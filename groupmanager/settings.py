@@ -199,7 +199,15 @@ STORAGES = {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        # Le manifest strict exige que collectstatic ait tourne (fait par
+        # docker/entrypoint.sh en production). En dev/tests, on garde le
+        # stockage standard pour ne pas avoir a lancer collectstatic avant
+        # chaque `runserver`/`manage.py test`.
+        "BACKEND": (
+            "whitenoise.storage.CompressedManifestStaticFilesStorage"
+            if not DEBUG
+            else "django.contrib.staticfiles.storage.StaticFilesStorage"
+        ),
     },
 }
 
