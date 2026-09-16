@@ -17,12 +17,14 @@ class Contribution(models.Model):
     amende pour absence, ou autre.
     """
     TYPE_MONTHLY = "monthly"
+    TYPE_ANNUAL = "annual"
     TYPE_SPONTANEOUS = "spontaneous"
     TYPE_LATE_FINE = "late_fine"
     TYPE_ABSENCE_FINE = "absence_fine"
     TYPE_OTHER = "other"
     TYPE_CHOICES = [
         (TYPE_MONTHLY, "Mensuelle"),
+        (TYPE_ANNUAL, "Annuelle"),
         (TYPE_SPONTANEOUS, "Spontanee"),
         (TYPE_LATE_FINE, "Amende retard"),
         (TYPE_ABSENCE_FINE, "Amende absence"),
@@ -34,6 +36,7 @@ class Contribution(models.Model):
     contribution_type = models.CharField(max_length=20, choices=TYPE_CHOICES)
     amount = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal("0.01"))])
     paid_at = models.DateField()
+    notes = models.TextField(blank=True)
 
     class Meta:
         constraints = [

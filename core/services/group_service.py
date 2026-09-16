@@ -179,15 +179,15 @@ class GroupService:
                 total=Sum('amount')
             )['total'] or 0
             
-            meeting_entries = group.meetings.values('meeting_entries__status').annotate(
-                count=Count('meeting_entries__status')
+            meeting_entries = group.meetings.values('entries__status').annotate(
+                count=Count('entries__status')
             )
-            
+
             attendance_data = {}
             total_attendance = 0
             for entry in meeting_entries:
-                if entry['meeting_entries__status']:
-                    attendance_data[entry['meeting_entries__status']] = entry['count']
+                if entry['entries__status']:
+                    attendance_data[entry['entries__status']] = entry['count']
                     total_attendance += entry['count']
             
             return {

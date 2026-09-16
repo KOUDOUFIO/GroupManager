@@ -17,7 +17,7 @@ class Position(models.Model):
     description = models.TextField(blank=True)
     organ = models.ForeignKey(Organ, on_delete=models.SET_NULL, null=True, blank=True)
     group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="positions")
-    member = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True, blank=True)
+    member = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True, blank=True, related_name="positions")
 
     class Meta:
         indexes = [

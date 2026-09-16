@@ -12,6 +12,7 @@ class Meeting(models.Model):
     group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="meetings")
     scheduled_at = models.DateTimeField()
     title = models.CharField(max_length=200, blank=True)
+    description = models.TextField(blank=True)
 
     class Meta:
         indexes = [

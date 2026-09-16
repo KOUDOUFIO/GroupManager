@@ -32,7 +32,7 @@ class MeetingService:
             Liste des rencontres filtrées
         """
         queryset = Meeting.objects.select_related('group').annotate(
-            entry_count=Count('meeting_entries')
+            entry_count=Count('entries')
         )
         
         if search_query:

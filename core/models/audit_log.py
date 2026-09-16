@@ -1,6 +1,7 @@
 """Journal d'audit des modifications."""
 
 from django.conf import settings
+from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 
 
@@ -32,7 +33,7 @@ class AuditLog(models.Model):
     object_repr = models.CharField(max_length=255)
     path = models.CharField(max_length=300, blank=True)
     ip_address = models.GenericIPAddressField(null=True, blank=True)
-    changes = models.JSONField(default=dict, blank=True)
+    changes = models.JSONField(default=dict, blank=True, encoder=DjangoJSONEncoder)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
