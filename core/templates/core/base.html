@@ -73,7 +73,10 @@
       <div class="topbar-actions">
         {% if user.is_authenticated %}
         <span class="user-pill">{{ user.get_username }} - {{ ui_role_label }}</span>
-        <a class="btn ghost" href="/accounts/logout/">Se déconnecter</a>
+        <form method="post" action="/accounts/logout/" class="logout-form">
+          {% csrf_token %}
+          <button type="submit" class="btn ghost logout-btn">Se déconnecter</button>
+        </form>
         {% else %}
         <a class="btn ghost" href="/accounts/login/">Se connecter</a>
         {% endif %}
