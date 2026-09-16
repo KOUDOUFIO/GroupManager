@@ -124,16 +124,26 @@ docker-compose up --build
 
 - http://127.0.0.1:8000/
 
-## Checklist avant mise en production
+## Deploiement en production
 
-- [ ] `DJANGO_DEBUG=0`
-- [ ] `DJANGO_SECRET_KEY` genere aleatoirement (`python3 -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"`) — au demarrage, l'application refuse de tourner en production avec la cle par defaut.
-- [ ] `DJANGO_ALLOWED_HOSTS` et `CSRF_TRUSTED_ORIGINS` renseignes avec le(s) vrai(s) domaine(s) (ex: `CSRF_TRUSTED_ORIGINS=https://mondomaine.com`).
-- [ ] `DB_NAME` / `DB_USER` / `DB_PASSWORD` definis avec des identifiants forts (jamais ceux de `.env.example`).
-- [ ] TLS/HTTPS termine en amont de `web` (reverse-proxy nginx/Caddy + certbot sur un VPS, ou gere automatiquement par une plateforme managee type Railway/Render/Fly.io). Sans ca, `SECURE_SSL_REDIRECT=1` provoquera une boucle de redirection.
-- [ ] Sauvegardes regulieres du volume `pgdata` (ex: `pg_dump` planifie, ou snapshots du volume Docker).
-- [ ] Superutilisateur cree avec un mot de passe fort (`bootstrap_project --with-superuser --password ...`, jamais la valeur par defaut `Admin1234!`).
-- [ ] `python3 manage.py check --deploy` execute sans avertissement bloquant.
+Guide pas-a-pas complet (VPS + Docker + nginx + HTTPS automatique + sauvegardes) : voir [`DEPLOYMENT.md`](DEPLOYMENT.md).
+
+Resume de la stack Docker de production (`docker-compose.yml`) :
+
+- `db` (PostgreSQL 14), `redis` (cache + throttling API)
+- `web` (Django/gunicorn), accessible uniquement en local (`127.0.0.1:8000`)
+- `nginx` : reverse-proxy, termine le HTTPS, sert `/media/`, redirige HTTP vers HTTPS
+- `certbot` : obtient et renouvelle automatiquement le certificat Let's Encrypt
+
+Checklist rapide avant mise en ligne :
+
+- [ ] `DJANGO_SECRET_KEY` genere aleatoirement — l'application refuse de demarrer en production avec la cle par defaut.
+- [ ] `DJANGO_ALLOWED_HOSTS` / `CSRF_TRUSTED_ORIGINS` avec le vrai domaine.
+- [ ] `DB_NAME` / `DB_USER` / `DB_PASSWORD` forts.
+- [ ] `docker/nginx/app.conf` mis a jour avec le vrai domaine, puis `docker/nginx/init-letsencrypt.sh` execute.
+- [ ] `docker/backup.sh` planifie via crontab.
+- [ ] Superutilisateur de production cree avec un mot de passe fort.
+- [ ] Contenu de `/mentions-legales/` et `/confidentialite/` complete avec vos vraies informations.
 
 ## Acces
 

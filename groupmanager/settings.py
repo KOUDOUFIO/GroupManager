@@ -182,6 +182,11 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/accounts/login/"
 
 if not DEBUG:
+    # nginx termine le HTTPS et transmet en HTTP simple a gunicorn (voir
+    # docker/nginx/app.conf, qui pose X-Forwarded-Proto) : sans cette ligne,
+    # Django croit que chaque requete est en HTTP et boucle sur la redirection
+    # HTTPS imposee par SECURE_SSL_REDIRECT.
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
     SECURE_SSL_REDIRECT = os.environ.get("DJANGO_SECURE_SSL_REDIRECT", "1") == "1"
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
@@ -191,8 +196,6 @@ if not DEBUG:
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_BROWSER_XSS_FILTER = True
     X_FRAME_OPTIONS = "DENY"
-
-
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
