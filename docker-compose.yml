@@ -1,32 +1,52 @@
-version: "3.9"
-
 services:
   db:
     image: postgres:14
+    restart: unless-stopped
     environment:
-      POSTGRES_DB: ${DB_pgAdmin}
-      POSTGRES_USER: ${DB_KOUDOUFIO}
-      POSTGRES_PASSWORD: ${DB_postgres}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
       - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5432:5432"
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
   web:
     build: .
     command: /app/docker/entrypoint.sh
+    restart: unless-stopped
+    env_file:
+      - .env
     environment:
       DJANGO_DEBUG: "0"
-      DJANGO_ALLOWED_HOSTS: "localhost,127.0.0.1"
-      DB_NAME: ${DB_NAME}
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
       DB_HOST: db
       DB_PORT: "5432"
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+    volumes:
+      - media:/app/media
     ports:
       - "8000:8000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
 
 volumes:
   pgdata:
+  media:
