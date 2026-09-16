@@ -13,6 +13,7 @@ class MemberListView(SearchableListView):
     title = "Membres"
     create_url_name = "member_create"
     base_url_name = "member"
+    hero_image = "core/img/modules/membres.jpg"
     list_columns = [
         {"label": "Nom complet", "accessor": "full_name"},
         {"label": "Email", "accessor": "email"},

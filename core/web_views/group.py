@@ -13,6 +13,7 @@ class GroupListView(SearchableListView):
     title = "Groupes"
     create_url_name = "group_create"
     base_url_name = "group"
+    hero_image = "core/img/modules/groupes.jpg"
     list_columns = [
         {"label": "Nom", "accessor": "name"},
         {"label": "Responsable", "accessor": "responsible.get_username"},

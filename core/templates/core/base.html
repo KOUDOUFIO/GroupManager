@@ -23,17 +23,16 @@
         GroupManager
       </a>
       <nav class="nav">
+        {% if not ui_is_authenticated %}
         <a href="/entreprise/">Entreprise</a>
         <a href="/plateforme/">Plateforme</a>
         <a href="/devis/">Devis</a>
-        {% if ui_is_authenticated %}
-        <div class="nav-divider"></div>
-        <a href="/recherche/">🔍 Recherche</a>
+        {% else %}
         {% if ui_is_admin %}
-        <a href="/admin-workspace/">⚙️ Admin</a>
+        <a href="/admin-workspace/">⚙️ Espace admin</a>
         {% endif %}
         {% if ui_is_manager or ui_is_admin %}
-        <a href="/manager-workspace/">📊 Manager</a>
+        <a href="/manager-workspace/">📊 Espace manager</a>
         {% endif %}
         <div class="nav-divider"></div>
         <div class="nav-dropdown">
@@ -52,22 +51,19 @@
             <a href="/presences/">Présences</a>
           </div>
         </div>
-        <div class="nav-dropdown">
-          <button class="nav-dropdown-btn">💰 Finance ▾</button>
-          <div class="nav-dropdown-content">
-            <a href="/cotisations/">Cotisations</a>
-            <a href="/documents/">Documents</a>
-          </div>
-        </div>
+        <a href="/cotisations/">💰 Cotisations</a>
         <div class="nav-dropdown">
           <button class="nav-dropdown-btn">📋 Activités ▾</button>
           <div class="nav-dropdown-content">
             <a href="/evenements/">Événements</a>
+            <a href="/documents/">Documents</a>
             {% if ui_is_admin %}
             <a href="/audit-logs/">Audit</a>
             {% endif %}
           </div>
         </div>
+        <div class="nav-divider"></div>
+        <a href="/recherche/">🔍 Recherche</a>
         {% endif %}
       </nav>
       <div class="topbar-actions">

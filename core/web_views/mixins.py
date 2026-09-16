@@ -23,12 +23,15 @@ class CrudContextMixin:
     base_url_name = ""
     list_columns = []
     show_actions = True
+    hero_image = ""
 
     def get_context_data(self, **kwargs):
         """Fournit le contexte avec les URLs et configuration CRUD."""
         context = super().get_context_data(**kwargs)
         context["title"] = self.title
         context["base_url_name"] = self.base_url_name
+        if self.hero_image:
+            context["hero_image"] = self.hero_image
         if self.list_columns:
             context["list_columns"] = self.list_columns
         if self.create_url_name:

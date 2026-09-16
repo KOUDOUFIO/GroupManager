@@ -13,6 +13,7 @@ class EventListView(SearchableListView):
     title = "Evenements"
     create_url_name = "event_create"
     base_url_name = "event"
+    hero_image = "core/img/modules/evenements.jpg"
     list_columns = [
         {"label": "Titre", "accessor": "title"},
         {"label": "Type", "accessor": "event_type"},

@@ -16,6 +16,7 @@ class ContributionListView(SearchableListView):
     title = "Cotisations"
     create_url_name = "contribution_create"
     base_url_name = "contribution"
+    hero_image = "core/img/modules/cotisations.jpg"
     list_columns = [
         {"label": "Membre", "accessor": "member.full_name"},
         {"label": "Groupe", "accessor": "group.name"},

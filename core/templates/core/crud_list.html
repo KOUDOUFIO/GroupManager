@@ -1,9 +1,12 @@
 {% extends 'core/base.html' %}
-{% load core_extras %}
+{% load core_extras static %}
 
 {% block title %}{{ title }} - GroupManager{% endblock %}
 
 {% block hero %}
+{% if hero_image %}
+<img class="hero-banner" src="{% static hero_image %}" alt="" />
+{% endif %}
 <div>
   <p class="pill">Module</p>
   <h1>{{ title }}</h1>
