@@ -93,6 +93,12 @@ CSRF_TRUSTED_ORIGINS = _split_env_list(os.environ.get("CSRF_TRUSTED_ORIGINS"))
 
 
 INSTALLED_APPS = [
+    # 'core' est place avant 'django.contrib.admin' pour que nos propres
+    # templates registration/ (login, reinitialisation de mot de passe...)
+    # soient trouves en premier : django.contrib.admin fournit ses propres
+    # templates registration/* (y compris l'email de reinitialisation) qui,
+    # sinon, prennent le pas sur les notres silencieusement.
+    'core',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -103,7 +109,6 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'django_otp',
     'django_otp.plugins.otp_totp',
-    'core',
 ]
 
 MIDDLEWARE = [
@@ -193,6 +198,21 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# Email : par defaut, ecrit les emails dans la console/les logs (rien n'est
+# envoye, pratique en dev). En production, definir EMAIL_HOST pour basculer
+# automatiquement sur un vrai envoi SMTP.
+if os.environ.get("EMAIL_HOST"):
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_HOST = os.environ["EMAIL_HOST"]
+    EMAIL_PORT = int(os.environ.get("EMAIL_PORT", "587"))
+    EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
+    EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
+    EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS", "1") == "1"
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "noreply@groupmanager.local")
 
 STORAGES = {
     "default": {

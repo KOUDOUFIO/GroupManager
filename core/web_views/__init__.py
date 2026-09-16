@@ -12,6 +12,7 @@ organisées par domaine :
 """
 
 from .marketing import company_page, home, platform_page, proposal_page
+from .legal import LegalNoticeView, PrivacyPolicyView
 from .workspaces import AdminWorkspaceView, GlobalSearchView, GroupDashboardView, ManagerWorkspaceView
 from .mixins import (
     BaseCreateView,
@@ -58,6 +59,8 @@ __all__ = [
     "home",
     "platform_page",
     "proposal_page",
+    "LegalNoticeView",
+    "PrivacyPolicyView",
     "AdminWorkspaceView",
     "GlobalSearchView",
     "GroupDashboardView",

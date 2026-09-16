@@ -1,0 +1,50 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Politique de confidentialité - GroupManager{% endblock %}
+
+{% block hero %}
+<div>
+  <p class="pill">Vos données</p>
+  <h1>Politique de confidentialité</h1>
+  <p class="subtitle">Comment vos données sont collectées, utilisées et protégées.</p>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="form-card">
+  <p style="margin-bottom: 1.5rem; padding: 1rem; border-radius: 8px; background: var(--color-warning-light, #fffbeb); color: var(--color-text-primary, #201e1b);">
+    ⚠️ <strong>Contenu a completer</strong> : ce texte decrit les donnees reellement traitees par
+    l'application GroupManager (groupes, membres, cotisations, presences, audit). Completez les
+    [crochets] avec vos informations et faites relire ce texte si vous traitez des donnees de
+    personnes dans l'Union Europeenne (obligations RGPD).
+  </p>
+
+  <h2>Responsable du traitement</h2>
+  <p>[Nom de l'entreprise ou de l'organisation] — [email de contact du responsable des données].</p>
+
+  <h2>Données collectées</h2>
+  <p>L'application traite les catégories de données suivantes :</p>
+  <ul>
+    <li><strong>Comptes utilisateurs</strong> : nom d'utilisateur, email, mot de passe (chiffré), rôle.</li>
+    <li><strong>Membres gérés</strong> : nom complet, email, téléphone, adresse, appartenance à des groupes.</li>
+    <li><strong>Cotisations et présences</strong> : montants, dates, statuts de présence liés à un membre.</li>
+    <li><strong>Documents</strong> : fichiers déposés et associés à un groupe.</li>
+    <li><strong>Journal d'audit</strong> : historique des créations/modifications/suppressions, avec l'utilisateur et l'adresse IP à l'origine de l'action.</li>
+  </ul>
+
+  <h2>Finalité du traitement</h2>
+  <p>Ces données sont utilisées exclusivement pour la gestion administrative des groupes, membres, cotisations et activités de l'organisation, ainsi que pour la sécurité et la traçabilité (journal d'audit).</p>
+
+  <h2>Durée de conservation</h2>
+  <p>[À définir : par exemple, conservation pendant la durée d'adhésion du membre, puis archivage ou suppression après X années conformément aux obligations légales applicables.]</p>
+
+  <h2>Destinataires des données</h2>
+  <p>Les données sont accessibles uniquement aux administrateurs et gestionnaires autorisés de l'organisation. Elles ne sont pas vendues ni transmises à des tiers à des fins commerciales.</p>
+
+  <h2>Sécurité</h2>
+  <p>Les mots de passe sont chiffrés, les accès sont protégés par authentification (et 2FA optionnelle), et toutes les actions sensibles sont tracées dans un journal d'audit.</p>
+
+  <h2>Vos droits</h2>
+  <p>Conformément à la réglementation applicable (ex: RGPD en UE), vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour l'exercer, contactez [email de contact].</p>
+</section>
+{% endblock %}

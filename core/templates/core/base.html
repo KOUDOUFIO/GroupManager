@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{% block title %}GroupManager{% endblock %}</title>
     {% load static %}
+    <link rel="icon" type="image/svg+xml" href="{% static 'core/img/logo.svg' %}" />
     <link rel="stylesheet" href="{% static 'core/styles.css' %}" />
   </head>
   <body>
@@ -17,7 +18,10 @@
     </div>
 
     <header class="topbar">
-      <a class="brand" href="/">GroupManager</a>
+      <a class="brand" href="/">
+        <img src="{% static 'core/img/logo.svg' %}" alt="" width="32" height="32" class="brand-logo" />
+        GroupManager
+      </a>
       <nav class="nav">
         <a href="/entreprise/">Entreprise</a>
         <a href="/plateforme/">Plateforme</a>
@@ -99,6 +103,10 @@
 
     <footer class="footer">
       <p>GroupManager - edition professionnelle</p>
+      <p class="footer-links">
+        <a href="/mentions-legales/">Mentions légales</a>
+        <a href="/confidentialite/">Politique de confidentialité</a>
+      </p>
     </footer>
     {% block extra_scripts %}{% endblock %}
   </body>

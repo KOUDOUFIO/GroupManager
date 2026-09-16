@@ -1,0 +1,50 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Mentions légales - GroupManager{% endblock %}
+
+{% block hero %}
+<div>
+  <p class="pill">Informations légales</p>
+  <h1>Mentions légales</h1>
+  <p class="subtitle">Identification de l'éditeur et de l'hébergeur du service.</p>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="form-card">
+  <p style="margin-bottom: 1.5rem; padding: 1rem; border-radius: 8px; background: var(--color-warning-light, #fffbeb); color: var(--color-text-primary, #201e1b);">
+    ⚠️ <strong>Contenu a completer</strong> : les informations ci-dessous sont des exemples de structure.
+    Remplacez chaque [entre crochets] par vos vraies coordonnees avant la mise en ligne publique.
+    Ces mentions sont une obligation legale (France : art. 6-III de la LCEN).
+  </p>
+
+  <h2>Éditeur du site</h2>
+  <p>
+    [Nom de l'entreprise ou du responsable]<br>
+    [Forme juridique, ex: SAS, association loi 1901...]<br>
+    [Adresse postale complète]<br>
+    [Numéro SIRET / RNA]<br>
+    [Email de contact]<br>
+    [Téléphone]
+  </p>
+
+  <h2>Directeur de la publication</h2>
+  <p>[Nom et prénom du responsable de la publication]</p>
+
+  <h2>Hébergement</h2>
+  <p>
+    [Nom de l'hébergeur]<br>
+    [Adresse de l'hébergeur]<br>
+    [Contact de l'hébergeur]
+  </p>
+
+  <h2>Propriété intellectuelle</h2>
+  <p>
+    L'ensemble du contenu de ce site (textes, logos, interface) est protégé par le droit d'auteur.
+    Toute reproduction sans autorisation est interdite.
+  </p>
+
+  <h2>Contact</h2>
+  <p>Pour toute question relative à ces mentions légales : [email de contact].</p>
+</section>
+{% endblock %}
