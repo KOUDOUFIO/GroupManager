@@ -13,6 +13,7 @@ class DocumentListView(SearchableListView):
     title = "Documents"
     create_url_name = "document_create"
     base_url_name = "document"
+    hero_image = "core/img/modules/documents.jpg"
     list_columns = [
         {"label": "Titre", "accessor": "title"},
         {"label": "Type", "accessor": "document_type"},

@@ -16,6 +16,7 @@ class MeetingListView(SearchableListView):
     title = "Rencontres"
     create_url_name = "meeting_create"
     base_url_name = "meeting"
+    hero_image = "core/img/modules/rencontres.jpg"
     list_columns = [
         {"label": "Titre", "accessor": "title"},
         {"label": "Groupe", "accessor": "group.name"},
@@ -64,6 +65,7 @@ class MeetingEntryListView(SearchableListView):
     title = "Presences"
     create_url_name = "meeting_entry_create"
     base_url_name = "meeting_entry"
+    hero_image = "core/img/modules/presences.jpg"
     list_columns = [
         {"label": "Membre", "accessor": "member.full_name"},
         {"label": "Rencontre", "accessor": "meeting.title"},

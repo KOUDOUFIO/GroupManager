@@ -13,6 +13,7 @@ class OrganListView(SearchableListView):
     title = "Organes"
     create_url_name = "organ_create"
     base_url_name = "organ"
+    hero_image = "core/img/modules/organes.jpg"
     list_columns = [
         {"label": "Nom", "accessor": "name"},
         {"label": "Groupe", "accessor": "group.name"},

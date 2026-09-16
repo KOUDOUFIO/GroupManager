@@ -10,6 +10,7 @@ class AuditLogListView(SearchableListView):
     template_name = "core/crud_list.html"
     title = "Historique d'audit"
     base_url_name = "audit_log"
+    hero_image = "core/img/modules/audit.jpg"
     list_columns = [
         {"label": "Date", "accessor": "created_at"},
         {"label": "Utilisateur", "accessor": "actor.get_username"},

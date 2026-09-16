@@ -13,6 +13,7 @@ class PositionListView(SearchableListView):
     title = "Postes"
     create_url_name = "position_create"
     base_url_name = "position"
+    hero_image = "core/img/modules/postes.jpg"
     list_columns = [
         {"label": "Nom", "accessor": "name"},
         {"label": "Groupe", "accessor": "group.name"},
