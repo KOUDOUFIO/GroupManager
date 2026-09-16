@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ title }} - GroupManager{% endblock %}
+
+{% block hero %}
+<div>
+  <p class="pill">Confirmation</p>
+  <h1>{{ title }}</h1>
+  <p class="subtitle">Cette action est definitive.</p>
+</div>
+<div class="hero-actions">
+  {% if list_url %}
+  <a class="btn ghost" href="{{ list_url }}">Retour a la liste</a>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="form-card">
+  <form method="post">
+    {% csrf_token %}
+    <p>Voulez-vous vraiment supprimer : <strong>{{ object }}</strong> ?</p>
+    <div class="form-actions">
+      <button class="btn primary" type="submit">Supprimer</button>
+      {% if list_url %}
+      <a class="btn ghost" href="{{ list_url }}">Annuler</a>
+      {% endif %}
+    </div>
+  </form>
+</section>
+{% endblock %}

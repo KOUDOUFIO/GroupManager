@@ -1,0 +1,123 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Devis GroupManager{% endblock %}
+
+{% block hero %}
+<div>
+  <p class="pill">Offre commerciale</p>
+  <h1>Des solutions de gestion conçues pour les entreprises exigeantes.</h1>
+  <p class="subtitle">
+    Une plateforme robuste pour organiser vos groupes, vos équipes, vos événements et vos opérations,
+    avec un pilotage clair et une expérience premium pour vos responsables.
+  </p>
+</div>
+<div class="hero-actions">
+  <a class="btn primary" href="#pricing">Voir les tarifs</a>
+  <a class="btn ghost" href="#contact">Demander un devis</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="section-block highlight-panel">
+  <div class="section-heading narrow">
+    <p class="pill">Pourquoi choisir GroupManager</p>
+    <h2>Un système qui transforme l’organisation en avantage concurrentiel.</h2>
+  </div>
+  <div class="benefit-grid">
+    {% for benefit in benefits %}
+    <div class="benefit-card">
+      <span class="benefit-icon">✓</span>
+      <p>{{ benefit }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="pricing" class="section-block pricing-block">
+  <div class="section-heading">
+    <p class="pill">Tarification</p>
+    <h2>Des formules flexibles pour démarrer vite, grandir sereinement et évoluer avec votre organisation.</h2>
+  </div>
+  <div class="pricing-grid">
+    {% for plan in pricing %}
+    <article class="price-card {% if plan.highlighted %}featured{% endif %}">
+      <div class="plan-head">
+        <span class="plan-tag">{{ plan.name }}</span>
+        {% if plan.highlighted %}
+        <span class="popular">Populaire</span>
+        {% endif %}
+      </div>
+      <div class="plan-price">
+        <strong>{{ plan.price }}</strong>
+        <span>{{ plan.subtitle }}</span>
+      </div>
+      <p class="plan-description">{{ plan.description }}</p>
+      <ul>
+        {% for feature in plan.features %}
+        <li>{{ feature }}</li>
+        {% endfor %}
+      </ul>
+      <a class="btn {% if plan.highlighted %}primary{% else %}ghost{% endif %}" href="#contact">Choisir {{ plan.name }}</a>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section-block highlight-panel">
+  <div class="section-heading narrow">
+    <p class="pill">Déploiement rapide</p>
+    <h2>Une mise en service simple, avec un accompagnement pensé pour les équipes de terrain.</h2>
+  </div>
+  <div class="trust-grid">
+    {% for item in contact_points %}
+    <div class="trust-card compact">
+      <strong>{{ item.value }}</strong>
+      <span>{{ item.label }}</span>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="contact" class="section-block contact-panel">
+  <div class="contact-copy">
+    <p class="pill">Demande de devis</p>
+    <h2>Parlons de votre organisation et de vos besoins.</h2>
+    <p>
+      Dites-nous quel niveau d’automatisation, de sécurité et d’accompagnement vous recherchez.
+      Nous vous répondrons avec une proposition claire, adaptée à votre volume et à votre contexte.
+    </p>
+  </div>
+  <form class="proposal-form">
+    <div class="field-row">
+      <label>
+        <span>Nom</span>
+        <input type="text" placeholder="Votre nom" />
+      </label>
+      <label>
+        <span>Email</span>
+        <input type="email" placeholder="nom@entreprise.com" />
+      </label>
+    </div>
+    <div class="field-row">
+      <label>
+        <span>Entreprise</span>
+        <input type="text" placeholder="Nom de l'organisation" />
+      </label>
+      <label>
+        <span>Type d'organisation</span>
+        <select>
+          <option>Société</option>
+          <option>Association</option>
+          <option>Collectivité</option>
+          <option>Club / groupe</option>
+        </select>
+      </label>
+    </div>
+    <label>
+      <span>Besoin principal</span>
+      <textarea rows="5" placeholder="Décrivez votre besoin, le nombre d'utilisateurs, les groupes et les priorités..."></textarea>
+    </label>
+    <button class="btn primary" type="submit">Demander un devis</button>
+  </form>
+</section>
+{% endblock %}

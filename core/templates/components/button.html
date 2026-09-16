@@ -1,0 +1,32 @@
+{% load static %}
+
+{% comment %}
+Composant Bouton réutilisable
+Usage:
+{% include 'components/button.html' with text='Sauvegarder' variant='primary' size='large' icon='save' %}
+{% endcomment %}
+
+{% if not variant %}{% with variant='primary' %}{% endif %}
+{% if not size %}{% with size='medium' %}{% endif %}
+{% if not type %}{% with type='button' %}{% endif %}
+
+<button 
+  type="{{ type|default:'button' }}"
+  class="btn btn-{{ variant|default:'primary' }} btn-{{ size|default:'medium' }} {% if block %}btn-block{% endif %} {% if disabled %}btn-disabled{% endif %}"
+  {% if onclick %}onclick="{{ onclick }}"{% endif %}
+  {% if id %}id="{{ id }}"{% endif %}
+  {% if name %}name="{{ name }}"{% endif %}
+  {% if disabled %}disabled{% endif %}
+>
+  {% if icon %}
+  <span class="btn-icon">{{ icon }}</span>
+  {% endif %}
+  <span class="btn-text">{{ text|default:'Bouton' }}</span>
+  {% if icon_right %}
+  <span class="btn-icon btn-icon-right">{{ icon_right }}</span>
+  {% endif %}
+</button>
+
+{% if not size %}{% endwith %}{% endif %}
+{% if not variant %}{% endwith %}{% endif %}
+{% if not type %}{% endwith %}{% endif %}

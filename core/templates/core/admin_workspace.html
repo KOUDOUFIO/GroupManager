@@ -1,0 +1,133 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Interface Administrateur - GroupManager{% endblock %}
+
+{% block hero %}
+<div>
+  <p class="pill">Espace Administrateur</p>
+  <h1>Pilotage global</h1>
+  <p class="subtitle">Vue centralisée pour suivre la santé fonctionnelle, l'activité et la gouvernance.</p>
+</div>
+<div class="hero-actions">
+  <a class="btn primary" href="/admin/">Administration Django</a>
+  <a class="btn ghost" href="/audit-logs/">Historique d'audit</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="stats">
+  <div class="stat-card">
+    <div class="stat-icon">🏢</div>
+    <h3>Groupes</h3>
+    <p class="stat-value">{{ group_count }}</p>
+    <p class="stat-label">structures actives</p>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon">👥</div>
+    <h3>Membres</h3>
+    <p class="stat-value">{{ member_count }}</p>
+    <p class="stat-label">membres actifs</p>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon">📅</div>
+    <h3>Rencontres</h3>
+    <p class="stat-value">{{ meeting_count }}</p>
+    <p class="stat-label">réunions planifiées</p>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon">💰</div>
+    <h3>Cotisations</h3>
+    <p class="stat-value">{{ contribution_count }}</p>
+    <p class="stat-label">paiements enregistrés</p>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon">📋</div>
+    <h3>Audits</h3>
+    <p class="stat-value">{{ audit_count }}</p>
+    <p class="stat-label">traces d'activité</p>
+  </div>
+</section>
+
+<section class="workspace-sections">
+  <div class="workspace-section">
+    <h2>📊 Vue d'ensemble</h2>
+    <div class="quick-actions">
+      <a class="action-card" href="/groupes/">
+        <span class="action-icon">🏢</span>
+        <h4>Gérer les groupes</h4>
+        <p>Administrer les structures organisationnelles</p>
+      </a>
+      <a class="action-card" href="/membres/">
+        <span class="action-icon">👥</span>
+        <h4>Contrôler les membres</h4>
+        <p>Gérer les utilisateurs et leurs accès</p>
+      </a>
+      <a class="action-card" href="/cotisations/">
+        <span class="action-icon">💰</span>
+        <h4>Vérifier les cotisations</h4>
+        <p>Suivre les paiements et finances</p>
+      </a>
+      <a class="action-card" href="/presences/">
+        <span class="action-icon">📅</span>
+        <h4>Suivre les présences</h4>
+        <p>Contrôler les participations aux réunions</p>
+      </a>
+    </div>
+  </div>
+
+  <div class="workspace-section">
+    <h2>📁 Modules par catégorie</h2>
+    <div class="category-grid">
+      <div class="category-card">
+        <h3>🏢 Organisation</h3>
+        <ul>
+          <li><a href="/groupes/">Groupes</a></li>
+          <li><a href="/organes/">Organes</a></li>
+          <li><a href="/postes/">Postes</a></li>
+        </ul>
+      </div>
+      <div class="category-card">
+        <h3>👥 Personnes</h3>
+        <ul>
+          <li><a href="/membres/">Membres</a></li>
+          <li><a href="/rencontres/">Rencontres</a></li>
+          <li><a href="/presences/">Présences</a></li>
+        </ul>
+      </div>
+      <div class="category-card">
+        <h3>💰 Finance</h3>
+        <ul>
+          <li><a href="/cotisations/">Cotisations</a></li>
+          <li><a href="/documents/">Documents</a></li>
+        </ul>
+      </div>
+      <div class="category-card">
+        <h3>📋 Activités</h3>
+        <ul>
+          <li><a href="/evenements/">Événements</a></li>
+          <li><a href="/audit-logs/">Audit</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="workspace-section">
+    <h2>🔍 Activité récente</h2>
+    <div class="recent-activity">
+      <h3>Derniers événements d'audit</h3>
+      <div class="mini-list">
+        {% for log in recent_audits %}
+        <div class="mini-row">
+          <span class="action-badge">{{ log.get_action_display }}</span>
+          <span class="model-name">{{ log.model_name }}</span>
+          <span class="object-name">{{ log.object_repr }}</span>
+          <span class="timestamp">{{ log.created_at|date:"d/m/Y H:i" }}</span>
+        </div>
+        {% empty %}
+        <p class="empty-state">Aucune activité récente.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Entreprise - GroupManager{% endblock %}
+
+{% block hero %}
+<div>
+  <p class="pill">Notre entreprise</p>
+  <h1>Une vision claire pour des organisations plus solides.</h1>
+  <p class="subtitle">
+    GroupManager aide les entreprises, institutions et structures associatives à mieux organiser leur activité,
+    leur gouvernance et leur suivi grâce à un système simple, fiable et professionnel.
+  </p>
+</div>
+<div class="hero-actions">
+  <a class="btn primary" href="/devis/">Demander un devis</a>
+  <a class="btn ghost" href="/">Retour au site</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="section-block highlight-panel">
+  <div class="section-heading narrow">
+    <p class="pill">Notre approche</p>
+    <h2>Nous construisons des outils qui rendent la gestion plus lisible, plus rapide et plus sûre.</h2>
+  </div>
+  <div class="company-grid">
+    {% for item in company_values %}
+    <article class="company-card">
+      <h4>{{ item.title }}</h4>
+      <p>{{ item.description }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section-block">
+  <div class="section-heading">
+    <p class="pill">Méthode</p>
+    <h2>Un parcours simple, pensé pour les équipes et pour la stabilité de l'organisation.</h2>
+  </div>
+  <div class="roadmap-grid">
+    {% for item in roadmap %}
+    <article class="roadmap-card">
+      <span class="step-badge">{{ item.step }}</span>
+      <h4>{{ item.title }}</h4>
+      <p>{{ item.description }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section-block highlight-panel">
+  <div class="section-heading narrow">
+    <p class="pill">FAQ</p>
+    <h2>Les réponses aux questions fréquentes de nos clients et partenaires.</h2>
+  </div>
+  <div class="faq-list">
+    {% for item in faqs %}
+    <details class="faq-item" open>
+      <summary>{{ item.question }}</summary>
+      <p>{{ item.answer }}</p>
+    </details>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="cta">
+  <div>
+    <h3>Prêt à moderniser votre organisation ?</h3>
+    <p>Nous pouvons vous proposer une mise en place adaptée à votre structure, vos besoins de gestion et votre niveau d’exigence.</p>
+  </div>
+  <a class="btn primary" href="/devis/">Obtenir une proposition</a>
+</section>
+{% endblock %}

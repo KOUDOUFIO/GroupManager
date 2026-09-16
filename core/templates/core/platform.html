@@ -1,0 +1,88 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Plateforme - GroupManager{% endblock %}
+
+{% block hero %}
+<div>
+  <p class="pill">Suite d'entreprise</p>
+  <h1>Une plateforme qui grandit avec votre organisation.</h1>
+  <p class="subtitle">
+    Au-delà de la gestion interne, GroupManager devient un espace de pilotage, d’opportunités,
+    de suivi commercial et d’automatisation pour les structures ambitieuses.
+  </p>
+</div>
+<div class="hero-actions">
+  <a class="btn primary" href="/devis/">Demander un devis</a>
+  <a class="btn ghost" href="/entreprise/">Notre entreprise</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="section-block highlight-panel">
+  <div class="section-heading narrow">
+    <p class="pill">Modules</p>
+    <h2>Un écosystème pensé pour centraliser les opérations, la vente et le reporting.</h2>
+  </div>
+  <div class="module-grid">
+    {% for module in platform_modules %}
+    <article class="module-card">
+      <span class="module-badge">{{ module.badge }}</span>
+      <h4>{{ module.title }}</h4>
+      <p>{{ module.description }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section-block">
+  <div class="section-heading">
+    <p class="pill">Roadmap</p>
+    <h2>Un développement progressif pour transformer la solution en plateforme d’entreprise.</h2>
+  </div>
+  <div class="roadmap-grid">
+    {% for item in roadmap %}
+    <article class="roadmap-card">
+      <span class="step-badge">{{ item.phase }}</span>
+      <h4>{{ item.title }}</h4>
+      <p>{{ item.description }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section-block pricing-block">
+  <div class="section-heading">
+    <p class="pill">Comparatif</p>
+    <h2>Une base solide pour passer de l’organisation locale à la plateforme business complète.</h2>
+  </div>
+  <div class="comparison-table-wrap">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Fonction</th>
+          <th>Base</th>
+          <th>Business</th>
+          <th>Enterprise</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in comparison %}
+        <tr>
+          {% for cell in row %}
+          <td>{{ cell }}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="cta">
+  <div>
+    <h3>La plateforme évolue avec vos ambitions.</h3>
+    <p>Commencez avec une base solide et passez progressivement vers un système d’entreprise complet, pilotable et intégré.</p>
+  </div>
+  <a class="btn primary" href="/devis/">Planifier une solution</a>
+</section>
+{% endblock %}

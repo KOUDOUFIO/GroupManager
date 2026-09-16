@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Deconnexion - GroupManager{% endblock %}
+
+{% block hero %}
+<div>
+  <p class="pill">A bientot</p>
+  <h1>Vous etes deconnecte</h1>
+  <p class="subtitle">Votre session est terminee.</p>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="form-card">
+  <p>Revenir a la connexion :</p>
+  <a class="btn primary" href="/accounts/login/">Se connecter</a>
+</section>
+{% endblock %}

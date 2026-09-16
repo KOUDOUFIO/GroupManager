@@ -1,0 +1,35 @@
+{% comment %}
+Composant Table réutilisable
+Usage:
+{% include 'components/table.html' with headers=headers rows=data %}
+{% endcomment %}
+
+<div class="table-container {% if responsive %}table-responsive{% endif %}">
+  <table class="table {% if variant %}table-{{ variant }}{% endif %}">
+    {% if headers %}
+    <thead>
+      <tr>
+        {% for header in headers %}
+        <th scope="col">{{ header }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    {% endif %}
+    
+    <tbody>
+      {% for row in rows %}
+      <tr {% if row.id %}data-id="{{ row.id }}"{% endif %}>
+        {% for cell in row.cells %}
+        <td>{{ cell }}</td>
+        {% endfor %}
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="{{ headers|length }}" class="table-empty">
+          {% if empty_message %}{{ empty_message }}{% else %}Aucune donnée disponible{% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

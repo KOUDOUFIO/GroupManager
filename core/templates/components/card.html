@@ -1,0 +1,28 @@
+{% comment %}
+Composant Card réutilisable
+Usage:
+{% include 'components/card.html' with title='Titre' content='Contenu' %}
+{% endcomment %}
+
+<div class="card {% if variant %}card-{{ variant }}{% endif %} {% if hoverable %}card-hoverable{% endif %}">
+  {% if title %}
+  <div class="card-header">
+    {% if icon %}<span class="card-icon">{{ icon }}</span>{% endif %}
+    <h3 class="card-title">{{ title }}</h3>
+    {% if subtitle %}<p class="card-subtitle">{{ subtitle }}</p>{% endif %}
+  </div>
+  {% endif %}
+  
+  <div class="card-body">
+    {% if content %}
+    <p class="card-content">{{ content }}</p>
+    {% endif %}
+    {% block card_body %}{% endblock %}
+  </div>
+  
+  {% if footer %}
+  <div class="card-footer">
+    {{ footer }}
+  </div>
+  {% endif %}
+</div>

@@ -1,0 +1,49 @@
+{% comment %}
+Composant Modal réutilisable
+Usage:
+{% include 'components/modal.html' with id='myModal' title='Confirmation' content='Êtes-vous sûr?' %}
+{% endcomment %}
+
+<div id="{{ id|default:'modal' }}" class="modal {% if show %}modal-show{% endif %}" tabindex="-1" role="dialog">
+  <div class="modal-backdrop" {% if close_on_backdrop %}data-dismiss="modal"{% endif %}></div>
+  <div class="modal-dialog {% if size %}modal-{{ size }}{% endif %}">
+    <div class="modal-content">
+      {% if title %}
+      <div class="modal-header">
+        <h3 class="modal-title">{{ title }}</h3>
+        {% if close_button %}
+        <button type="button" class="modal-close" data-dismiss="modal" aria-label="Fermer">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {% endif %}
+      </div>
+      {% endif %}
+      
+      <div class="modal-body">
+        {% if content %}
+        <p>{{ content }}</p>
+        {% endif %}
+        {% block modal_body %}{% endblock %}
+      </div>
+      
+      {% if footer or actions %}
+      <div class="modal-footer">
+        {% if footer %}
+        {{ footer }}
+        {% else %}
+        {% if actions %}
+          {% for action in actions %}
+          <button type="button" class="btn btn-{{ action.variant|default:'secondary' }}" {% if action.dismiss %}data-dismiss="modal"{% endif %}>
+            {{ action.text }}
+          </button>
+          {% endfor %}
+        {% else %}
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-primary">Confirmer</button>
+        {% endif %}
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

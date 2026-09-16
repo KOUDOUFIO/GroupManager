@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}GroupManager{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'core/styles.css' %}" />
+  </head>
+  <body>
+    <div class="background">
+      <div class="glow"></div>
+      <div class="grid"></div>
+      <div class="orbit orbit-1"></div>
+      <div class="orbit orbit-2"></div>
+      <div class="orbit orbit-3"></div>
+    </div>
+
+    <header class="topbar">
+      <a class="brand" href="/">GroupManager</a>
+      <nav class="nav">
+        <a href="/entreprise/">Entreprise</a>
+        <a href="/plateforme/">Plateforme</a>
+        <a href="/devis/">Devis</a>
+        {% if ui_is_authenticated %}
+        <div class="nav-divider"></div>
+        <a href="/recherche/">🔍 Recherche</a>
+        {% if ui_is_admin %}
+        <a href="/admin-workspace/">⚙️ Admin</a>
+        {% endif %}
+        {% if ui_is_manager or ui_is_admin %}
+        <a href="/manager-workspace/">📊 Manager</a>
+        {% endif %}
+        <div class="nav-divider"></div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-btn">🏢 Organisation ▾</button>
+          <div class="nav-dropdown-content">
+            <a href="/groupes/">Groupes</a>
+            <a href="/organes/">Organes</a>
+            <a href="/postes/">Postes</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-btn">👥 Personnes ▾</button>
+          <div class="nav-dropdown-content">
+            <a href="/membres/">Membres</a>
+            <a href="/rencontres/">Rencontres</a>
+            <a href="/presences/">Présences</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-btn">💰 Finance ▾</button>
+          <div class="nav-dropdown-content">
+            <a href="/cotisations/">Cotisations</a>
+            <a href="/documents/">Documents</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-btn">📋 Activités ▾</button>
+          <div class="nav-dropdown-content">
+            <a href="/evenements/">Événements</a>
+            {% if ui_is_admin %}
+            <a href="/audit-logs/">Audit</a>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+      </nav>
+      <div class="topbar-actions">
+        {% if user.is_authenticated %}
+        <span class="user-pill">{{ user.get_username }} - {{ ui_role_label }}</span>
+        <a class="btn ghost" href="/accounts/logout/">Se déconnecter</a>
+        {% else %}
+        <a class="btn ghost" href="/accounts/login/">Se connecter</a>
+        {% endif %}
+      </div>
+    </header>
+
+    <section class="hero">
+      {% block hero %}
+      <div>
+        <p class="pill">Plateforme de gestion de groupes</p>
+        <h1>GroupManager</h1>
+        <p class="subtitle">
+          Centralisez vos groupes, vos membres et vos rencontres dans un espace clair,
+          rapide et professionnel.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <a class="btn primary" href="/admin/">Acceder a l'administration</a>
+        <a class="btn ghost" href="/api/">Voir l'API</a>
+      </div>
+      {% endblock %}
+    </section>
+
+    <main class="content">
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+      <p>GroupManager - edition professionnelle</p>
+    </footer>
+    {% block extra_scripts %}{% endblock %}
+  </body>
+</html>

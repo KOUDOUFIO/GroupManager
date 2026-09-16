@@ -1,0 +1,144 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Interface Manager - GroupManager{% endblock %}
+
+{% block hero %}
+<div>
+  <p class="pill">Espace Gestionnaire</p>
+  <h1>Pilotage opérationnel</h1>
+  <p class="subtitle">Suivi quotidien des groupes, activités, présences et cotisations.</p>
+</div>
+<div class="hero-actions">
+  <a class="btn primary" href="/groupes/">Gérer les groupes</a>
+  <a class="btn ghost" href="/recherche/">Recherche globale</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="stats">
+  <div class="stat-card">
+    <div class="stat-icon">🏢</div>
+    <h3>Groupes</h3>
+    <p class="stat-value">{{ group_count }}</p>
+    <p class="stat-label">groupes suivis</p>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon">👥</div>
+    <h3>Membres</h3>
+    <p class="stat-value">{{ member_count }}</p>
+    <p class="stat-label">membres actifs</p>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon">📅</div>
+    <h3>Rencontres</h3>
+    <p class="stat-value">{{ meeting_count }}</p>
+    <p class="stat-label">réunions organisées</p>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon">📋</div>
+    <h3>Événements</h3>
+    <p class="stat-value">{{ event_count }}</p>
+    <p class="stat-label">événements planifiés</p>
+  </div>
+</section>
+
+<section class="workspace-sections">
+  <div class="workspace-section">
+    <h2>📊 Activité récente</h2>
+    <div class="recent-activity-grid">
+      <div class="activity-card">
+        <h3>📅 Rencontres récentes</h3>
+        <div class="activity-list">
+          {% for m in latest_meetings %}
+          <div class="activity-item">
+            <span class="activity-date">{{ m.scheduled_at|date:"d/m/Y" }}</span>
+            <span class="activity-title">{{ m.title|default:'Rencontre' }}</span>
+            <span class="activity-group">{{ m.group.name }}</span>
+          </div>
+          {% empty %}
+          <p class="empty-state">Aucune rencontre récente.</p>
+          {% endfor %}
+        </div>
+      </div>
+      
+      <div class="activity-card">
+        <h3>💰 Cotisations récentes</h3>
+        <div class="activity-list">
+          {% for c in latest_contributions %}
+          <div class="activity-item">
+            <span class="activity-date">{{ c.paid_at|date:"d/m/Y" }}</span>
+            <span class="activity-title">{{ c.member.full_name }}</span>
+            <span class="activity-amount">{{ c.amount }} €</span>
+            <span class="activity-group">{{ c.group.name }}</span>
+          </div>
+          {% empty %}
+          <p class="empty-state">Aucune cotisation récente.</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="workspace-section">
+    <h2>📁 Modules par catégorie</h2>
+    <div class="category-grid">
+      <div class="category-card">
+        <h3>🏢 Organisation</h3>
+        <ul>
+          <li><a href="/groupes/">Groupes</a></li>
+          <li><a href="/organes/">Organes</a></li>
+          <li><a href="/postes/">Postes</a></li>
+        </ul>
+      </div>
+      <div class="category-card">
+        <h3>👥 Personnes</h3>
+        <ul>
+          <li><a href="/membres/">Membres</a></li>
+          <li><a href="/rencontres/">Rencontres</a></li>
+          <li><a href="/presences/">Présences</a></li>
+        </ul>
+      </div>
+      <div class="category-card">
+        <h3>💰 Finance</h3>
+        <ul>
+          <li><a href="/cotisations/">Cotisations</a></li>
+          <li><a href="/documents/">Documents</a></li>
+        </ul>
+      </div>
+      <div class="category-card">
+        <h3>📋 Activités</h3>
+        <ul>
+          <li><a href="/evenements/">Événements</a></li>
+          <li><a href="/recherche/">Recherche globale</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="workspace-section">
+    <h2>⚡ Actions rapides</h2>
+    <div class="quick-actions">
+      <a class="action-card" href="/membres/nouveau/">
+        <span class="action-icon">➕</span>
+        <h4>Ajouter un membre</h4>
+        <p>Créer un nouveau membre</p>
+      </a>
+      <a class="action-card" href="/rencontres/nouveau/">
+        <span class="action-icon">➕</span>
+        <h4>Planifier une rencontre</h4>
+        <p>Organiser une réunion</p>
+      </a>
+      <a class="action-card" href="/cotisations/nouveau/">
+        <span class="action-icon">➕</span>
+        <h4>Enregistrer une cotisation</h4>
+        <p>Ajouter un paiement</p>
+      </a>
+      <a class="action-card" href="/evenements/nouveau/">
+        <span class="action-icon">➕</span>
+        <h4>Créer un événement</h4>
+        <p>Ajouter un événement</p>
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

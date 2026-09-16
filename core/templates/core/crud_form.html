@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ title }} - GroupManager{% endblock %}
+
+{% block hero %}
+<div>
+  <p class="pill">Formulaire</p>
+  <h1>{{ title }}</h1>
+  <p class="subtitle">Remplissez les informations et enregistrez.</p>
+</div>
+<div class="hero-actions">
+  {% if list_url %}
+  <a class="btn ghost" href="{{ list_url }}">Retour a la liste</a>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="form-card">
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="form-actions">
+      <button class="btn primary" type="submit">Enregistrer</button>
+      {% if list_url %}
+      <a class="btn ghost" href="{{ list_url }}">Annuler</a>
+      {% endif %}
+    </div>
+  </form>
+</section>
+{% endblock %}

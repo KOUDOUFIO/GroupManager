@@ -1,0 +1,107 @@
+{% extends 'core/base.html' %}
+{% load core_extras %}
+
+{% block title %}{{ title }} - GroupManager{% endblock %}
+
+{% block hero %}
+<div>
+  <p class="pill">Module</p>
+  <h1>{{ title }}</h1>
+  <p class="subtitle">Liste et gestion rapide des enregistrements.</p>
+</div>
+<div class="hero-actions">
+  {% if create_url %}
+  <a class="btn primary" href="{{ create_url }}">Ajouter</a>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="table-card">
+  <div class="table-toolbar">
+    <form class="search-form" method="get">
+      <input type="text" name="q" placeholder="Rechercher..." value="{{ query }}" />
+      {% if base_url_name == 'contribution' or base_url_name == 'meeting_entry' %}
+      <select name="group">
+        <option value="">Tous les groupes</option>
+        {% for grp in groups %}
+        <option value="{{ grp.id }}" {% if selected_group == grp.id|stringformat:'s' %}selected{% endif %}>{{ grp.name }}</option>
+        {% endfor %}
+      </select>
+      <input type="date" name="start_date" value="{{ start_date }}" />
+      <input type="date" name="end_date" value="{{ end_date }}" />
+      {% endif %}
+      <button class="btn ghost" type="submit">Filtrer</button>
+    </form>
+    {% if base_url_name == 'contribution' %}
+    <div class="hero-actions">
+      <a class="btn ghost" href="{% url 'contribution_export_csv' %}?{{ export_query }}">CSV</a>
+      <a class="btn ghost" href="{% url 'contribution_export_xlsx' %}?{{ export_query }}">Excel</a>
+      <a class="btn ghost" href="{% url 'contribution_export_pdf' %}?{{ export_query }}">PDF</a>
+    </div>
+    {% endif %}
+    {% if base_url_name == 'meeting_entry' %}
+    <div class="hero-actions">
+      <a class="btn ghost" href="{% url 'meeting_entry_export_csv' %}?{{ export_query }}">CSV</a>
+      <a class="btn ghost" href="{% url 'meeting_entry_export_xlsx' %}?{{ export_query }}">Excel</a>
+      <a class="btn ghost" href="{% url 'meeting_entry_export_pdf' %}?{{ export_query }}">PDF</a>
+    </div>
+    {% endif %}
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        {% if list_columns %}
+          {% for col in list_columns %}
+          <th>{{ col.label }}</th>
+          {% endfor %}
+        {% else %}
+          <th>Nom</th>
+        {% endif %}
+        {% if show_actions %}
+        <th>Actions</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for obj in object_list %}
+      <tr>
+        {% if list_columns %}
+          {% for col in list_columns %}
+          <td>{{ obj|get_attr:col.accessor }}</td>
+          {% endfor %}
+        {% else %}
+          <td>{{ obj }}</td>
+        {% endif %}
+        {% if show_actions %}
+        <td class="actions">
+          {% if base_url_name == 'group' %}
+          <a class="link" href="{% url 'group_dashboard' obj.pk %}">Dashboard</a>
+          {% endif %}
+          <a class="link" href="{% url base_url_name|add:'_update' obj.pk %}">Modifier</a>
+          <a class="link danger" href="{% url base_url_name|add:'_delete' obj.pk %}">Supprimer</a>
+        </td>
+        {% endif %}
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="{% if show_actions %}8{% else %}7{% endif %}">Aucun element pour le moment.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% if is_paginated %}
+  <div class="pagination">
+    {% if page_obj.has_previous %}
+      <a class="link" href="?q={{ query }}&group={{ selected_group }}&start_date={{ start_date }}&end_date={{ end_date }}&page={{ page_obj.previous_page_number }}">Precedent</a>
+    {% endif %}
+    <span>Page {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+    {% if page_obj.has_next %}
+      <a class="link" href="?q={{ query }}&group={{ selected_group }}&start_date={{ start_date }}&end_date={{ end_date }}&page={{ page_obj.next_page_number }}">Suivant</a>
+    {% endif %}
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

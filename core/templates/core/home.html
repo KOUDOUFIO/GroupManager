@@ -1,0 +1,205 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Tableau de bord - GroupManager{% endblock %}
+
+{% block hero %}
+<div>
+  <p class="pill">Plateforme de gestion multisectorielle</p>
+  <h1>Une solution plus profonde pour piloter vos organisations.</h1>
+  <p class="subtitle">
+    GroupManager centralise les groupes, les membres, les activités, les événements et la trésorerie
+    pour offrir une expérience claire et évolutive dans tous les secteurs d'entreprise.
+  </p>
+</div>
+<div class="hero-actions">
+  <a class="btn primary" href="/groupes/">Commencer</a>
+  <a class="btn ghost" href="/api/">Voir l'API</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="stats">
+  <div class="stat-card">
+    <h3>Groupes</h3>
+    <p class="stat-value" data-counter data-target="{{ group_count }}">0</p>
+    <p class="stat-label">actifs</p>
+  </div>
+  <div class="stat-card">
+    <h3>Membres</h3>
+    <p class="stat-value" data-counter data-target="{{ member_count }}">0</p>
+    <p class="stat-label">enregistres</p>
+  </div>
+  <div class="stat-card">
+    <h3>Rencontres</h3>
+    <p class="stat-value" data-counter data-target="{{ meeting_count }}">0</p>
+    <p class="stat-label">planifiees</p>
+  </div>
+  <div class="stat-card">
+    <h3>Evenements</h3>
+    <p class="stat-value" data-counter data-target="{{ event_count }}">0</p>
+    <p class="stat-label">a venir</p>
+  </div>
+  <div class="stat-card">
+    <h3>Cotisations total</h3>
+    <p class="stat-value" data-counter data-target="{{ total_contributions }}">0</p>
+    <p class="stat-label">cumulees</p>
+  </div>
+  <div class="stat-card">
+    <h3>Cotisations du mois</h3>
+    <p class="stat-value" data-counter data-target="{{ current_month_contributions }}">0</p>
+    <p class="stat-label">mois courant</p>
+  </div>
+  <div class="stat-card">
+    <h3>Taux de presence</h3>
+    <p class="stat-value" data-counter data-target="{{ attendance_rate }}" data-suffix="%">0%</p>
+    <p class="stat-label">global</p>
+  </div>
+</section>
+
+<section class="analytics-rings">
+  <article class="ring-card">
+    <h4>Taux de presence</h4>
+    <div class="progress-ring" style="--pct: {{ attendance_rate|floatformat:1 }};">
+      <div class="ring-inner">
+        <strong data-counter data-target="{{ attendance_rate|floatformat:1 }}" data-suffix="%">0%</strong>
+      </div>
+    </div>
+  </article>
+  <article class="ring-card">
+    <h4>Cotisations du mois</h4>
+    <div class="progress-ring alt" style="--pct: {{ contribution_month_share|floatformat:1 }};">
+      <div class="ring-inner">
+        <strong data-counter data-target="{{ contribution_month_share|floatformat:1 }}" data-suffix="%">0%</strong>
+      </div>
+    </div>
+  </article>
+  <article class="ring-card">
+    <h4>Activite evenements</h4>
+    <div class="progress-ring calm" style="--pct: {{ event_activity_rate|floatformat:1 }};">
+      <div class="ring-inner">
+        <strong data-counter data-target="{{ event_activity_rate|floatformat:1 }}" data-suffix="%">0%</strong>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section class="section-block">
+  <div class="section-heading">
+    <p class="pill">Domaines d'application</p>
+    <h2>Un système conçu pour les entreprises, associations et organisations durables.</h2>
+  </div>
+  <div class="domain-grid">
+    {% for item in industry_cards %}
+    <article class="domain-card">
+      <span class="domain-tag">{{ item.tag }}</span>
+      <h4>{{ item.title }}</h4>
+      <p>{{ item.description }}</p>
+      <ul>
+        {% for point in item.points %}
+        <li>{{ point }}</li>
+        {% endfor %}
+      </ul>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section-block">
+  <div class="section-heading">
+    <p class="pill">Méthode de travail</p>
+    <h2>Une plateforme de gestion simple à adopter et profonde à exploiter.</h2>
+  </div>
+  <div class="flow-grid">
+    {% for step in workflow_steps %}
+    <article class="flow-card">
+      <div class="step-number">0{{ forloop.counter }}</div>
+      <h4>{{ step.title }}</h4>
+      <p>{{ step.description }}</p>
+    </article>
+    {% endfor %}
+  </div>
+  <div class="feature-list">
+    {% for feature in feature_highlights %}
+    <span class="feature-pill">{{ feature }}</span>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section-block highlight-panel">
+  <div class="section-heading narrow">
+    <p class="pill">Offre d'entreprise</p>
+    <h2>Un outil de gestion pensé pour la performance et la croissance.</h2>
+  </div>
+  <div class="solution-grid">
+    {% for card in solution_cards %}
+    <article class="solution-card">
+      <span class="solution-icon">{{ card.icon }}</span>
+      <h4>{{ card.title }}</h4>
+      <p>{{ card.description }}</p>
+    </article>
+    {% endfor %}
+  </div>
+  <div class="trust-grid">
+    {% for metric in trust_metrics %}
+    <div class="trust-card">
+      <strong>{{ metric.value }}</strong>
+      <span>{{ metric.label }}</span>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section-block testimonials-block">
+  <div class="section-heading">
+    <p class="pill">Témoignages</p>
+    <h2>Des organisations qui gagnent en clarté, en vitesse et en confiance.</h2>
+  </div>
+  <div class="testimonial-grid">
+    {% for testimonial in testimonials %}
+    <article class="testimonial-card">
+      <p class="quote">“{{ testimonial.quote }}”</p>
+      <div class="person">
+        <strong>{{ testimonial.name }}</strong>
+        <span>{{ testimonial.role }}</span>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="grid-cards">
+  <article class="info-card">
+    <h4>Gestion des groupes</h4>
+    <p>Creation, mise a jour, filtration par responsable, organes et postes inclus.</p>
+    <a class="link" href="/groupes/">Acceder</a>
+  </article>
+  <article class="info-card">
+    <h4>Membres & postes</h4>
+    <p>Association multi-groupes, postes isoles ou rattaches a un organe.</p>
+    <a class="link" href="/membres/">Acceder</a>
+  </article>
+  <article class="info-card">
+    <h4>Rencontres & presences</h4>
+    <p>Planification, presence/absence/retard/permission avec motifs.</p>
+    <a class="link" href="/rencontres/">Acceder</a>
+  </article>
+  <article class="info-card">
+    <h4>Cotisations & documents</h4>
+    <p>Suivi des paiements, stockage de documents importants.</p>
+    <a class="link" href="/cotisations/">Acceder</a>
+  </article>
+</section>
+
+<section class="cta">
+  <div>
+    <h3>Donnez à votre organisation un système plus robuste.</h3>
+    <p>Ajoutez vos premiers groupes, clarifiez vos rôles et pilotez votre activité en un seul espace professionnel.</p>
+  </div>
+  <a class="btn primary" href="/groupes/">Commencer</a>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+{% load static %}
+<script src="{% static 'core/dashboard.js' %}"></script>
+{% endblock %}

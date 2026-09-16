@@ -1,0 +1,76 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Connexion - GroupManager{% endblock %}
+
+{% block hero %}
+<div>
+  <p class="pill">Accès sécurisé</p>
+  <h1>Connexion</h1>
+  <p class="subtitle">Identifiez-vous pour accéder à votre espace de gestion.</p>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <h2>Bienvenue sur GroupManager</h2>
+      <p>Connectez-vous pour accéder à vos tableaux de bord et modules.</p>
+    </div>
+    
+    <form method="post" class="login-form">
+      {% csrf_token %}
+      
+      {% if form.errors %}
+      <div class="error-messages">
+        {% for field, errors in form.errors.items %}
+        <div class="error-item">
+          <strong>{{ field|title }}:</strong>
+          {% for error in errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      
+      <div class="form-group">
+        <label for="{{ form.username.id_for_label }}">Nom d'utilisateur</label>
+        <input type="text" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}" 
+               class="form-control" placeholder="Entrez votre nom d'utilisateur" required autofocus>
+      </div>
+      
+      <div class="form-group">
+        <label for="{{ form.password.id_for_label }}">Mot de passe</label>
+        <input type="password" name="{{ form.password.name }}" id="{{ form.password.id_for_label }}" 
+               class="form-control" placeholder="Entrez votre mot de passe" required>
+      </div>
+      
+      <div class="form-actions">
+        <button class="btn primary btn-block" type="submit">
+          <span>Se connecter</span>
+        </button>
+      </div>
+    </form>
+    
+    <div class="login-footer">
+      <p>Accès réservé aux membres autorisés.</p>
+    </div>
+  </div>
+  
+  <div class="login-info">
+    <div class="info-card">
+      <h3>🔐 Sécurité</h3>
+      <p>Connexion sécurisée avec chiffrement des données.</p>
+    </div>
+    <div class="info-card">
+      <h3>📊 Tableaux de bord</h3>
+      <p>Accès aux dashboards Admin, Manager et Groupes.</p>
+    </div>
+    <div class="info-card">
+      <h3>📁 Modules organisés</h3>
+      <p>Gestion des groupes, membres, rencontres et cotisations.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}
