@@ -9,9 +9,8 @@ from django.core.exceptions import ValidationError
 from django.test import TestCase
 from django.utils import timezone
 
-from .models import Group, Member, Meeting, Contribution, MeetingEntry
+from .models import AuditLog, Group, Member, Meeting, Contribution, MeetingEntry
 from .services import GroupService, MemberService, ContributionService, MeetingService
-from .audit import AuditLog
 
 User = get_user_model()
 
