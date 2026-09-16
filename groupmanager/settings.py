@@ -243,6 +243,7 @@ SPECTACULAR_SETTINGS = {
     "DESCRIPTION": "API REST pour la gestion de groupes, membres, rencontres et cotisations",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
+    "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAuthenticated"],
     "COMPONENT_SPLIT_REQUEST": True,
     "SCHEMA_PATH_PREFIX": "/api",
     "SERVERS": [
