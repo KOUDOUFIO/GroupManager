@@ -1,0 +1,55 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Mes presences - GroupManager{% endblock %}
+
+{% block hero %}
+<div>
+  <p class="pill">Mon espace</p>
+  <h1>Mes presences</h1>
+  <p class="subtitle">Historique complet de vos presences aux rencontres.</p>
+</div>
+<div class="hero-actions">
+  <a class="btn ghost" href="{% url 'member_portal' %}">Retour au tableau de bord</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="table-card">
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Rencontre</th>
+        <th>Groupe</th>
+        <th>Statut</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for e in object_list %}
+      <tr>
+        <td>{{ e.meeting.scheduled_at }}</td>
+        <td>{{ e.meeting.title|default:'Rencontre' }}</td>
+        <td>{{ e.meeting.group.name }}</td>
+        <td>{{ e.get_status_display }}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4">Aucune presence enregistree.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% if is_paginated %}
+  <div class="pagination">
+    {% if page_obj.has_previous %}
+      <a class="link" href="?page={{ page_obj.previous_page_number }}">Precedent</a>
+    {% endif %}
+    <span>Page {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+    {% if page_obj.has_next %}
+      <a class="link" href="?page={{ page_obj.next_page_number }}">Suivant</a>
+    {% endif %}
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

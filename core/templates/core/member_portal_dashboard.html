@@ -1,0 +1,58 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Mon espace - {{ member.full_name }}{% endblock %}
+
+{% block hero %}
+<div>
+  <p class="pill">Mon espace</p>
+  <h1>{{ member.full_name }}</h1>
+  <p class="subtitle">Vos cotisations et votre presence, en un coup d'oeil.</p>
+</div>
+{% if cinetpay_enabled %}
+<div class="hero-actions">
+  <a class="btn primary" href="{% url 'member_portal_pay' %}">Payer une cotisation</a>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<section class="stats">
+  <div class="stat-card"><h3>Groupes</h3><p class="stat-value">{{ group_count }}</p></div>
+  <div class="stat-card"><h3>Postes</h3><p class="stat-value">{{ position_count }}</p></div>
+  <div class="stat-card"><h3>Cotisations</h3><p class="stat-value">{{ contribution_count }}</p></div>
+  <div class="stat-card"><h3>Total cotise</h3><p class="stat-value">{{ contribution_total }}</p></div>
+  <div class="stat-card"><h3>Rencontres</h3><p class="stat-value">{{ meeting_count }}</p></div>
+  <div class="stat-card"><h3>Presence</h3><p class="stat-value">{{ attendance_rate }}%</p></div>
+</section>
+
+<section class="workspace-grid">
+  <article class="workspace-card">
+    <h4>Cotisations recentes</h4>
+    {% for c in recent_contributions %}
+    <p>{{ c.paid_at }} - {{ c.group.name }} - {{ c.amount }}</p>
+    {% empty %}
+    <p>Aucune cotisation enregistree.</p>
+    {% endfor %}
+    <a class="link" href="{% url 'member_portal_contributions' %}">Voir tout</a>
+  </article>
+
+  <article class="workspace-card">
+    <h4>Presences recentes</h4>
+    {% for e in recent_attendance %}
+    <p>{{ e.meeting.scheduled_at }} - {{ e.meeting.title|default:'Rencontre' }} - {{ e.get_status_display }}</p>
+    {% empty %}
+    <p>Aucune presence enregistree.</p>
+    {% endfor %}
+    <a class="link" href="{% url 'member_portal_attendance' %}">Voir tout</a>
+  </article>
+
+  <article class="workspace-card">
+    <h4>Mes groupes</h4>
+    {% for g in member_groups %}
+    <p>{{ g.name }}</p>
+    {% empty %}
+    <p>Vous n'appartenez a aucun groupe.</p>
+    {% endfor %}
+  </article>
+</section>
+{% endblock %}

@@ -3,6 +3,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
 from django.urls import reverse_lazy
+from django.utils.functional import cached_property
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
 
@@ -13,6 +14,20 @@ class StaffRequiredMixin(UserPassesTestMixin):
     def test_func(self):
         """Vérifie que l'utilisateur est membre du staff."""
         return self.request.user.is_staff
+
+
+class MemberSelfRequiredMixin(LoginRequiredMixin, UserPassesTestMixin):
+    """Mixin restreignant l'accès aux comptes liés à une fiche Member."""
+    raise_exception = True
+
+    def test_func(self):
+        """Vérifie que l'utilisateur connecté a une fiche Member liée."""
+        return hasattr(self.request.user, "member_profile")
+
+    @cached_property
+    def member(self):
+        """Fiche Member liée à l'utilisateur connecté."""
+        return self.request.user.member_profile
 
 
 class CrudContextMixin:

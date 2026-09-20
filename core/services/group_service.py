@@ -33,7 +33,10 @@ class GroupService:
         queryset = Group.objects.select_related('responsible').annotate(
             member_count=Count('members', distinct=True),
             meeting_count=Count('meetings', distinct=True),
-            contribution_total=Sum('contributions__amount')
+            contribution_total=Sum(
+                'contributions__amount',
+                filter=Q(contributions__payment_status=Contribution.STATUS_CONFIRMED)
+            )
         )
         
         if search_query:
@@ -175,7 +178,9 @@ class GroupService:
         try:
             group = Group.objects.get(pk=group_id)
             
-            total_contributions = group.contributions.aggregate(
+            total_contributions = group.contributions.filter(
+                payment_status=Contribution.STATUS_CONFIRMED
+            ).aggregate(
                 total=Sum('amount')
             )['total'] or 0
             

@@ -12,11 +12,13 @@ from django.urls import include, path
 from django.views.generic import TemplateView
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from core.views import healthcheck
+from core.webhooks import cinetpay_notify
 
 from . import error_views
 
 urlpatterns = [
     path('health/', healthcheck, name='healthcheck'),
+    path('webhooks/cinetpay/', cinetpay_notify, name='cinetpay_webhook'),
     path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain'), name='robots'),
     # API Documentation
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),

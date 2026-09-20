@@ -32,7 +32,10 @@ class MemberService:
         """
         queryset = Member.objects.prefetch_related('groups').annotate(
             group_count=Count('groups', distinct=True),
-            contribution_total=Sum('contributions__amount')
+            contribution_total=Sum(
+                'contributions__amount',
+                filter=Q(contributions__payment_status=Contribution.STATUS_CONFIRMED)
+            )
         )
         
         if search_query:
@@ -184,7 +187,9 @@ class MemberService:
         try:
             member = Member.objects.get(pk=member_id)
             
-            total_contributions = member.contributions.aggregate(
+            total_contributions = member.contributions.filter(
+                payment_status=Contribution.STATUS_CONFIRMED
+            ).aggregate(
                 total=Sum('amount'),
                 count=Count('id')
             )

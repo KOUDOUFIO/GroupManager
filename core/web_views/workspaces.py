@@ -100,7 +100,9 @@ class GroupDashboardView(LoginRequiredMixin, PermissionRequiredMixin, TemplateVi
         context = super().get_context_data(**kwargs)
         group = get_object_or_404(models.Group.objects.select_related("responsible"), pk=self.kwargs["pk"])
 
-        total_contributions = group.contributions.aggregate(total=Sum("amount"))["total"] or 0
+        total_contributions = group.contributions.filter(
+            payment_status=models.Contribution.STATUS_CONFIRMED
+        ).aggregate(total=Sum("amount"))["total"] or 0
         meeting_entries = models.MeetingEntry.objects.filter(meeting__group=group)
         total_entries = meeting_entries.count()
         attended_entries = meeting_entries.filter(

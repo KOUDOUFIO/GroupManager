@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.http import HttpResponse
 from django.utils.dateparse import parse_date
 from openpyxl import Workbook
+from reportlab.lib.pagesizes import landscape, letter
 from reportlab.pdfgen import canvas
 
 from .. import models
@@ -86,7 +87,7 @@ def export_contributions_csv(request):
     response = HttpResponse(content_type="text/csv")
     response["Content-Disposition"] = "attachment; filename=cotisations.csv"
     writer = csv.writer(response)
-    writer.writerow(["Membre", "Groupe", "Type", "Montant", "Date"])
+    writer.writerow(["Membre", "Groupe", "Type", "Methode", "Statut", "Montant", "Date"])
     queryset = models.Contribution.objects.select_related("member", "group").order_by("-paid_at")
     group_id, start_date, end_date = _parse_filters(request)
     if group_id:
@@ -101,6 +102,8 @@ def export_contributions_csv(request):
                 _safe_spreadsheet_cell(item.member.full_name),
                 _safe_spreadsheet_cell(item.group.name),
                 _safe_spreadsheet_cell(item.get_contribution_type_display()),
+                _safe_spreadsheet_cell(item.get_payment_method_display()),
+                _safe_spreadsheet_cell(item.get_payment_status_display()),
                 item.amount,
                 item.paid_at,
             ]
@@ -122,7 +125,7 @@ def export_contributions_xlsx(request):
     workbook = Workbook()
     sheet = workbook.active
     sheet.title = "Cotisations"
-    sheet.append(["Membre", "Groupe", "Type", "Montant", "Date"])
+    sheet.append(["Membre", "Groupe", "Type", "Methode", "Statut", "Montant", "Date"])
     queryset = models.Contribution.objects.select_related("member", "group").order_by("-paid_at")
     group_id, start_date, end_date = _parse_filters(request)
     if group_id:
@@ -137,6 +140,8 @@ def export_contributions_xlsx(request):
                 _safe_spreadsheet_cell(item.member.full_name),
                 _safe_spreadsheet_cell(item.group.name),
                 _safe_spreadsheet_cell(item.get_contribution_type_display()),
+                _safe_spreadsheet_cell(item.get_payment_method_display()),
+                _safe_spreadsheet_cell(item.get_payment_status_display()),
                 float(item.amount),
                 item.paid_at.strftime("%Y-%m-%d"),
             ]
@@ -160,16 +165,18 @@ def export_contributions_pdf(request):
         HttpResponse: Le fichier PDF des cotisations.
     """
     response = _pdf_response("cotisations.pdf")
-    pdf = canvas.Canvas(response)
+    pdf = canvas.Canvas(response, pagesize=landscape(letter))
     pdf.setFont("Helvetica-Bold", 14)
-    pdf.drawString(40, 800, "Rapport des cotisations")
+    pdf.drawString(40, 570, "Rapport des cotisations")
     pdf.setFont("Helvetica", 10)
-    y = 770
+    y = 540
     pdf.drawString(40, y, "Membre")
-    pdf.drawString(200, y, "Groupe")
-    pdf.drawString(320, y, "Type")
-    pdf.drawString(420, y, "Montant")
-    pdf.drawString(490, y, "Date")
+    pdf.drawString(220, y, "Groupe")
+    pdf.drawString(340, y, "Type")
+    pdf.drawString(430, y, "Methode")
+    pdf.drawString(540, y, "Statut")
+    pdf.drawString(650, y, "Montant")
+    pdf.drawString(720, y, "Date")
     y -= 20
     queryset = models.Contribution.objects.select_related("member", "group").order_by("-paid_at")
     group_id, start_date, end_date = _parse_filters(request)
@@ -180,15 +187,17 @@ def export_contributions_pdf(request):
     if end_date:
         queryset = queryset.filter(paid_at__lte=end_date)
     for item in queryset:
-        if y < 60:
+        if y < 40:
             pdf.showPage()
             pdf.setFont("Helvetica", 10)
-            y = 800
+            y = 570
         pdf.drawString(40, y, item.member.full_name)
-        pdf.drawString(200, y, item.group.name)
-        pdf.drawString(320, y, item.get_contribution_type_display())
-        pdf.drawRightString(460, y, f"{item.amount}")
-        pdf.drawString(480, y, item.paid_at.strftime("%Y-%m-%d"))
+        pdf.drawString(220, y, item.group.name)
+        pdf.drawString(340, y, item.get_contribution_type_display())
+        pdf.drawString(430, y, item.get_payment_method_display())
+        pdf.drawString(540, y, item.get_payment_status_display())
+        pdf.drawRightString(700, y, f"{item.amount}")
+        pdf.drawString(720, y, item.paid_at.strftime("%Y-%m-%d"))
         y -= 18
     pdf.showPage()
     pdf.save()

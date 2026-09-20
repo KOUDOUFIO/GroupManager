@@ -217,6 +217,16 @@ else:
 
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "noreply@groupmanager.local")
 
+# CinetPay (paiement en ligne) : desactive tant que CINETPAY_API_KEY et
+# CINETPAY_SITE_ID ne sont pas definis. Le portail membre masque alors le
+# bouton de paiement et la vue d'initiation refuse toute tentative.
+CINETPAY_API_KEY = os.environ.get("CINETPAY_API_KEY", "")
+CINETPAY_SITE_ID = os.environ.get("CINETPAY_SITE_ID", "")
+CINETPAY_SECRET_KEY = os.environ.get("CINETPAY_SECRET_KEY", "")
+CINETPAY_CURRENCY = os.environ.get("CINETPAY_CURRENCY", "XOF")
+CINETPAY_ENABLED = bool(CINETPAY_API_KEY and CINETPAY_SITE_ID)
+CINETPAY_BASE_URL = "https://api-checkout.cinetpay.com/v2"
+
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",

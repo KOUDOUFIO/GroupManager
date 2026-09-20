@@ -1,0 +1,64 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Mes cotisations - GroupManager{% endblock %}
+
+{% block hero %}
+<div>
+  <p class="pill">Mon espace</p>
+  <h1>Mes cotisations</h1>
+  <p class="subtitle">Historique complet de vos paiements enregistres.</p>
+</div>
+<div class="hero-actions">
+  <a class="btn ghost" href="{% url 'member_portal' %}">Retour au tableau de bord</a>
+</div>
+{% endblock %}
+
+{% block content %}
+{% if request.GET.paiement == "en_attente" %}
+<p class="pill">Paiement initie, en attente de confirmation. Le statut sera mis a jour automatiquement.</p>
+{% endif %}
+<section class="table-card">
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Groupe</th>
+        <th>Type</th>
+        <th>Methode</th>
+        <th>Statut</th>
+        <th>Montant</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for c in object_list %}
+      <tr>
+        <td>{{ c.paid_at }}</td>
+        <td>{{ c.group.name }}</td>
+        <td>{{ c.get_contribution_type_display }}</td>
+        <td>{{ c.get_payment_method_display }}</td>
+        <td>{{ c.get_payment_status_display }}</td>
+        <td>{{ c.amount }}</td>
+        <td>{{ c.notes }}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="7">Aucune cotisation enregistree.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% if is_paginated %}
+  <div class="pagination">
+    {% if page_obj.has_previous %}
+      <a class="link" href="?page={{ page_obj.previous_page_number }}">Precedent</a>
+    {% endif %}
+    <span>Page {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+    {% if page_obj.has_next %}
+      <a class="link" href="?page={{ page_obj.next_page_number }}">Suivant</a>
+    {% endif %}
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

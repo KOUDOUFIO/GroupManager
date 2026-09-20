@@ -184,9 +184,12 @@ def dashboard_summary(_request):
         Response: JSON avec les statistiques principales de l'application.
     """
     today = timezone.localdate()
-    total_contributions = models.Contribution.objects.aggregate(total=Sum("amount"))["total"] or 0
+    confirmed_contributions = models.Contribution.objects.filter(
+        payment_status=models.Contribution.STATUS_CONFIRMED
+    )
+    total_contributions = confirmed_contributions.aggregate(total=Sum("amount"))["total"] or 0
     current_month_contributions = (
-        models.Contribution.objects.filter(paid_at__year=today.year, paid_at__month=today.month)
+        confirmed_contributions.filter(paid_at__year=today.year, paid_at__month=today.month)
         .aggregate(total=Sum("amount"))["total"]
         or 0
     )

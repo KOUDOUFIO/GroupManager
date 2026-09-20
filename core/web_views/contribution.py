@@ -21,10 +21,12 @@ class ContributionListView(SearchableListView):
         {"label": "Membre", "accessor": "member.full_name"},
         {"label": "Groupe", "accessor": "group.name"},
         {"label": "Type", "accessor": "get_contribution_type_display"},
+        {"label": "Methode", "accessor": "get_payment_method_display"},
+        {"label": "Statut", "accessor": "get_payment_status_display"},
         {"label": "Montant", "accessor": "amount"},
         {"label": "Date", "accessor": "paid_at"},
     ]
-    search_fields = ["member__full_name", "group__name", "contribution_type"]
+    search_fields = ["member__full_name", "group__name", "contribution_type", "payment_method", "payment_status"]
     select_related_fields = ("member", "group")
 
     def get_queryset(self):

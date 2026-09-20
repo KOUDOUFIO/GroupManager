@@ -58,3 +58,17 @@ class ContributionForm(forms.ModelForm):
         if group and member and not member.groups.filter(pk=group.id).exists():
             self.add_error("member", "Le membre doit appartenir au groupe de la cotisation.")
         return cleaned_data
+
+
+class MemberPaymentForm(forms.Form):
+    """Formulaire d'initiation d'un paiement en ligne depuis le portail membre."""
+
+    group = forms.ModelChoiceField(queryset=models.Group.objects.none(), label="Groupe")
+    contribution_type = forms.ChoiceField(choices=models.Contribution.TYPE_CHOICES, label="Type")
+    amount = forms.DecimalField(min_value=0.01, max_digits=10, decimal_places=2, label="Montant")
+
+    def __init__(self, *args, member=None, **kwargs):
+        """Restreint le choix de groupe aux groupes du membre connecté."""
+        super().__init__(*args, **kwargs)
+        if member is not None:
+            self.fields["group"].queryset = member.groups.all()

@@ -29,9 +29,10 @@ class OrganAdmin(admin.ModelAdmin):
 @admin.register(models.Member)
 class MemberAdmin(admin.ModelAdmin):
     """Interface d'administration pour les membres."""
-    list_display = ("full_name", "email", "phone")
+    list_display = ("full_name", "email", "phone", "user")
     search_fields = ("full_name", "email", "phone")
     filter_horizontal = ("groups",)
+    autocomplete_fields = ("user",)
 
 
 @admin.register(models.Position)
@@ -61,9 +62,9 @@ class MeetingEntryAdmin(admin.ModelAdmin):
 @admin.register(models.Contribution)
 class ContributionAdmin(admin.ModelAdmin):
     """Interface d'administration pour les cotisations."""
-    list_display = ("member", "group", "contribution_type", "amount", "paid_at")
+    list_display = ("member", "group", "contribution_type", "payment_method", "payment_status", "amount", "paid_at")
     search_fields = ("member__full_name", "group__name")
-    list_filter = ("contribution_type", "group", "paid_at")
+    list_filter = ("contribution_type", "payment_method", "payment_status", "group", "paid_at")
 
 
 @admin.register(models.Document)

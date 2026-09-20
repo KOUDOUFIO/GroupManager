@@ -79,10 +79,13 @@ class ContributionService:
         amount: str,
         paid_at: str,
         notes: str = "",
+        payment_method: str = Contribution.METHOD_OTHER,
+        payment_status: str = Contribution.STATUS_CONFIRMED,
+        gateway_transaction_id: Optional[str] = None,
         actor=None
     ) -> Optional[Contribution]:
         """Crée une nouvelle cotisation avec validation et logging.
-        
+
         Args:
             member_id: ID du membre
             group_id: ID du groupe
@@ -90,8 +93,11 @@ class ContributionService:
             amount: Montant
             paid_at: Date de paiement
             notes: Notes optionnelles
+            payment_method: Methode de paiement
+            payment_status: Statut du paiement
+            gateway_transaction_id: Identifiant de transaction de la passerelle de paiement
             actor: Utilisateur effectuant l'action
-            
+
         Returns:
             Instance de la cotisation créée ou None si validation échoue
         """
@@ -115,7 +121,10 @@ class ContributionService:
                 contribution_type=contribution_type,
                 amount=amount,
                 paid_at=paid_at,
-                notes=notes
+                notes=notes,
+                payment_method=payment_method,
+                payment_status=payment_status,
+                gateway_transaction_id=gateway_transaction_id
             )
             
             if actor:
@@ -133,18 +142,22 @@ class ContributionService:
         contribution_type: Optional[str] = None,
         paid_at: Optional[str] = None,
         notes: Optional[str] = None,
+        payment_method: Optional[str] = None,
+        payment_status: Optional[str] = None,
         actor=None
     ) -> Optional[Contribution]:
         """Met à jour une cotisation avec logging d'audit.
-        
+
         Args:
             contribution_id: ID de la cotisation
             amount: Nouveau montant
             contribution_type: Nouveau type
             paid_at: Nouvelle date
             notes: Nouvelles notes
+            payment_method: Nouvelle methode de paiement
+            payment_status: Nouveau statut de paiement
             actor: Utilisateur effectuant l'action
-            
+
         Returns:
             Instance de la cotisation mise à jour ou None
         """
@@ -175,12 +188,24 @@ class ContributionService:
             if notes is not None and notes != contribution.notes:
                 changes['notes'] = {'old': contribution.notes, 'new': notes}
                 contribution.notes = notes
-            
+
+            if payment_method and payment_method != contribution.payment_method:
+                changes['payment_method'] = {'old': contribution.payment_method, 'new': payment_method}
+                contribution.payment_method = payment_method
+
+            if payment_status and payment_status != contribution.payment_status:
+                changes['payment_status'] = {'old': contribution.payment_status, 'new': payment_status}
+                contribution.payment_status = payment_status
+
             if changes:
                 contribution.save()
-                if actor:
-                    log_action(actor, 'update', 'contribution', contribution.pk, str(contribution), changes)
-            
+                # Journalise meme sans acteur (ex: webhook de paiement) : la
+                # confirmation d'un paiement reel doit rester tracable meme
+                # quand elle vient d'un systeme externe plutot que d'un
+                # utilisateur connecte. log_action gere deja actor=None
+                # (FK nullable sur AuditLog.actor).
+                log_action(actor, 'update', 'contribution', contribution.pk, str(contribution), changes)
+
             return contribution
         except Contribution.DoesNotExist:
             return None
@@ -220,11 +245,11 @@ class ContributionService:
             Dictionnaire avec le résumé des cotisations
         """
         queryset = Contribution.objects.all()
-        
+
         if group_id:
             queryset = queryset.filter(group_id=group_id)
-        
-        total = queryset.aggregate(
+
+        total = queryset.filter(payment_status=Contribution.STATUS_CONFIRMED).aggregate(
             total_amount=Sum('amount'),
             count=Count('id')
         )

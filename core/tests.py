@@ -1,3 +1,5 @@
+from unittest.mock import patch
+
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group as AuthGroup
 from django.contrib.auth.models import Permission
@@ -10,6 +12,7 @@ from django.utils import timezone
 from rest_framework.test import APIClient
 
 from .models import AuditLog, Contribution, Group, Meeting, MeetingEntry, Member, Organ, Position
+from .services.member_service import MemberService
 from .web_views import _safe_spreadsheet_cell
 
 
@@ -65,6 +68,20 @@ class ModelTests(TestCase):
         log = AuditLog.objects.filter(model_name="member", action=AuditLog.ACTION_UPDATE).first()
         self.assertIsNotNone(log)
         self.assertIn("groups", log.changes)
+
+    def test_contribution_defaults_payment_method_and_status(self):
+        group = Group.objects.create(name="G-Defaults")
+        member = Member.objects.create(full_name="Defaults User")
+        member.groups.add(group)
+        contribution = Contribution.objects.create(
+            member=member,
+            group=group,
+            contribution_type=Contribution.TYPE_MONTHLY,
+            amount="10.00",
+            paid_at="2025-01-01",
+        )
+        self.assertEqual(contribution.payment_method, Contribution.METHOD_OTHER)
+        self.assertEqual(contribution.payment_status, Contribution.STATUS_CONFIRMED)
 
 
 class WebPermissionTests(TestCase):
@@ -155,6 +172,237 @@ class WebPermissionTests(TestCase):
         response = self.client.get(reverse("home"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Gestionnaire")
+
+
+class ContributionAggregationTests(TestCase):
+    def setUp(self):
+        self.group = Group.objects.create(name="Groupe Agregation")
+        self.member = Member.objects.create(full_name="Membre Agregation")
+        self.member.groups.add(self.group)
+        Contribution.objects.create(
+            member=self.member,
+            group=self.group,
+            contribution_type=Contribution.TYPE_MONTHLY,
+            amount="20.00",
+            paid_at=timezone.now().date(),
+            payment_status=Contribution.STATUS_CONFIRMED,
+        )
+        Contribution.objects.create(
+            member=self.member,
+            group=self.group,
+            contribution_type=Contribution.TYPE_MONTHLY,
+            amount="500.00",
+            paid_at=timezone.now().date(),
+            payment_status=Contribution.STATUS_PENDING,
+        )
+
+    def test_home_total_excludes_unconfirmed_contributions(self):
+        response = self.client.get(reverse("home"))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["total_contributions"], 20)
+
+    def test_group_dashboard_total_excludes_unconfirmed_contributions(self):
+        user = get_user_model().objects.create_user(username="dash_user", password="password123")
+        perm = Permission.objects.get(codename="view_group", content_type__app_label="core")
+        user.user_permissions.add(perm)
+        self.client.force_login(user)
+
+        response = self.client.get(reverse("group_dashboard", args=[self.group.id]))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["total_contributions"], 20)
+
+    def test_member_statistics_exclude_unconfirmed_contributions(self):
+        stats = MemberService.get_member_statistics(self.member.id)
+        self.assertEqual(stats["contribution_total"], 20)
+        self.assertEqual(stats["contribution_count"], 1)
+
+
+class MemberPortalTests(TestCase):
+    def setUp(self):
+        self.group = Group.objects.create(name="Groupe Portail")
+        self.user_a = get_user_model().objects.create_user(username="membre_a", password="password123")
+        self.member_a = Member.objects.create(full_name="Membre A", user=self.user_a)
+        self.member_a.groups.add(self.group)
+        self.contribution_a = Contribution.objects.create(
+            member=self.member_a,
+            group=self.group,
+            contribution_type=Contribution.TYPE_MONTHLY,
+            amount="10.00",
+            paid_at=timezone.now().date(),
+        )
+        self.meeting = Meeting.objects.create(group=self.group, title="Reunion A", scheduled_at=timezone.now())
+        self.entry_a = MeetingEntry.objects.create(
+            meeting=self.meeting, member=self.member_a, status=MeetingEntry.STATUS_PRESENT
+        )
+
+        self.user_b = get_user_model().objects.create_user(username="membre_b", password="password123")
+        self.member_b = Member.objects.create(full_name="Membre B", user=self.user_b)
+        self.member_b.groups.add(self.group)
+        self.contribution_b = Contribution.objects.create(
+            member=self.member_b,
+            group=self.group,
+            contribution_type=Contribution.TYPE_MONTHLY,
+            amount="99.00",
+            paid_at=timezone.now().date(),
+        )
+        MeetingEntry.objects.create(meeting=self.meeting, member=self.member_b, status=MeetingEntry.STATUS_ABSENT)
+
+        self.user_no_member = get_user_model().objects.create_user(username="sans_membre", password="password123")
+
+    def test_dashboard_requires_login(self):
+        response = self.client.get(reverse("member_portal"))
+        self.assertEqual(response.status_code, 403)
+
+    def test_dashboard_requires_linked_member(self):
+        self.client.force_login(self.user_no_member)
+        response = self.client.get(reverse("member_portal"))
+        self.assertEqual(response.status_code, 403)
+
+    def test_dashboard_shows_own_statistics(self):
+        self.client.force_login(self.user_a)
+        response = self.client.get(reverse("member_portal"))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["member"], self.member_a)
+        self.assertEqual(response.context["contribution_count"], 1)
+        self.assertNotContains(response, "99.00")
+
+    def test_contributions_list_scoped_to_self(self):
+        self.client.force_login(self.user_a)
+        response = self.client.get(reverse("member_portal_contributions"))
+        self.assertEqual(response.status_code, 200)
+        object_list = list(response.context["object_list"])
+        self.assertEqual(object_list, [self.contribution_a])
+        self.assertNotContains(response, "99.00")
+
+    def test_attendance_list_scoped_to_self(self):
+        self.client.force_login(self.user_a)
+        response = self.client.get(reverse("member_portal_attendance"))
+        self.assertEqual(response.status_code, 200)
+        object_list = list(response.context["object_list"])
+        self.assertEqual(object_list, [self.entry_a])
+
+
+CINETPAY_TEST_SETTINGS = dict(
+    CINETPAY_ENABLED=True,
+    CINETPAY_API_KEY="test-key",
+    CINETPAY_SITE_ID="test-site",
+    CINETPAY_SECRET_KEY="",
+)
+
+
+class CinetPayIntegrationTests(TestCase):
+    def setUp(self):
+        self.group = Group.objects.create(name="Groupe CinetPay")
+        self.user = get_user_model().objects.create_user(username="payeur", password="password123")
+        self.member = Member.objects.create(full_name="Payeur Test", user=self.user)
+        self.member.groups.add(self.group)
+
+    @override_settings(**CINETPAY_TEST_SETTINGS)
+    def test_payment_initiation_creates_pending_contribution_and_redirects(self):
+        self.client.force_login(self.user)
+        with patch("core.services.cinetpay_service.requests.post") as mock_post:
+            mock_post.return_value.raise_for_status.return_value = None
+            mock_post.return_value.json.return_value = {
+                "code": "201",
+                "data": {"payment_url": "https://checkout.cinetpay.com/payment/abc", "payment_token": "abc"},
+            }
+            response = self.client.post(
+                reverse("member_portal_pay"),
+                {"group": self.group.id, "contribution_type": Contribution.TYPE_MONTHLY, "amount": "25.00"},
+            )
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, "https://checkout.cinetpay.com/payment/abc")
+
+        contribution = Contribution.objects.get(member=self.member)
+        self.assertEqual(contribution.payment_status, Contribution.STATUS_PENDING)
+        self.assertTrue(contribution.gateway_transaction_id)
+
+    def test_payment_initiation_disabled_by_default(self):
+        self.client.force_login(self.user)
+        response = self.client.post(
+            reverse("member_portal_pay"),
+            {"group": self.group.id, "contribution_type": Contribution.TYPE_MONTHLY, "amount": "25.00"},
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(Contribution.objects.filter(member=self.member).exists())
+
+    @override_settings(**CINETPAY_TEST_SETTINGS)
+    def test_webhook_confirms_pending_contribution(self):
+        contribution = Contribution.objects.create(
+            member=self.member,
+            group=self.group,
+            contribution_type=Contribution.TYPE_MONTHLY,
+            amount="25.00",
+            paid_at=timezone.now().date(),
+            payment_status=Contribution.STATUS_PENDING,
+            gateway_transaction_id="txn-accepted",
+        )
+        with patch("core.services.cinetpay_service.requests.post") as mock_post:
+            mock_post.return_value.raise_for_status.return_value = None
+            mock_post.return_value.json.return_value = {
+                "code": "00",
+                "data": {"status": "ACCEPTED", "payment_method": "MOBILE_MONEY"},
+            }
+            response = self.client.post(reverse("cinetpay_webhook"), {"cpm_trans_id": "txn-accepted"})
+        self.assertEqual(response.status_code, 200)
+
+        contribution.refresh_from_db()
+        self.assertEqual(contribution.payment_status, Contribution.STATUS_CONFIRMED)
+        self.assertEqual(contribution.payment_method, Contribution.METHOD_MOBILE_MONEY)
+
+        log = AuditLog.objects.filter(model_name="contribution", object_pk=str(contribution.pk)).first()
+        self.assertIsNotNone(log)
+        self.assertIsNone(log.actor)
+
+    @override_settings(**CINETPAY_TEST_SETTINGS)
+    def test_webhook_marks_refused_as_failed(self):
+        contribution = Contribution.objects.create(
+            member=self.member,
+            group=self.group,
+            contribution_type=Contribution.TYPE_MONTHLY,
+            amount="25.00",
+            paid_at=timezone.now().date(),
+            payment_status=Contribution.STATUS_PENDING,
+            gateway_transaction_id="txn-refused",
+        )
+        with patch("core.services.cinetpay_service.requests.post") as mock_post:
+            mock_post.return_value.raise_for_status.return_value = None
+            mock_post.return_value.json.return_value = {
+                "code": "00",
+                "data": {"status": "REFUSED", "payment_method": "MOBILE_MONEY"},
+            }
+            response = self.client.post(reverse("cinetpay_webhook"), {"cpm_trans_id": "txn-refused"})
+        self.assertEqual(response.status_code, 200)
+
+        contribution.refresh_from_db()
+        self.assertEqual(contribution.payment_status, Contribution.STATUS_FAILED)
+
+    def test_webhook_unknown_transaction_returns_200_without_crash(self):
+        response = self.client.post(reverse("cinetpay_webhook"), {"cpm_trans_id": "does-not-exist"})
+        self.assertEqual(response.status_code, 200)
+
+    @override_settings(**CINETPAY_TEST_SETTINGS)
+    def test_webhook_is_idempotent(self):
+        contribution = Contribution.objects.create(
+            member=self.member,
+            group=self.group,
+            contribution_type=Contribution.TYPE_MONTHLY,
+            amount="25.00",
+            paid_at=timezone.now().date(),
+            payment_status=Contribution.STATUS_PENDING,
+            gateway_transaction_id="txn-repeat",
+        )
+        with patch("core.services.cinetpay_service.requests.post") as mock_post:
+            mock_post.return_value.raise_for_status.return_value = None
+            mock_post.return_value.json.return_value = {
+                "code": "00",
+                "data": {"status": "ACCEPTED", "payment_method": "MOBILE_MONEY"},
+            }
+            self.client.post(reverse("cinetpay_webhook"), {"cpm_trans_id": "txn-repeat"})
+            response = self.client.post(reverse("cinetpay_webhook"), {"cpm_trans_id": "txn-repeat"})
+        self.assertEqual(response.status_code, 200)
+        contribution.refresh_from_db()
+        self.assertEqual(contribution.payment_status, Contribution.STATUS_CONFIRMED)
 
 
 class ApiPermissionTests(TestCase):
@@ -282,6 +530,18 @@ class ExportSecurityTests(TestCase):
         content = response.content.decode("utf-8")
         self.assertIn("'+Alice", content)
         self.assertIn("'=Group Name", content)
+
+    def test_contribution_csv_export_includes_payment_columns(self):
+        user = get_user_model().objects.create_user(username="exporter_payment", password="password123")
+        permission = Permission.objects.get(codename="view_contribution", content_type__app_label="core")
+        user.user_permissions.add(permission)
+        self.client.force_login(user)
+
+        response = self.client.get(reverse("contribution_export_csv"))
+        self.assertEqual(response.status_code, 200)
+        content = response.content.decode("utf-8")
+        self.assertIn("Methode", content)
+        self.assertIn("Statut", content)
 
     def test_contribution_csv_export_filters_by_group(self):
         user = get_user_model().objects.create_user(username="exporter_filter", password="password123")

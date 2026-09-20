@@ -34,6 +34,9 @@
         {% if ui_is_manager or ui_is_admin %}
         <a href="/manager-workspace/">📊 Espace manager</a>
         {% endif %}
+        {% if ui_is_member %}
+        <a href="/mon-espace/">🙍 Mon espace</a>
+        {% endif %}
         <div class="nav-divider"></div>
         <div class="nav-dropdown">
           <button class="nav-dropdown-btn">🏢 Organisation ▾</button>

@@ -19,9 +19,16 @@ from .mixins import (
     BaseDeleteView,
     BaseUpdateView,
     CrudContextMixin,
+    MemberSelfRequiredMixin,
     ModelPermissionMixin,
     SearchableListView,
     StaffRequiredMixin,
+)
+from .member_portal import (
+    MemberAttendanceListView,
+    MemberContributionsListView,
+    MemberPaymentInitiateView,
+    MemberPortalDashboardView,
 )
 from .group import GroupCreateView, GroupDeleteView, GroupListView, GroupUpdateView
 from .organ import OrganCreateView, OrganDeleteView, OrganListView, OrganUpdateView
@@ -69,9 +76,14 @@ __all__ = [
     "BaseDeleteView",
     "BaseUpdateView",
     "CrudContextMixin",
+    "MemberSelfRequiredMixin",
     "ModelPermissionMixin",
     "SearchableListView",
     "StaffRequiredMixin",
+    "MemberAttendanceListView",
+    "MemberContributionsListView",
+    "MemberPaymentInitiateView",
+    "MemberPortalDashboardView",
     "GroupCreateView",
     "GroupDeleteView",
     "GroupListView",
