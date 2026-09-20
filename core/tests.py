@@ -1,8 +1,10 @@
+from datetime import timedelta
 from unittest.mock import patch
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group as AuthGroup
 from django.contrib.auth.models import Permission
+from django.core import mail
 from django.core.exceptions import ValidationError
 from django.core.management import call_command
 from django.test import TestCase
@@ -11,7 +13,18 @@ from django.urls import reverse
 from django.utils import timezone
 from rest_framework.test import APIClient
 
-from .models import AuditLog, Contribution, Group, Meeting, MeetingEntry, Member, Organ, Position
+from .models import (
+    AuditLog,
+    Contribution,
+    Group,
+    Meeting,
+    MeetingEntry,
+    Member,
+    Notification,
+    NotificationPreference,
+    Organ,
+    Position,
+)
 from .services.member_service import MemberService
 from .web_views import _safe_spreadsheet_cell
 
@@ -737,3 +750,94 @@ class BootstrapCommandTests(TestCase):
         user = get_user_model().objects.get(username="opsadmin")
         self.assertTrue(user.is_staff)
         self.assertTrue(user.is_superuser)
+
+
+class ContributionReminderCommandTests(TestCase):
+    def setUp(self):
+        self.today = timezone.localdate()
+        self.group = Group.objects.create(name="Groupe Rappels")
+        # Historique: le groupe utilise bien des cotisations mensuelles.
+        historical_member = Member.objects.create(full_name="Historique", email="historique@example.com")
+        historical_member.groups.add(self.group)
+        Contribution.objects.create(
+            member=historical_member,
+            group=self.group,
+            contribution_type=Contribution.TYPE_MONTHLY,
+            amount="10.00",
+            paid_at=self.today - timedelta(days=365),
+            payment_status=Contribution.STATUS_CONFIRMED,
+        )
+        # Egalement a jour ce mois-ci, pour ne pas etre relance et fausser
+        # les assertions ciblant member_late.
+        Contribution.objects.create(
+            member=historical_member,
+            group=self.group,
+            contribution_type=Contribution.TYPE_MONTHLY,
+            amount="10.00",
+            paid_at=self.today,
+            payment_status=Contribution.STATUS_CONFIRMED,
+        )
+
+        self.user = get_user_model().objects.create_user(username="retardataire", password="password123")
+        self.member_late = Member.objects.create(
+            full_name="Membre Retard", email="retard@example.com", user=self.user
+        )
+        self.member_late.groups.add(self.group)
+
+        self.member_paid = Member.objects.create(full_name="Membre Paye", email="paye@example.com")
+        self.member_paid.groups.add(self.group)
+        Contribution.objects.create(
+            member=self.member_paid,
+            group=self.group,
+            contribution_type=Contribution.TYPE_MONTHLY,
+            amount="10.00",
+            paid_at=self.today,
+            payment_status=Contribution.STATUS_CONFIRMED,
+        )
+
+        self.member_pending = Member.objects.create(full_name="Membre En Attente", email="attente@example.com")
+        self.member_pending.groups.add(self.group)
+        Contribution.objects.create(
+            member=self.member_pending,
+            group=self.group,
+            contribution_type=Contribution.TYPE_MONTHLY,
+            amount="10.00",
+            paid_at=self.today,
+            payment_status=Contribution.STATUS_PENDING,
+        )
+
+        self.event_group = Group.objects.create(name="Groupe Evenementiel")
+        self.event_member = Member.objects.create(full_name="Membre Evenement", email="evenement@example.com")
+        self.event_member.groups.add(self.event_group)
+
+    def test_sends_email_and_notification_to_late_member(self):
+        call_command("send_contribution_reminders")
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to, ["retard@example.com"])
+
+        notification = Notification.objects.filter(user=self.user).first()
+        self.assertIsNotNone(notification)
+        self.assertEqual(notification.category, Notification.CATEGORY_CONTRIBUTION)
+
+    def test_paid_member_is_not_reminded(self):
+        call_command("send_contribution_reminders")
+        self.assertNotIn("paye@example.com", [m.to[0] for m in mail.outbox])
+
+    def test_pending_payment_is_not_reminded(self):
+        call_command("send_contribution_reminders")
+        self.assertNotIn("attente@example.com", [m.to[0] for m in mail.outbox])
+
+    def test_group_without_monthly_history_is_skipped(self):
+        call_command("send_contribution_reminders")
+        self.assertNotIn("evenement@example.com", [m.to[0] for m in mail.outbox])
+
+    def test_dry_run_sends_nothing(self):
+        call_command("send_contribution_reminders", dry_run=True)
+        self.assertEqual(len(mail.outbox), 0)
+        self.assertEqual(Notification.objects.count(), 0)
+
+    def test_email_disabled_preference_skips_email_but_keeps_notification(self):
+        NotificationPreference.objects.create(user=self.user, email_enabled=False)
+        call_command("send_contribution_reminders")
+        self.assertNotIn("retard@example.com", [m.to[0] for m in mail.outbox])
+        self.assertTrue(Notification.objects.filter(user=self.user).exists())

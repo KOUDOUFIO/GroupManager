@@ -265,3 +265,41 @@ class ContributionService:
             'total_count': total['count'] or 0,
             'by_type': list(by_type),
         }
+
+    @staticmethod
+    def get_groups_with_monthly_dues():
+        """Retourne les groupes ayant deja enregistre au moins une cotisation mensuelle.
+
+        Sert a ne relancer que les groupes qui utilisent effectivement des
+        cotisations mensuelles, et pas les groupes evenementiels.
+
+        Returns:
+            QuerySet de groupes
+        """
+        return Group.objects.filter(
+            contributions__contribution_type=Contribution.TYPE_MONTHLY
+        ).distinct()
+
+    @staticmethod
+    def get_members_without_monthly_payment(group, year: int, month: int):
+        """Retourne les membres d'un groupe sans cotisation mensuelle pour le mois donne.
+
+        Un paiement deja confirme ou en attente (paiement en ligne en cours)
+        exclut le membre de la relance.
+
+        Args:
+            group: Le groupe concerne
+            year: Annee du mois a verifier
+            month: Mois a verifier
+
+        Returns:
+            QuerySet de membres sans cotisation mensuelle ce mois-ci
+        """
+        paid_member_ids = Contribution.objects.filter(
+            group=group,
+            contribution_type=Contribution.TYPE_MONTHLY,
+            payment_status__in=[Contribution.STATUS_CONFIRMED, Contribution.STATUS_PENDING],
+            paid_at__year=year,
+            paid_at__month=month,
+        ).values_list('member_id', flat=True)
+        return group.members.exclude(id__in=paid_member_ids)

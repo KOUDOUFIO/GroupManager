@@ -84,7 +84,29 @@ Pour restaurer un dump :
 gunzip -c backups/votre_dump.sql.gz | docker-compose exec -T db psql -U <DB_USER> <DB_NAME>
 ```
 
-## 10. Renouvellement / mises à jour de l'application
+## 10. Rappels automatiques de cotisation
+
+`send_contribution_reminders` relance par email (et notification in-app si le
+membre a un compte lié) les membres sans cotisation mensuelle enregistrée pour
+le mois en cours, groupe par groupe — seuls les groupes ayant déjà utilisé des
+cotisations mensuelles sont concernés. Testez d'abord avec `--dry-run` :
+
+```bash
+docker-compose exec web python manage.py send_contribution_reminders --dry-run
+```
+
+Puis ajoutez au crontab du serveur (`crontab -e`) — une exécution mensuelle,
+pas quotidienne, pour ne pas spammer les membres déjà relancés :
+
+```
+0 8 5 * * cd /chemin/vers/groupmanager && docker-compose exec -T web python manage.py send_contribution_reminders >> logs/reminders.log 2>&1
+```
+
+Nécessite `EMAIL_HOST` configuré (section 3) pour un envoi réel — sans lui,
+les emails partent dans les logs console du conteneur `web`, rien n'est
+envoyé.
+
+## 11. Renouvellement / mises à jour de l'application
 
 ```bash
 git pull
