@@ -83,6 +83,15 @@ class EventAdmin(admin.ModelAdmin):
     list_filter = ("group", "event_type", "starts_at")
 
 
+@admin.register(models.ProposalRequest)
+class ProposalRequestAdmin(admin.ModelAdmin):
+    """Interface d'administration pour les demandes de devis."""
+    list_display = ("name", "email", "company", "organization_type", "created_at")
+    search_fields = ("name", "email", "company", "message")
+    list_filter = ("organization_type", "created_at")
+    readonly_fields = ("created_at",)
+
+
 @admin.register(models.AuditLog)
 class AuditLogAdmin(admin.ModelAdmin):
     """Interface d'administration pour les logs d'audit (lecture seule)."""

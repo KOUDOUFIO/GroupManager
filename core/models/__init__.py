@@ -17,6 +17,7 @@ from .member import Member
 from .position import Position
 from .meeting import Meeting, MeetingEntry
 from .contribution import Contribution
+from .proposal_request import ProposalRequest
 from .document import Document
 from .event import Event
 from .audit_log import AuditLog
@@ -32,6 +33,7 @@ __all__ = [
     "Meeting",
     "MeetingEntry",
     "Contribution",
+    "ProposalRequest",
     "Document",
     "Event",
     "AuditLog",

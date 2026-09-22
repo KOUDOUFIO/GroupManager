@@ -58,3 +58,27 @@ class ContributionForm(forms.ModelForm):
         if group and member and not member.groups.filter(pk=group.id).exists():
             self.add_error("member", "Le membre doit appartenir au groupe de la cotisation.")
         return cleaned_data
+
+
+class ProposalRequestForm(forms.ModelForm):
+    """Formulaire de demande de devis depuis la page vitrine."""
+
+    class Meta:
+        model = models.ProposalRequest
+        fields = ["name", "email", "company", "organization_type", "message"]
+        widgets = {
+            "name": forms.TextInput(attrs={"placeholder": "Votre nom"}),
+            "email": forms.EmailInput(attrs={"placeholder": "nom@entreprise.com"}),
+            "company": forms.TextInput(attrs={"placeholder": "Nom de l'organisation"}),
+            "message": forms.Textarea(attrs={
+                "rows": 5,
+                "placeholder": "Décrivez votre besoin, le nombre d'utilisateurs, les groupes et les priorités...",
+            }),
+        }
+        labels = {
+            "name": "Nom",
+            "email": "Email",
+            "company": "Entreprise",
+            "organization_type": "Type d'organisation",
+            "message": "Besoin principal",
+        }

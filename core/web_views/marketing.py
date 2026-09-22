@@ -1,9 +1,13 @@
 """Pages vitrine : accueil, entreprise, plateforme, devis."""
 
+from django.conf import settings
+from django.core.mail import send_mail
 from django.db.models import Sum
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.utils import timezone
 
+from .. import forms as core_forms
 from .. import models
 
 
@@ -165,10 +169,34 @@ def proposal_page(request):
         {"label": "Support", "value": "Réponse sous 24h"},
     ]
 
+    submitted = request.GET.get("envoye") == "1"
+    if request.method == "POST":
+        form = core_forms.ProposalRequestForm(request.POST)
+        if form.is_valid():
+            proposal_request = form.save()
+            send_mail(
+                subject=f"Nouvelle demande de devis - {proposal_request.name}",
+                message=(
+                    f"Nom: {proposal_request.name}\n"
+                    f"Email: {proposal_request.email}\n"
+                    f"Entreprise: {proposal_request.company or '-'}\n"
+                    f"Type d'organisation: {proposal_request.get_organization_type_display()}\n\n"
+                    f"{proposal_request.message}"
+                ),
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[settings.DEFAULT_FROM_EMAIL],
+                fail_silently=True,
+            )
+            return redirect(f"{reverse('proposal_page')}?envoye=1")
+    else:
+        form = core_forms.ProposalRequestForm()
+
     context = {
         "pricing": pricing,
         "benefits": benefits,
         "contact_points": contact_points,
+        "form": form,
+        "submitted": submitted,
     }
     return render(request, "core/proposal.html", context)
 

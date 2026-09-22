@@ -1706,6 +1706,14 @@ body {
   margin-top: var(--spacing-1);
 }
 
+.form-success {
+  background: var(--color-success-light);
+  color: var(--color-success);
+  border-radius: 12px;
+  padding: 16px;
+  font-weight: 600;
+}
+
 /* Table Component Styles */
 .table-container {
   background: var(--color-bg-secondary);

@@ -43,6 +43,29 @@ class HomeViewTests(TestCase):
         self.assertContains(response, "Demander un devis")
         self.assertContains(response, "Business")
 
+    def test_proposal_page_submission_creates_request_and_sends_notification(self):
+        from .models import ProposalRequest
+
+        response = self.client.post(
+            reverse("proposal_page"),
+            {
+                "name": "Amina K.",
+                "email": "amina@example.com",
+                "company": "Association Test",
+                "organization_type": ProposalRequest.ORG_TYPE_ASSOCIATION,
+                "message": "Nous avons besoin d'un devis pour 50 membres.",
+            },
+        )
+        self.assertRedirects(response, reverse("proposal_page") + "?envoye=1")
+        self.assertTrue(ProposalRequest.objects.filter(email="amina@example.com").exists())
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertIn("Amina K.", mail.outbox[0].subject)
+
+    def test_proposal_page_submission_invalid_shows_errors(self):
+        response = self.client.post(reverse("proposal_page"), {"name": "", "email": "pas-un-email"})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "error-messages")
+
     def test_company_page_status_ok(self):
         response = self.client.get(reverse("company_page"))
         self.assertEqual(response.status_code, 200)

@@ -87,37 +87,49 @@
       Nous vous répondrons avec une proposition claire, adaptée à votre volume et à votre contexte.
     </p>
   </div>
-  <form class="proposal-form">
+  {% if submitted %}
+  <p class="form-success">Merci ! Votre demande a bien été envoyée, nous vous répondrons rapidement.</p>
+  {% else %}
+  <form class="proposal-form" method="post">
+    {% csrf_token %}
+    {% if form.errors %}
+    <div class="error-messages">
+      {% for field, errors in form.errors.items %}
+      <div class="error-item">
+        <strong>{{ field|title }}:</strong>
+        {% for error in errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
     <div class="field-row">
       <label>
         <span>Nom</span>
-        <input type="text" placeholder="Votre nom" />
+        {{ form.name }}
       </label>
       <label>
         <span>Email</span>
-        <input type="email" placeholder="nom@entreprise.com" />
+        {{ form.email }}
       </label>
     </div>
     <div class="field-row">
       <label>
         <span>Entreprise</span>
-        <input type="text" placeholder="Nom de l'organisation" />
+        {{ form.company }}
       </label>
       <label>
         <span>Type d'organisation</span>
-        <select>
-          <option>Société</option>
-          <option>Association</option>
-          <option>Collectivité</option>
-          <option>Club / groupe</option>
-        </select>
+        {{ form.organization_type }}
       </label>
     </div>
     <label>
       <span>Besoin principal</span>
-      <textarea rows="5" placeholder="Décrivez votre besoin, le nombre d'utilisateurs, les groupes et les priorités..."></textarea>
+      {{ form.message }}
     </label>
     <button class="btn primary" type="submit">Demander un devis</button>
   </form>
+  {% endif %}
 </section>
 {% endblock %}
