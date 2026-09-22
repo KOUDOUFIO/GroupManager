@@ -27,7 +27,6 @@ from .mixins import (
 from .member_portal import (
     MemberAttendanceListView,
     MemberContributionsListView,
-    MemberPaymentInitiateView,
     MemberPortalDashboardView,
 )
 from .group import GroupCreateView, GroupDeleteView, GroupListView, GroupUpdateView
@@ -82,7 +81,6 @@ __all__ = [
     "StaffRequiredMixin",
     "MemberAttendanceListView",
     "MemberContributionsListView",
-    "MemberPaymentInitiateView",
     "MemberPortalDashboardView",
     "GroupCreateView",
     "GroupDeleteView",

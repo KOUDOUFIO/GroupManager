@@ -8,11 +8,6 @@
   <h1>{{ member.full_name }}</h1>
   <p class="subtitle">Vos cotisations et votre presence, en un coup d'oeil.</p>
 </div>
-{% if cinetpay_enabled %}
-<div class="hero-actions">
-  <a class="btn primary" href="{% url 'member_portal_pay' %}">Payer une cotisation</a>
-</div>
-{% endif %}
 {% endblock %}
 
 {% block content %}

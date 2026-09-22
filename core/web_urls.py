@@ -14,7 +14,6 @@ urlpatterns = [
     path("mon-espace/", web_views.MemberPortalDashboardView.as_view(), name="member_portal"),
     path("mon-espace/cotisations/", web_views.MemberContributionsListView.as_view(), name="member_portal_contributions"),
     path("mon-espace/presences/", web_views.MemberAttendanceListView.as_view(), name="member_portal_attendance"),
-    path("mon-espace/payer/", web_views.MemberPaymentInitiateView.as_view(), name="member_portal_pay"),
     path("recherche/", web_views.GlobalSearchView.as_view(), name="global_search"),
     path("groupes/", web_views.GroupListView.as_view(), name="group_list"),
     path("groupes/<int:pk>/dashboard/", web_views.GroupDashboardView.as_view(), name="group_dashboard"),
