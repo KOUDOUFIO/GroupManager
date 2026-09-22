@@ -11,7 +11,7 @@ set -e
 
 if [ -z "$1" ] || [ -z "$2" ]; then
   echo "Usage: $0 <domaine> <email>"
-  echo "Exemple: $0 groupmanager.example.com admin@example.com"
+  echo "Exemple: $0 kotiza.example.com admin@example.com"
   exit 1
 fi
 

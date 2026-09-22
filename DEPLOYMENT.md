@@ -14,8 +14,8 @@ Ce guide suppose un déploiement sur un VPS (OVH, Hetzner, DigitalOcean...) avec
 ```bash
 # Sur le VPS
 sudo apt update && sudo apt install -y docker.io docker-compose git
-git clone <url-de-votre-depot> groupmanager
-cd groupmanager
+git clone <url-de-votre-depot> kotiza
+cd kotiza
 ```
 
 ## 3. Configurer l'environnement
@@ -73,7 +73,7 @@ Changez ce mot de passe dès la première connexion si vous l'avez tapé en clai
 Ajoutez au crontab du serveur (`crontab -e`) :
 
 ```
-0 3 * * * cd /chemin/vers/groupmanager && ./docker/backup.sh >> logs/backup.log 2>&1
+0 3 * * * cd /chemin/vers/kotiza && ./docker/backup.sh >> logs/backup.log 2>&1
 ```
 
 Cela sauvegarde la base chaque nuit à 3h dans `./backups/`, avec suppression automatique des sauvegardes de plus de 14 jours. **Pensez aussi à copier régulièrement `./backups/` hors du serveur** (S3, un autre serveur...) — une sauvegarde qui reste sur la même machine que l'original ne protège pas contre une panne disque.
@@ -99,7 +99,7 @@ Puis ajoutez au crontab du serveur (`crontab -e`) — une exécution mensuelle,
 pas quotidienne, pour ne pas spammer les membres déjà relancés :
 
 ```
-0 8 5 * * cd /chemin/vers/groupmanager && docker-compose exec -T web python manage.py send_contribution_reminders >> logs/reminders.log 2>&1
+0 8 5 * * cd /chemin/vers/kotiza && docker-compose exec -T web python manage.py send_contribution_reminders >> logs/reminders.log 2>&1
 ```
 
 Nécessite `EMAIL_HOST` configuré (section 3) pour un envoi réel — sans lui,

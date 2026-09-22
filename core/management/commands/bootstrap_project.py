@@ -5,7 +5,7 @@ from django.core.management import BaseCommand, call_command
 
 
 class Command(BaseCommand):
-    """Commande d'initialisation du projet GroupManager."""
+    """Commande d'initialisation du projet Kotiza."""
 
     help = "Initialise le projet: migrate, seed_roles, et creation optionnelle d'un superutilisateur."
 

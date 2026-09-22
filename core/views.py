@@ -230,7 +230,7 @@ def api_schema(_request):
     """
     return Response(
         {
-            "name": "GroupManager API",
+            "name": "Kotiza API",
             "version": "1.0.0",
             "resources": [
                 {"path": "/api/groups/", "description": "CRUD groupes"},

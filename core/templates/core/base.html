@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{% block title %}GroupManager{% endblock %}</title>
+    <title>{% block title %}Kotiza{% endblock %}</title>
     {% load static %}
     <link rel="icon" type="image/svg+xml" href="{% static 'core/img/logo.svg' %}" />
     <link rel="stylesheet" href="{% static 'core/styles.css' %}" />
@@ -20,7 +20,7 @@
     <header class="topbar">
       <a class="brand" href="/">
         <img src="{% static 'core/img/logo.svg' %}" alt="" width="32" height="32" class="brand-logo" />
-        GroupManager
+        Kotiza
       </a>
       <nav class="nav">
         {% if not ui_is_authenticated %}
@@ -86,7 +86,7 @@
       {% block hero %}
       <div>
         <p class="pill">Plateforme de gestion de groupes</p>
-        <h1>GroupManager</h1>
+        <h1>Kotiza</h1>
         <p class="subtitle">
           Centralisez vos groupes, vos membres et vos rencontres dans un espace clair,
           rapide et professionnel.
@@ -104,7 +104,7 @@
     </main>
 
     <footer class="footer">
-      <p>GroupManager - edition professionnelle</p>
+      <p>Kotiza - edition professionnelle</p>
       <p class="footer-links">
         <a href="/mentions-legales/">Mentions légales</a>
         <a href="/confidentialite/">Politique de confidentialité</a>

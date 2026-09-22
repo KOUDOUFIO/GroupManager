@@ -3,7 +3,7 @@
 PYTHON ?= ./.venv/bin/python
 PIP ?= ./.venv/bin/pip
 RUN_SQLITE = env -u DB_NAME -u DB_USER -u DB_PASSWORD -u DB_HOST -u DB_PORT
-IMAGE ?= groupmanager:local
+IMAGE ?= kotiza:local
 
 help:
 	@echo "Targets disponibles:"

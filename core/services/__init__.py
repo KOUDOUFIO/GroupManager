@@ -1,4 +1,4 @@
-"""Services Layer - GroupManager
+"""Services Layer - Kotiza
 
 Ce package contient la logique métier de l'application.
 Les services encapsulent la logique business et peuvent être réutilisés

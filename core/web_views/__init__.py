@@ -1,6 +1,6 @@
 """Vues web Django pour l'interface utilisateur.
 
-Ce package regroupe les vues web pour l'interface utilisateur de GroupManager,
+Ce package regroupe les vues web pour l'interface utilisateur de Kotiza,
 organisées par domaine :
 
 - marketing : pages vitrine (accueil, entreprise, plateforme, devis)

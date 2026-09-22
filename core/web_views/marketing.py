@@ -34,7 +34,7 @@ def company_page(request):
     faqs = [
         {
             "question": "Le système convient-il à des structures diverses ?",
-            "answer": "Oui. GroupManager est conçu pour s’adapter à des entreprises, associations, clubs, institutions ou organisations multisites.",
+            "answer": "Oui. Kotiza est conçu pour s’adapter à des entreprises, associations, clubs, institutions ou organisations multisites.",
         },
         {
             "question": "Peut-on personnaliser le niveau d’accès ?",

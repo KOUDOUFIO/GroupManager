@@ -124,7 +124,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'groupmanager.urls'
+ROOT_URLCONF = 'kotiza.urls'
 
 TEMPLATES = [
     {
@@ -142,7 +142,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'groupmanager.wsgi.application'
+WSGI_APPLICATION = 'kotiza.wsgi.application'
 
 DATABASES = _build_database_config()
 
@@ -215,7 +215,7 @@ if os.environ.get("EMAIL_HOST"):
 else:
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "noreply@groupmanager.local")
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "noreply@kotiza.local")
 
 # CinetPay (paiement en ligne) : desactive tant que CINETPAY_API_KEY et
 # CINETPAY_SITE_ID ne sont pas definis. Le portail membre masque alors le
@@ -272,7 +272,7 @@ REST_FRAMEWORK = {
 
 # drf-spectacular configuration
 SPECTACULAR_SETTINGS = {
-    "TITLE": "GroupManager API",
+    "TITLE": "Kotiza API",
     "DESCRIPTION": "API REST pour la gestion de groupes, membres, rencontres et cotisations",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
@@ -281,7 +281,7 @@ SPECTACULAR_SETTINGS = {
     "SCHEMA_PATH_PREFIX": "/api",
     "SERVERS": [
         {"url": "http://127.0.0.1:8000", "description": "Development server"},
-        {"url": "https://groupmanager.example.com", "description": "Production server"},
+        {"url": "https://kotiza.example.com", "description": "Production server"},
     ],
     "TAGS": [
         {"name": "Groups", "description": "Gestion des groupes"},
@@ -307,7 +307,7 @@ CACHES = {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             "CONNECTION_POOL_KWARGS": {"max_connections": 100},
         },
-        "KEY_PREFIX": "groupmanager",
+        "KEY_PREFIX": "kotiza",
         "TIMEOUT": 300,  # 5 minutes default
     }
 }
@@ -341,7 +341,7 @@ LOGGING = {
         },
         "file": {
             "class": "logging.handlers.RotatingFileHandler",
-            "filename": str(LOG_DIR / "groupmanager.log"),
+            "filename": str(LOG_DIR / "kotiza.log"),
             "maxBytes": 1024 * 1024 * 5,
             "backupCount": 5,
             "formatter": "standard",

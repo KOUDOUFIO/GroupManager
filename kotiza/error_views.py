@@ -1,4 +1,4 @@
-"""Vues de gestion d'erreurs personnalisées pour le projet GroupManager.
+"""Vues de gestion d'erreurs personnalisées pour le projet Kotiza.
 
 Ce module fournit des vues pour les pages d'erreur HTTP personnalisées
 (400, 403, 404, 500) avec des templates dédiés.

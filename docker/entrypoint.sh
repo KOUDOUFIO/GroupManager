@@ -20,7 +20,7 @@ fi
 python manage.py migrate
 python manage.py collectstatic --noinput
 
-exec gunicorn groupmanager.wsgi:application \
+exec gunicorn kotiza.wsgi:application \
   --bind 0.0.0.0:8000 \
   --workers "${GUNICORN_WORKERS:-3}" \
   --timeout "${GUNICORN_TIMEOUT:-60}" \

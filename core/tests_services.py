@@ -1,4 +1,4 @@
-"""Tests pour les Services Layer - GroupManager
+"""Tests pour les Services Layer - Kotiza
 
 Ce module contient les tests unitaires pour les services métier,
 assurant que la logique business fonctionne correctement.

@@ -1,10 +1,10 @@
-# GroupManager
+# Kotiza
 
 Plateforme web pour gerer des groupes, membres, rencontres, cotisations, documents et evenements.
 
 ## Base de données
 
-Le projet est un backend Django et fonctionne avec **deux bases de données possibles**, choisies automatiquement (`groupmanager/settings.py::_build_database_config`) :
+Le projet est un backend Django et fonctionne avec **deux bases de données possibles**, choisies automatiquement (`kotiza/settings.py::_build_database_config`) :
 
 | Contexte | Moteur | Déclenché quand |
 |---|---|---|
@@ -28,8 +28,8 @@ python3 -m pip install -r requirements.txt
 3. Configurer les variables d'environnement dans un fichier `.env` a la racine du projet. Le projet charge automatiquement ce fichier et active PostgreSQL si `DB_NAME`, `DB_USER` et `DB_PASSWORD` sont presentes.
 
 ```env
-DB_NAME=groupmanager_db
-DB_USER=groupmanager_user
+DB_NAME=kotiza_db
+DB_USER=kotiza_user
 DB_PASSWORD=ChangeMe_2025!
 DB_HOST=localhost
 DB_PORT=5432
@@ -62,8 +62,8 @@ sudo -u postgres psql
 ```
 
 ```sql
-CREATE USER groupmanager_user WITH PASSWORD 'GroupManager_2025!';
-CREATE DATABASE groupmanager_db OWNER groupmanager_user;
+CREATE USER kotiza_user WITH PASSWORD 'Kotiza_2025!';
+CREATE DATABASE kotiza_db OWNER kotiza_user;
 ```
 
 7. Demarrer le serveur :
@@ -163,7 +163,7 @@ Checklist rapide avant mise en ligne :
 ## Structure du projet
 
 ```
-groupmanager/        Configuration Django (settings, urls, wsgi/asgi)
+kotiza/        Configuration Django (settings, urls, wsgi/asgi)
 core/                 Application principale
   models/             Modeles de donnees, un fichier par domaine
     group.py            Group
@@ -206,4 +206,4 @@ core/                 Application principale
 - Un dashboard `Groupe 360` est disponible via la liste des groupes (action `Dashboard`).
 - Les menus de navigation s'adaptent au profil connecte (`Administrateur`, `Gestionnaire`, `Utilisateur`).
 - Les erreurs HTTP 400/403/404/500 ont des pages dediees.
-- Les logs applicatifs sont ecrits dans `logs/groupmanager.log`.
+- Les logs applicatifs sont ecrits dans `logs/kotiza.log`.

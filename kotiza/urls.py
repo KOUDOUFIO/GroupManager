@@ -1,4 +1,4 @@
-"""Configuration des URLs pour le projet GroupManager.
+"""Configuration des URLs pour le projet Kotiza.
 
 Ce module définit la configuration principale des URLs du projet,
 incluant les routes pour l'admin, l'API REST, l'interface web,
@@ -34,7 +34,7 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-handler400 = "groupmanager.error_views.bad_request"
-handler403 = "groupmanager.error_views.permission_denied"
-handler404 = "groupmanager.error_views.page_not_found"
-handler500 = "groupmanager.error_views.server_error"
+handler400 = "kotiza.error_views.bad_request"
+handler403 = "kotiza.error_views.permission_denied"
+handler404 = "kotiza.error_views.page_not_found"
+handler500 = "kotiza.error_views.server_error"
