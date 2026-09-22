@@ -284,15 +284,17 @@ SPECTACULAR_SETTINGS = {
     ],
 }
 
-# Redis Cache Configuration
+# Redis Cache Configuration : REDIS_URL a la priorite si definie (ex: Railway,
+# Heroku), sinon on construit l'URL depuis REDIS_HOST/REDIS_PORT/REDIS_DB.
 REDIS_HOST = os.environ.get("REDIS_HOST", "localhost")
 REDIS_PORT = int(os.environ.get("REDIS_PORT", "6379"))
 REDIS_DB = int(os.environ.get("REDIS_DB", "0"))
+REDIS_LOCATION = os.environ.get("REDIS_URL") or f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}"
 
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}",
+        "LOCATION": REDIS_LOCATION,
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             "CONNECTION_POOL_KWARGS": {"max_connections": 100},
