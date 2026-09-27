@@ -1,14 +1,28 @@
 {% extends 'core/base.html' %}
 
-{% block title %}Abonnement expire{% endblock %}
+{% block title %}Abonnement expiré{% endblock %}
 
 {% block hero %}{% endblock %}
 
 {% block content %}
-<section class="form-card">
-  <h2>Abonnement expire</h2>
-  <p>L'abonnement Kotiza de votre organisation est arrive a son terme. Vos donnees sont conservees et seront de nouveau accessibles des le renouvellement.</p>
-  <p>Responsables : contactez-nous pour renouveler l'abonnement{% if billing_contact %} : <strong>{{ billing_contact }}</strong>{% endif %}.</p>
+<section class="expired-card" aria-labelledby="expired-title">
+  <div class="expired-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="4" y="11" width="16" height="10" rx="2"></rect>
+      <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
+    </svg>
+  </div>
+  <h2 id="expired-title">Abonnement expiré</h2>
+  <p>L'abonnement Kotiza de votre organisation est arrivé à son terme.</p>
+  <p>Vos données sont conservées et redeviennent accessibles dès le renouvellement.</p>
+
+  {% if billing_contact %}
+  <div class="expired-contact">
+    <span>Pour renouveler, contactez-nous</span>
+    <strong>{{ billing_contact }}</strong>
+  </div>
+  {% endif %}
+
   <a class="btn ghost" href="/accounts/login/">Connexion administrateur</a>
 </section>
 {% endblock %}
