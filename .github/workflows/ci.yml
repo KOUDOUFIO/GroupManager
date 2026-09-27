@@ -9,6 +9,19 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_DB: kotiza_test
+          POSTGRES_USER: kotiza
+          POSTGRES_PASSWORD: kotiza
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U kotiza"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
       redis:
         image: redis:7-alpine
         ports:
@@ -22,6 +35,8 @@ jobs:
     env:
       REDIS_HOST: localhost
       REDIS_PORT: 6379
+      # Tests sur Postgres, comme en production (et non SQLite).
+      DATABASE_URL: postgres://kotiza:kotiza@localhost:5432/kotiza_test
 
     steps:
       - name: Checkout

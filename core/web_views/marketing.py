@@ -164,9 +164,9 @@ def proposal_page(request):
     ]
 
     contact_points = [
-        {"label": "Déploiement", "value": "7 jours"},
+        {"label": "Démarrage", "value": "Accompagné"},
         {"label": "Mise en service", "value": "Sans migration lourde"},
-        {"label": "Support", "value": "Réponse sous 24h"},
+        {"label": "Support", "value": "Par email"},
     ]
 
     submitted = request.GET.get("envoye") == "1"
@@ -201,14 +201,11 @@ def proposal_page(request):
     return render(request, "core/proposal.html", context)
 
 
-def home(request):
-    """Vue de la page d'accueil avec les KPIs principaux.
-
-    Args:
-        request: L'objet HttpRequest Django.
+def _platform_stats():
+    """Calcule les KPIs globaux de la plateforme (tous groupes confondus).
 
     Returns:
-        HttpResponse: La page d'accueil avec les statistiques.
+        dict: Les statistiques a injecter dans le contexte de la page d'accueil.
     """
     today = timezone.localdate()
     group_count = models.Group.objects.count()
@@ -238,6 +235,28 @@ def home(request):
     event_activity_rate = round((event_count / meeting_count) * 100, 1) if meeting_count else 0
     event_activity_rate = min(event_activity_rate, 100)
 
+    return {
+        "group_count": group_count,
+        "member_count": member_count,
+        "meeting_count": meeting_count,
+        "event_count": event_count,
+        "total_contributions": total_contributions,
+        "current_month_contributions": current_month_contributions,
+        "attendance_rate": attendance_rate,
+        "contribution_month_share": contribution_month_share,
+        "event_activity_rate": event_activity_rate,
+    }
+
+
+def home(request):
+    """Vue de la page d'accueil avec les KPIs principaux.
+
+    Args:
+        request: L'objet HttpRequest Django.
+
+    Returns:
+        HttpResponse: La page d'accueil avec les statistiques.
+    """
     industry_cards = [
         {
             "tag": "Associations",
@@ -325,45 +344,22 @@ def home(request):
         },
     ]
 
-    testimonials = [
-        {
-            "quote": "La plateforme a transformé notre façon de gérer les groupes, les événements et les cotisations sans dépendre de plusieurs outils. ",
-            "name": "Amina K.",
-            "role": "Directrice d'association",
-        },
-        {
-            "quote": "Nous avons gagné en visibilité opérationnelle et nos équipes adoptent beaucoup plus facilement les routines de suivi.",
-            "name": "Thomas R.",
-            "role": "Responsable administratif",
-        },
-        {
-            "quote": "L'ergonomie est claire, la traçabilité est solide et le pilotage est devenu plus rapide pour toute l'entreprise.",
-            "name": "Sofia M.",
-            "role": "Chef de projet",
-        },
-    ]
-
     trust_metrics = [
-        {"value": "24/7", "label": "Suivi opérationnel"},
+        {"value": "2FA", "label": "Connexion sécurisée"},
         {"value": "360°", "label": "Vue d'ensemble"},
         {"value": "100%", "label": "Traçabilité"},
     ]
 
+    # Les totaux (dont la tresorerie) couvrent tous les groupes : on ne les
+    # montre qu'aux administrateurs, jamais aux visiteurs ni aux membres.
+    show_platform_stats = request.user.is_authenticated and request.user.is_staff
     context = {
-        "group_count": group_count,
-        "member_count": member_count,
-        "meeting_count": meeting_count,
-        "event_count": event_count,
-        "total_contributions": total_contributions,
-        "current_month_contributions": current_month_contributions,
-        "attendance_rate": attendance_rate,
-        "contribution_month_share": contribution_month_share,
-        "event_activity_rate": event_activity_rate,
+        "show_platform_stats": show_platform_stats,
+        **(_platform_stats() if show_platform_stats else {}),
         "industry_cards": industry_cards,
         "workflow_steps": workflow_steps,
         "feature_highlights": feature_highlights,
         "solution_cards": solution_cards,
-        "testimonials": testimonials,
         "trust_metrics": trust_metrics,
     }
     return render(request, "core/home.html", context)

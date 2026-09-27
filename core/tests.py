@@ -33,6 +33,25 @@ class HomeViewTests(TestCase):
     def test_home_view_status_ok(self):
         response = self.client.get(reverse("home"))
         self.assertEqual(response.status_code, 200)
+
+    def test_home_hides_platform_stats_from_anonymous_visitors(self):
+        response = self.client.get(reverse("home"))
+        self.assertFalse(response.context["show_platform_stats"])
+        self.assertNotIn("total_contributions", response.context)
+        self.assertNotContains(response, 'class="stats"')
+
+    def test_home_hides_platform_stats_from_non_staff_users(self):
+        user = get_user_model().objects.create_user(username="simple_user", password="password123")
+        self.client.force_login(user)
+        response = self.client.get(reverse("home"))
+        self.assertNotIn("total_contributions", response.context)
+
+    def test_home_shows_platform_stats_to_staff(self):
+        staff = get_user_model().objects.create_user(
+            username="staff_user", password="password123", is_staff=True
+        )
+        self.client.force_login(staff)
+        response = self.client.get(reverse("home"))
         self.assertIn("total_contributions", response.context)
         self.assertIn("current_month_contributions", response.context)
         self.assertIn("attendance_rate", response.context)
@@ -233,6 +252,10 @@ class ContributionAggregationTests(TestCase):
         )
 
     def test_home_total_excludes_unconfirmed_contributions(self):
+        staff = get_user_model().objects.create_user(
+            username="agg_staff", password="password123", is_staff=True
+        )
+        self.client.force_login(staff)
         response = self.client.get(reverse("home"))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context["total_contributions"], 20)
