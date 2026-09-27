@@ -6,6 +6,8 @@
   --ink: var(--color-text-primary);
   --accent: var(--color-primary-500);
   --accent-2: var(--color-secondary-500);
+  /* Fond des boutons a texte blanc : primary-600 pour un contraste AA (5.9:1). */
+  --accent-strong: var(--color-primary-600);
   --card: var(--color-bg-secondary);
   --shadow: var(--shadow-xl);
 }
@@ -193,7 +195,7 @@ body {
 }
 
 .btn.primary {
-  background: var(--accent);
+  background: var(--accent-strong);
   color: #fff;
   box-shadow: var(--shadow);
   border: none;
@@ -1532,13 +1534,13 @@ body {
 }
 
 .btn-primary {
-  background: var(--color-primary-500);
+  background: var(--accent-strong);
   color: var(--color-text-inverse);
   box-shadow: var(--shadow-base);
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: var(--color-primary-600);
+  background: var(--color-primary-700);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
