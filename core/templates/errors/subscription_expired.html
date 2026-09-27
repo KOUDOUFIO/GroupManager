@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Abonnement expire{% endblock %}
+
+{% block hero %}{% endblock %}
+
+{% block content %}
+<section class="form-card">
+  <h2>Abonnement expire</h2>
+  <p>L'abonnement Kotiza de votre organisation est arrive a son terme. Vos donnees sont conservees et seront de nouveau accessibles des le renouvellement.</p>
+  <p>Responsables : contactez-nous pour renouveler l'abonnement{% if billing_contact %} : <strong>{{ billing_contact }}</strong>{% endif %}.</p>
+  <a class="btn ghost" href="/accounts/login/">Connexion administrateur</a>
+</section>
+{% endblock %}

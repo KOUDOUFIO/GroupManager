@@ -100,6 +100,16 @@
     </section>
 
     <main class="content">
+      {% if subscription_days_left is not None %}
+      <div class="subscription-banner{% if subscription_expired %} expired{% endif %}" role="status">
+        {% if subscription_expired %}
+        Abonnement expire depuis le {{ subscription_access_until|date:"d/m/Y" }} : le site est bloque pour votre organisation.
+        {% else %}
+        Abonnement valable jusqu'au {{ subscription_access_until|date:"d/m/Y" }} ({{ subscription_days_left }} jour{{ subscription_days_left|pluralize }} restant{{ subscription_days_left|pluralize }}).
+        {% endif %}
+        {% if subscription_billing_contact %}Renouvellement : {{ subscription_billing_contact }}{% endif %}
+      </div>
+      {% endif %}
       {% block content %}{% endblock %}
     </main>
 

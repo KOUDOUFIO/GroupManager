@@ -1,6 +1,7 @@
 
 import os
 import sys
+from datetime import date
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -120,6 +121,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django_otp.middleware.OTPMiddleware',
     'core.middleware.AuditActorMiddleware',
+    'core.subscription.SubscriptionMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -137,6 +139,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'core.context_processors.ui_profile',
+                'core.subscription.subscription_status',
             ],
         },
     },
@@ -180,6 +183,25 @@ USE_TZ = True
 LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/accounts/login/"
+
+
+def _parse_access_until(value: str):
+    """Parse la date de fin d'abonnement (format AAAA-MM-JJ), ou None si vide."""
+    if not value:
+        return None
+    try:
+        return date.fromisoformat(value)
+    except ValueError as exc:
+        raise ImproperlyConfigured(
+            f"KOTIZA_ACCESS_UNTIL doit etre au format AAAA-MM-JJ (recu : {value!r})."
+        ) from exc
+
+
+# Abonnement du client (une installation par client) : apres cette date,
+# seuls les administrateurs gardent l'acces au site. Vide = aucune limite.
+KOTIZA_ACCESS_UNTIL = _parse_access_until(os.environ.get("KOTIZA_ACCESS_UNTIL", "").strip())
+# Contact affiche sur la page "abonnement expire" (email, telephone Mobile Money...).
+KOTIZA_BILLING_CONTACT = os.environ.get("KOTIZA_BILLING_CONTACT", "")
 
 if not DEBUG:
     # nginx termine le HTTPS et transmet en HTTP simple a gunicorn (voir

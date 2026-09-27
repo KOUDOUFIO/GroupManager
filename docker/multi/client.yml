@@ -1,0 +1,63 @@
+# Une installation Kotiza pour UN client (base, cache et application isoles).
+#
+# Ne pas lancer a la main : utiliser docker/multi/kotiza-clients.sh, qui
+# fournit CLIENT_SLUG, CLIENT_DIR et le .env du client.
+services:
+  db:
+    image: postgres:14
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  web:
+    image: kotiza:latest
+    command: /app/docker/entrypoint.sh
+    restart: unless-stopped
+    env_file:
+      - ${CLIENTS_ROOT}/shared.env
+      - ${CLIENT_DIR}/.env
+    environment:
+      DJANGO_DEBUG: "0"
+      DB_HOST: db
+      DB_PORT: "5432"
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      GUNICORN_WORKERS: ${GUNICORN_WORKERS:-2}
+    volumes:
+      - ${CLIENT_DIR}/media:/app/media
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      default:
+      proxy:
+        aliases:
+          - ${CLIENT_SLUG}-web
+
+volumes:
+  pgdata:
+
+networks:
+  proxy:
+    external: true
+    name: kotiza_proxy

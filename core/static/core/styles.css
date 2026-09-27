@@ -2226,3 +2226,17 @@ body {
     transform: scale(1);
   }
 }
+
+.subscription-banner {
+  margin-bottom: 24px;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: var(--color-warning-light);
+  color: var(--color-gray-900);
+  border: 1px solid var(--color-warning);
+}
+
+.subscription-banner.expired {
+  background: var(--color-danger-light);
+  border-color: var(--color-danger);
+}

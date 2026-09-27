@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import date, timedelta
 from unittest.mock import patch
 
 from django.contrib.auth import get_user_model
@@ -764,3 +764,102 @@ class ContributionReminderCommandTests(TestCase):
         call_command("send_contribution_reminders")
         self.assertNotIn("retard@example.com", [m.to[0] for m in mail.outbox])
         self.assertTrue(Notification.objects.filter(user=self.user).exists())
+
+
+@override_settings(KOTIZA_ACCESS_UNTIL=date(2026, 1, 31), KOTIZA_BILLING_CONTACT="+228 90 00 00 00")
+class SubscriptionTests(TestCase):
+    def setUp(self):
+        self.user = get_user_model().objects.create_user(username="sub_user", password="password123")
+        self.staff = get_user_model().objects.create_user(
+            username="sub_staff", password="password123", is_staff=True
+        )
+        self.operator = get_user_model().objects.create_superuser(
+            username="sub_operator", password="password123", email="op@example.com"
+        )
+
+    def _on(self, day):
+        return patch("core.subscription.timezone.localdate", return_value=day)
+
+    def test_site_open_until_last_day_included(self):
+        self.client.force_login(self.user)
+        with self._on(date(2026, 1, 31)):
+            response = self.client.get(reverse("home"))
+        self.assertEqual(response.status_code, 200)
+
+    def test_expired_blocks_users_and_shows_billing_contact(self):
+        self.client.force_login(self.user)
+        with self._on(date(2026, 2, 1)):
+            response = self.client.get(reverse("home"))
+        self.assertEqual(response.status_code, 402)
+        self.assertContains(response, "+228 90 00 00 00", status_code=402)
+
+    def test_expired_blocks_anonymous_visitors(self):
+        with self._on(date(2026, 2, 1)):
+            response = self.client.get(reverse("home"))
+        self.assertEqual(response.status_code, 402)
+
+    def test_expired_blocks_api_with_json(self):
+        self.client.force_login(self.user)
+        with self._on(date(2026, 2, 1)):
+            response = self.client.get("/api/")
+        self.assertEqual(response.status_code, 402)
+        self.assertEqual(response.json()["detail"], "Abonnement expire.")
+
+    def test_expired_keeps_login_and_health_reachable(self):
+        with self._on(date(2026, 2, 1)):
+            self.assertEqual(self.client.get(reverse("login")).status_code, 200)
+            self.assertEqual(self.client.get("/health/").status_code, 200)
+
+    def test_expired_blocks_client_admin(self):
+        self.client.force_login(self.staff)
+        with self._on(date(2026, 2, 1)):
+            response = self.client.get(reverse("home"))
+        self.assertEqual(response.status_code, 402)
+
+    def test_expired_blocks_client_admin_from_django_admin(self):
+        self.client.force_login(self.staff)
+        with self._on(date(2026, 2, 1)):
+            response = self.client.get("/admin/core/contribution/")
+        self.assertEqual(response.status_code, 402)
+
+    def test_expired_lets_operator_into_django_admin(self):
+        self.client.force_login(self.operator)
+        with self._on(date(2026, 2, 1)):
+            response = self.client.get("/admin/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_expired_lets_operator_in_with_banner(self):
+        self.client.force_login(self.operator)
+        with self._on(date(2026, 2, 1)):
+            response = self.client.get(reverse("home"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Abonnement expire depuis le 31/01/2026")
+
+    def test_staff_sees_reminder_banner_before_expiry(self):
+        self.client.force_login(self.staff)
+        with self._on(date(2026, 1, 25)):
+            response = self.client.get(reverse("home"))
+        self.assertContains(response, "6 jours restants")
+
+    def test_no_banner_long_before_expiry(self):
+        self.client.force_login(self.staff)
+        with self._on(date(2025, 12, 1)):
+            response = self.client.get(reverse("home"))
+        self.assertNotContains(response, "subscription-banner")
+
+    @override_settings(KOTIZA_ACCESS_UNTIL=None)
+    def test_no_end_date_means_no_limit(self):
+        with self._on(date(2099, 1, 1)):
+            response = self.client.get(reverse("home"))
+        self.assertEqual(response.status_code, 200)
+
+
+class CreateClientAdminCommandTests(TestCase):
+    def test_creates_staff_admin_without_superuser_rights(self):
+        call_command("create_client_admin", username="bureau", email="b@example.com", password="Pass1234!x")
+        user = get_user_model().objects.get(username="bureau")
+        self.assertTrue(user.is_staff)
+        self.assertFalse(user.is_superuser)
+        self.assertTrue(user.groups.filter(name="Administrateur").exists())
+        self.assertTrue(user.has_perm("core.delete_contribution"))
+        self.assertTrue(user.check_password("Pass1234!x"))
