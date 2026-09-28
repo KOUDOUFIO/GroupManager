@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-28 06:05+0000\n"
+"POT-Creation-Date: 2026-09-28 07:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -153,6 +153,9 @@ msgstr "Your name"
 msgid "nom@entreprise.com"
 msgstr "name@company.com"
 
+msgid "90 12 34 56"
+msgstr "90 12 34 56"
+
 msgid "Nom de l'organisation"
 msgstr "Organization name"
 
@@ -165,14 +168,26 @@ msgstr "Name"
 msgid "Email"
 msgstr "Email"
 
-msgid "Entreprise"
-msgstr "Company"
+msgid "Téléphone / WhatsApp"
+msgstr "Phone / WhatsApp"
 
 msgid "Type d'organisation"
 msgstr "Organization type"
 
+msgid "Formule souhaitée"
+msgstr "Preferred plan"
+
 msgid "Besoin principal"
 msgstr "Main need"
+
+msgid "Choisissez..."
+msgstr "Choose..."
+
+msgid "Je ne sais pas encore"
+msgstr "Not sure yet"
+
+msgid "Numéro de téléphone invalide."
+msgstr "Invalid phone number."
 
 msgid "Groupe"
 msgstr "Group"
@@ -191,9 +206,6 @@ msgstr "Mobile Money number"
 
 msgid "Exemple : 90 12 34 56. Vous confirmerez le paiement sur ce téléphone."
 msgstr "Example: 90 12 34 56. You will confirm the payment on this phone."
-
-msgid "Numéro de téléphone invalide."
-msgstr "Invalid phone number."
 
 msgid "Création"
 msgstr "Creation"
@@ -419,6 +431,18 @@ msgstr "Local authority"
 
 msgid "Club / groupe"
 msgstr "Club / group"
+
+msgid "Starter"
+msgstr "Starter"
+
+msgid "Business"
+msgstr "Business"
+
+msgid "Enterprise"
+msgstr "Enterprise"
+
+msgid "Entreprise"
+msgstr "Company"
 
 msgid "Reçu le"
 msgstr "Received on"
@@ -1124,6 +1148,9 @@ msgstr "Organization, people, contributions, activities, admin and manager areas
 msgid "Afficher tous les modules"
 msgstr "Show all modules"
 
+msgid "(facultatif)"
+msgstr "(optional)"
+
 msgid "Sécurité et confiance"
 msgstr "Security and trust"
 
@@ -1241,12 +1268,6 @@ msgstr "A solid foundation to grow from a local organization to a full business 
 msgid "Base"
 msgstr "Base"
 
-msgid "Business"
-msgstr "Business"
-
-msgid "Enterprise"
-msgstr "Enterprise"
-
 msgid "La plateforme évolue avec vos ambitions."
 msgstr "The platform evolves with your ambitions."
 
@@ -1314,8 +1335,23 @@ msgstr "Let's talk about your organization and your needs."
 msgid "Dites-nous quel niveau d’automatisation, de sécurité et d’accompagnement vous recherchez. Nous vous répondrons avec une proposition claire, adaptée à votre volume et à votre contexte."
 msgstr "Tell us what level of automation, security and support you need. We will reply with a clear proposal tailored to your size and context."
 
-msgid "Merci ! Votre demande a bien été envoyée, nous vous répondrons rapidement."
-msgstr "Thank you! Your request has been sent, we will get back to you soon."
+msgid "Merci, votre demande est bien envoyée !"
+msgstr "Thank you, your request has been sent!"
+
+msgid "Nous revenons vers vous rapidement, par email ou sur WhatsApp si vous avez laissé votre numéro."
+msgstr "We will get back to you quickly, by email or on WhatsApp if you left your number."
+
+msgid "Revoir les tarifs"
+msgstr "See pricing again"
+
+msgid "Merci de corriger les champs indiqués en rouge."
+msgstr "Please correct the fields shown in red."
+
+msgid "Ne pas remplir"
+msgstr "Do not fill in"
+
+msgid "Vos informations servent uniquement à vous répondre."
+msgstr "Your details are only used to reply to you."
 
 msgid "Requête invalide"
 msgstr "Bad request"
@@ -1793,9 +1829,6 @@ msgstr "No"
 msgid "Sur demande"
 msgstr "On request"
 
-msgid "Starter"
-msgstr "Starter"
-
 msgid "Par mois"
 msgstr "Per month"
 
@@ -2122,6 +2155,9 @@ msgstr "Edit position"
 
 msgid "Supprimer un poste"
 msgstr "Delete position"
+
+#~ msgid "Merci ! Votre demande a bien été envoyée, nous vous répondrons rapidement."
+#~ msgstr "Thank you! Your request has been sent, we will get back to you soon."
 
 #~ msgid "Vos modules"
 #~ msgstr "Your modules"

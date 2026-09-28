@@ -3,7 +3,7 @@
 from datetime import timedelta
 
 from django.conf import settings
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from django.db.models import Count, Sum
 from django.shortcuts import redirect, render
 from django.urls import reverse
@@ -120,6 +120,27 @@ def platform_page(request):
     return render(request, "core/platform.html", context)
 
 
+def _notify_sales(proposal_request):
+    """Previent l'equipe commerciale d'une nouvelle demande de devis (repondre = ecrire au prospect)."""
+    recipient = settings.KOTIZA_SALES_EMAIL or settings.DEFAULT_FROM_EMAIL
+    body = (
+        f"Nom : {proposal_request.name}\n"
+        f"Email : {proposal_request.email}\n"
+        f"Téléphone / WhatsApp : {proposal_request.phone or '-'}\n"
+        f"Organisation : {proposal_request.company or '-'}\n"
+        f"Type d'organisation : {proposal_request.get_organization_type_display()}\n"
+        f"Formule souhaitée : {proposal_request.get_plan_display() or '-'}\n\n"
+        f"{proposal_request.message}"
+    )
+    EmailMessage(
+        subject=f"Nouvelle demande de devis - {proposal_request.name}",
+        body=body,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        to=[recipient],
+        reply_to=[proposal_request.email],
+    ).send(fail_silently=True)
+
+
 def _published_testimonials():
     """Temoignages publies (avec accord du client), les plus mis en avant d'abord."""
     return list(models.Testimonial.objects.filter(is_published=True, consent_given=True)[:6])
@@ -134,6 +155,7 @@ def proposal_page(request):
     """Page de proposition commerciale / devis premium."""
     pricing = [
         {
+            "key": "starter",
             "name": _("Starter"),
             "price": _price(settings.KOTIZA_PRICE_STARTER),
             "subtitle": _("Par mois"),
@@ -148,6 +170,7 @@ def proposal_page(request):
             "highlighted": False,
         },
         {
+            "key": "business",
             "name": _("Business"),
             "price": _price(settings.KOTIZA_PRICE_BUSINESS),
             "subtitle": _("Par mois"),
@@ -162,6 +185,7 @@ def proposal_page(request):
             "highlighted": True,
         },
         {
+            "key": "enterprise",
             "name": _("Enterprise"),
             "price": _("Sur devis"),
             "subtitle": _("Personnalisé"),
@@ -193,23 +217,14 @@ def proposal_page(request):
     if request.method == "POST":
         form = core_forms.ProposalRequestForm(request.POST)
         if form.is_valid():
-            proposal_request = form.save()
-            send_mail(
-                subject=f"Nouvelle demande de devis - {proposal_request.name}",
-                message=(
-                    f"Nom: {proposal_request.name}\n"
-                    f"Email: {proposal_request.email}\n"
-                    f"Entreprise: {proposal_request.company or '-'}\n"
-                    f"Type d'organisation: {proposal_request.get_organization_type_display()}\n\n"
-                    f"{proposal_request.message}"
-                ),
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[settings.DEFAULT_FROM_EMAIL],
-                fail_silently=True,
-            )
-            return redirect(f"{reverse('proposal_page')}?envoye=1")
+            # Robot detecte : on fait comme si tout allait bien, sans rien enregistrer.
+            if not form.is_spam():
+                _notify_sales(form.save())
+            return redirect(f"{reverse('proposal_page')}?envoye=1#contact")
     else:
-        form = core_forms.ProposalRequestForm()
+        plan = request.GET.get("formule", "")
+        valid_plans = {key for key, _label in models.ProposalRequest.PLAN_CHOICES}
+        form = core_forms.ProposalRequestForm(initial={"plan": plan if plan in valid_plans else ""})
 
     context = {
         "pricing": pricing,

@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-{% load i18n %}
+{% load i18n core_extras %}
 
 {% block title %}{% translate "Devis Kotiza" %}{% endblock %}
 
@@ -60,7 +60,7 @@
         <li>{{ feature }}</li>
         {% endfor %}
       </ul>
-      <a class="btn {% if plan.highlighted %}primary{% else %}ghost{% endif %}" href="#contact">{% blocktranslate with name=plan.name %}Choisir {{ name }}{% endblocktranslate %}</a>
+      <a class="btn {% if plan.highlighted %}primary{% else %}ghost{% endif %}" href="?formule={{ plan.key }}#contact">{% blocktranslate with name=plan.name %}Choisir {{ name }}{% endblocktranslate %}</a>
     </article>
     {% endfor %}
   </div>
@@ -92,47 +92,37 @@
     </p>
   </div>
   {% if submitted %}
-  <p class="form-success">{% translate "Merci ! Votre demande a bien été envoyée, nous vous répondrons rapidement." %}</p>
+  <div class="proposal-success" role="status">
+    <span class="pay-status-icon" aria-hidden="true">{% icon "check" 30 %}</span>
+    <h3>{% translate "Merci, votre demande est bien envoyée !" %}</h3>
+    <p>{% translate "Nous revenons vers vous rapidement, par email ou sur WhatsApp si vous avez laissé votre numéro." %}</p>
+    <a class="btn ghost" href="{% url 'proposal_page' %}#pricing">{% translate "Revoir les tarifs" %}</a>
+  </div>
   {% else %}
-  <form class="proposal-form" method="post">
+  <form class="proposal-form" method="post" action="{% url 'proposal_page' %}#contact" novalidate>
     {% csrf_token %}
     {% if form.errors %}
-    <div class="error-messages">
-      {% for field, errors in form.errors.items %}
-      <div class="error-item">
-        <strong>{{ field|title }}:</strong>
-        {% for error in errors %}
-        <span>{{ error }}</span>
-        {% endfor %}
-      </div>
-      {% endfor %}
-    </div>
+    <p class="flash flash-error" role="alert">{% translate "Merci de corriger les champs indiqués en rouge." %}</p>
     {% endif %}
-    <div class="field-row">
-      <label>
-        <span>{% translate "Nom" %}</span>
-        {{ form.name }}
-      </label>
-      <label>
-        <span>{% translate "Email" %}</span>
-        {{ form.email }}
-      </label>
+    <div class="hp-field" aria-hidden="true">
+      <label for="{{ form.website.id_for_label }}">{% translate "Ne pas remplir" %}</label>
+      {{ form.website }}
     </div>
     <div class="field-row">
-      <label>
-        <span>{% translate "Entreprise" %}</span>
-        {{ form.company }}
-      </label>
-      <label>
-        <span>{% translate "Type d'organisation" %}</span>
-        {{ form.organization_type }}
-      </label>
+      {% include "core/partials/proposal_field.html" with field=form.name %}
+      {% include "core/partials/proposal_field.html" with field=form.email %}
     </div>
-    <label>
-      <span>{% translate "Besoin principal" %}</span>
-      {{ form.message }}
-    </label>
-    <button class="btn primary" type="submit">{% translate "Demander un devis" %}</button>
+    <div class="field-row">
+      {% include "core/partials/proposal_field.html" with field=form.phone optional=True %}
+      {% include "core/partials/proposal_field.html" with field=form.company optional=True %}
+    </div>
+    <div class="field-row">
+      {% include "core/partials/proposal_field.html" with field=form.organization_type %}
+      {% include "core/partials/proposal_field.html" with field=form.plan optional=True %}
+    </div>
+    {% include "core/partials/proposal_field.html" with field=form.message %}
+    <button class="btn primary proposal-submit" type="submit">{% translate "Demander un devis" %}</button>
+    <p class="proposal-note">{% translate "Vos informations servent uniquement à vous répondre." %}</p>
   </form>
   {% endif %}
 </section>

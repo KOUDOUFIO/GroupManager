@@ -123,15 +123,49 @@ class HomeViewTests(TestCase):
                 "message": "Nous avons besoin d'un devis pour 50 membres.",
             },
         )
-        self.assertRedirects(response, reverse("proposal_page") + "?envoye=1")
+        self.assertRedirects(response, reverse("proposal_page") + "?envoye=1#contact", fetch_redirect_response=False)
         self.assertTrue(ProposalRequest.objects.filter(email="amina@example.com").exists())
         self.assertEqual(len(mail.outbox), 1)
         self.assertIn("Amina K.", mail.outbox[0].subject)
+        # Repondre a l'email ecrit directement au prospect.
+        self.assertEqual(mail.outbox[0].reply_to, ["amina@example.com"])
+
+    @override_settings(KOTIZA_SALES_EMAIL="ventes@kotiza.tg")
+    def test_proposal_request_goes_to_sales_email_with_phone_and_plan(self):
+        from .models import ProposalRequest
+
+        self.client.post(reverse("proposal_page"), {
+            "name": "Kofi", "email": "kofi@example.com", "phone": "90 12 34 56",
+            "organization_type": ProposalRequest.ORG_TYPE_CLUB, "plan": "business", "message": "Tontine de 30 membres",
+        })
+        request = ProposalRequest.objects.get()
+        self.assertEqual(request.phone, "+22890123456")
+        self.assertEqual(request.plan, "business")
+        self.assertEqual(mail.outbox[0].to, ["ventes@kotiza.tg"])
+        self.assertIn("+22890123456", mail.outbox[0].body)
+
+    def test_proposal_spam_bot_is_silently_ignored(self):
+        from .models import ProposalRequest
+
+        response = self.client.post(reverse("proposal_page"), {
+            "name": "Bot", "email": "bot@example.com", "organization_type": ProposalRequest.ORG_TYPE_COMPANY,
+            "message": "spam", "website": "http://spam.example",
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertFalse(ProposalRequest.objects.exists())
+        self.assertEqual(len(mail.outbox), 0)
+
+    def test_proposal_plan_button_preselects_plan(self):
+        response = self.client.get(reverse("proposal_page") + "?formule=enterprise")
+        self.assertEqual(response.context["form"].initial["plan"], "enterprise")
+        self.assertContains(response, "?formule=business#contact")
 
     def test_proposal_page_submission_invalid_shows_errors(self):
         response = self.client.post(reverse("proposal_page"), {"name": "", "email": "pas-un-email"})
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "error-messages")
+        self.assertContains(response, "field-error")
+        # Plus de noms techniques de champs affiches au visiteur.
+        self.assertNotContains(response, "Organization_Type")
 
     def test_company_page_status_ok(self):
         response = self.client.get(reverse("company_page"))

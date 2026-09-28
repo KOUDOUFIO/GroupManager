@@ -623,7 +623,7 @@ body {
 }
 
 .trust-card {
-  background: rgba(15, 23, 42, 0.96);
+  background: linear-gradient(160deg, #0b3d1f, #14572c);
   color: #fff;
   border-radius: 22px;
   padding: 20px 18px;
@@ -718,8 +718,8 @@ body {
 }
 
 .price-card.featured {
-  background: linear-gradient(180deg, rgba(13, 148, 136, 0.08), rgba(255,255,255,0.86));
-  border-color: rgba(13, 148, 136, 0.18);
+  background: linear-gradient(180deg, rgba(22, 163, 74, 0.08), #fff 60%);
+  border: 2px solid var(--color-primary-300);
   transform: translateY(-6px);
 }
 
@@ -4104,5 +4104,179 @@ html.modules-open {
 
 .section-heading > .pill {
   align-self: flex-start;
+  width: fit-content;
+}
+
+/* Page Devis : formulaire */
+.proposal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.proposal-field label {
+  font-weight: 600;
+  color: var(--color-gray-700);
+}
+
+.proposal-field label small {
+  font-weight: 500;
+  color: var(--color-gray-500);
+}
+
+.proposal-field input,
+.proposal-field select,
+.proposal-field textarea {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--color-gray-300);
+  background: #fff;
+  font: inherit;
+  color: var(--ink);
+}
+
+.proposal-field textarea {
+  resize: vertical;
+}
+
+.proposal-field input:focus,
+.proposal-field select:focus,
+.proposal-field textarea:focus {
+  outline: none;
+  border-color: var(--color-primary-500);
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
+}
+
+.proposal-field.has-error input,
+.proposal-field.has-error select,
+.proposal-field.has-error textarea {
+  border-color: #dc2626;
+  background: #fffafa;
+}
+
+.proposal-submit {
+  height: 52px;
+  font: inherit;
+  font-weight: 700;
+}
+
+.proposal-note {
+  margin: -6px 0 0;
+  font-size: 0.85rem;
+  color: var(--color-gray-500);
+  text-align: center;
+}
+
+/* Champ piege anti-robot : hors de l'ecran, jamais visible. */
+.hp-field {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.contact-panel {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--color-gray-200);
+}
+
+.proposal-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 28px 20px;
+  border-radius: 20px;
+  background: var(--color-primary-50);
+  text-align: center;
+}
+
+.proposal-success h3 {
+  margin: 4px 0 0;
+}
+
+.proposal-success p {
+  margin: 0;
+  color: var(--color-gray-600);
+}
+
+.proposal-success .pay-status-icon {
+  background: #fff;
+  color: var(--color-primary-700);
+}
+
+@media (max-width: 900px) {
+  .contact-panel {
+    grid-template-columns: 1fr;
+    padding: 22px;
+  }
+}
+
+@media (max-width: 720px) {
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-panel {
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .price-card.featured {
+    transform: none;
+  }
+
+  /* En-tete public compact : ligne 1 marque + langue + connexion,
+     ligne 2 retour + menu. */
+  .topbar:not(.topbar-app) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 14px;
+    padding: 12px 16px;
+  }
+
+  .topbar:not(.topbar-app) .topbar-actions {
+    order: 1;
+    margin-left: auto;
+    gap: 8px;
+  }
+
+  .topbar:not(.topbar-app)::after {
+    content: "";
+    order: 2;
+    flex-basis: 100%;
+  }
+
+  .topbar:not(.topbar-app) > .back-btn {
+    order: 3;
+    margin-right: 0;
+    height: 34px;
+    padding: 0 10px;
+  }
+
+  .topbar:not(.topbar-app) .nav {
+    order: 4;
+    gap: 14px;
+  }
+
+  .topbar:not(.topbar-app) .topbar-actions .btn {
+    padding: 8px 14px;
+    font-size: 0.9rem;
+  }
+}
+
+.proposal-form .proposal-field label {
+  display: block;
+}
+
+.pill {
+  align-self: flex-start;
+  justify-self: start;
   width: fit-content;
 }

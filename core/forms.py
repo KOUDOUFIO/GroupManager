@@ -64,13 +64,19 @@ class ContributionForm(forms.ModelForm):
 class ProposalRequestForm(forms.ModelForm):
     """Formulaire de demande de devis depuis la page vitrine."""
 
+    # Champ piege invisible : un robot le remplit, un humain ne le voit pas.
+    website = forms.CharField(required=False, label="", widget=forms.TextInput(attrs={
+        "autocomplete": "off", "tabindex": "-1",
+    }))
+
     class Meta:
         model = models.ProposalRequest
-        fields = ["name", "email", "company", "organization_type", "message"]
+        fields = ["name", "email", "phone", "company", "organization_type", "plan", "message"]
         widgets = {
-            "name": forms.TextInput(attrs={"placeholder": _("Votre nom")}),
-            "email": forms.EmailInput(attrs={"placeholder": _("nom@entreprise.com")}),
-            "company": forms.TextInput(attrs={"placeholder": _("Nom de l'organisation")}),
+            "name": forms.TextInput(attrs={"placeholder": _("Votre nom"), "autocomplete": "name"}),
+            "email": forms.EmailInput(attrs={"placeholder": _("nom@entreprise.com"), "autocomplete": "email"}),
+            "phone": forms.TextInput(attrs={"placeholder": _("90 12 34 56"), "autocomplete": "tel", "inputmode": "tel"}),
+            "company": forms.TextInput(attrs={"placeholder": _("Nom de l'organisation"), "autocomplete": "organization"}),
             "message": forms.Textarea(attrs={
                 "rows": 5,
                 "placeholder": _("Décrivez votre besoin, le nombre d'utilisateurs, les groupes et les priorités..."),
@@ -79,10 +85,36 @@ class ProposalRequestForm(forms.ModelForm):
         labels = {
             "name": _("Nom"),
             "email": _("Email"),
-            "company": _("Entreprise"),
+            "phone": _("Téléphone / WhatsApp"),
+            "company": _("Organisation"),
             "organization_type": _("Type d'organisation"),
+            "plan": _("Formule souhaitée"),
             "message": _("Besoin principal"),
         }
+
+    def __init__(self, *args, **kwargs):
+        """Remplace les tirets des listes par un texte clair."""
+        super().__init__(*args, **kwargs)
+        self.fields["organization_type"].choices = [("", _("Choisissez..."))] + list(
+            models.ProposalRequest.ORG_TYPE_CHOICES
+        )
+        self.fields["plan"].choices = [("", _("Je ne sais pas encore"))] + list(models.ProposalRequest.PLAN_CHOICES)
+
+    def is_spam(self):
+        """Vrai si le champ piege a ete rempli (robot)."""
+        return bool(self.cleaned_data.get("website"))
+
+    def clean_phone(self):
+        """Normalise le numero s'il est renseigne (+228...)."""
+        from .services.phone import normalize_phone
+
+        raw = self.cleaned_data.get("phone", "").strip()
+        if not raw:
+            return ""
+        phone = normalize_phone(raw)
+        if not phone:
+            raise forms.ValidationError(_("Numéro de téléphone invalide."))
+        return phone
 
 
 class MemberPaymentForm(forms.Form):

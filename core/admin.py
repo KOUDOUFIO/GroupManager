@@ -86,9 +86,9 @@ class EventAdmin(admin.ModelAdmin):
 @admin.register(models.ProposalRequest)
 class ProposalRequestAdmin(admin.ModelAdmin):
     """Interface d'administration pour les demandes de devis."""
-    list_display = ("name", "email", "company", "organization_type", "created_at")
-    search_fields = ("name", "email", "company", "message")
-    list_filter = ("organization_type", "created_at")
+    list_display = ("name", "email", "phone", "company", "organization_type", "plan", "created_at")
+    search_fields = ("name", "email", "phone", "company", "message")
+    list_filter = ("organization_type", "plan", "created_at")
     readonly_fields = ("created_at",)
 
 

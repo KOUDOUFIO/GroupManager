@@ -18,12 +18,23 @@ class ProposalRequest(models.Model):
         (ORG_TYPE_CLUB, _("Club / groupe")),
     ]
 
+    PLAN_STARTER = "starter"
+    PLAN_BUSINESS = "business"
+    PLAN_ENTERPRISE = "enterprise"
+    PLAN_CHOICES = [
+        (PLAN_STARTER, _("Starter")),
+        (PLAN_BUSINESS, _("Business")),
+        (PLAN_ENTERPRISE, _("Enterprise")),
+    ]
+
     name = models.CharField(max_length=150, verbose_name=_("Nom"))
     email = models.EmailField(verbose_name=_("Email"))
+    phone = models.CharField(max_length=32, blank=True, verbose_name=_("Téléphone / WhatsApp"))
     company = models.CharField(max_length=150, blank=True, verbose_name=_("Entreprise"))
     organization_type = models.CharField(
         max_length=20, choices=ORG_TYPE_CHOICES, verbose_name=_("Type d'organisation")
     )
+    plan = models.CharField(max_length=20, choices=PLAN_CHOICES, blank=True, verbose_name=_("Formule souhaitée"))
     message = models.TextField(verbose_name=_("Besoin principal"))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Reçu le"))
 

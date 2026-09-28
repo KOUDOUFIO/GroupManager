@@ -1,0 +1,6 @@
+{% load i18n %}
+<div class="proposal-field{% if field.errors %} has-error{% endif %}">
+  <label for="{{ field.id_for_label }}">{{ field.label }}{% if optional %} <small>{% translate "(facultatif)" %}</small>{% endif %}</label>
+  {{ field }}
+  {% for error in field.errors %}<p class="field-error" id="{{ field.auto_id }}_error">{{ error }}</p>{% endfor %}
+</div>

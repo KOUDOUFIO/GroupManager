@@ -805,4 +805,17 @@ EN = {
     "Rappels automatiques SMS / WhatsApp": "Automatic SMS / WhatsApp reminders",
     "Le paiement n'a pas pu être lancé. Vérifiez le numéro et réessayez dans quelques instants.": "The payment could not be started. Check the number and try again in a moment.",
     "Paiement toujours en attente. Confirmez-le sur votre téléphone avec votre code secret.": "Payment still pending. Confirm it on your phone with your PIN.",
+    # Page Devis
+    "90 12 34 56": "90 12 34 56",
+    "Téléphone / WhatsApp": "Phone / WhatsApp",
+    "Formule souhaitée": "Preferred plan",
+    "Choisissez...": "Choose...",
+    "Je ne sais pas encore": "Not sure yet",
+    "(facultatif)": "(optional)",
+    "Merci, votre demande est bien envoyée !": "Thank you, your request has been sent!",
+    "Nous revenons vers vous rapidement, par email ou sur WhatsApp si vous avez laissé votre numéro.": "We will get back to you quickly, by email or on WhatsApp if you left your number.",
+    "Revoir les tarifs": "See pricing again",
+    "Merci de corriger les champs indiqués en rouge.": "Please correct the fields shown in red.",
+    "Ne pas remplir": "Do not fill in",
+    "Vos informations servent uniquement à vous répondre.": "Your details are only used to reply to you.",
 }

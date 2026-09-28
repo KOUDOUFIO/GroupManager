@@ -214,6 +214,8 @@ KOTIZA_ACCESS_UNTIL = _parse_access_until(os.environ.get("KOTIZA_ACCESS_UNTIL", 
 KOTIZA_API_ENABLED = os.environ.get("KOTIZA_API_ENABLED", "0") == "1"
 # Contact affiche sur la page "abonnement expire" (email, telephone Mobile Money...).
 KOTIZA_BILLING_CONTACT = os.environ.get("KOTIZA_BILLING_CONTACT", "")
+# Adresse qui recoit les demandes de devis de la page vitrine (votre email).
+KOTIZA_SALES_EMAIL = os.environ.get("KOTIZA_SALES_EMAIL", "")
 # Devise affichee sur les montants (FCFA au Togo et en zone UEMOA).
 KOTIZA_CURRENCY = os.environ.get("KOTIZA_CURRENCY", "FCFA")
 # Tarifs mensuels affiches sur la page Devis (dans la devise ci-dessus) et
