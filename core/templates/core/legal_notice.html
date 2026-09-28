@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load core_extras %}
 
 {% block title %}Mentions légales - Kotiza{% endblock %}
 
@@ -25,8 +26,8 @@
   <p>KOUDOUFIO Kodjo Alex</p>
 
   <h2>Hébergement</h2>
-  <p style="margin-bottom: 1rem; padding: 1rem; border-radius: 8px; background: var(--color-warning-light, #fffbeb); color: var(--color-text-primary, #201e1b);">
-    ⚠️ À compléter une fois le VPS acheté : nom de l'hébergeur (ex: OVH, Hetzner, DigitalOcean...)
+  <p class="legal-todo">
+    {% icon "history" 18 %}À compléter une fois le VPS acheté : nom de l'hébergeur (ex: OVH, Hetzner, DigitalOcean...)
     et son adresse.
   </p>
   <p>

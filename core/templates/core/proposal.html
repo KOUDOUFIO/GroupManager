@@ -28,7 +28,7 @@
   <div class="benefit-grid">
     {% for benefit in benefits %}
     <div class="benefit-card">
-      <span class="benefit-icon">✓</span>
+      <span class="benefit-icon">{% icon "check" 16 %}</span>
       <p>{{ benefit }}</p>
     </div>
     {% endfor %}

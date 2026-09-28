@@ -817,4 +817,5 @@ EN = {
     "Élément": "Item",
     "Caisse transparente": "Transparent cash box",
     "Chaque cotisation est enregistrée avec son statut, et la caisse s'exporte en Excel ou en PDF.": "Every contribution is recorded with its status, and the cash box exports to Excel or PDF.",
+    "Informations légales": "Legal information",
 }
