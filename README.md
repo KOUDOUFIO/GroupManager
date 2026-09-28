@@ -90,7 +90,7 @@ Les données de démonstration sont marquées « (démo) » et n'affectent pas l
 ## Paiement Mobile Money et rappels
 
 - `PAYGATE_AUTH_TOKEN` active le paiement T-Money / Flooz (PayGate Global) dans « Mon espace ».
-- `TWILIO_*` active les rappels par SMS et WhatsApp (voir `.env.example`).
+- `ESMS_API_KEY` (eSMS Africa) active les rappels par SMS, `TWILIO_*` les rappels WhatsApp (voir `.env.example`).
 - `python3 manage.py send_contribution_reminders` relance les membres en retard.
 - `python3 manage.py check_pending_payments` revérifie les paiements restés en attente.
 

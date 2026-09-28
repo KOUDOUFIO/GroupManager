@@ -234,6 +234,12 @@ PAYGATE_AUTH_TOKEN = os.environ.get("PAYGATE_AUTH_TOKEN", "")
 PAYGATE_ENABLED = bool(PAYGATE_AUTH_TOKEN)
 PAYGATE_API_URL = os.environ.get("PAYGATE_API_URL", "https://paygateglobal.com/api")
 
+# SMS via eSMS Africa (prioritaire pour les SMS si la cle est definie).
+# ESMS_SENDER_ID : nom d'expediteur approuve par eSMS (ex. KOTIZA), vide = celui par defaut.
+ESMS_API_KEY = os.environ.get("ESMS_API_KEY", "")
+ESMS_SENDER_ID = os.environ.get("ESMS_SENDER_ID", "")
+ESMS_API_URL = os.environ.get("ESMS_API_URL", "https://sms.esmsafrica.io/api")
+
 # Rappels SMS / WhatsApp via Twilio : un canal est actif des que son numero
 # d'expedition est defini. Sans configuration, les messages sont seulement
 # journalises (aucun envoi, aucun cout).

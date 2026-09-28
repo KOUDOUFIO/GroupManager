@@ -82,7 +82,9 @@ Les sauvegardes vont dans `clients/<client>/backups/` et sont conservées 14 jou
 
 Le membre voit alors un bouton « Payer ma cotisation » dans « Mon espace ». Il reçoit la demande sur son téléphone, la valide avec son code secret, et la cotisation passe en « Confirmée » toute seule. Kotiza ne fait jamais confiance au message reçu : il revérifie chaque paiement auprès de PayGate, y compris le montant.
 
-**Rappels SMS / WhatsApp (Twilio).** Renseignez `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_SMS_FROM` et/ou `TWILIO_WHATSAPP_FROM`. WhatsApp exige un modèle de message validé par Meta (`TWILIO_WHATSAPP_TEMPLATE_SID`). Sans modèle, WhatsApp refuse l'envoi et le SMS prend le relais. Sans aucune configuration, les rappels partent seulement par email et dans l'application.
+**SMS (eSMS Africa).** Renseignez `ESMS_API_KEY` (clé `esms_live_…`, menu Developers > API Keys sur esmsafrica.io) et rechargez le solde du compte (environ 30 FCFA par SMS vers le Togo). Faites approuver un nom d'expéditeur (ex. `KOTIZA`) et mettez-le dans `ESMS_SENDER_ID`, sinon les SMS partent au nom « eSMS ». eSMS Africa est prioritaire sur Twilio pour les SMS.
+
+**Rappels WhatsApp (et SMS de repli) via Twilio.** Renseignez `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_SMS_FROM` et/ou `TWILIO_WHATSAPP_FROM`. WhatsApp exige un modèle de message validé par Meta (`TWILIO_WHATSAPP_TEMPLATE_SID`). Sans modèle, WhatsApp refuse l'envoi et le SMS prend le relais. Sans aucune configuration, les rappels partent seulement par email et dans l'application.
 
 Tâches automatiques (`crontab -e`) :
 

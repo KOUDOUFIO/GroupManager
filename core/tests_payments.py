@@ -19,6 +19,11 @@ from .services.phone import normalize_phone
 from .templatetags.core_extras import money
 
 PAYGATE = {"PAYGATE_AUTH_TOKEN": "test-token", "PAYGATE_ENABLED": True}
+# Point de depart neutre : les tests ne dependent jamais des vraies cles du .env local.
+NO_PROVIDERS = {
+    "PAYGATE_AUTH_TOKEN": "", "PAYGATE_ENABLED": False, "ESMS_API_KEY": "",
+    "TWILIO_ACCOUNT_SID": "", "TWILIO_AUTH_TOKEN": "", "TWILIO_SMS_FROM": "", "TWILIO_WHATSAPP_FROM": "",
+}
 
 
 def fake_response(payload):
@@ -41,6 +46,7 @@ class PhoneAndMoneyTests(TestCase):
         self.assertNotIn(",00", money(Decimal("15000")))
 
 
+@override_settings(**NO_PROVIDERS)
 class MemberPaymentTests(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(username="payer", password="password123")
@@ -96,7 +102,7 @@ class MemberPaymentTests(TestCase):
         self.assertEqual(response.status_code, 404)
 
 
-@override_settings(**PAYGATE)
+@override_settings(**{**NO_PROVIDERS, **PAYGATE})
 class PayGateWebhookTests(TestCase):
     def setUp(self):
         self.group = Group.objects.create(name="Tontine")
@@ -155,6 +161,7 @@ class PayGateWebhookTests(TestCase):
         self.assertEqual(self.contribution.payment_status, Contribution.STATUS_CONFIRMED)
 
 
+@override_settings(**NO_PROVIDERS)
 class MessagingTests(TestCase):
     @patch("core.services.messaging_service.requests.post")
     def test_nothing_sent_without_configuration(self, post):
@@ -191,6 +198,29 @@ class MessagingTests(TestCase):
         self.assertEqual(post.call_args.kwargs["data"]["To"], "+22890000002")
 
 
+@override_settings(**NO_PROVIDERS)
+class EsmsAfricaTests(TestCase):
+    @override_settings(ESMS_API_KEY="esms_test_abc", ESMS_SENDER_ID="KOTIZA",
+                       TWILIO_ACCOUNT_SID="", TWILIO_AUTH_TOKEN="")
+    @patch("core.services.messaging_service.requests.post")
+    def test_sms_goes_through_esms_africa(self, post):
+        post.return_value = fake_response({"id": "m1", "status": "submitted"})
+        self.assertEqual(MessagingService.enabled_channels(), [CHANNEL_SMS])
+        self.assertTrue(MessagingService.send(CHANNEL_SMS, "90 12 34 56", "Bonjour"))
+        self.assertTrue(post.call_args.args[0].endswith("/messages/send"))
+        self.assertEqual(post.call_args.kwargs["json"], {"to": "+22890123456", "text": "Bonjour", "sender_id": "KOTIZA"})
+        self.assertEqual(post.call_args.kwargs["headers"]["Authorization"], "Bearer esms_test_abc")
+
+    @override_settings(ESMS_API_KEY="esms_test_abc")
+    @patch("core.services.messaging_service.requests.post")
+    def test_esms_failure_returns_false(self, post):
+        import requests as real_requests
+
+        post.side_effect = real_requests.ConnectionError("hors ligne")
+        self.assertFalse(MessagingService.send(CHANNEL_SMS, "90 12 34 56", "Bonjour"))
+
+
+@override_settings(**NO_PROVIDERS)
 class DemoAndMarketingTests(TestCase):
     def test_seed_demo_is_repeatable_and_removable(self):
         call_command("seed_demo", password="DemoPass123", stdout=MagicMock())

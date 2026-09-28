@@ -1,8 +1,8 @@
-"""Envoi de SMS et de messages WhatsApp (Twilio).
+"""Envoi de SMS (eSMS Africa ou Twilio) et de messages WhatsApp (Twilio).
 
-Un canal est actif des que son numero d'expedition est configure
-(TWILIO_SMS_FROM, TWILIO_WHATSAPP_FROM). Sinon le message est seulement
-journalise : utile en developpement, et aucun cout d'envoi.
+SMS : eSMS Africa si ESMS_API_KEY est defini, sinon Twilio (TWILIO_SMS_FROM).
+WhatsApp : Twilio (TWILIO_WHATSAPP_FROM). Un canal non configure ne fait
+que journaliser le message : aucun envoi, aucun cout.
 """
 
 import json
@@ -37,7 +37,32 @@ class MessagingService:
     @classmethod
     def enabled_channels(cls) -> list:
         """Canaux reellement configures, dans l'ordre d'envoi."""
-        return [channel for channel in (CHANNEL_WHATSAPP, CHANNEL_SMS) if cls.sender(channel)]
+        channels = []
+        if cls.sender(CHANNEL_WHATSAPP):
+            channels.append(CHANNEL_WHATSAPP)
+        if settings.ESMS_API_KEY or cls.sender(CHANNEL_SMS):
+            channels.append(CHANNEL_SMS)
+        return channels
+
+    @staticmethod
+    def _send_esms(to: str, body: str) -> bool:
+        """SMS via eSMS Africa (POST /messages/send, cle en Bearer)."""
+        payload = {"to": to, "text": body}
+        if settings.ESMS_SENDER_ID:
+            payload["sender_id"] = settings.ESMS_SENDER_ID
+        try:
+            response = requests.post(
+                f"{settings.ESMS_API_URL}/messages/send",
+                json=payload,
+                headers={"Authorization": f"Bearer {settings.ESMS_API_KEY}", "Accept": "application/json"},
+                timeout=TIMEOUT_SECONDS,
+            )
+            response.raise_for_status()
+        except requests.RequestException as exc:
+            detail = getattr(getattr(exc, "response", None), "text", "")[:300]
+            logger.error("Envoi SMS eSMS vers %s en echec : %s %s", to, exc, detail)
+            return False
+        return True
 
     @classmethod
     def send(cls, channel: str, phone: str, body: str, template_vars: dict = None) -> bool:
@@ -50,6 +75,8 @@ class MessagingService:
         to = normalize_phone(phone)
         if not to:
             return False
+        if channel == CHANNEL_SMS and settings.ESMS_API_KEY:
+            return cls._send_esms(to, body)
         sender = cls.sender(channel)
         if not sender:
             logger.info("[%s non configure] message pour %s : %s", channel, to, body)
