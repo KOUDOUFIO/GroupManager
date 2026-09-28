@@ -1,0 +1,78 @@
+{% extends 'core/base.html' %}
+{% load i18n core_extras %}
+
+{% block title %}{% translate "Accès à Mon espace - Kotiza" %}{% endblock %}
+
+{% block hero %}
+<div>
+  <p class="pill">{% translate "Accès membre" %}</p>
+  <h1>{{ member.full_name }}</h1>
+  <p class="subtitle">{% translate "Le membre consulte ses cotisations, ses présences et ses reçus depuis son téléphone." %}</p>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="form-card access-card">
+  {% if granted %}
+  <div class="access-done">
+    <span class="pay-status-icon" aria-hidden="true">{% icon "check" 30 %}</span>
+    <h2>{% translate "Accès créé" %}</h2>
+    <dl class="access-summary">
+      <div><dt>{% translate "Identifiant" %}</dt><dd>{{ username }}</dd></div>
+      {% if temporary_password %}
+      <div><dt>{% translate "Mot de passe provisoire" %}</dt><dd class="access-secret">{{ temporary_password }}</dd></div>
+      {% endif %}
+    </dl>
+    {% if temporary_password %}
+    <p>{% translate "Transmettez ces informations au membre (en main propre, par SMS ou WhatsApp). Il pourra changer son mot de passe après sa première connexion. Ce mot de passe ne sera plus affiché." %}</p>
+    {% elif email_sent %}
+    <p>{% blocktranslate with email=member.email %}Un email a été envoyé à {{ email }} avec un lien pour choisir son mot de passe.{% endblocktranslate %}</p>
+    {% else %}
+    <p class="flash flash-warning">{% blocktranslate with email=member.email %}L'email vers {{ email }} n'a pas pu partir (envoi d'emails non configuré ?). Le membre peut utiliser « Mot de passe oublié » sur la page de connexion.{% endblocktranslate %}</p>
+    {% endif %}
+    <div class="form-actions">
+      <a class="btn primary" href="{% url 'member_list' %}">{% translate "Retour aux membres" %}</a>
+    </div>
+  </div>
+
+  {% elif member.user %}
+  <div class="access-status">
+    <span class="status-badge status-ok">{% translate "Accès actif" %}</span>
+    <p>{% blocktranslate with username=member.user.get_username %}Identifiant de connexion : <strong>{{ username }}</strong>{% endblocktranslate %}</p>
+    {% if member.user.last_login %}
+    <p class="muted">{% blocktranslate with date=member.user.last_login|date:"j F Y à H:i" %}Dernière connexion : {{ date }}{% endblocktranslate %}</p>
+    {% else %}
+    <p class="muted">{% translate "Le membre ne s'est pas encore connecté." %}</p>
+    {% endif %}
+  </div>
+  <form method="post" class="form-actions">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="revoke" />
+    <button class="btn ghost danger-btn" type="submit">{% translate "Retirer l'accès" %}</button>
+    <a class="btn ghost" href="{% url 'member_list' %}">{% translate "Retour aux membres" %}</a>
+  </form>
+
+  {% else %}
+  <form method="post" class="crud-form" novalidate>
+    {% csrf_token %}
+    <div class="access-status">
+      <span class="status-badge status-info">{% translate "Pas encore d'accès" %}</span>
+      {% if member.email %}
+      <p>{% blocktranslate with email=member.email %}Un email sera envoyé à <strong>{{ email }}</strong> avec un lien pour choisir son mot de passe.{% endblocktranslate %}</p>
+      {% else %}
+      <p>{% translate "Ce membre n'a pas d'email : un mot de passe provisoire vous sera affiché, à lui transmettre." %}</p>
+      {% endif %}
+    </div>
+    <div class="crud-field{% if form.username.errors %} has-error{% endif %}">
+      <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+      {{ form.username }}
+      {% for error in form.username.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+    </div>
+    <div class="form-actions">
+      <button class="btn primary" type="submit">{% icon "user" 18 %}{% translate "Donner l'accès" %}</button>
+      <a class="btn ghost" href="{% url 'member_list' %}">{% translate "Annuler" %}</a>
+    </div>
+  </form>
+  {% endif %}
+</section>
+{% endblock %}

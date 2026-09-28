@@ -1,115 +1,143 @@
 <!DOCTYPE html>
-<html lang="fr">
+{% load i18n core_extras %}{% get_current_language as CURRENT_LANG %}<html lang="{{ CURRENT_LANG }}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{% block title %}Kotiza{% endblock %}</title>
     {% load static %}
-    <link rel="icon" type="image/svg+xml" href="{% static 'core/img/logo.svg' %}" />
+    <link rel="icon" type="image/svg+xml" href="{% static 'core/img/favicon.svg' %}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'core/img/favicon-32.png' %}" />
+    <link rel="apple-touch-icon" href="{% static 'core/img/apple-touch-icon.png' %}" />
+    <meta name="theme-color" content="#0b3d1f" />
     <link rel="stylesheet" href="{% static 'core/styles.css' %}" />
+    {% block extra_head %}{% endblock %}
   </head>
-  <body>
+  <body class="{% if ui_is_authenticated %}app {% endif %}{% block body_class %}{% endblock %}">
     <div class="background">
       <div class="glow"></div>
       <div class="grid"></div>
-      <div class="orbit orbit-1"></div>
-      <div class="orbit orbit-2"></div>
-      <div class="orbit orbit-3"></div>
     </div>
 
-    <header class="topbar">
+    <header class="topbar{% if ui_is_authenticated %} topbar-app{% endif %}">
       <a class="brand" href="/">
-        <img src="{% static 'core/img/logo.svg' %}" alt="" width="32" height="32" class="brand-logo" />
-        Kotiza
+        <img src="{% static 'core/img/logo.svg' %}" alt="" width="36" height="36" class="brand-logo" />
+        <span class="brand-name">Koti<span class="brand-accent">za</span></span>
       </a>
+      {% if not ui_is_authenticated %}
+      {% if request.path != "/" %}
+      <a class="back-btn" href="/" data-back aria-label="{% translate "Retour" %}" title="{% translate "Retour" %}">{% icon "arrow-left" 20 %}</a>
+      {% endif %}
       <nav class="nav">
-        {% if not ui_is_authenticated %}
-        <a href="/entreprise/">Entreprise</a>
-        <a href="/plateforme/">Plateforme</a>
-        <a href="/devis/">Devis</a>
-        {% else %}
-        {% if ui_is_admin %}
-        <a href="/admin-workspace/">⚙️ Espace admin</a>
-        {% endif %}
-        {% if ui_is_manager or ui_is_admin %}
-        <a href="/manager-workspace/">📊 Espace manager</a>
-        {% endif %}
-        {% if ui_is_member %}
-        <a href="/mon-espace/">🙍 Mon espace</a>
-        {% endif %}
-        <div class="nav-divider"></div>
-        <div class="nav-dropdown">
-          <button class="nav-dropdown-btn">🏢 Organisation ▾</button>
-          <div class="nav-dropdown-content">
-            <a href="/groupes/">Groupes</a>
-            <a href="/organes/">Organes</a>
-            <a href="/postes/">Postes</a>
-          </div>
-        </div>
-        <div class="nav-dropdown">
-          <button class="nav-dropdown-btn">👥 Personnes ▾</button>
-          <div class="nav-dropdown-content">
-            <a href="/membres/">Membres</a>
-            <a href="/rencontres/">Rencontres</a>
-            <a href="/presences/">Présences</a>
-          </div>
-        </div>
-        <a href="/cotisations/">💰 Cotisations</a>
-        <div class="nav-dropdown">
-          <button class="nav-dropdown-btn">📋 Activités ▾</button>
-          <div class="nav-dropdown-content">
-            <a href="/evenements/">Événements</a>
-            <a href="/documents/">Documents</a>
-            {% if ui_is_admin %}
-            <a href="/audit-logs/">Audit</a>
-            {% endif %}
-          </div>
-        </div>
-        <div class="nav-divider"></div>
-        <a href="/recherche/">🔍 Recherche</a>
-        {% endif %}
+        <a href="/entreprise/">{% translate "Entreprise" %}</a>
+        <a href="/plateforme/">{% translate "Plateforme" %}</a>
+        <a href="/devis/">{% translate "Devis" %}</a>
       </nav>
+      {% else %}
+      <nav class="app-nav" aria-label="{% translate "Navigation principale" %}">
+        {% if request.path != "/" %}
+        <a class="back-btn" href="/" data-back aria-label="{% translate "Retour" %}" title="{% translate "Retour" %}">{% icon "arrow-left" 20 %}</a>
+        {% endif %}
+        <button type="button" class="launcher-btn" aria-haspopup="dialog" aria-controls="modules-dialog" aria-expanded="false" data-modules-open>
+          {% icon "grid" 18 %}<span>{% translate "Modules" %}</span>
+        </button>
+        <form class="topbar-search" method="get" action="/recherche/" role="search">
+          {% icon "search" 16 %}
+          <input type="search" name="q" placeholder="{% translate "Rechercher un membre, un groupe..." %}" aria-label="{% translate "Recherche" %}" />
+        </form>
+      </nav>
+      {% endif %}
       <div class="topbar-actions">
+        <form method="post" action="{% url 'set_language' %}" class="lang-switch" aria-label="{% translate "Langue" %}">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.get_full_path }}" />
+          <button type="submit" name="language" value="fr" class="lang-btn{% if CURRENT_LANG == 'fr' %} active{% endif %}" {% if CURRENT_LANG == 'fr' %}aria-current="true"{% endif %}>FR</button>
+          <button type="submit" name="language" value="en" class="lang-btn{% if CURRENT_LANG == 'en' %} active{% endif %}" {% if CURRENT_LANG == 'en' %}aria-current="true"{% endif %}>EN</button>
+        </form>
         {% if user.is_authenticated %}
-        <span class="user-pill">{{ user.get_username }} - {{ ui_role_label }}</span>
+        <a class="bell-btn" href="/notifications/" aria-label="{% translate "Notifications" %}{% if ui_unread_notifications %} ({{ ui_unread_notifications }}){% endif %}" title="{% translate "Notifications" %}">
+          {% icon "bell" 19 %}
+          {% if ui_unread_notifications %}<span class="bell-count">{% if ui_unread_notifications > 9 %}9+{% else %}{{ ui_unread_notifications }}{% endif %}</span>{% endif %}
+        </a>
+        <a class="user-pill" href="/securite/" title="{% translate "Sécurité du compte" %}">
+          <span class="user-avatar" aria-hidden="true">{{ user.get_username|first|upper }}</span>
+          <span class="user-meta"><strong>{{ user.get_username }}</strong><small>{{ ui_role_label }}</small></span>
+        </a>
         <form method="post" action="/accounts/logout/" class="logout-form">
           {% csrf_token %}
-          <button type="submit" class="btn ghost logout-btn">Se déconnecter</button>
+          <button type="submit" class="btn ghost logout-btn" title="{% translate "Se déconnecter" %}">{% icon "logout" 16 %}<span>{% translate "Se déconnecter" %}</span></button>
         </form>
         {% else %}
-        <a class="btn ghost" href="/accounts/login/">Se connecter</a>
+        <a class="btn ghost" href="/accounts/login/">{% translate "Se connecter" %}</a>
         {% endif %}
       </div>
     </header>
 
-    <section class="hero">
+    <section class="hero{% block hero_class %}{% endblock %}">
       {% block hero %}
       <div>
-        <p class="pill">Plateforme de gestion de groupes</p>
+        <p class="pill">{% translate "Plateforme de gestion de groupes" %}</p>
         <h1>Kotiza</h1>
         <p class="subtitle">
-          Centralisez vos groupes, vos membres et vos rencontres dans un espace clair,
-          rapide et professionnel.
+          {% translate "Centralisez vos groupes, vos membres et vos rencontres dans un espace clair, rapide et professionnel." %}
         </p>
       </div>
       <div class="hero-actions">
-        <a class="btn primary" href="/admin/">Acceder a l'administration</a>
-        <a class="btn ghost" href="/api/">Voir l'API</a>
+        <a class="btn primary" href="/admin/">{% translate "Accéder à l'administration" %}</a>
       </div>
       {% endblock %}
     </section>
 
     <main class="content">
+      {% if subscription_days_left is not None %}
+      <div class="subscription-banner{% if subscription_expired %} expired{% endif %}" role="status">
+        {% with end_date=subscription_access_until|date:"d/m/Y" days=subscription_days_left contact=subscription_billing_contact %}
+        {% if subscription_expired %}
+        {% blocktranslate %}Abonnement expiré depuis le {{ end_date }} : le site est bloqué pour votre organisation.{% endblocktranslate %}
+        {% else %}
+        {% blocktranslate count days=days %}Abonnement valable jusqu'au {{ end_date }} ({{ days }} jour restant).{% plural %}Abonnement valable jusqu'au {{ end_date }} ({{ days }} jours restants).{% endblocktranslate %}
+        {% endif %}
+        {% if contact %}{% blocktranslate %}Renouvellement : {{ contact }}{% endblocktranslate %}{% endif %}
+        {% endwith %}
+      </div>
+      {% endif %}
+      {% if messages %}
+      <div class="flash-list" role="status">
+        {% for message in messages %}<p class="flash flash-{{ message.tags }}">{{ message }}</p>{% endfor %}
+      </div>
+      {% endif %}
       {% block content %}{% endblock %}
     </main>
 
     <footer class="footer">
-      <p>Kotiza - edition professionnelle</p>
-      <p class="footer-links">
-        <a href="/mentions-legales/">Mentions légales</a>
-        <a href="/confidentialite/">Politique de confidentialité</a>
-      </p>
+      <div class="footer-inner">
+        <p class="footer-brand">
+          <img src="{% static 'core/img/favicon.svg' %}" alt="" width="20" height="20" />
+          <span>© {% now "Y" %} {% translate "Kotiza - édition professionnelle" %}</span>
+        </p>
+        <nav class="footer-links" aria-label="{% translate "Informations légales" %}">
+          <a href="/mentions-legales/">{% translate "Mentions légales" %}</a>
+          <a href="/confidentialite/">{% translate "Politique de confidentialité" %}</a>
+        </nav>
+      </div>
     </footer>
+    {% if ui_is_authenticated %}
+    <div class="modules-overlay" id="modules-dialog" role="dialog" aria-modal="true" aria-labelledby="modules-title" hidden data-modules>
+      <div class="modules-backdrop" data-modules-close></div>
+      <div class="modules-dialog">
+        <header class="modules-head">
+          <div>
+            <h2 id="modules-title">{% translate "Tous vos modules" %}</h2>
+            <p>{% translate "Accédez en un clic à chaque espace de Kotiza." %}</p>
+          </div>
+          <button type="button" class="modules-close" data-modules-close aria-label="{% translate "Retour" %}" title="{% translate "Retour" %}">{% icon "arrow-left" 20 %}</button>
+        </header>
+        <div class="modules-body">
+          {% include "core/partials/module_grid.html" %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <script src="{% static 'core/nav.js' %}" defer></script>
     {% block extra_scripts %}{% endblock %}
   </body>
 </html>

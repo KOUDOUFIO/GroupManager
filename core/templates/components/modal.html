@@ -1,3 +1,4 @@
+{% load i18n %}
 {% comment %}
 Composant Modal réutilisable
 Usage:
@@ -12,7 +13,7 @@ Usage:
       <div class="modal-header">
         <h3 class="modal-title">{{ title }}</h3>
         {% if close_button %}
-        <button type="button" class="modal-close" data-dismiss="modal" aria-label="Fermer">
+        <button type="button" class="modal-close" data-dismiss="modal" aria-label="{% translate 'Fermer' %}">
           <span aria-hidden="true">&times;</span>
         </button>
         {% endif %}
@@ -38,8 +39,8 @@ Usage:
           </button>
           {% endfor %}
         {% else %}
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn btn-primary">Confirmer</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{% translate "Fermer" %}</button>
+        <button type="button" class="btn btn-primary">{% translate "Confirmer" %}</button>
         {% endif %}
         {% endif %}
       </div>

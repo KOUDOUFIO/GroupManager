@@ -1,0 +1,88 @@
+{% extends 'core/base.html' %}
+{% load i18n core_extras %}
+
+{% block title %}{% translate "Sécurité du compte - Kotiza" %}{% endblock %}
+
+{% block hero %}
+<div>
+  <p class="pill">{% translate "Sécurité" %}</p>
+  <h1>{% translate "Sécurité du compte" %}</h1>
+  <p class="subtitle">{% translate "Protégez l'accès à la caisse de votre organisation." %}</p>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="security-grid">
+  <article class="form-card security-card">
+    <div class="security-head">
+      <span class="module-icon tone-green">{% icon "shield" 20 %}</span>
+      <div>
+        <h2>{% translate "Connexion à deux étapes" %}</h2>
+        <p>{% translate "En plus du mot de passe, un code à 6 chiffres affiché sur votre téléphone est demandé à chaque connexion." %}</p>
+      </div>
+      {% if enabled %}<span class="status-badge status-ok">{% translate "Activée" %}</span>{% else %}<span class="status-badge status-wait">{% translate "Désactivée" %}</span>{% endif %}
+    </div>
+
+    {% if setup %}
+    <ol class="setup-steps">
+      <li>{% translate "Installez une application d'authentification : Google Authenticator ou Microsoft Authenticator." %}</li>
+      <li>{% translate "Dans l'application, scannez ce QR code :" %}
+        <div class="qr-box">{{ qr_svg }}</div>
+        {% if secret %}<p class="muted">{% translate "Ou saisissez cette clé :" %} <code class="access-secret">{{ secret }}</code></p>{% endif %}
+      </li>
+      <li>{% translate "Saisissez le code à 6 chiffres affiché par l'application :" %}</li>
+    </ol>
+    <form method="post" class="code-form" novalidate>
+      {% csrf_token %}
+      <input type="hidden" name="action" value="confirm" />
+      {{ form.code }}
+      <button class="btn primary" type="submit">{% translate "Activer" %}</button>
+    </form>
+    {% for error in form.code.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+
+    {% elif enabled %}
+    {% if backup_codes %}
+    <div class="backup-box" role="status">
+      <h3>{% translate "Vos codes de secours" %}</h3>
+      <p>{% translate "Notez-les ou imprimez-les maintenant et gardez-les en lieu sûr : ils ne seront plus affichés. Chaque code sert une seule fois, si vous n'avez plus votre téléphone." %}</p>
+      <ul class="backup-codes">{% for code in backup_codes %}<li>{{ code|slice:":4" }} {{ code|slice:"4:" }}</li>{% endfor %}</ul>
+    </div>
+    {% else %}
+    <p class="muted">{% blocktranslate count total=backup_remaining %}{{ total }} code de secours disponible.{% plural %}{{ total }} codes de secours disponibles.{% endblocktranslate %}</p>
+    {% endif %}
+    <form method="post" class="form-actions">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="backup" />
+      <button class="btn ghost" type="submit">{% translate "Générer de nouveaux codes de secours" %}</button>
+    </form>
+    <p>{% translate "Pour désactiver la protection, saisissez le code affiché en ce moment dans votre application." %}</p>
+    <form method="post" class="code-form" novalidate>
+      {% csrf_token %}
+      <input type="hidden" name="action" value="disable" />
+      <input type="text" name="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="123456" aria-label="{% translate "Code à 6 chiffres" %}" />
+      <button class="btn ghost danger-btn" type="submit">{% translate "Désactiver" %}</button>
+    </form>
+    {% for error in disable_form.code.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+    <p class="muted">{% translate "Téléphone perdu et plus de code de secours ? Un administrateur peut supprimer votre appareil dans l'administration." %}</p>
+
+    {% else %}
+    <form method="post">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="start" />
+      <button class="btn primary" type="submit">{% icon "lock" 18 %}{% translate "Activer la connexion à deux étapes" %}</button>
+    </form>
+    {% endif %}
+  </article>
+
+  <article class="form-card security-card">
+    <div class="security-head">
+      <span class="module-icon tone-slate">{% icon "lock" 20 %}</span>
+      <div>
+        <h2>{% translate "Mot de passe" %}</h2>
+        <p>{% translate "Choisissez un mot de passe long, que vous n'utilisez nulle part ailleurs." %}</p>
+      </div>
+    </div>
+    <a class="btn ghost" href="{% url 'password_change' %}">{% translate "Changer mon mot de passe" %}</a>
+  </article>
+</section>
+{% endblock %}

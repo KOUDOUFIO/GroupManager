@@ -1,11 +1,12 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 
-{% block title %}Page introuvable{% endblock %}
+{% block title %}{% translate "Page introuvable" %}{% endblock %}
 
 {% block content %}
 <section class="form-card">
-  <h2>404 - Page introuvable</h2>
-  <p>La page demandee n'existe pas ou a ete deplacee.</p>
-  <a class="btn ghost" href="/">Retour a l'accueil</a>
+  <h2>{% translate "404 - Page introuvable" %}</h2>
+  <p>{% translate "La page demandée n'existe pas ou a été déplacée." %}</p>
+  <a class="btn ghost" href="/">{% translate "Retour à l'accueil" %}</a>
 </section>
 {% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+
+{% block title %}{% translate "Abonnement expiré" %}{% endblock %}
+
+{% block hero %}{% endblock %}
+
+{% block content %}
+<section class="expired-card" aria-labelledby="expired-title">
+  <div class="expired-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="4" y="11" width="16" height="10" rx="2"></rect>
+      <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
+    </svg>
+  </div>
+  <h2 id="expired-title">{% translate "Abonnement expiré" %}</h2>
+  <p>{% translate "L'abonnement Kotiza de votre organisation est arrivé à son terme." %}</p>
+  <p>{% translate "Vos données sont conservées et redeviennent accessibles dès le renouvellement." %}</p>
+
+  {% if billing_contact %}
+  <div class="expired-contact">
+    <span>{% translate "Pour renouveler, contactez-nous" %}</span>
+    <strong>{{ billing_contact }}</strong>
+  </div>
+  {% endif %}
+
+  <a class="btn ghost" href="/accounts/login/">{% translate "Connexion administrateur" %}</a>
+</section>
+{% endblock %}

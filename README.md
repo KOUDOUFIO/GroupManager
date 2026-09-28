@@ -78,6 +78,21 @@ python3 manage.py runserver
 python3 manage.py bootstrap_project --with-superuser --username admin --email admin@example.com --password Admin1234!
 ```
 
+## Démonstration commerciale
+
+```bash
+python3 manage.py seed_demo --password "UnMotDePasseDemo"   # tontine d'exemple + comptes demo-tresorier / demo-membre
+python3 manage.py seed_demo --reset                          # tout supprimer
+```
+
+Les données de démonstration sont marquées « (démo) » et n'affectent pas les autres données.
+
+## Rappels de cotisation
+
+- `python3 manage.py send_contribution_reminders` relance les membres en retard (email et notification ; SMS / WhatsApp si `TWILIO_*` est configuré, voir `.env.example`).
+
+Tâche automatique : `DEPLOYMENT-CLIENTS.md`, section 5.
+
 ## Commandes standard (Makefile)
 
 ```bash

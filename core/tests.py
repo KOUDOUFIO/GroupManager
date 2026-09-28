@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import date, timedelta
 from unittest.mock import patch
 
 from django.contrib.auth import get_user_model
@@ -33,9 +33,76 @@ class HomeViewTests(TestCase):
     def test_home_view_status_ok(self):
         response = self.client.get(reverse("home"))
         self.assertEqual(response.status_code, 200)
+
+    def test_home_hides_platform_stats_from_anonymous_visitors(self):
+        response = self.client.get(reverse("home"))
+        self.assertFalse(response.context["show_platform_stats"])
+        self.assertNotIn("total_contributions", response.context)
+        self.assertNotContains(response, 'class="stats"')
+
+    def test_home_hides_platform_stats_from_non_staff_users(self):
+        user = get_user_model().objects.create_user(username="simple_user", password="password123")
+        self.client.force_login(user)
+        response = self.client.get(reverse("home"))
+        self.assertNotIn("total_contributions", response.context)
+
+    def test_home_shows_platform_stats_to_staff(self):
+        staff = get_user_model().objects.create_user(
+            username="staff_user", password="password123", is_staff=True
+        )
+        self.client.force_login(staff)
+        response = self.client.get(reverse("home"))
         self.assertIn("total_contributions", response.context)
         self.assertIn("current_month_contributions", response.context)
         self.assertIn("attendance_rate", response.context)
+
+    def test_home_shows_dashboard_to_signed_in_users(self):
+        user = get_user_model().objects.create_user(username="dash_user", password="password123")
+        self.client.force_login(user)
+        response = self.client.get(reverse("home"))
+        self.assertTemplateUsed(response, "core/dashboard.html")
+        self.assertContains(response, "data-modules-open")
+        self.assertNotContains(response, "bar-chart")
+        # Pas de bouton Retour sur le tableau de bord lui-meme.
+        self.assertNotContains(response, "data-back")
+
+    def test_modules_button_lists_only_allowed_modules(self):
+        user = get_user_model().objects.create_user(username="plain_user", password="password123")
+        self.client.force_login(user)
+        response = self.client.get(reverse("global_search"))
+        self.assertContains(response, "data-back")
+        self.assertContains(response, 'href="/recherche/"')
+        self.assertNotContains(response, 'href="/admin-workspace/"')
+        self.assertNotContains(response, 'href="/cotisations/"')
+
+    def test_modules_button_lists_admin_modules_for_superuser(self):
+        admin = get_user_model().objects.create_superuser(
+            username="root_user", password="password123", email="root@example.com"
+        )
+        self.client.force_login(admin)
+        response = self.client.get(reverse("home"))
+        for url in ("/admin-workspace/", "/manager-workspace/", "/groupes/", "/cotisations/", "/audit-logs/"):
+            self.assertContains(response, f'href="{url}"')
+
+    def test_dashboard_counts_week_activity_monday_to_sunday(self):
+        staff = get_user_model().objects.create_user(
+            username="week_staff", password="password123", is_staff=True
+        )
+        group = Group.objects.create(name="Semaine")
+        member = Member.objects.create(full_name="Jour Test")
+        today = timezone.localdate()
+        monday = today - timedelta(days=today.weekday())
+        Contribution.objects.create(member=member, group=group, amount=10, paid_at=monday)
+        Contribution.objects.create(member=member, group=group, amount=10, paid_at=monday + timedelta(days=6))
+        Contribution.objects.create(member=member, group=group, amount=10, paid_at=monday - timedelta(days=1))
+        self.client.force_login(staff)
+        response = self.client.get(reverse("home"))
+        days = response.context["week_days"]
+        self.assertEqual([d["date"].weekday() for d in days], list(range(7)))
+        self.assertEqual(days[0]["total"], 1)
+        self.assertEqual(days[6]["total"], 1)
+        self.assertEqual(response.context["week_total"], 2)
+        self.assertContains(response, "bar-chart")
 
     def test_proposal_page_status_ok(self):
         response = self.client.get(reverse("proposal_page"))
@@ -56,15 +123,49 @@ class HomeViewTests(TestCase):
                 "message": "Nous avons besoin d'un devis pour 50 membres.",
             },
         )
-        self.assertRedirects(response, reverse("proposal_page") + "?envoye=1")
+        self.assertRedirects(response, reverse("proposal_page") + "?envoye=1#contact", fetch_redirect_response=False)
         self.assertTrue(ProposalRequest.objects.filter(email="amina@example.com").exists())
         self.assertEqual(len(mail.outbox), 1)
         self.assertIn("Amina K.", mail.outbox[0].subject)
+        # Repondre a l'email ecrit directement au prospect.
+        self.assertEqual(mail.outbox[0].reply_to, ["amina@example.com"])
+
+    @override_settings(KOTIZA_SALES_EMAIL="ventes@kotiza.tg")
+    def test_proposal_request_goes_to_sales_email_with_phone_and_plan(self):
+        from .models import ProposalRequest
+
+        self.client.post(reverse("proposal_page"), {
+            "name": "Kofi", "email": "kofi@example.com", "phone": "90 12 34 56",
+            "organization_type": ProposalRequest.ORG_TYPE_CLUB, "plan": "business", "message": "Tontine de 30 membres",
+        })
+        request = ProposalRequest.objects.get()
+        self.assertEqual(request.phone, "+22890123456")
+        self.assertEqual(request.plan, "business")
+        self.assertEqual(mail.outbox[0].to, ["ventes@kotiza.tg"])
+        self.assertIn("+22890123456", mail.outbox[0].body)
+
+    def test_proposal_spam_bot_is_silently_ignored(self):
+        from .models import ProposalRequest
+
+        response = self.client.post(reverse("proposal_page"), {
+            "name": "Bot", "email": "bot@example.com", "organization_type": ProposalRequest.ORG_TYPE_COMPANY,
+            "message": "spam", "website": "http://spam.example",
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertFalse(ProposalRequest.objects.exists())
+        self.assertEqual(len(mail.outbox), 0)
+
+    def test_proposal_plan_button_preselects_plan(self):
+        response = self.client.get(reverse("proposal_page") + "?formule=enterprise")
+        self.assertEqual(response.context["form"].initial["plan"], "enterprise")
+        self.assertContains(response, "?formule=business#contact")
 
     def test_proposal_page_submission_invalid_shows_errors(self):
         response = self.client.post(reverse("proposal_page"), {"name": "", "email": "pas-un-email"})
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "error-messages")
+        self.assertContains(response, "field-error")
+        # Plus de noms techniques de champs affiches au visiteur.
+        self.assertNotContains(response, "Organization_Type")
 
     def test_company_page_status_ok(self):
         response = self.client.get(reverse("company_page"))
@@ -197,9 +298,20 @@ class WebPermissionTests(TestCase):
 
         self.client.force_login(self.user)
         Group.objects.create(name="Chorale Recherche")
+        Member.objects.create(full_name="Membre Recherche", phone="90000000")
+
+        # Sans droit de consultation, la recherche ne revele rien.
         response = self.client.get(reverse("global_search"), {"q": "Recherche"})
         self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, "Chorale Recherche")
+        self.assertNotContains(response, "Membre Recherche")
+
+        # Avec le droit sur les groupes : les groupes seulement.
+        perm = Permission.objects.get(codename="view_group", content_type__app_label="core")
+        self.user.user_permissions.add(perm)
+        response = self.client.get(reverse("global_search"), {"q": "Recherche"})
         self.assertContains(response, "Chorale Recherche")
+        self.assertNotContains(response, "Membre Recherche")
 
     def test_base_nav_displays_role_label(self):
         manager_group, _ = AuthGroup.objects.get_or_create(name="Gestionnaire")
@@ -233,6 +345,10 @@ class ContributionAggregationTests(TestCase):
         )
 
     def test_home_total_excludes_unconfirmed_contributions(self):
+        staff = get_user_model().objects.create_user(
+            username="agg_staff", password="password123", is_staff=True
+        )
+        self.client.force_login(staff)
         response = self.client.get(reverse("home"))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context["total_contributions"], 20)
@@ -318,6 +434,7 @@ class MemberPortalTests(TestCase):
         self.assertEqual(object_list, [self.entry_a])
 
 
+@override_settings(KOTIZA_API_ENABLED=True)
 class ApiPermissionTests(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(
@@ -453,7 +570,7 @@ class ExportSecurityTests(TestCase):
         response = self.client.get(reverse("contribution_export_csv"))
         self.assertEqual(response.status_code, 200)
         content = response.content.decode("utf-8")
-        self.assertIn("Methode", content)
+        self.assertIn("Méthode", content)
         self.assertIn("Statut", content)
 
     def test_contribution_csv_export_filters_by_group(self):
@@ -548,7 +665,7 @@ class WebFormValidationTests(TestCase):
             data={"name": "Secretaire", "description": "", "organ": organ.id, "group": g2.id, "member": ""},
         )
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "L&#x27;organe selectionne doit appartenir au meme groupe.")
+        self.assertContains(response, "L&#x27;organe sélectionné doit appartenir au même groupe.")
 
     def test_contribution_form_shows_error_for_member_outside_group(self):
         g1 = Group.objects.create(name="G1")
@@ -570,6 +687,7 @@ class WebFormValidationTests(TestCase):
         self.assertContains(response, "Le membre doit appartenir au groupe de la cotisation.")
 
 
+@override_settings(KOTIZA_API_ENABLED=True)
 class AuditLogTests(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(username="audituser", password="password123")
@@ -741,3 +859,200 @@ class ContributionReminderCommandTests(TestCase):
         call_command("send_contribution_reminders")
         self.assertNotIn("retard@example.com", [m.to[0] for m in mail.outbox])
         self.assertTrue(Notification.objects.filter(user=self.user).exists())
+
+
+@override_settings(
+    KOTIZA_ACCESS_UNTIL=date(2026, 1, 31),
+    KOTIZA_BILLING_CONTACT="+228 90 00 00 00",
+    KOTIZA_API_ENABLED=True,
+)
+class SubscriptionTests(TestCase):
+    def setUp(self):
+        self.user = get_user_model().objects.create_user(username="sub_user", password="password123")
+        self.staff = get_user_model().objects.create_user(
+            username="sub_staff", password="password123", is_staff=True
+        )
+        self.operator = get_user_model().objects.create_superuser(
+            username="sub_operator", password="password123", email="op@example.com"
+        )
+
+    def _on(self, day):
+        return patch("core.subscription.timezone.localdate", return_value=day)
+
+    def test_site_open_until_last_day_included(self):
+        self.client.force_login(self.user)
+        with self._on(date(2026, 1, 31)):
+            response = self.client.get(reverse("home"))
+        self.assertEqual(response.status_code, 200)
+
+    def test_expired_blocks_users_and_shows_billing_contact(self):
+        self.client.force_login(self.user)
+        with self._on(date(2026, 2, 1)):
+            response = self.client.get(reverse("home"))
+        self.assertEqual(response.status_code, 402)
+        self.assertContains(response, "+228 90 00 00 00", status_code=402)
+
+    def test_expired_blocks_anonymous_visitors(self):
+        with self._on(date(2026, 2, 1)):
+            response = self.client.get(reverse("home"))
+        self.assertEqual(response.status_code, 402)
+
+    def test_expired_blocks_api_with_json(self):
+        self.client.force_login(self.user)
+        with self._on(date(2026, 2, 1)):
+            response = self.client.get("/api/")
+        self.assertEqual(response.status_code, 402)
+        self.assertEqual(response.json()["detail"], "Abonnement expiré.")
+
+    def test_expired_keeps_login_and_health_reachable(self):
+        with self._on(date(2026, 2, 1)):
+            self.assertEqual(self.client.get(reverse("login")).status_code, 200)
+            self.assertEqual(self.client.get("/health/").status_code, 200)
+
+    def test_expired_blocks_client_admin(self):
+        self.client.force_login(self.staff)
+        with self._on(date(2026, 2, 1)):
+            response = self.client.get(reverse("home"))
+        self.assertEqual(response.status_code, 402)
+
+    def test_expired_blocks_client_admin_from_django_admin(self):
+        self.client.force_login(self.staff)
+        with self._on(date(2026, 2, 1)):
+            response = self.client.get("/admin/core/contribution/")
+        self.assertEqual(response.status_code, 402)
+
+    def test_expired_lets_operator_into_django_admin(self):
+        self.client.force_login(self.operator)
+        with self._on(date(2026, 2, 1)):
+            response = self.client.get("/admin/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_expired_lets_operator_in_with_banner(self):
+        self.client.force_login(self.operator)
+        with self._on(date(2026, 2, 1)):
+            response = self.client.get(reverse("home"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Abonnement expiré depuis le 31/01/2026")
+
+    def test_staff_sees_reminder_banner_before_expiry(self):
+        self.client.force_login(self.staff)
+        with self._on(date(2026, 1, 25)):
+            response = self.client.get(reverse("home"))
+        self.assertContains(response, "6 jours restants")
+
+    def test_no_banner_long_before_expiry(self):
+        self.client.force_login(self.staff)
+        with self._on(date(2025, 12, 1)):
+            response = self.client.get(reverse("home"))
+        self.assertNotContains(response, "subscription-banner")
+
+    @override_settings(KOTIZA_ACCESS_UNTIL=None)
+    def test_no_end_date_means_no_limit(self):
+        with self._on(date(2099, 1, 1)):
+            response = self.client.get(reverse("home"))
+        self.assertEqual(response.status_code, 200)
+
+
+class CreateClientAdminCommandTests(TestCase):
+    def test_creates_staff_admin_without_superuser_rights(self):
+        call_command("create_client_admin", username="bureau", email="b@example.com", password="Pass1234!x")
+        user = get_user_model().objects.get(username="bureau")
+        self.assertTrue(user.is_staff)
+        self.assertFalse(user.is_superuser)
+        self.assertTrue(user.groups.filter(name="Administrateur").exists())
+        self.assertTrue(user.has_perm("core.delete_contribution"))
+        self.assertTrue(user.check_password("Pass1234!x"))
+
+
+class ApiToggleTests(TestCase):
+    def setUp(self):
+        self.staff = get_user_model().objects.create_superuser(
+            username="api_admin", password="password123", email="api@example.com"
+        )
+        self.client.force_login(self.staff)
+
+    @override_settings(KOTIZA_API_ENABLED=False)
+    def test_api_and_docs_return_404_when_disabled(self):
+        for path in ["/api/", "/api/contributions/", "/api/docs/", "/api/schema/"]:
+            self.assertEqual(self.client.get(path).status_code, 404, path)
+
+    @override_settings(KOTIZA_API_ENABLED=False)
+    def test_basic_auth_cannot_reach_api_when_disabled(self):
+        self.client.logout()
+        import base64
+        creds = base64.b64encode(b"api_admin:password123").decode()
+        response = self.client.get("/api/contributions/", HTTP_AUTHORIZATION=f"Basic {creds}")
+        self.assertEqual(response.status_code, 404)
+
+    @override_settings(KOTIZA_API_ENABLED=True)
+    def test_api_reachable_when_enabled(self):
+        self.assertEqual(self.client.get("/api/contributions/").status_code, 200)
+
+
+class LanguageTests(TestCase):
+    def test_french_is_the_default(self):
+        response = self.client.get(reverse("login"))
+        self.assertContains(response, "Mot de passe oublié ?")
+        self.assertContains(response, '<html lang="fr">')
+
+    def test_english_from_browser_language(self):
+        response = self.client.get(reverse("login"), HTTP_ACCEPT_LANGUAGE="en-US,en;q=0.9")
+        self.assertContains(response, "Forgot your password?")
+        self.assertContains(response, '<html lang="en">')
+
+    def test_switcher_sets_language_and_redirects_back(self):
+        response = self.client.post("/i18n/setlang/", {"language": "en", "next": "/plateforme/"})
+        self.assertRedirects(response, "/plateforme/", fetch_redirect_response=False)
+        page = self.client.get("/plateforme/")
+        self.assertContains(page, "Coming soon")
+        self.assertContains(page, "Yes")
+
+    def test_switcher_back_to_french(self):
+        self.client.post("/i18n/setlang/", {"language": "en", "next": "/"})
+        self.client.post("/i18n/setlang/", {"language": "fr", "next": "/"})
+        self.assertContains(self.client.get("/plateforme/"), "Bientôt")
+
+    @override_settings(KOTIZA_ACCESS_UNTIL=date(2026, 1, 31), KOTIZA_BILLING_CONTACT="Mobile Money : 91 19 80 74")
+    def test_expired_page_in_english_and_switcher_still_works(self):
+        with patch("core.subscription.timezone.localdate", return_value=date(2026, 2, 1)):
+            response = self.client.post("/i18n/setlang/", {"language": "en", "next": "/"})
+            self.assertEqual(response.status_code, 302)
+            page = self.client.get("/")
+        self.assertContains(page, "Subscription expired", status_code=402)
+        self.assertContains(page, "Mobile Money : 91 19 80 74", status_code=402)
+
+
+class AppLanguageTests(TestCase):
+    def setUp(self):
+        self.admin = get_user_model().objects.create_superuser(
+            username="lang_admin", password="password123", email="lang@example.com"
+        )
+        self.client.force_login(self.admin)
+        group = Group.objects.create(name="Groupe Langue")
+        member = Member.objects.create(full_name="Awa Langue")
+        member.groups.add(group)
+        Contribution.objects.create(
+            member=member,
+            group=group,
+            contribution_type=Contribution.TYPE_MONTHLY,
+            payment_method=Contribution.METHOD_CASH,
+            amount="1000.00",
+            paid_at=timezone.now().date(),
+            payment_status=Contribution.STATUS_CONFIRMED,
+        )
+
+    def test_contribution_list_in_english(self):
+        self.client.post("/i18n/setlang/", {"language": "en", "next": "/"})
+        response = self.client.get(reverse("contribution_list"))
+        for text in ["Contributions", "Member", "Method", "Cash", "Monthly", "Confirmed", "All groups"]:
+            self.assertContains(response, text)
+
+    def test_contribution_list_in_french(self):
+        response = self.client.get(reverse("contribution_list"))
+        for text in ["Cotisations", "Méthode", "Espèces", "Mensuelle", "Confirmée", "Tous les groupes"]:
+            self.assertContains(response, text)
+
+    def test_csv_export_headers_follow_language(self):
+        self.client.post("/i18n/setlang/", {"language": "en", "next": "/"})
+        content = self.client.get(reverse("contribution_export_csv")).content.decode("utf-8")
+        self.assertTrue(content.startswith("Member,Group,Type,Method,Status,Amount,Date"))

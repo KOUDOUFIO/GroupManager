@@ -4,20 +4,21 @@ from django.urls import reverse_lazy
 
 from .. import models
 from .mixins import BaseCreateView, BaseDeleteView, BaseUpdateView, SearchableListView
+from django.utils.translation import gettext_lazy as _
 
 
 class OrganListView(SearchableListView):
     """ListView pour les organes."""
     model = models.Organ
     template_name = "core/crud_list.html"
-    title = "Organes"
+    title = _("Organes")
     create_url_name = "organ_create"
     base_url_name = "organ"
     hero_image = "core/img/modules/organes.jpg"
     list_columns = [
-        {"label": "Nom", "accessor": "name"},
-        {"label": "Groupe", "accessor": "group.name"},
-        {"label": "Description", "accessor": "description"},
+        {"label": _("Nom"), "accessor": "name"},
+        {"label": _("Groupe"), "accessor": "group.name"},
+        {"label": _("Description"), "accessor": "description"},
     ]
     search_fields = ["name", "description", "group__name"]
     select_related_fields = ("group",)
@@ -28,7 +29,7 @@ class OrganCreateView(BaseCreateView):
     model = models.Organ
     fields = "__all__"
     template_name = "core/crud_form.html"
-    title = "Ajouter un organe"
+    title = _("Ajouter un organe")
     success_url = reverse_lazy("organ_list")
     list_url_name = "organ_list"
     base_url_name = "organ"
@@ -39,7 +40,7 @@ class OrganUpdateView(BaseUpdateView):
     model = models.Organ
     fields = "__all__"
     template_name = "core/crud_form.html"
-    title = "Modifier un organe"
+    title = _("Modifier un organe")
     success_url = reverse_lazy("organ_list")
     list_url_name = "organ_list"
     base_url_name = "organ"
@@ -49,7 +50,7 @@ class OrganDeleteView(BaseDeleteView):
     """Vue de suppression pour les organes."""
     model = models.Organ
     template_name = "core/crud_confirm_delete.html"
-    title = "Supprimer un organe"
+    title = _("Supprimer un organe")
     success_url = reverse_lazy("organ_list")
     list_url_name = "organ_list"
     base_url_name = "organ"

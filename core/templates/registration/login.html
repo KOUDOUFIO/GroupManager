@@ -1,76 +1,47 @@
 {% extends 'core/base.html' %}
+{% load i18n static %}
 
-{% block title %}Connexion - Kotiza{% endblock %}
+{% block title %}{% translate "Connexion - Kotiza" %}{% endblock %}
 
-{% block hero %}
-<div>
-  <p class="pill">Accès sécurisé</p>
-  <h1>Connexion</h1>
-  <p class="subtitle">Identifiez-vous pour accéder à votre espace de gestion.</p>
-</div>
-{% endblock %}
+{% block body_class %}page-auth{% endblock %}
+
+{% block hero %}{% endblock %}
 
 {% block content %}
-<section class="login-container">
-  <div class="login-card">
+<section class="auth-wrap">
+  <div class="login-card auth-card">
     <div class="login-header">
-      <h2>Bienvenue sur Kotiza</h2>
-      <p>Connectez-vous pour accéder à vos tableaux de bord et modules.</p>
+      <img class="auth-logo" src="{% static 'core/img/logo.svg' %}" alt="" width="64" height="64" />
+      <h1>{% translate "Bienvenue sur Kotiza" %}</h1>
+      <p>{% translate "Connectez-vous pour accéder à vos tableaux de bord et modules." %}</p>
     </div>
-    
+
     <form method="post" class="login-form">
       {% csrf_token %}
-      
+      {% if next %}<input type="hidden" name="next" value="{{ next }}" />{% endif %}
+
       {% if form.errors %}
-      <div class="error-messages">
-        {% for field, errors in form.errors.items %}
-        <div class="error-item">
-          <strong>{{ field|title }}:</strong>
-          {% for error in errors %}
-          <span>{{ error }}</span>
-          {% endfor %}
-        </div>
-        {% endfor %}
-      </div>
+      <p class="flash flash-error" role="alert">{% translate "Nom d'utilisateur ou mot de passe incorrect. Vérifiez les majuscules et réessayez." %}</p>
       {% endif %}
-      
+
       <div class="form-group">
-        <label for="{{ form.username.id_for_label }}">Nom d'utilisateur</label>
-        <input type="text" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}" 
-               class="form-control" placeholder="Entrez votre nom d'utilisateur" required autofocus>
+        <label for="{{ form.username.id_for_label }}">{% translate "Nom d'utilisateur" %}</label>
+        <input type="text" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}" value="{{ form.username.value|default:'' }}"
+               class="form-control" placeholder="{% translate 'Entrez votre nom d’utilisateur' %}" autocomplete="username" required {% if not form.errors %}autofocus{% endif %}>
       </div>
-      
+
       <div class="form-group">
-        <label for="{{ form.password.id_for_label }}">Mot de passe</label>
-        <input type="password" name="{{ form.password.name }}" id="{{ form.password.id_for_label }}" 
-               class="form-control" placeholder="Entrez votre mot de passe" required>
+        <label for="{{ form.password.id_for_label }}">{% translate "Mot de passe" %}</label>
+        <input type="password" name="{{ form.password.name }}" id="{{ form.password.id_for_label }}"
+               class="form-control" placeholder="{% translate 'Entrez votre mot de passe' %}" autocomplete="current-password" required {% if form.errors %}autofocus{% endif %}>
       </div>
-      
-      <div class="form-actions">
-        <button class="btn primary btn-block" type="submit">
-          <span>Se connecter</span>
-        </button>
-      </div>
+
+      <button class="btn primary btn-block" type="submit">{% translate "Se connecter" %}</button>
     </form>
 
     <div class="login-footer">
-      <p><a href="{% url 'password_reset' %}">Mot de passe oublié ?</a></p>
-      <p>Accès réservé aux membres autorisés.</p>
-    </div>
-  </div>
-  
-  <div class="login-info">
-    <div class="info-card">
-      <h3>🔐 Sécurité</h3>
-      <p>Connexion sécurisée avec chiffrement des données.</p>
-    </div>
-    <div class="info-card">
-      <h3>📊 Tableaux de bord</h3>
-      <p>Accès aux dashboards Admin, Manager et Groupes.</p>
-    </div>
-    <div class="info-card">
-      <h3>📁 Modules organisés</h3>
-      <p>Gestion des groupes, membres, rencontres et cotisations.</p>
+      <a class="link" href="{% url 'password_reset' %}">{% translate "Mot de passe oublié ?" %}</a>
+      <p>{% translate "Accès réservé aux membres autorisés." %}</p>
     </div>
   </div>
 </section>

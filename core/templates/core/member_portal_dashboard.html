@@ -1,53 +1,105 @@
 {% extends 'core/base.html' %}
+{% load i18n core_extras %}
 
 {% block title %}Mon espace - {{ member.full_name }}{% endblock %}
 
 {% block hero %}
 <div>
-  <p class="pill">Mon espace</p>
+  <p class="pill">{% translate "Mon espace" %}</p>
   <h1>{{ member.full_name }}</h1>
-  <p class="subtitle">Vos cotisations et votre presence, en un coup d'oeil.</p>
+  <p class="subtitle">{% translate "Vos cotisations et votre présence, en un coup d'œil." %}</p>
 </div>
 {% endblock %}
 
 {% block content %}
-<section class="stats">
-  <div class="stat-card"><h3>Groupes</h3><p class="stat-value">{{ group_count }}</p></div>
-  <div class="stat-card"><h3>Postes</h3><p class="stat-value">{{ position_count }}</p></div>
-  <div class="stat-card"><h3>Cotisations</h3><p class="stat-value">{{ contribution_count }}</p></div>
-  <div class="stat-card"><h3>Total cotise</h3><p class="stat-value">{{ contribution_total }}</p></div>
-  <div class="stat-card"><h3>Rencontres</h3><p class="stat-value">{{ meeting_count }}</p></div>
-  <div class="stat-card"><h3>Presence</h3><p class="stat-value">{{ attendance_rate }}%</p></div>
+<section class="stats kpi-grid">
+  <div class="kpi-card tone-gold">
+    <span class="module-icon">{% icon "wallet" 20 %}</span>
+    <p class="kpi-label">{% translate "Total cotisé" %}</p>
+    <p class="stat-value">{{ contribution_total|money }}</p>
+    <p class="stat-label">{% blocktranslate count total=contribution_count %}{{ total }} cotisation{% plural %}{{ total }} cotisations{% endblocktranslate %}</p>
+  </div>
+  <div class="kpi-card tone-emerald">
+    <span class="module-icon">{% icon "check" 20 %}</span>
+    <p class="kpi-label">{% translate "Présence" %}</p>
+    <p class="stat-value">{{ attendance_rate }} %</p>
+    <p class="stat-label">{% blocktranslate count total=meeting_count %}sur {{ total }} rencontre{% plural %}sur {{ total }} rencontres{% endblocktranslate %}</p>
+  </div>
+  <div class="kpi-card tone-teal">
+    <span class="module-icon">{% icon "users" 20 %}</span>
+    <p class="kpi-label">{% translate "Groupes" %}</p>
+    <p class="stat-value">{{ group_count }}</p>
+    <p class="stat-label">{% blocktranslate count total=position_count %}{{ total }} poste occupé{% plural %}{{ total }} postes occupés{% endblocktranslate %}</p>
+  </div>
 </section>
 
-<section class="workspace-grid">
-  <article class="workspace-card">
-    <h4>Cotisations recentes</h4>
-    {% for c in recent_contributions %}
-    <p>{{ c.paid_at }} - {{ c.group.name }} - {{ c.amount }}</p>
-    {% empty %}
-    <p>Aucune cotisation enregistree.</p>
-    {% endfor %}
-    <a class="link" href="{% url 'member_portal_contributions' %}">Voir tout</a>
-  </article>
+{% if my_dues %}
+<section class="dues-strip">
+  {% for row in my_dues %}
+  <div class="dues-item{% if row.is_late %} is-late{% endif %}">
+    <span class="module-icon tone-{% if row.is_late %}orange{% else %}green{% endif %}">{% if row.is_late %}{% icon "trending" 18 %}{% else %}{% icon "check" 18 %}{% endif %}</span>
+    <span class="feed-main">
+      <strong>{{ row.group.name }}</strong>
+      {% if row.is_late %}
+      <small>{% blocktranslate with amount=row.remaining|money count months=row.months_late %}Reste à payer : {{ amount }} ({{ months }} mois){% plural %}Reste à payer : {{ amount }} ({{ months }} mois){% endblocktranslate %}</small>
+      {% else %}
+      <small>{% translate "Vous êtes à jour de vos cotisations." %}</small>
+      {% endif %}
+    </span>
+  </div>
+  {% endfor %}
+</section>
+{% endif %}
 
-  <article class="workspace-card">
-    <h4>Presences recentes</h4>
-    {% for e in recent_attendance %}
-    <p>{{ e.meeting.scheduled_at }} - {{ e.meeting.title|default:'Rencontre' }} - {{ e.get_status_display }}</p>
-    {% empty %}
-    <p>Aucune presence enregistree.</p>
-    {% endfor %}
-    <a class="link" href="{% url 'member_portal_attendance' %}">Voir tout</a>
-  </article>
+<section class="feed-grid">
+  <div class="feed-card">
+    <div class="feed-head">
+      <h3>{% translate "Cotisations récentes" %}</h3>
+      <a class="link" href="{% url 'member_portal_contributions' %}">{% translate "Voir tout" %}</a>
+    </div>
+    <ul class="feed">
+      {% for c in recent_contributions %}
+      <li class="feed-row">
+        <span class="feed-date"><strong>{{ c.paid_at|date:"d" }}</strong><small>{{ c.paid_at|date:"M" }}</small></span>
+        <span class="feed-main"><strong>{{ c.get_contribution_type_display }}</strong><small>{{ c.group.name }}</small></span>
+        <span class="feed-side"><b class="feed-amount">{{ c.amount|money }}</b>{{ c.payment_status|cell:"status" }}</span>
+      </li>
+      {% empty %}
+      <li class="empty-state">{% translate "Aucune cotisation enregistrée." %}</li>
+      {% endfor %}
+    </ul>
+  </div>
 
-  <article class="workspace-card">
-    <h4>Mes groupes</h4>
-    {% for g in member_groups %}
-    <p>{{ g.name }}</p>
-    {% empty %}
-    <p>Vous n'appartenez a aucun groupe.</p>
-    {% endfor %}
-  </article>
+  <div class="feed-card">
+    <div class="feed-head">
+      <h3>{% translate "Présences récentes" %}</h3>
+      <a class="link" href="{% url 'member_portal_attendance' %}">{% translate "Voir tout" %}</a>
+    </div>
+    <ul class="feed">
+      {% for e in recent_attendance %}
+      <li class="feed-row">
+        <span class="feed-date"><strong>{{ e.meeting.scheduled_at|date:"d" }}</strong><small>{{ e.meeting.scheduled_at|date:"M" }}</small></span>
+        <span class="feed-main"><strong>{{ e.meeting.title|default:_("Rencontre") }}</strong><small>{{ e.meeting.group.name }}</small></span>
+        <span class="feed-side">{{ e.status|cell:"status" }}</span>
+      </li>
+      {% empty %}
+      <li class="empty-state">{% translate "Aucune présence enregistrée." %}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="feed-card">
+    <div class="feed-head"><h3>{% translate "Mes groupes" %}</h3></div>
+    <ul class="feed">
+      {% for g in member_groups %}
+      <li class="feed-row">
+        <span class="module-icon tone-teal">{% icon "users" 18 %}</span>
+        <span class="feed-main"><strong>{{ g.name }}</strong></span>
+      </li>
+      {% empty %}
+      <li class="empty-state">{% translate "Vous n'appartenez à aucun groupe." %}</li>
+      {% endfor %}
+    </ul>
+  </div>
 </section>
 {% endblock %}

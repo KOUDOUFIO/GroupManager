@@ -344,7 +344,7 @@ class MeetingServiceTests(TestCase):
         meeting = Meeting.objects.create(
             group=self.group,
             title='Test Meeting',
-            scheduled_at='2025-01-01'
+            scheduled_at='2025-01-01T00:00:00+00:00'
         )
         
         meetings = MeetingService.get_meeting_list()
@@ -355,7 +355,7 @@ class MeetingServiceTests(TestCase):
         meeting = MeetingService.create_meeting(
             group_id=self.group.id,
             title='New Meeting',
-            scheduled_at='2025-02-01',
+            scheduled_at='2025-02-01T00:00:00+00:00',
             actor=self.user
         )
         self.assertIsNotNone(meeting)
@@ -366,7 +366,7 @@ class MeetingServiceTests(TestCase):
         meeting = Meeting.objects.create(
             group=self.group,
             title='Test Meeting',
-            scheduled_at='2025-01-01'
+            scheduled_at='2025-01-01T00:00:00+00:00'
         )
         
         updated = MeetingService.update_meeting(
@@ -382,7 +382,7 @@ class MeetingServiceTests(TestCase):
         meeting = Meeting.objects.create(
             group=self.group,
             title='Test Meeting',
-            scheduled_at='2025-01-01'
+            scheduled_at='2025-01-01T00:00:00+00:00'
         )
         
         result = MeetingService.delete_meeting(meeting.id, actor=self.user)
@@ -394,7 +394,7 @@ class MeetingServiceTests(TestCase):
         meeting = Meeting.objects.create(
             group=self.group,
             title='Test Meeting',
-            scheduled_at='2025-01-01'
+            scheduled_at='2025-01-01T00:00:00+00:00'
         )
         
         entry = MeetingService.create_meeting_entry(
@@ -415,7 +415,7 @@ class MeetingServiceTests(TestCase):
         meeting = Meeting.objects.create(
             group=self.group,
             title='Test Meeting',
-            scheduled_at='2025-01-01'
+            scheduled_at='2025-01-01T00:00:00+00:00'
         )
         
         entry = MeetingService.create_meeting_entry(
@@ -430,7 +430,7 @@ class MeetingServiceTests(TestCase):
         meeting = Meeting.objects.create(
             group=self.group,
             title='Test Meeting',
-            scheduled_at='2025-01-01'
+            scheduled_at='2025-01-01T00:00:00+00:00'
         )
         entry = MeetingEntry.objects.create(
             meeting=meeting,
@@ -451,7 +451,7 @@ class MeetingServiceTests(TestCase):
         meeting = Meeting.objects.create(
             group=self.group,
             title='Test Meeting',
-            scheduled_at='2025-01-01'
+            scheduled_at='2025-01-01T00:00:00+00:00'
         )
         entry = MeetingEntry.objects.create(
             meeting=meeting,
@@ -468,7 +468,7 @@ class MeetingServiceTests(TestCase):
         meeting = Meeting.objects.create(
             group=self.group,
             title='Test Meeting',
-            scheduled_at='2025-01-01'
+            scheduled_at='2025-01-01T00:00:00+00:00'
         )
         
         MeetingEntry.objects.create(

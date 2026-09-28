@@ -1,32 +1,34 @@
 {% extends 'core/base.html' %}
+{% load i18n core_extras %}
 
-{% block title %}Devis Kotiza{% endblock %}
+{% block title %}{% translate "Devis Kotiza" %}{% endblock %}
+
+{% block body_class %}page-marketing{% endblock %}
 
 {% block hero %}
 <div>
-  <p class="pill">Offre commerciale</p>
-  <h1>Des solutions de gestion conçues pour les entreprises exigeantes.</h1>
+  <p class="pill">{% translate "Offre commerciale" %}</p>
+  <h1>{% translate "Des solutions de gestion conçues pour les entreprises exigeantes." %}</h1>
   <p class="subtitle">
-    Une plateforme robuste pour organiser vos groupes, vos équipes, vos événements et vos opérations,
-    avec un pilotage clair et une expérience premium pour vos responsables.
+    {% translate "Une plateforme robuste pour organiser vos groupes, vos équipes, vos événements et vos opérations, avec un pilotage clair et une expérience premium pour vos responsables." %}
   </p>
 </div>
 <div class="hero-actions">
-  <a class="btn primary" href="#pricing">Voir les tarifs</a>
-  <a class="btn ghost" href="#contact">Demander un devis</a>
+  <a class="btn primary" href="#contact">{% blocktranslate count days=trial_days %}Essayer gratuitement {{ days }} jour{% plural %}Essayer gratuitement {{ days }} jours{% endblocktranslate %}</a>
+  <a class="btn ghost" href="#pricing">{% translate "Voir les tarifs" %}</a>
 </div>
 {% endblock %}
 
 {% block content %}
 <section class="section-block highlight-panel">
   <div class="section-heading narrow">
-    <p class="pill">Pourquoi choisir Kotiza</p>
-    <h2>Un système qui transforme l’organisation en avantage concurrentiel.</h2>
+    <p class="pill">{% translate "Pourquoi choisir Kotiza" %}</p>
+    <h2>{% translate "Un système qui transforme l’organisation en avantage concurrentiel." %}</h2>
   </div>
   <div class="benefit-grid">
     {% for benefit in benefits %}
     <div class="benefit-card">
-      <span class="benefit-icon">✓</span>
+      <span class="benefit-icon">{% icon "check" 16 %}</span>
       <p>{{ benefit }}</p>
     </div>
     {% endfor %}
@@ -35,8 +37,8 @@
 
 <section id="pricing" class="section-block pricing-block">
   <div class="section-heading">
-    <p class="pill">Tarification</p>
-    <h2>Des formules flexibles pour démarrer vite, grandir sereinement et évoluer avec votre organisation.</h2>
+    <p class="pill">{% translate "Tarification" %}</p>
+    <h2>{% translate "Des formules flexibles pour démarrer vite, grandir sereinement et évoluer avec votre organisation." %}</h2>
   </div>
   <div class="pricing-grid">
     {% for plan in pricing %}
@@ -44,29 +46,34 @@
       <div class="plan-head">
         <span class="plan-tag">{{ plan.name }}</span>
         {% if plan.highlighted %}
-        <span class="popular">Populaire</span>
+        <span class="popular">{% translate "Populaire" %}</span>
         {% endif %}
       </div>
       <div class="plan-price">
         <strong>{{ plan.price }}</strong>
         <span>{{ plan.subtitle }}</span>
       </div>
+      {% if not forloop.last %}
+      <p class="plan-trial">{% blocktranslate count days=trial_days %}{{ days }} jour d'essai gratuit, sans engagement{% plural %}{{ days }} jours d'essai gratuit, sans engagement{% endblocktranslate %}</p>
+      {% endif %}
       <p class="plan-description">{{ plan.description }}</p>
       <ul>
         {% for feature in plan.features %}
         <li>{{ feature }}</li>
         {% endfor %}
       </ul>
-      <a class="btn {% if plan.highlighted %}primary{% else %}ghost{% endif %}" href="#contact">Choisir {{ plan.name }}</a>
+      <a class="btn {% if plan.highlighted %}primary{% else %}ghost{% endif %}" href="?formule={{ plan.key }}#contact">{% blocktranslate with name=plan.name %}Choisir {{ name }}{% endblocktranslate %}</a>
     </article>
     {% endfor %}
   </div>
 </section>
 
+{% include "core/partials/trust_section.html" %}
+
 <section class="section-block highlight-panel">
   <div class="section-heading narrow">
-    <p class="pill">Déploiement rapide</p>
-    <h2>Une mise en service simple, avec un accompagnement pensé pour les équipes de terrain.</h2>
+    <p class="pill">{% translate "Déploiement rapide" %}</p>
+    <h2>{% translate "Une mise en service simple, avec un accompagnement pensé pour les équipes de terrain." %}</h2>
   </div>
   <div class="trust-grid">
     {% for item in contact_points %}
@@ -80,55 +87,44 @@
 
 <section id="contact" class="section-block contact-panel">
   <div class="contact-copy">
-    <p class="pill">Demande de devis</p>
-    <h2>Parlons de votre organisation et de vos besoins.</h2>
+    <p class="pill">{% translate "Demande de devis" %}</p>
+    <h2>{% translate "Parlons de votre organisation et de vos besoins." %}</h2>
     <p>
-      Dites-nous quel niveau d’automatisation, de sécurité et d’accompagnement vous recherchez.
-      Nous vous répondrons avec une proposition claire, adaptée à votre volume et à votre contexte.
+      {% translate "Dites-nous quel niveau d’automatisation, de sécurité et d’accompagnement vous recherchez. Nous vous répondrons avec une proposition claire, adaptée à votre volume et à votre contexte." %}
     </p>
   </div>
   {% if submitted %}
-  <p class="form-success">Merci ! Votre demande a bien été envoyée, nous vous répondrons rapidement.</p>
+  <div class="proposal-success" role="status">
+    <span class="pay-status-icon" aria-hidden="true">{% icon "check" 30 %}</span>
+    <h3>{% translate "Merci, votre demande est bien envoyée !" %}</h3>
+    <p>{% translate "Nous revenons vers vous rapidement, par email ou sur WhatsApp si vous avez laissé votre numéro." %}</p>
+    <a class="btn ghost" href="{% url 'proposal_page' %}#pricing">{% translate "Revoir les tarifs" %}</a>
+  </div>
   {% else %}
-  <form class="proposal-form" method="post">
+  <form class="proposal-form" method="post" action="{% url 'proposal_page' %}#contact" novalidate>
     {% csrf_token %}
     {% if form.errors %}
-    <div class="error-messages">
-      {% for field, errors in form.errors.items %}
-      <div class="error-item">
-        <strong>{{ field|title }}:</strong>
-        {% for error in errors %}
-        <span>{{ error }}</span>
-        {% endfor %}
-      </div>
-      {% endfor %}
-    </div>
+    <p class="flash flash-error" role="alert">{% translate "Merci de corriger les champs indiqués en rouge." %}</p>
     {% endif %}
-    <div class="field-row">
-      <label>
-        <span>Nom</span>
-        {{ form.name }}
-      </label>
-      <label>
-        <span>Email</span>
-        {{ form.email }}
-      </label>
+    <div class="hp-field" aria-hidden="true">
+      <label for="{{ form.website.id_for_label }}">{% translate "Ne pas remplir" %}</label>
+      {{ form.website }}
     </div>
     <div class="field-row">
-      <label>
-        <span>Entreprise</span>
-        {{ form.company }}
-      </label>
-      <label>
-        <span>Type d'organisation</span>
-        {{ form.organization_type }}
-      </label>
+      {% include "core/partials/proposal_field.html" with field=form.name %}
+      {% include "core/partials/proposal_field.html" with field=form.email %}
     </div>
-    <label>
-      <span>Besoin principal</span>
-      {{ form.message }}
-    </label>
-    <button class="btn primary" type="submit">Demander un devis</button>
+    <div class="field-row">
+      {% include "core/partials/proposal_field.html" with field=form.phone optional=True %}
+      {% include "core/partials/proposal_field.html" with field=form.company optional=True %}
+    </div>
+    <div class="field-row">
+      {% include "core/partials/proposal_field.html" with field=form.organization_type %}
+      {% include "core/partials/proposal_field.html" with field=form.plan optional=True %}
+    </div>
+    {% include "core/partials/proposal_field.html" with field=form.message %}
+    <button class="btn primary proposal-submit" type="submit">{% translate "Demander un devis" %}</button>
+    <p class="proposal-note">{% translate "Vos informations servent uniquement à vous répondre." %}</p>
   </form>
   {% endif %}
 </section>

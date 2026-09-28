@@ -9,6 +9,8 @@ from django.utils import timezone
 from rest_framework import filters, permissions, viewsets
 from django.db import connection
 from django.http import JsonResponse
+from drf_spectacular.utils import extend_schema, inline_serializer
+from rest_framework import serializers as drf_serializers
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
@@ -172,6 +174,20 @@ def healthcheck(_request):
     return JsonResponse({"status": "ok" if db_status == "ok" else "degraded", "database": db_status}, status=status_code)
 
 
+@extend_schema(
+    responses=inline_serializer(
+        name="DashboardSummary",
+        fields={
+            "group_count": drf_serializers.IntegerField(),
+            "member_count": drf_serializers.IntegerField(),
+            "meeting_count": drf_serializers.IntegerField(),
+            "event_count": drf_serializers.IntegerField(),
+            "total_contributions": drf_serializers.DecimalField(max_digits=14, decimal_places=2),
+            "current_month_contributions": drf_serializers.DecimalField(max_digits=14, decimal_places=2),
+            "attendance_rate": drf_serializers.FloatField(),
+        },
+    )
+)
 @api_view(["GET"])
 @permission_classes([permissions.IsAuthenticated])
 def dashboard_summary(_request):

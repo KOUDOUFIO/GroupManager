@@ -70,19 +70,27 @@ class GlobalSearchView(LoginRequiredMixin, TemplateView):
             return context
 
         context["has_query"] = True
-        context["groups"] = models.Group.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))[:6]
-        context["members"] = models.Member.objects.filter(
-            Q(full_name__icontains=query) | Q(email__icontains=query) | Q(phone__icontains=query)
-        )[:6]
-        context["meetings"] = models.Meeting.objects.select_related("group").filter(
-            Q(title__icontains=query) | Q(group__name__icontains=query)
-        )[:6]
-        context["contributions"] = models.Contribution.objects.select_related("member", "group").filter(
-            Q(member__full_name__icontains=query) | Q(group__name__icontains=query) | Q(contribution_type__icontains=query)
-        )[:6]
-        context["events"] = models.Event.objects.select_related("group").filter(
-            Q(title__icontains=query) | Q(location__icontains=query) | Q(group__name__icontains=query)
-        )[:6]
+        user = self.request.user
+        # Chacun ne cherche que dans ce qu'il a le droit de consulter.
+        searches = {
+            "groups": ("core.view_group", lambda: models.Group.objects.filter(
+                Q(name__icontains=query) | Q(description__icontains=query))),
+            "members": ("core.view_member", lambda: models.Member.objects.filter(
+                Q(full_name__icontains=query) | Q(email__icontains=query) | Q(phone__icontains=query))),
+            "meetings": ("core.view_meeting", lambda: models.Meeting.objects.select_related("group").filter(
+                Q(title__icontains=query) | Q(group__name__icontains=query))),
+            "contributions": ("core.view_contribution", lambda: models.Contribution.objects.select_related(
+                "member", "group").filter(Q(member__full_name__icontains=query) | Q(group__name__icontains=query)
+                                          | Q(contribution_type__icontains=query))),
+            "events": ("core.view_event", lambda: models.Event.objects.select_related("group").filter(
+                Q(title__icontains=query) | Q(location__icontains=query) | Q(group__name__icontains=query))),
+        }
+        total = 0
+        for key, (permission, build) in searches.items():
+            results = list(build()[:6]) if user.has_perm(permission) else []
+            context[key] = results
+            total += len(results)
+        context["result_count"] = total
         return context
 
 

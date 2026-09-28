@@ -1,0 +1,2751 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-28 15:51+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Visiteur"
+msgstr "Visitor"
+
+msgid "Administrateur"
+msgstr "Administrator"
+
+msgid "Gestionnaire"
+msgstr "Manager"
+
+msgid "Utilisateur"
+msgstr "User"
+
+msgid "Espaces"
+msgstr "Spaces"
+
+msgid "Tableau de bord"
+msgstr "Dashboard"
+
+msgid "Vue d'ensemble de votre activité"
+msgstr "Overview of your activity"
+
+msgid "Espace admin"
+msgstr "Admin area"
+
+msgid "Gouvernance, audit et contrôle global"
+msgstr "Governance, audit and global control"
+
+msgid "Espace manager"
+msgstr "Manager area"
+
+msgid "Pilotage opérationnel au quotidien"
+msgstr "Day-to-day operations"
+
+msgid "Mon espace"
+msgstr "My space"
+
+msgid "Vos cotisations et vos présences"
+msgstr "Your contributions and attendance"
+
+msgid "Organisation"
+msgstr "Organization"
+
+msgid "Groupes"
+msgstr "Groups"
+
+msgid "Structures, responsables et membres"
+msgstr "Structures, leaders and members"
+
+msgid "Organes"
+msgstr "Bodies"
+
+msgid "Bureaux, comités et commissions"
+msgstr "Boards, committees and commissions"
+
+msgid "Postes"
+msgstr "Positions"
+
+msgid "Rôles et responsabilités"
+msgstr "Roles and responsibilities"
+
+msgid "Personnes"
+msgstr "People"
+
+msgid "Membres"
+msgstr "Members"
+
+msgid "Fiches et coordonnées des membres"
+msgstr "Member records and contact details"
+
+msgid "Rencontres"
+msgstr "Meetings"
+
+msgid "Réunions planifiées et passées"
+msgstr "Planned and past meetings"
+
+msgid "Présences"
+msgstr "Attendance"
+
+msgid "Présents, absents, retards et permissions"
+msgstr "Present, absent, late and excused"
+
+msgid "Finance"
+msgstr "Finance"
+
+msgid "Cotisations"
+msgstr "Contributions"
+
+msgid "Paiements, reçus PDF et exports"
+msgstr "Payments, PDF receipts and exports"
+
+msgid "Suivi des cotisations"
+msgstr "Dues tracking"
+
+msgid "Qui est à jour, qui est en retard"
+msgstr "Who is up to date, who is behind"
+
+msgid "Activités"
+msgstr "Activities"
+
+msgid "Événements"
+msgstr "Events"
+
+msgid "Agenda des événements à venir"
+msgstr "Upcoming events calendar"
+
+msgid "Documents"
+msgstr "Documents"
+
+msgid "Statuts, comptes rendus et fichiers"
+msgstr "Bylaws, minutes and files"
+
+msgid "Audit"
+msgstr "Audit"
+
+msgid "Historique de toutes les actions"
+msgstr "History of every action"
+
+msgid "Outils"
+msgstr "Tools"
+
+msgid "Recherche"
+msgstr "Search"
+
+msgid "Retrouvez tout en un seul champ"
+msgstr "Find anything from one field"
+
+msgid "Notifications"
+msgstr "Notifications"
+
+msgid "Rappels et informations reçus"
+msgstr "Reminders and information received"
+
+msgid "Sécurité du compte"
+msgstr "Account security"
+
+msgid "Mot de passe et connexion à deux étapes"
+msgstr "Password and two-step sign-in"
+
+msgid "Choisissez..."
+msgstr "Choose..."
+
+msgid "L'organe sélectionné doit appartenir au même groupe."
+msgstr "The selected body must belong to the same group."
+
+msgid "Le membre doit appartenir au groupe de la rencontre."
+msgstr "The member must belong to the meeting's group."
+
+msgid "Le membre doit appartenir au groupe de la cotisation."
+msgstr "The member must belong to the contribution's group."
+
+msgid "Votre nom"
+msgstr "Your name"
+
+msgid "nom@entreprise.com"
+msgstr "name@company.com"
+
+msgid "90 12 34 56"
+msgstr "90 12 34 56"
+
+msgid "Nom de l'organisation"
+msgstr "Organization name"
+
+msgid "Décrivez votre besoin, le nombre d'utilisateurs, les groupes et les priorités..."
+msgstr "Describe your needs, number of users, groups and priorities..."
+
+msgid "Nom"
+msgstr "Name"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Téléphone / WhatsApp"
+msgstr "Phone / WhatsApp"
+
+msgid "Type d'organisation"
+msgstr "Organization type"
+
+msgid "Formule souhaitée"
+msgstr "Preferred plan"
+
+msgid "Besoin principal"
+msgstr "Main need"
+
+msgid "Je ne sais pas encore"
+msgstr "Not sure yet"
+
+msgid "Numéro de téléphone invalide."
+msgstr "Invalid phone number."
+
+msgid "Création"
+msgstr "Creation"
+
+msgid "Modification"
+msgstr "Update"
+
+msgid "Suppression"
+msgstr "Deletion"
+
+msgid "Mensuelle"
+msgstr "Monthly"
+
+msgid "Annuelle"
+msgstr "Annual"
+
+msgid "Spontanée"
+msgstr "One-off"
+
+msgid "Amende retard"
+msgstr "Late fine"
+
+msgid "Amende absence"
+msgstr "Absence fine"
+
+msgid "Autre"
+msgstr "Other"
+
+msgid "Espèces"
+msgstr "Cash"
+
+msgid "Virement bancaire"
+msgstr "Bank transfer"
+
+msgid "Mobile Money"
+msgstr "Mobile Money"
+
+msgid "Carte bancaire"
+msgstr "Card"
+
+msgid "En attente"
+msgstr "Pending"
+
+msgid "Confirmée"
+msgstr "Confirmed"
+
+msgid "Échouée"
+msgstr "Failed"
+
+msgid "Membre"
+msgstr "Member"
+
+msgid "Groupe"
+msgstr "Group"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Moyen de paiement"
+msgstr "Payment method"
+
+msgid "Statut"
+msgstr "Status"
+
+msgid "Montant"
+msgstr "Amount"
+
+msgid "Date de paiement"
+msgstr "Payment date"
+
+msgid "Notes"
+msgstr "Notes"
+
+msgid "Identifiant de transaction"
+msgstr "Transaction ID"
+
+msgid "Cotisation"
+msgstr "Contribution"
+
+msgid "Statistiques Groupes"
+msgstr "Group statistics"
+
+msgid "Statistiques Membres"
+msgstr "Member statistics"
+
+msgid "Statistiques Rencontres"
+msgstr "Meeting statistics"
+
+msgid "Statistiques Cotisations"
+msgstr "Contribution statistics"
+
+msgid "Activité Récente"
+msgstr "Recent activity"
+
+msgid "Événements à Venir"
+msgstr "Upcoming events"
+
+msgid "Actions Rapides"
+msgstr "Quick actions"
+
+msgid "Taux de Présence"
+msgstr "Attendance rate"
+
+msgid "Widgets activés"
+msgstr "Enabled widgets"
+
+msgid "Ordre des widgets"
+msgstr "Widget order"
+
+msgid "1 colonne"
+msgstr "1 column"
+
+msgid "2 colonnes"
+msgstr "2 columns"
+
+msgid "3 colonnes"
+msgstr "3 columns"
+
+msgid "4 colonnes"
+msgstr "4 columns"
+
+msgid "Nombre de colonnes"
+msgstr "Number of columns"
+
+msgid "Clair"
+msgstr "Light"
+
+msgid "Sombre"
+msgstr "Dark"
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "Thème"
+msgstr "Theme"
+
+msgid "Créé le"
+msgstr "Created on"
+
+msgid "Mis à jour le"
+msgstr "Updated on"
+
+msgid "Préférence de dashboard"
+msgstr "Dashboard preference"
+
+msgid "Préférences de dashboard"
+msgstr "Dashboard preferences"
+
+msgid "Type de document"
+msgstr "Document type"
+
+msgid "Titre"
+msgstr "Title"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Fichier"
+msgstr "File"
+
+msgid "Ajouté le"
+msgstr "Added on"
+
+msgid "Document"
+msgstr "Document"
+
+msgid "Type d'événement"
+msgstr "Event type"
+
+msgid "Date et heure"
+msgstr "Date and time"
+
+msgid "Lieu"
+msgstr "Location"
+
+msgid "Événement"
+msgstr "Event"
+
+msgid "Responsable"
+msgstr "Leader"
+
+msgid "Cotisation mensuelle attendue"
+msgstr "Expected monthly contribution"
+
+msgid "Montant que chaque membre doit verser par mois. Vide = pas de suivi des retards."
+msgstr "Amount each member owes per month. Empty = no arrears tracking."
+
+msgid "Début des cotisations"
+msgstr "Dues start"
+
+msgid "Premier mois dû. Vide = date de création du groupe."
+msgstr "First month due. Empty = group creation date."
+
+msgid "Rencontre"
+msgstr "Meeting"
+
+msgid "Présent"
+msgstr "Present"
+
+msgid "Absent"
+msgstr "Absent"
+
+msgid "En retard"
+msgstr "Late"
+
+msgid "Permission"
+msgstr "Excused"
+
+msgid "Motif"
+msgstr "Reason"
+
+msgid "Enregistré le"
+msgstr "Recorded on"
+
+msgid "Présence"
+msgstr "Attendance"
+
+msgid "Nom complet"
+msgstr "Full name"
+
+msgid "Téléphone"
+msgstr "Phone"
+
+msgid "Adresse"
+msgstr "Address"
+
+msgid "Compte utilisateur"
+msgstr "User account"
+
+msgid "Information"
+msgstr "Information"
+
+msgid "Succès"
+msgstr "Success"
+
+msgid "Avertissement"
+msgstr "Warning"
+
+msgid "Erreur"
+msgstr "Error"
+
+msgid "Système"
+msgstr "System"
+
+msgid "Catégorie"
+msgstr "Category"
+
+msgid "Message"
+msgstr "Message"
+
+msgid "Lien"
+msgstr "Link"
+
+msgid "Lu"
+msgstr "Read"
+
+msgid "Lu le"
+msgstr "Read on"
+
+msgid "Modèle lié"
+msgstr "Related model"
+
+msgid "ID de l'objet lié"
+msgstr "Related object ID"
+
+msgid "Notifications par email"
+msgstr "Email notifications"
+
+msgid "Notifications in-app"
+msgstr "In-app notifications"
+
+msgid "Notifications groupes"
+msgstr "Group notifications"
+
+msgid "Notifications membres"
+msgstr "Member notifications"
+
+msgid "Notifications rencontres"
+msgstr "Meeting notifications"
+
+msgid "Notifications cotisations"
+msgstr "Contribution notifications"
+
+msgid "Notifications système"
+msgstr "System notifications"
+
+msgid "Préférence de notification"
+msgstr "Notification preference"
+
+msgid "Préférences de notification"
+msgstr "Notification preferences"
+
+msgid "Organe"
+msgstr "Body"
+
+msgid "Intitulé"
+msgstr "Title"
+
+msgid "Titulaire"
+msgstr "Holder"
+
+msgid "Poste"
+msgstr "Position"
+
+msgid "Société"
+msgstr "Company"
+
+msgid "Association"
+msgstr "Association"
+
+msgid "Collectivité"
+msgstr "Local authority"
+
+msgid "Club / groupe"
+msgstr "Club / group"
+
+msgid "Starter"
+msgstr "Starter"
+
+msgid "Business"
+msgstr "Business"
+
+msgid "Enterprise"
+msgstr "Enterprise"
+
+msgid "Entreprise"
+msgstr "Company"
+
+msgid "Reçu le"
+msgstr "Received on"
+
+msgid "Demande de devis"
+msgstr "Quote request"
+
+msgid "Demandes de devis"
+msgstr "Quote requests"
+
+msgid "Fonction"
+msgstr "Feature"
+
+msgid "Ex. Trésorière"
+msgstr "E.g. Treasurer"
+
+msgid "Témoignage"
+msgstr "Testimonial"
+
+msgid "Accord écrit du client"
+msgstr "Customer's written consent"
+
+msgid "Obligatoire pour publier : le client a accepté que son avis et son nom soient affichés."
+msgstr "Required to publish: the customer agreed that their review and name may be shown."
+
+msgid "Publié"
+msgstr "Published"
+
+msgid "Ordre"
+msgstr "Order"
+
+msgid "Témoignages"
+msgstr "Testimonials"
+
+msgid "Impossible de publier sans l'accord écrit du client."
+msgstr "Cannot publish without the customer's written consent."
+
+msgid "Dernière utilisation"
+msgstr "Last used"
+
+msgid "Appareil TOTP"
+msgstr "TOTP device"
+
+msgid "Appareils TOTP"
+msgstr "TOTP devices"
+
+msgid "2FA activé"
+msgstr "2FA enabled"
+
+msgid "Codes de secours"
+msgstr "Backup codes"
+
+msgid "Codes de secours utilisés"
+msgstr "Used backup codes"
+
+msgid "Préférence 2FA"
+msgstr "2FA preference"
+
+msgid "Préférences 2FA"
+msgstr "2FA preferences"
+
+#, python-format
+msgid ""
+"Bonjour %(name)s,\n"
+"\n"
+"Votre espace Kotiza est prêt : vous pouvez y suivre vos cotisations et vos présences.\n"
+"\n"
+"Votre identifiant : %(username)s\n"
+"Choisissez votre mot de passe en ouvrant ce lien :\n"
+"%(link)s\n"
+"\n"
+"L'équipe Kotiza"
+msgstr ""
+
+msgid "Votre accès à Kotiza"
+msgstr "Your access to Kotiza"
+
+msgid "Le montant doit être positif."
+msgstr "The amount must be positive."
+
+msgid "Le montant doit être un nombre valide."
+msgstr "The amount must be a valid number."
+
+msgid "Fichier trop volumineux (2 Mo maximum)."
+msgstr "File too large (2 MB maximum)."
+
+msgid "Fichier Excel illisible."
+msgstr "Unreadable Excel file."
+
+msgid "Format non reconnu : envoyez un fichier .xlsx ou .csv."
+msgstr "Unknown format: send an .xlsx or .csv file."
+
+msgid "Colonne « Nom complet » introuvable. Utilisez le modèle proposé."
+msgstr "\"Full name\" column not found. Use the provided template."
+
+#, python-format
+msgid "Trop de lignes (%(max)s maximum par import)."
+msgstr "Too many rows (%(max)s maximum per import)."
+
+msgid "Nom manquant."
+msgstr "Missing name."
+
+msgid "Nom trop long."
+msgstr "Name too long."
+
+msgid "Téléphone invalide."
+msgstr "Invalid phone."
+
+msgid "Email invalide."
+msgstr "Invalid email."
+
+#, python-format
+msgid "Groupe « %(name)s » inconnu."
+msgstr "Unknown group \"%(name)s\"."
+
+msgid "Même téléphone ou email qu'un membre existant."
+msgstr "Same phone or email as an existing member."
+
+msgid "Même nom qu'un membre existant."
+msgstr "Same name as an existing member."
+
+msgid "Abonnement expiré."
+msgstr "Subscription expired."
+
+msgid "Fermer"
+msgstr "Close"
+
+msgid "Confirmer"
+msgstr "Confirm"
+
+msgid "Aucune donnée disponible"
+msgstr "No data available"
+
+msgid "Interface Administrateur - Kotiza"
+msgstr "Administrator area - Kotiza"
+
+msgid "Espace Administrateur"
+msgstr "Administrator area"
+
+msgid "Pilotage global"
+msgstr "Global oversight"
+
+msgid "Vue centralisée pour suivre la santé fonctionnelle, l'activité et la gouvernance."
+msgstr "A central view of operational health, activity and governance."
+
+msgid "Administration Django"
+msgstr "Django administration"
+
+msgid "Historique d'audit"
+msgstr "Audit history"
+
+msgid "structures actives"
+msgstr "active organizations"
+
+msgid "membres actifs"
+msgstr "active members"
+
+msgid "réunions planifiées"
+msgstr "scheduled meetings"
+
+msgid "paiements enregistrés"
+msgstr "recorded payments"
+
+msgid "Audits"
+msgstr "Audits"
+
+msgid "traces d'activité"
+msgstr "activity records"
+
+msgid "Vue d'ensemble"
+msgstr "Overview"
+
+msgid "Gérer les groupes"
+msgstr "Manage groups"
+
+msgid "Administrer les structures organisationnelles"
+msgstr "Manage organizational structures"
+
+msgid "Contrôler les membres"
+msgstr "Review members"
+
+msgid "Gérer les utilisateurs et leurs accès"
+msgstr "Manage users and their access"
+
+msgid "Vérifier les cotisations"
+msgstr "Check contributions"
+
+msgid "Suivre les paiements et finances"
+msgstr "Track payments and finances"
+
+msgid "Suivre les présences"
+msgstr "Track attendance"
+
+msgid "Contrôler les participations aux réunions"
+msgstr "Review meeting participation"
+
+msgid "Activité récente"
+msgstr "Recent activity"
+
+msgid "Derniers événements d'audit"
+msgstr "Latest audit events"
+
+msgid "Voir tout"
+msgstr "See all"
+
+msgid "Aucune activité récente."
+msgstr "No recent activity."
+
+msgid "Retour"
+msgstr "Back"
+
+msgid "Plateforme"
+msgstr "Platform"
+
+msgid "Devis"
+msgstr "Pricing"
+
+msgid "Navigation principale"
+msgstr "Main navigation"
+
+msgid "Modules"
+msgstr "Modules"
+
+msgid "Rechercher un membre, un groupe..."
+msgstr "Search a member, a group..."
+
+msgid "Langue"
+msgstr "Language"
+
+msgid "Se déconnecter"
+msgstr "Log out"
+
+msgid "Se connecter"
+msgstr "Log in"
+
+msgid "Plateforme de gestion de groupes"
+msgstr "Group management platform"
+
+msgid "Centralisez vos groupes, vos membres et vos rencontres dans un espace clair, rapide et professionnel."
+msgstr "Bring your groups, members and meetings together in one clear, fast and professional space."
+
+msgid "Accéder à l'administration"
+msgstr "Go to administration"
+
+#, python-format
+msgid "Abonnement expiré depuis le %(end_date)s : le site est bloqué pour votre organisation."
+msgstr "Subscription expired on %(end_date)s: the site is locked for your organization."
+
+#, python-format
+msgid "Abonnement valable jusqu'au %(end_date)s (%(days)s jour restant)."
+msgid_plural "Abonnement valable jusqu'au %(end_date)s (%(days)s jours restants)."
+msgstr[0] "Subscription valid until %(end_date)s (%(days)s day left)."
+msgstr[1] "Subscription valid until %(end_date)s (%(days)s days left)."
+
+#, python-format
+msgid "Renouvellement : %(contact)s"
+msgstr "Renewal: %(contact)s"
+
+msgid "Kotiza - édition professionnelle"
+msgstr "Kotiza - professional edition"
+
+msgid "Informations légales"
+msgstr "Legal information"
+
+msgid "Mentions légales"
+msgstr "Legal notice"
+
+msgid "Politique de confidentialité"
+msgstr "Privacy policy"
+
+msgid "Tous vos modules"
+msgstr "All your modules"
+
+msgid "Accédez en un clic à chaque espace de Kotiza."
+msgstr "Reach every area of Kotiza in one click."
+
+msgid "Confirmation"
+msgstr "Confirmation"
+
+msgid "Cette action est définitive."
+msgstr "This action cannot be undone."
+
+msgid "Retour à la liste"
+msgstr "Back to list"
+
+msgid "Voulez-vous vraiment supprimer :"
+msgstr "Do you really want to delete:"
+
+msgid "Supprimer"
+msgstr "Delete"
+
+msgid "Annuler"
+msgstr "Cancel"
+
+msgid "Formulaire"
+msgstr "Form"
+
+msgid "Remplissez les informations et enregistrez."
+msgstr "Fill in the details and save."
+
+msgid "Merci de corriger les champs indiqués en rouge."
+msgstr "Please correct the fields shown in red."
+
+msgid "(facultatif)"
+msgstr "(optional)"
+
+msgid "Enregistrer"
+msgstr "Save"
+
+msgid "Module"
+msgstr "Module"
+
+msgid "Liste et gestion rapide des enregistrements."
+msgstr "List and quick management of records."
+
+msgid "Ajouter"
+msgstr "Add"
+
+msgid "Importer depuis Excel"
+msgstr "Import from Excel"
+
+msgid "Rechercher..."
+msgstr "Search..."
+
+msgid "Tous les groupes"
+msgstr "All groups"
+
+msgid "Filtrer"
+msgstr "Filter"
+
+msgid "CSV"
+msgstr "CSV"
+
+msgid "Excel"
+msgstr "Excel"
+
+msgid "PDF"
+msgstr "PDF"
+
+msgid "Actions"
+msgstr "Actions"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Accès actif"
+msgstr "Access active"
+
+msgid "Donner l'accès"
+msgstr "Give access"
+
+msgid "Reçu"
+msgstr "Receipt"
+
+msgid "Modifier"
+msgstr "Edit"
+
+msgid "Aucun élément pour le moment."
+msgstr "Nothing here yet."
+
+msgid "Précédent"
+msgstr "Previous"
+
+#, python-format
+msgid "Page %(number)s / %(total)s"
+msgstr "Page %(number)s / %(total)s"
+
+msgid "Suivant"
+msgstr "Next"
+
+msgid "Tableau de bord - Kotiza"
+msgstr "Dashboard - Kotiza"
+
+#, fuzzy, python-format
+msgid "Bonjour, %(name)s"
+msgstr "Hello, %(name)s"
+
+msgid "Voici l'essentiel de votre organisation aujourd'hui. Tous vos modules sont à portée de clic."
+msgstr "Here is what matters in your organization today. All your modules are one click away."
+
+msgid "Recherche globale"
+msgstr "Global search"
+
+msgid "Indicateurs clés"
+msgstr "Key indicators"
+
+msgid "Chiffres consolidés de tous vos groupes."
+msgstr "Consolidated figures across all your groups."
+
+msgid "actifs"
+msgstr "active"
+
+msgid "enregistrés"
+msgstr "registered"
+
+msgid "Cotisations total"
+msgstr "Total contributions"
+
+msgid "cumulées"
+msgstr "to date"
+
+msgid "Cotisations du mois"
+msgstr "Contributions this month"
+
+msgid "mois courant"
+msgstr "current month"
+
+msgid "planifiées"
+msgstr "scheduled"
+
+msgid "à venir"
+msgstr "upcoming"
+
+msgid "Semaine en cours"
+msgstr "This week"
+
+msgid "Cotisations, rencontres et événements comptés du lundi au dimanche."
+msgstr "Contributions, meetings and events counted from Monday to Sunday."
+
+msgid "Taux de présence"
+msgstr "Attendance rate"
+
+msgid "Présents, retards et permissions"
+msgstr "Present, late and excused"
+
+msgid "Part du total encaissé ce mois-ci"
+msgstr "Share of the total collected this month"
+
+msgid "Activité événements"
+msgstr "Event activity"
+
+msgid "Événements par rencontre"
+msgstr "Events per meeting"
+
+msgid "Actions rapides"
+msgstr "Quick actions"
+
+msgid "Les tâches les plus courantes, en un clic."
+msgstr "Your most common tasks, one click away."
+
+msgid "Suivi des cotisations - Kotiza"
+msgstr "Dues tracking - Kotiza"
+
+msgid "Qui est à jour, qui est en retard, et combien il reste à encaisser."
+msgstr "Who is up to date, who is behind, and how much is left to collect."
+
+msgid "Aucun groupe suivi pour l'instant"
+msgstr "No tracked group yet"
+
+msgid "Indiquez la cotisation mensuelle attendue dans la fiche d'un groupe pour suivre les retards."
+msgstr "Set the expected monthly contribution on a group to track arrears."
+
+msgid "Ouvrir les groupes"
+msgstr "Open groups"
+
+msgid "Attendu"
+msgstr "Expected"
+
+#, fuzzy, python-format
+msgid "%(total)s membre suivi"
+msgid_plural "%(total)s membres suivis"
+msgstr[0] "%(total)s tracked member"
+msgstr[1] "%(total)s tracked members"
+
+msgid "Encaissé"
+msgstr "Collected"
+
+msgid "cotisations mensuelles confirmées"
+msgstr "confirmed monthly contributions"
+
+msgid "Reste à encaisser"
+msgstr "Left to collect"
+
+#, fuzzy, python-format
+msgid "%(total)s membre en retard"
+msgid_plural "%(total)s membres en retard"
+msgstr[0] "%(total)s member behind"
+msgstr[1] "%(total)s members behind"
+
+msgid "mois"
+msgstr "month"
+
+msgid "Tous les membres"
+msgstr "All members"
+
+msgid "En retard seulement"
+msgstr "Behind only"
+
+msgid "Mois dus"
+msgstr "Months due"
+
+msgid "Versé"
+msgstr "Paid"
+
+msgid "Reste à payer"
+msgstr "Left to pay"
+
+msgid "Situation"
+msgstr "Status"
+
+#, python-format
+msgid "%(months)s mois de retard"
+msgid_plural "%(months)s mois de retard"
+msgstr[0] "%(months)s month behind"
+msgstr[1] "%(months)s months behind"
+
+msgid "À jour"
+msgstr "Up to date"
+
+msgid "Aucun membre en retard. Bravo !"
+msgstr "No member behind. Well done!"
+
+msgid "Calcul : cotisation mensuelle attendue × nombre de mois depuis le début des cotisations, comparée aux cotisations mensuelles confirmées."
+msgstr "Calculation: expected monthly contribution × months since dues start, compared with confirmed monthly contributions."
+
+msgid "Entreprise - Kotiza"
+msgstr "Company - Kotiza"
+
+msgid "Notre entreprise"
+msgstr "Our company"
+
+msgid "Une vision claire pour des organisations plus solides."
+msgstr "A clear vision for stronger organizations."
+
+msgid "Kotiza aide les entreprises, institutions et structures associatives à mieux organiser leur activité, leur gouvernance et leur suivi grâce à un système simple, fiable et professionnel."
+msgstr "Kotiza helps companies, institutions and associations organize their activity, governance and follow-up with a simple, reliable and professional system."
+
+msgid "Demander un devis"
+msgstr "Request a quote"
+
+msgid "Retour au site"
+msgstr "Back to site"
+
+msgid "Notre approche"
+msgstr "Our approach"
+
+msgid "Nous construisons des outils qui rendent la gestion plus lisible, plus rapide et plus sûre."
+msgstr "We build tools that make management clearer, faster and safer."
+
+msgid "Méthode"
+msgstr "Method"
+
+msgid "Un parcours simple, pensé pour les équipes et pour la stabilité de l'organisation."
+msgstr "A simple path, designed for teams and for the stability of the organization."
+
+msgid "FAQ"
+msgstr "FAQ"
+
+msgid "Les réponses aux questions fréquentes de nos clients et partenaires."
+msgstr "Answers to frequent questions from our clients and partners."
+
+msgid "Prêt à moderniser votre organisation ?"
+msgstr "Ready to modernize your organization?"
+
+msgid "Nous pouvons vous proposer une mise en place adaptée à votre structure, vos besoins de gestion et votre niveau d’exigence."
+msgstr "We can offer a setup tailored to your structure, your management needs and your standards."
+
+msgid "Obtenir une proposition"
+msgstr "Get a proposal"
+
+msgid "Recherche Globale - Kotiza"
+msgstr "Global search - Kotiza"
+
+msgid "Recherche transversale"
+msgstr "Search everything"
+
+msgid "Interrogez toutes les entités depuis un seul point d'entrée."
+msgstr "Search every record from a single place."
+
+msgid "Nom, email, groupe, événement..."
+msgstr "Name, email, group, event..."
+
+msgid "Rechercher"
+msgstr "Search"
+
+#, python-format
+msgid "%(total)s résultat pour « %(q)s »"
+msgid_plural "%(total)s résultats pour « %(q)s »"
+msgstr[0] "%(total)s result for \"%(q)s\""
+msgstr[1] "%(total)s results for \"%(q)s\""
+
+msgid "Aucun résultat"
+msgstr "No results"
+
+msgid "Essayez un autre nom, un numéro de téléphone ou le nom d'un groupe."
+msgstr "Try another name, a phone number or a group name."
+
+msgid "Groupe 360"
+msgstr "Group 360"
+
+msgid "Vision complète du groupe : activités, membres, finances et agenda."
+msgstr "The full picture of the group: activities, members, finances and schedule."
+
+msgid "Retour aux groupes"
+msgstr "Back to groups"
+
+msgid "confirmées"
+msgstr "confirmed"
+
+#, python-format
+msgid "%(total)s poste"
+msgid_plural "%(total)s postes"
+msgstr[0] "%(total)s position"
+msgstr[1] "%(total)s positions"
+
+#, fuzzy, python-format
+msgid "%(total)s rencontre"
+msgid_plural "%(total)s rencontres"
+msgstr[0] "%(total)s meeting"
+msgstr[1] "%(total)s meetings"
+
+msgid "au total"
+msgstr "in total"
+
+msgid "Cotisations récentes"
+msgstr "Recent contributions"
+
+msgid "Aucune cotisation récente."
+msgstr "No recent contributions."
+
+msgid "Événements à venir"
+msgstr "Upcoming events"
+
+msgid "Aucun événement à venir."
+msgstr "No upcoming events."
+
+msgid "Rencontres récentes"
+msgstr "Recent meetings"
+
+msgid "Aucune rencontre récente."
+msgstr "No recent meetings."
+
+msgid "Plateforme de gestion multisectorielle"
+msgstr "Management platform for every sector"
+
+msgid "Une solution plus profonde pour piloter vos organisations."
+msgstr "A deeper way to run your organizations."
+
+msgid "Kotiza centralise les groupes, les membres, les activités, les événements et la trésorerie pour offrir une expérience claire et évolutive dans tous les secteurs d'entreprise."
+msgstr "Kotiza brings groups, members, activities, events and treasury together for a clear, scalable experience in every sector."
+
+msgid "Commencer"
+msgstr "Get started"
+
+msgid "Domaines d'application"
+msgstr "Use cases"
+
+msgid "Un système conçu pour les entreprises, associations et organisations durables."
+msgstr "A system built for companies, associations and lasting organizations."
+
+msgid "Méthode de travail"
+msgstr "How it works"
+
+msgid "Une plateforme de gestion simple à adopter et profonde à exploiter."
+msgstr "A management platform that is easy to adopt and deep to use."
+
+msgid "Offre d'entreprise"
+msgstr "Business offer"
+
+msgid "Un outil de gestion pensé pour la performance et la croissance."
+msgstr "A management tool built for performance and growth."
+
+msgid "Gestion des groupes"
+msgstr "Group management"
+
+msgid "Création, mise à jour, filtration par responsable, organes et postes inclus."
+msgstr "Create, update and filter by leader, with bodies and positions included."
+
+msgid "Accéder"
+msgstr "Open"
+
+msgid "Membres & postes"
+msgstr "Members & positions"
+
+msgid "Association multi-groupes, postes isolés ou rattachés à un organe."
+msgstr "Members in several groups, positions standalone or attached to a body."
+
+msgid "Rencontres & présences"
+msgstr "Meetings & attendance"
+
+msgid "Planification, présence/absence/retard/permission avec motifs."
+msgstr "Scheduling, present/absent/late/excused with reasons."
+
+msgid "Cotisations & documents"
+msgstr "Contributions & documents"
+
+msgid "Suivi des paiements, stockage de documents importants."
+msgstr "Payment tracking and storage of key documents."
+
+msgid "Donnez à votre organisation un système plus robuste."
+msgstr "Give your organization a more robust system."
+
+msgid "Ajoutez vos premiers groupes, clarifiez vos rôles et pilotez votre activité en un seul espace professionnel."
+msgstr "Add your first groups, clarify roles and run your activity from one professional space."
+
+msgid "Interface Manager - Kotiza"
+msgstr "Manager area - Kotiza"
+
+msgid "Espace Gestionnaire"
+msgstr "Manager area"
+
+msgid "Pilotage opérationnel"
+msgstr "Day-to-day oversight"
+
+msgid "Suivi quotidien des groupes, activités, présences et cotisations."
+msgstr "Daily follow-up of groups, activities, attendance and contributions."
+
+msgid "groupes suivis"
+msgstr "groups tracked"
+
+msgid "réunions organisées"
+msgstr "meetings held"
+
+msgid "événements planifiés"
+msgstr "events scheduled"
+
+msgid "Ajouter un membre"
+msgstr "Add a member"
+
+msgid "Créer un nouveau membre"
+msgstr "Create a new member"
+
+msgid "Planifier une rencontre"
+msgstr "Schedule a meeting"
+
+msgid "Organiser une réunion"
+msgstr "Organize a meeting"
+
+msgid "Enregistrer une cotisation"
+msgstr "Record a contribution"
+
+msgid "Ajouter un paiement"
+msgstr "Add a payment"
+
+msgid "Créer un événement"
+msgstr "Create an event"
+
+msgid "Ajouter un événement"
+msgstr "Add an event"
+
+msgid "Accès à Mon espace - Kotiza"
+msgstr "Access to My space - Kotiza"
+
+msgid "Accès membre"
+msgstr "Member access"
+
+msgid "Le membre consulte ses cotisations, ses présences et ses reçus depuis son téléphone."
+msgstr "The member checks their contributions, attendance and receipts from their phone."
+
+msgid "Accès créé"
+msgstr "Access created"
+
+msgid "Identifiant"
+msgstr "Username"
+
+msgid "Mot de passe provisoire"
+msgstr "Temporary password"
+
+msgid "Transmettez ces informations au membre (en main propre, par SMS ou WhatsApp). Il pourra changer son mot de passe après sa première connexion. Ce mot de passe ne sera plus affiché."
+msgstr "Give these details to the member (in person, by SMS or WhatsApp). They can change their password after first signing in. This password will not be shown again."
+
+#, python-format
+msgid "Un email a été envoyé à %(email)s avec un lien pour choisir son mot de passe."
+msgstr "An email was sent to %(email)s with a link to choose a password."
+
+#, python-format
+msgid "L'email vers %(email)s n'a pas pu partir (envoi d'emails non configuré ?). Le membre peut utiliser « Mot de passe oublié » sur la page de connexion."
+msgstr "The email to %(email)s could not be sent (email not configured?). The member can use \"Forgot password\" on the sign-in page."
+
+msgid "Retour aux membres"
+msgstr "Back to members"
+
+#, python-format
+msgid "Identifiant de connexion : <strong>%(username)s</strong>"
+msgstr "Username: <strong>%(username)s</strong>"
+
+#, python-format
+msgid "Dernière connexion : %(date)s"
+msgstr "Last sign-in: %(date)s"
+
+msgid "Le membre ne s'est pas encore connecté."
+msgstr "The member has not signed in yet."
+
+msgid "Retirer l'accès"
+msgstr "Remove access"
+
+msgid "Pas encore d'accès"
+msgstr "No access yet"
+
+#, python-format
+msgid "Un email sera envoyé à <strong>%(email)s</strong> avec un lien pour choisir son mot de passe."
+msgstr "An email will be sent to <strong>%(email)s</strong> with a link to choose a password."
+
+msgid "Ce membre n'a pas d'email : un mot de passe provisoire vous sera affiché, à lui transmettre."
+msgstr "This member has no email: a temporary password will be shown for you to pass on."
+
+msgid "Importer des membres - Kotiza"
+msgstr "Import members - Kotiza"
+
+msgid "Importer des membres"
+msgstr "Import members"
+
+msgid "Ajoutez tous vos membres d'un coup depuis un fichier Excel ou CSV."
+msgstr "Add all your members at once from an Excel or CSV file."
+
+msgid "À importer"
+msgstr "To import"
+
+msgid "nouveaux membres"
+msgstr "new members"
+
+msgid "Déjà présents"
+msgstr "Already there"
+
+msgid "ignorés"
+msgstr "skipped"
+
+msgid "Erreurs"
+msgstr "Errors"
+
+msgid "lignes à corriger"
+msgstr "rows to fix"
+
+msgid "Ligne"
+msgstr "Row"
+
+msgid "Résultat"
+msgstr "Result"
+
+msgid "Déjà présent"
+msgstr "Already there"
+
+#, fuzzy, python-format
+msgid "Importer %(total)s membre"
+msgid_plural "Importer %(total)s membres"
+msgstr[0] "Import %(total)s member"
+msgstr[1] "Import %(total)s members"
+
+msgid "Aucun nouveau membre à importer dans ce fichier."
+msgstr "No new member to import in this file."
+
+msgid "Envoyer un autre fichier"
+msgstr "Send another file"
+
+msgid "Voir l'aperçu"
+msgstr "See preview"
+
+msgid "Comment faire ?"
+msgstr "How to do it?"
+
+msgid "Téléchargez le modèle Excel et remplissez une ligne par membre."
+msgstr "Download the Excel template and fill one row per member."
+
+msgid "Seul le nom est obligatoire. Le téléphone, l'email, l'adresse et le groupe sont facultatifs."
+msgstr "Only the name is required. Phone, email, address and group are optional."
+
+msgid "Envoyez le fichier : un aperçu s'affiche avant toute création."
+msgstr "Send the file: a preview is shown before anything is created."
+
+msgid "Les membres déjà présents (même téléphone ou même email) sont ignorés : vous pouvez renvoyer le même fichier sans créer de doublons."
+msgstr "Members already there (same phone or email) are skipped: you can send the same file again without creating duplicates."
+
+msgid "Télécharger le modèle Excel"
+msgstr "Download the Excel template"
+
+msgid "Mes présences - Kotiza"
+msgstr "My attendance - Kotiza"
+
+msgid "Mes présences"
+msgstr "My attendance"
+
+msgid "Historique complet de vos présences aux rencontres."
+msgstr "Your full meeting attendance history."
+
+msgid "Retour au tableau de bord"
+msgstr "Back to dashboard"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Aucune présence enregistrée."
+msgstr "No attendance recorded."
+
+msgid "Mes cotisations - Kotiza"
+msgstr "My contributions - Kotiza"
+
+msgid "Mes cotisations"
+msgstr "My contributions"
+
+msgid "Historique complet de vos paiements, avec un reçu PDF pour chaque cotisation confirmée."
+msgstr "Full history of your payments, with a PDF receipt for each confirmed contribution."
+
+msgid "Télécharger"
+msgstr "Download"
+
+msgid "Aucune cotisation enregistrée."
+msgstr "No contributions recorded."
+
+msgid "Vos cotisations et votre présence, en un coup d'œil."
+msgstr "Your contributions and attendance at a glance."
+
+msgid "Total cotisé"
+msgstr "Total contributed"
+
+#, fuzzy, python-format
+msgid "%(total)s cotisation"
+msgid_plural "%(total)s cotisations"
+msgstr[0] "%(total)s contribution"
+msgstr[1] "%(total)s contributions"
+
+#, python-format
+msgid "sur %(total)s rencontre"
+msgid_plural "sur %(total)s rencontres"
+msgstr[0] "over %(total)s meeting"
+msgstr[1] "over %(total)s meetings"
+
+#, python-format
+msgid "%(total)s poste occupé"
+msgid_plural "%(total)s postes occupés"
+msgstr[0] "%(total)s position held"
+msgstr[1] "%(total)s positions held"
+
+#, python-format
+msgid "Reste à payer : %(amount)s (%(months)s mois)"
+msgid_plural "Reste à payer : %(amount)s (%(months)s mois)"
+msgstr[0] "Left to pay: %(amount)s (%(months)s month)"
+msgstr[1] "Left to pay: %(amount)s (%(months)s months)"
+
+msgid "Vous êtes à jour de vos cotisations."
+msgstr "You are up to date with your contributions."
+
+msgid "Présences récentes"
+msgstr "Recent attendance"
+
+msgid "Mes groupes"
+msgstr "My groups"
+
+msgid "Vous n'appartenez à aucun groupe."
+msgstr "You are not in any group."
+
+msgid "Notifications - Kotiza"
+msgstr "Notifications - Kotiza"
+
+msgid "Vos notifications"
+msgstr "Your notifications"
+
+msgid "Rappels de cotisation et informations de votre organisation."
+msgstr "Contribution reminders and news from your organization."
+
+msgid "Tout marquer comme lu"
+msgstr "Mark all as read"
+
+msgid "Nouveau"
+msgstr "New"
+
+msgid "Aucune notification"
+msgstr "No notifications"
+
+msgid "Vous serez prévenu ici des rappels de cotisation."
+msgstr "Contribution reminders will show up here."
+
+msgid "Tous vos modules au même endroit"
+msgstr "All your modules in one place"
+
+msgid "Organisation, personnes, cotisations, activités, espaces admin et manager, recherche : un seul bouton suffit."
+msgstr "Organization, people, contributions, activities, admin and manager areas, search: one button is all it takes."
+
+msgid "Afficher tous les modules"
+msgstr "Show all modules"
+
+msgid "Sécurité et confiance"
+msgstr "Security and trust"
+
+msgid "L'argent de vos membres mérite une application sérieuse."
+msgstr "Your members' money deserves a serious app."
+
+msgid "Connexion protégée"
+msgstr "Protected sign-in"
+
+msgid "Mots de passe chiffrés et connexion à deux étapes disponible : un code sur le téléphone en plus du mot de passe."
+msgstr "Hashed passwords and optional two-step sign-in: a code on the phone on top of the password."
+
+msgid "Caisse transparente"
+msgstr "Transparent cash box"
+
+msgid "Chaque cotisation est enregistrée avec son statut, et la caisse s'exporte en Excel ou en PDF."
+msgstr "Every contribution is recorded with its status, and the cash box exports to Excel or PDF."
+
+msgid "Historique complet"
+msgstr "Full history"
+
+msgid "Qui a modifié quoi, et quand : chaque action est tracée. Fini les disputes sur la caisse."
+msgstr "Who changed what, and when: every action is logged. No more arguments about the cash box."
+
+msgid "Vos données séparées"
+msgstr "Your data kept separate"
+
+msgid "Chaque organisation a sa propre installation et sa propre base : aucune donnée partagée avec d'autres clients."
+msgstr "Each organization has its own installation and database: no data shared with other customers."
+
+msgid "Accès par rôle"
+msgstr "Role-based access"
+
+msgid "Administrateur, trésorier, membre : chacun ne voit que ce qui le concerne."
+msgstr "Administrator, treasurer, member: everyone only sees what concerns them."
+
+msgid "Sauvegardes"
+msgstr "Backups"
+
+msgid "Sauvegardes automatiques de la base de données."
+msgstr "Automatic database backups."
+
+msgid "Activité de la semaine"
+msgstr "Weekly activity"
+
+#, python-format
+msgid "Du lundi %(start)s au dimanche %(end)s"
+msgstr "From Monday %(start)s to Sunday %(end)s"
+
+#, python-format
+msgid "%(total)s activité cette semaine, du lundi au dimanche"
+msgid_plural "%(total)s activités cette semaine, du lundi au dimanche"
+msgstr[0] "%(total)s activity this week, Monday to Sunday"
+msgstr[1] "%(total)s activities this week, Monday to Sunday"
+
+msgid "Aujourd'hui"
+msgstr "Today"
+
+msgid "Aucune activité enregistrée pour cette semaine."
+msgstr "No activity recorded this week."
+
+msgid "Répartition"
+msgstr "Breakdown"
+
+msgid "Part de chaque activité sur la semaine"
+msgstr "Share of each activity this week"
+
+msgid "Répartition de l'activité de la semaine"
+msgstr "Breakdown of this week's activity"
+
+msgid "activité"
+msgid_plural "activités"
+msgstr[0] "activity"
+msgstr[1] "activities"
+
+msgid "Voir les données du lundi au dimanche"
+msgstr "See the data from Monday to Sunday"
+
+msgid "Jour"
+msgstr "Day"
+
+msgid "Total"
+msgstr "Total"
+
+msgid "Plateforme - Kotiza"
+msgstr "Platform - Kotiza"
+
+msgid "Suite d'entreprise"
+msgstr "Business suite"
+
+msgid "Une plateforme qui grandit avec votre organisation."
+msgstr "A platform that grows with your organization."
+
+msgid "Au-delà de la gestion interne, Kotiza devient un espace de pilotage, d’opportunités, de suivi commercial et d’automatisation pour les structures ambitieuses."
+msgstr "Beyond internal management, Kotiza becomes a space for oversight, opportunities, sales follow-up and automation for ambitious organizations."
+
+msgid "Un écosystème pensé pour centraliser les opérations, la vente et le reporting."
+msgstr "An ecosystem designed to centralize operations, sales and reporting."
+
+msgid "Bientôt"
+msgstr "Coming soon"
+
+msgid "Roadmap"
+msgstr "Roadmap"
+
+msgid "Un développement progressif pour transformer la solution en plateforme d’entreprise."
+msgstr "Step-by-step development to turn the solution into a business platform."
+
+msgid "Comparatif"
+msgstr "Comparison"
+
+msgid "Une base solide pour passer de l’organisation locale à la plateforme business complète."
+msgstr "A solid foundation to grow from a local organization to a full business platform."
+
+msgid "Base"
+msgstr "Base"
+
+msgid "La plateforme évolue avec vos ambitions."
+msgstr "The platform evolves with your ambitions."
+
+msgid "Commencez avec une base solide et passez progressivement vers un système d’entreprise complet, pilotable et intégré."
+msgstr "Start from a solid base and move step by step to a complete, manageable and integrated business system."
+
+msgid "Planifier une solution"
+msgstr "Plan a solution"
+
+msgid "Devis Kotiza"
+msgstr "Kotiza pricing"
+
+msgid "Offre commerciale"
+msgstr "Our offer"
+
+msgid "Des solutions de gestion conçues pour les entreprises exigeantes."
+msgstr "Management solutions built for demanding organizations."
+
+msgid "Une plateforme robuste pour organiser vos groupes, vos équipes, vos événements et vos opérations, avec un pilotage clair et une expérience premium pour vos responsables."
+msgstr "A robust platform to organize your groups, teams, events and operations, with clear oversight and a premium experience for your leaders."
+
+#, python-format
+msgid "Essayer gratuitement %(days)s jour"
+msgid_plural "Essayer gratuitement %(days)s jours"
+msgstr[0] "Try free for %(days)s day"
+msgstr[1] "Try free for %(days)s days"
+
+msgid "Voir les tarifs"
+msgstr "See pricing"
+
+msgid "Pourquoi choisir Kotiza"
+msgstr "Why choose Kotiza"
+
+msgid "Un système qui transforme l’organisation en avantage concurrentiel."
+msgstr "A system that turns organization into a competitive edge."
+
+msgid "Tarification"
+msgstr "Pricing"
+
+msgid "Des formules flexibles pour démarrer vite, grandir sereinement et évoluer avec votre organisation."
+msgstr "Flexible plans to start fast, grow calmly and evolve with your organization."
+
+msgid "Populaire"
+msgstr "Popular"
+
+#, python-format
+msgid "%(days)s jour d'essai gratuit, sans engagement"
+msgid_plural "%(days)s jours d'essai gratuit, sans engagement"
+msgstr[0] "%(days)s-day free trial, no commitment"
+msgstr[1] "%(days)s-day free trial, no commitment"
+
+#, python-format
+msgid "Choisir %(name)s"
+msgstr "Choose %(name)s"
+
+msgid "Déploiement rapide"
+msgstr "Quick setup"
+
+msgid "Une mise en service simple, avec un accompagnement pensé pour les équipes de terrain."
+msgstr "Simple onboarding, with support designed for teams on the ground."
+
+msgid "Parlons de votre organisation et de vos besoins."
+msgstr "Let's talk about your organization and your needs."
+
+msgid "Dites-nous quel niveau d’automatisation, de sécurité et d’accompagnement vous recherchez. Nous vous répondrons avec une proposition claire, adaptée à votre volume et à votre contexte."
+msgstr "Tell us what level of automation, security and support you need. We will reply with a clear proposal tailored to your size and context."
+
+msgid "Merci, votre demande est bien envoyée !"
+msgstr "Thank you, your request has been sent!"
+
+msgid "Nous revenons vers vous rapidement, par email ou sur WhatsApp si vous avez laissé votre numéro."
+msgstr "We will get back to you quickly, by email or on WhatsApp if you left your number."
+
+msgid "Revoir les tarifs"
+msgstr "See pricing again"
+
+msgid "Ne pas remplir"
+msgstr "Do not fill in"
+
+msgid "Vos informations servent uniquement à vous répondre."
+msgstr "Your details are only used to reply to you."
+
+msgid "Sécurité du compte - Kotiza"
+msgstr "Account security - Kotiza"
+
+msgid "Sécurité"
+msgstr "Security"
+
+msgid "Protégez l'accès à la caisse de votre organisation."
+msgstr "Protect access to your organization's cash box."
+
+msgid "Connexion à deux étapes"
+msgstr "Two-step sign-in"
+
+msgid "En plus du mot de passe, un code à 6 chiffres affiché sur votre téléphone est demandé à chaque connexion."
+msgstr "On top of the password, a 6-digit code shown on your phone is required at each sign-in."
+
+msgid "Activée"
+msgstr "On"
+
+msgid "Désactivée"
+msgstr "Off"
+
+msgid "Installez une application d'authentification : Google Authenticator ou Microsoft Authenticator."
+msgstr "Install an authenticator app: Google Authenticator or Microsoft Authenticator."
+
+msgid "Dans l'application, scannez ce QR code :"
+msgstr "In the app, scan this QR code:"
+
+msgid "Ou saisissez cette clé :"
+msgstr "Or enter this key:"
+
+msgid "Saisissez le code à 6 chiffres affiché par l'application :"
+msgstr "Enter the 6-digit code shown by the app:"
+
+msgid "Activer"
+msgstr "Turn on"
+
+msgid "Vos codes de secours"
+msgstr "Your backup codes"
+
+msgid "Notez-les ou imprimez-les maintenant et gardez-les en lieu sûr : ils ne seront plus affichés. Chaque code sert une seule fois, si vous n'avez plus votre téléphone."
+msgstr "Write them down or print them now and keep them safe: they will not be shown again. Each code works once, if you no longer have your phone."
+
+#, python-format
+msgid "%(total)s code de secours disponible."
+msgid_plural "%(total)s codes de secours disponibles."
+msgstr[0] "%(total)s backup code left."
+msgstr[1] "%(total)s backup codes left."
+
+msgid "Générer de nouveaux codes de secours"
+msgstr "Generate new backup codes"
+
+msgid "Pour désactiver la protection, saisissez le code affiché en ce moment dans votre application."
+msgstr "To turn protection off, enter the code currently shown in your app."
+
+msgid "Code à 6 chiffres"
+msgstr "6-digit code"
+
+msgid "Désactiver"
+msgstr "Turn off"
+
+msgid "Téléphone perdu et plus de code de secours ? Un administrateur peut supprimer votre appareil dans l'administration."
+msgstr "Lost your phone and out of backup codes? An administrator can delete your device in the admin."
+
+msgid "Activer la connexion à deux étapes"
+msgstr "Turn on two-step sign-in"
+
+msgid "Mot de passe"
+msgstr "Password"
+
+msgid "Choisissez un mot de passe long, que vous n'utilisez nulle part ailleurs."
+msgstr "Choose a long password you don't use anywhere else."
+
+msgid "Changer mon mot de passe"
+msgstr "Change my password"
+
+msgid "Vérification - Kotiza"
+msgstr "Verification - Kotiza"
+
+msgid "Vérification"
+msgstr "Verification"
+
+msgid "Saisissez le code à 6 chiffres affiché dans votre application d'authentification."
+msgstr "Enter the 6-digit code shown in your authenticator app."
+
+msgid "Valider"
+msgstr "Confirm"
+
+msgid "Plus de téléphone ? Saisissez un de vos codes de secours à 8 chiffres."
+msgstr "No phone? Enter one of your 8-digit backup codes."
+
+msgid "Requête invalide"
+msgstr "Bad request"
+
+msgid "400 - Requête invalide"
+msgstr "400 - Bad request"
+
+msgid "La requête envoyée n'est pas valide. Vérifiez les champs puis réessayez."
+msgstr "The request is not valid. Check the fields and try again."
+
+msgid "Retour à l'accueil"
+msgstr "Back to home"
+
+msgid "Accès refusé"
+msgstr "Access denied"
+
+msgid "403 - Accès refusé"
+msgstr "403 - Access denied"
+
+msgid "Vous n'avez pas la permission d'accéder à cette ressource."
+msgstr "You do not have permission to access this resource."
+
+msgid "Page introuvable"
+msgstr "Page not found"
+
+msgid "404 - Page introuvable"
+msgstr "404 - Page not found"
+
+msgid "La page demandée n'existe pas ou a été déplacée."
+msgstr "The page you requested does not exist or has moved."
+
+msgid "Erreur serveur"
+msgstr "Server error"
+
+msgid "500 - Erreur interne"
+msgstr "500 - Internal error"
+
+msgid "Une erreur interne est survenue. L'incident a été journalisé."
+msgstr "An internal error occurred. The incident has been logged."
+
+msgid "Abonnement expiré"
+msgstr "Subscription expired"
+
+msgid "L'abonnement Kotiza de votre organisation est arrivé à son terme."
+msgstr "Your organization's Kotiza subscription has ended."
+
+msgid "Vos données sont conservées et redeviennent accessibles dès le renouvellement."
+msgstr "Your data is kept and becomes available again as soon as you renew."
+
+msgid "Pour renouveler, contactez-nous"
+msgstr "To renew, contact us"
+
+msgid "Connexion administrateur"
+msgstr "Administrator login"
+
+msgid "Déconnexion - Kotiza"
+msgstr "Logged out - Kotiza"
+
+msgid "À bientôt"
+msgstr "See you soon"
+
+msgid "Vous êtes déconnecté"
+msgstr "You are logged out"
+
+msgid "Votre session est terminée."
+msgstr "Your session has ended."
+
+msgid "Revenir à la connexion :"
+msgstr "Back to login:"
+
+msgid "Connexion - Kotiza"
+msgstr "Log in - Kotiza"
+
+msgid "Bienvenue sur Kotiza"
+msgstr "Welcome to Kotiza"
+
+msgid "Connectez-vous pour accéder à vos tableaux de bord et modules."
+msgstr "Log in to access your dashboards and modules."
+
+msgid "Nom d'utilisateur ou mot de passe incorrect. Vérifiez les majuscules et réessayez."
+msgstr "Incorrect username or password. Check capital letters and try again."
+
+msgid "Nom d'utilisateur"
+msgstr "Username"
+
+msgid "Entrez votre nom d’utilisateur"
+msgstr "Enter your username"
+
+msgid "Entrez votre mot de passe"
+msgstr "Enter your password"
+
+msgid "Mot de passe oublié ?"
+msgstr "Forgot your password?"
+
+msgid "Accès réservé aux membres autorisés."
+msgstr "Access restricted to authorized members."
+
+msgid "Mot de passe modifié - Kotiza"
+msgstr "Password changed - Kotiza"
+
+msgid "Mon compte"
+msgstr "My account"
+
+msgid "Mot de passe modifié"
+msgstr "Password changed"
+
+msgid "Votre mot de passe a été mis à jour avec succès."
+msgstr "Your password has been updated."
+
+msgid "Changer le mot de passe - Kotiza"
+msgstr "Change password - Kotiza"
+
+msgid "Renseignez votre mot de passe actuel puis le nouveau."
+msgstr "Enter your current password, then the new one."
+
+msgid "Mot de passe actuel"
+msgstr "Current password"
+
+msgid "Nouveau mot de passe"
+msgstr "New password"
+
+msgid "Confirmer le nouveau mot de passe"
+msgstr "Confirm new password"
+
+msgid "Récupération de compte"
+msgstr "Account recovery"
+
+msgid "Vous pouvez maintenant vous connecter avec votre nouveau mot de passe."
+msgstr "You can now log in with your new password."
+
+msgid "Nouveau mot de passe - Kotiza"
+msgstr "New password - Kotiza"
+
+msgid "Choisir un nouveau mot de passe"
+msgstr "Choose a new password"
+
+msgid "Dernière étape avant de retrouver votre accès."
+msgstr "Last step to get your access back."
+
+msgid "Choisissez un mot de passe robuste, différent des précédents."
+msgstr "Choose a strong password, different from previous ones."
+
+msgid "Confirmer le mot de passe"
+msgstr "Confirm password"
+
+msgid "Enregistrer le nouveau mot de passe"
+msgstr "Save new password"
+
+msgid "Lien invalide"
+msgstr "Invalid link"
+
+msgid "Ce lien de réinitialisation est invalide ou a déjà été utilisé."
+msgstr "This reset link is invalid or has already been used."
+
+msgid "Demander un nouveau lien"
+msgstr "Request a new link"
+
+msgid "Email envoyé - Kotiza"
+msgstr "Email sent - Kotiza"
+
+msgid "Vérifiez votre boîte mail"
+msgstr "Check your inbox"
+
+msgid "Si l'adresse existe dans nos systèmes, un email vient de vous être envoyé."
+msgstr "If the address exists in our system, an email has just been sent to you."
+
+msgid "Suivez le lien reçu par email pour choisir un nouveau mot de passe. Pensez à vérifier vos courriers indésirables."
+msgstr "Follow the link in the email to choose a new password. Remember to check your spam folder."
+
+msgid "Retour à la connexion"
+msgstr "Back to login"
+
+#, python-format
+msgid "Bonjour %(username)s,"
+msgstr "Hello %(username)s,"
+
+#, python-format
+msgid "Vous recevez cet email car une demande de réinitialisation de mot de passe a été faite pour votre compte Kotiza sur %(domain)s."
+msgstr "You are receiving this email because a password reset was requested for your Kotiza account on %(domain)s."
+
+msgid "Pour choisir un nouveau mot de passe, ouvrez le lien suivant :"
+msgstr "To choose a new password, open this link:"
+
+msgid "Si vous n'êtes pas à l'origine de cette demande, ignorez simplement cet email : votre mot de passe restera inchangé."
+msgstr "If you did not make this request, just ignore this email: your password will stay the same."
+
+msgid "L'équipe Kotiza"
+msgstr "The Kotiza team"
+
+msgid "Mot de passe oublié - Kotiza"
+msgstr "Forgot password - Kotiza"
+
+msgid "Mot de passe oublié"
+msgstr "Forgot password"
+
+msgid "Indiquez votre email pour recevoir un lien de réinitialisation."
+msgstr "Enter your email to receive a reset link."
+
+msgid "Réinitialiser votre mot de passe"
+msgstr "Reset your password"
+
+msgid "Un email contenant les instructions vous sera envoyé si l'adresse correspond à un compte existant."
+msgstr "An email with instructions will be sent if the address matches an existing account."
+
+msgid "Adresse email"
+msgstr "Email address"
+
+msgid "vous@exemple.com"
+msgstr "you@example.com"
+
+msgid "Envoyer le lien de réinitialisation"
+msgstr "Send reset link"
+
+msgid "Kotiza - Réinitialisation de votre mot de passe"
+msgstr "Kotiza - Reset your password"
+
+msgid "Identifiant de connexion"
+msgstr "Username"
+
+msgid "Lettres, chiffres et . @ + - _ seulement, sans espace."
+msgstr "Letters, digits and . @ + - _ only, no spaces."
+
+msgid "Cet identifiant est déjà utilisé."
+msgstr "This username is already taken."
+
+#, python-format
+msgid "L'accès de %(name)s est retiré. Son historique est conservé."
+msgstr "%(name)s's access was removed. Their history is kept."
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Élément"
+msgstr "Item"
+
+msgid "Objet"
+msgstr "Object"
+
+msgid "Ajouter une cotisation"
+msgstr "Add a contribution"
+
+msgid "Modifier une cotisation"
+msgstr "Edit contribution"
+
+msgid "Supprimer une cotisation"
+msgstr "Delete contribution"
+
+msgid "Upload"
+msgstr "Uploaded"
+
+msgid "Ajouter un document"
+msgstr "Add a document"
+
+msgid "Modifier un document"
+msgstr "Edit document"
+
+msgid "Supprimer un document"
+msgstr "Delete document"
+
+msgid "Modifier un événement"
+msgstr "Edit event"
+
+msgid "Supprimer un événement"
+msgstr "Delete event"
+
+msgid "Rapport des cotisations"
+msgstr "Contributions report"
+
+msgid "Rapport des présences"
+msgstr "Attendance report"
+
+msgid "Ajouter un groupe"
+msgstr "Add a group"
+
+msgid "Modifier un groupe"
+msgstr "Edit group"
+
+msgid "Supprimer un groupe"
+msgstr "Delete group"
+
+msgid "Clarté opérationnelle"
+msgstr "Operational clarity"
+
+msgid "Nous aidons les organisations à mieux voir les priorités, les responsabilités et les réalités du terrain."
+msgstr "We help organizations see priorities, responsibilities and realities on the ground more clearly."
+
+msgid "Sérénité administrative"
+msgstr "Administrative peace of mind"
+
+msgid "Chaque action est suivie, chaque décision est traçable et chaque routine est sécurisée."
+msgstr "Every action is tracked, every decision is traceable and every routine is secured."
+
+msgid "Croissance mesurée"
+msgstr "Measured growth"
+
+msgid "Le système s'adapte à votre volume sans complexifier les usages ni ralentir les équipes."
+msgstr "The system scales with your volume without complicating usage or slowing teams down."
+
+msgid "Analyse"
+msgstr "Analysis"
+
+msgid "Nous identifions votre structure, vos groupes, vos rôles et vos points de friction."
+msgstr "We map your structure, groups, roles and pain points."
+
+msgid "Configuration"
+msgstr "Configuration"
+
+msgid "Nous configurons les espaces, les permissions et les workflows adaptés à votre organisation."
+msgstr "We configure the spaces, permissions and workflows that fit your organization."
+
+msgid "Adoption"
+msgstr "Adoption"
+
+msgid "Les équipes passent en production avec une logique de pilotage claire et un accompagnement précis."
+msgstr "Teams go live with clear oversight and close support."
+
+msgid "Optimisation"
+msgstr "Optimization"
+
+msgid "Vous mesurez les performances, ajustez les routines et améliorez la gouvernance au fil du temps."
+msgstr "You measure performance, adjust routines and improve governance over time."
+
+msgid "Le système convient-il à des structures diverses ?"
+msgstr "Does the system suit different kinds of organizations?"
+
+msgid "Oui. Kotiza est conçu pour s’adapter à des entreprises, associations, clubs, institutions ou organisations multisites."
+msgstr "Yes. Kotiza is designed to fit companies, associations, clubs, institutions and multi-site organizations."
+
+msgid "Peut-on personnaliser le niveau d’accès ?"
+msgstr "Can access levels be customized?"
+
+msgid "Oui. Les rôles et permissions sont pensés pour distinguer administrateurs, gestionnaires, responsables et utilisateurs."
+msgstr "Yes. Roles and permissions distinguish administrators, managers, group leaders and users."
+
+msgid "Le déploiement est-il rapide ?"
+msgstr "Is setup quick?"
+
+msgid "La mise en service est rapide et l’accompagnement permet de démarrer sans friction sur les routines existantes."
+msgstr "Setup is quick, and our support lets you start smoothly from your existing routines."
+
+msgid "CRM & relations"
+msgstr "CRM & relationships"
+
+msgid "Centralisez les contacts, les prospects, les comptes et l’historique des échanges pour un meilleur suivi commercial."
+msgstr "Centralize contacts, prospects, accounts and conversation history for better sales follow-up."
+
+msgid "Sales"
+msgstr "Sales"
+
+msgid "Devis & factures"
+msgstr "Quotes & invoices"
+
+msgid "Créez, suivez et finalisez vos propositions commerciales avec une gestion plus claire de la facturation."
+msgstr "Create, track and close your proposals with clearer invoicing."
+
+msgid "Billing"
+msgstr "Billing"
+
+msgid "Tâches & workflow"
+msgstr "Tasks & workflow"
+
+msgid "Coordonnez les actions internes, les responsabilités et les priorités à travers des workflows simples et fiables."
+msgstr "Coordinate internal actions, responsibilities and priorities through simple, reliable workflows."
+
+msgid "Ops"
+msgstr "Ops"
+
+msgid "Reporting & KPI"
+msgstr "Reporting & KPIs"
+
+msgid "Pilotez vos performances grâce à des tableaux de bord, des indicateurs, des tendances et des comparatifs."
+msgstr "Steer performance with dashboards, indicators, trends and comparisons."
+
+msgid "Analytics"
+msgstr "Analytics"
+
+msgid "Rappelez les échéances, les réunions et les tâches grâce à des alertes utiles et personnalisables."
+msgstr "Remind people of deadlines, meetings and tasks with useful, customizable alerts."
+
+msgid "Alerts"
+msgstr "Alerts"
+
+msgid "API & intégrations"
+msgstr "API & integrations"
+
+msgid "Connectez votre système à d’autres outils pour automatiser la gestion de vos données et de vos process."
+msgstr "Connect your system to other tools to automate your data and processes."
+
+msgid "Integrations"
+msgstr "Integrations"
+
+msgid "Phase 1"
+msgstr "Phase 1"
+
+msgid "Organisation interne"
+msgstr "Internal organization"
+
+msgid "Groupes, membres, réunions, présences, cotisations et documents centralisés."
+msgstr "Groups, members, meetings, attendance, contributions and documents in one place."
+
+msgid "Phase 2"
+msgstr "Phase 2"
+
+msgid "CRM & ventes"
+msgstr "CRM & sales"
+
+msgid "Contacts, prospection, pipeline, suivi des opportunités et gestion des comptes."
+msgstr "Contacts, prospecting, pipeline, opportunity tracking and account management."
+
+msgid "Phase 3"
+msgstr "Phase 3"
+
+msgid "Finance & propositions"
+msgstr "Finance & proposals"
+
+msgid "Devis, factures, suivi des paiements et reporting commercial."
+msgstr "Quotes, invoices, payment tracking and sales reporting."
+
+msgid "Phase 4"
+msgstr "Phase 4"
+
+msgid "Automatisation"
+msgstr "Automation"
+
+msgid "Notifications, tâches, workflows, intégrations et analytics avancés."
+msgstr "Notifications, tasks, workflows, integrations and advanced analytics."
+
+msgid "Oui"
+msgstr "Yes"
+
+msgid "CRM client/prospect"
+msgstr "Client/prospect CRM"
+
+msgid "Devis / factures"
+msgstr "Quotes / invoices"
+
+msgid "Tableaux de bord"
+msgstr "Dashboards"
+
+msgid "Partiel"
+msgstr "Partial"
+
+msgid "API / intégrations"
+msgstr "API / integrations"
+
+msgid "Non"
+msgstr "No"
+
+msgid "Sur demande"
+msgstr "On request"
+
+msgid "Par mois"
+msgstr "Per month"
+
+msgid "Idéal pour petites structures et équipes de démarrage."
+msgstr "Ideal for small organizations and new teams."
+
+msgid "Jusqu’à 3 groupes"
+msgstr "Up to 3 groups"
+
+msgid "Suivi des membres et réunions"
+msgstr "Member and meeting tracking"
+
+msgid "Dashboard actif"
+msgstr "Live dashboard"
+
+msgid "Exports de base"
+msgstr "Basic exports"
+
+msgid "Pour les organisations qui veulent un pilotage plus profond."
+msgstr "For organizations that want deeper oversight."
+
+msgid "Gestion multi-groupes"
+msgstr "Multi-group management"
+
+msgid "Rappels automatiques SMS / WhatsApp"
+msgstr "Automatic SMS / WhatsApp reminders"
+
+msgid "Accès rôles et permissions"
+msgstr "Roles and permissions"
+
+msgid "Audit complet"
+msgstr "Full audit"
+
+msgid "Support prioritaire"
+msgstr "Priority support"
+
+msgid "Sur devis"
+msgstr "Custom quote"
+
+msgid "Personnalisé"
+msgstr "Tailored"
+
+msgid "Pour les structures multi-sites avec besoin de conformité et d’intégration."
+msgstr "For multi-site organizations with compliance and integration needs."
+
+msgid "Configuration sur mesure"
+msgstr "Custom configuration"
+
+msgid "API et intégrations"
+msgstr "API and integrations"
+
+msgid "Support dédié"
+msgstr "Dedicated support"
+
+msgid "Sécurité avancée"
+msgstr "Advanced security"
+
+msgid "Pilotage centralisé en temps réel"
+msgstr "Real-time centralized oversight"
+
+msgid "Traçabilité des actions et décisions"
+msgstr "Traceable actions and decisions"
+
+msgid "Réduction du travail manuel et des doublons"
+msgstr "Less manual work and fewer duplicates"
+
+msgid "Expérience claire pour les responsables et les équipes"
+msgstr "A clear experience for leaders and teams"
+
+msgid "Démarrage"
+msgstr "Onboarding"
+
+msgid "Accompagné"
+msgstr "Guided"
+
+msgid "Mise en service"
+msgstr "Go-live"
+
+msgid "Sans migration lourde"
+msgstr "No heavy migration"
+
+msgid "Support"
+msgstr "Support"
+
+msgid "Par email"
+msgstr "By email"
+
+msgid "Associations"
+msgstr "Associations"
+
+msgid "ONG, clubs et fondations"
+msgstr "NGOs, clubs and foundations"
+
+msgid "Organisez les adhésions, les rencontres, les cotisations et les décisions de manière transparente pour votre communauté."
+msgstr "Organize memberships, meetings, contributions and decisions transparently for your community."
+
+msgid "Membres et responsables"
+msgstr "Members and leaders"
+
+msgid "Suivi des présences"
+msgstr "Attendance tracking"
+
+msgid "Gestion des documents"
+msgstr "Document management"
+
+msgid "Education"
+msgstr "Education"
+
+msgid "Écoles et centres de formation"
+msgstr "Schools and training centers"
+
+msgid "Pilotez la planification des cours, l'activité des groupes et le suivi des participants avec un tableau de bord clair."
+msgstr "Manage course planning, group activity and participant follow-up from a clear dashboard."
+
+msgid "Planning des sessions"
+msgstr "Session planning"
+
+msgid "Évaluations et présence"
+msgstr "Assessments and attendance"
+
+msgid "Suivi des participants"
+msgstr "Participant follow-up"
+
+msgid "Services"
+msgstr "Services"
+
+msgid "PME, cabinets et services"
+msgstr "SMEs, firms and services"
+
+msgid "Un cadre de gestion opérationnelle pour coordonner les équipes, les projets et les engagements clients dans un seul espace."
+msgstr "An operational framework to coordinate teams, projects and client commitments in one place."
+
+msgid "Equipes et rôles"
+msgstr "Teams and roles"
+
+msgid "Suivi des activités"
+msgstr "Activity tracking"
+
+msgid "Rapports dynamiques"
+msgstr "Dynamic reports"
+
+msgid "Sport"
+msgstr "Sport"
+
+msgid "Clubs sportifs et culturels"
+msgstr "Sports and cultural clubs"
+
+msgid "Gérez les effectifs, les événements, les paiements et les annonces avec une expérience pensée pour les bénévoles et les responsables."
+msgstr "Manage rosters, events, payments and announcements with an experience designed for volunteers and leaders."
+
+msgid "Effectifs et postes"
+msgstr "Rosters and positions"
+
+msgid "Événements publics"
+msgstr "Public events"
+
+msgid "Cotisations et remboursements"
+msgstr "Contributions and refunds"
+
+msgid "Santé"
+msgstr "Health"
+
+msgid "Structures communautaires"
+msgstr "Community organizations"
+
+msgid "Trouvez un équilibre entre la coordination des membres, le suivi des activités et la communication interne dans un environnement structuré."
+msgstr "Balance member coordination, activity tracking and internal communication in a structured environment."
+
+msgid "Suivi des missions"
+msgstr "Mission tracking"
+
+msgid "Communication interne"
+msgstr "Internal communication"
+
+msgid "Historique des actions"
+msgstr "Action history"
+
+msgid "Public"
+msgstr "Public sector"
+
+msgid "Institutions et collectivités"
+msgstr "Institutions and local authorities"
+
+msgid "Adaptez la plateforme à un environnement plus réglementé avec une gestion fiable des groupes, documents et opérations administratives."
+msgstr "Adapt the platform to a regulated environment with reliable management of groups, documents and administrative operations."
+
+msgid "Traçabilité des actions"
+msgstr "Action traceability"
+
+msgid "Pilotage centralisé"
+msgstr "Centralized oversight"
+
+msgid "Centraliser l'organisation"
+msgstr "Centralize the organization"
+
+msgid "Créez vos groupes, organes, membres et postes dans un espace unique, sans friction ni doublons."
+msgstr "Create your groups, bodies, members and positions in one space, without friction or duplicates."
+
+msgid "Suivre l'activité"
+msgstr "Track activity"
+
+msgid "Visualisez les réunions, présences, événements et cotisations pour mesurer le rythme réel de l'organisation."
+msgstr "See meetings, attendance, events and contributions to measure the organization's real pace."
+
+msgid "Automatiser les routines"
+msgstr "Automate routines"
+
+msgid "Utilisez des tableaux de bord et les flux de travail pour réduire les tâches manuelles et améliorer la fiabilité."
+msgstr "Use dashboards and workflows to cut manual work and improve reliability."
+
+msgid "Piloter la décision"
+msgstr "Drive decisions"
+
+msgid "Analysez les performances, les taux de présence et les indicateurs de gestion pour agir avec précision."
+msgstr "Analyze performance, attendance and management indicators to act precisely."
+
+msgid "Rôles et permissions"
+msgstr "Roles and permissions"
+
+msgid "Audit trail complet"
+msgstr "Full audit trail"
+
+msgid "Documents et événements"
+msgstr "Documents and events"
+
+msgid "Exports CSV / Excel / PDF"
+msgstr "CSV / Excel / PDF exports"
+
+msgid "Dashboard d'activité"
+msgstr "Activity dashboard"
+
+msgid "Pilotage d'opérations"
+msgstr "Operations oversight"
+
+msgid "Suivez les réunions, les effectifs, les obligations et les engagements dans un tableau de bord centralisé."
+msgstr "Track meetings, headcount, obligations and commitments in a central dashboard."
+
+msgid "Coordination multisite"
+msgstr "Multi-site coordination"
+
+msgid "Gérez plusieurs structures, équipes ou territoires sans perdre la trace des responsabilités et des livrables."
+msgstr "Manage several organizations, teams or areas without losing track of responsibilities and deliverables."
+
+msgid "Présence & trésorerie"
+msgstr "Attendance & treasury"
+
+msgid "Analysez les taux de présence, les paiements et la santé financière globale de votre organisation."
+msgstr "Analyze attendance, payments and your organization's overall financial health."
+
+msgid "360°"
+msgstr "360°"
+
+msgid "100%"
+msgstr "100%"
+
+msgid "Traçabilité"
+msgstr "Traceability"
+
+msgid "Ajouter une rencontre"
+msgstr "Add a meeting"
+
+msgid "Modifier une rencontre"
+msgstr "Edit meeting"
+
+msgid "Supprimer une rencontre"
+msgstr "Delete meeting"
+
+msgid "Ajouter une présence"
+msgstr "Add attendance"
+
+msgid "Modifier une présence"
+msgstr "Edit attendance"
+
+msgid "Supprimer une présence"
+msgstr "Delete attendance"
+
+msgid "Modifier un membre"
+msgstr "Edit member"
+
+msgid "Supprimer un membre"
+msgstr "Delete member"
+
+msgid "Fichier Excel ou CSV"
+msgstr "Excel or CSV file"
+
+msgid "Ajouter les membres au groupe"
+msgstr "Add the members to the group"
+
+msgid "Aucun (ou colonne « Groupe » du fichier)"
+msgstr "None (or the file's \"Group\" column)"
+
+msgid "L'aperçu a expiré. Envoyez à nouveau le fichier."
+msgstr "The preview expired. Send the file again."
+
+#, python-format
+msgid "%(count)s membre(s) importé(s)."
+msgstr "%(count)s member(s) imported."
+
+msgid "Ajouter un organe"
+msgstr "Add a body"
+
+msgid "Modifier un organe"
+msgstr "Edit body"
+
+msgid "Supprimer un organe"
+msgstr "Delete body"
+
+msgid "Ajouter un poste"
+msgstr "Add a position"
+
+msgid "Modifier un poste"
+msgstr "Edit position"
+
+msgid "Supprimer un poste"
+msgstr "Delete position"
+
+msgid "Seule une cotisation confirmée donne droit à un reçu."
+msgstr "Only a confirmed contribution gets a receipt."
+
+msgid "Reçu établi avec Kotiza"
+msgstr "Receipt issued with Kotiza"
+
+msgid "Reçu de cotisation"
+msgstr "Contribution receipt"
+
+msgid "Montant reçu"
+msgstr "Amount received"
+
+#, python-format
+msgid "Document généré le %(date)s. Conservez-le comme preuve de paiement."
+msgstr "Generated on %(date)s. Keep it as proof of payment."
+
+#, python-format
+msgid "Vérifiable auprès du trésorier avec le numéro %(number)s."
+msgstr "Verifiable with the treasurer using number %(number)s."
+
+msgid "Le code contient 6 chiffres (ou 8 pour un code de secours)."
+msgstr "The code has 6 digits (or 8 for a backup code)."
+
+msgid "Connexion à deux étapes activée. Le code vous sera demandé à chaque connexion."
+msgstr "Two-step sign-in is on. The code will be asked at each sign-in."
+
+msgid "Code incorrect. Vérifiez l'heure du téléphone et réessayez."
+msgstr "Wrong code. Check your phone's time and try again."
+
+msgid "Connexion à deux étapes désactivée."
+msgstr "Two-step sign-in is off."
+
+msgid "Code incorrect."
+msgstr "Wrong code."
+
+msgid "Code incorrect ou expiré. Utilisez le code affiché en ce moment."
+msgstr "Wrong or expired code. Use the code shown right now."
+
+#~ msgid "HTTPS"
+#~ msgstr "HTTPS"
+
+#~ msgid "Connexion sécurisée"
+#~ msgstr "Secure login"
+
+#~ msgid "Paiement initié, en attente de confirmation. Le statut sera mis à jour automatiquement."
+#~ msgstr "Payment started, awaiting confirmation. The status will update automatically."
+
+#~ msgid "Un code sur le téléphone en plus du mot de passe : personne ne se connecte avec un mot de passe volé."
+#~ msgstr "A code on the phone on top of the password: nobody signs in with a stolen password."
+
+#~ msgid "2FA"
+#~ msgstr "2FA"
+
+#~ msgid "Montant (FCFA)"
+#~ msgstr "Amount (FCFA)"
+
+#~ msgid "Réseau"
+#~ msgstr "Network"
+
+#~ msgid "Numéro Mobile Money"
+#~ msgstr "Mobile Money number"
+
+#~ msgid "Exemple : 90 12 34 56. Vous confirmerez le paiement sur ce téléphone."
+#~ msgstr "Example: 90 12 34 56. You will confirm the payment on this phone."
+
+#~ msgid "Référence du paiement"
+#~ msgstr "Payment reference"
+
+#~ msgid "Numéro payeur"
+#~ msgstr "Payer number"
+
+#~ msgid "Payer ma cotisation"
+#~ msgstr "Pay my contribution"
+
+#~ msgid "Payer ma cotisation - Kotiza"
+#~ msgstr "Pay my contribution - Kotiza"
+
+#~ msgid "Payez en quelques secondes avec T-Money ou Flooz. Votre cotisation est enregistrée automatiquement."
+#~ msgstr "Pay in seconds with T-Money or Flooz. Your contribution is recorded automatically."
+
+#~ msgid "Payer maintenant"
+#~ msgstr "Pay now"
+
+#~ msgid "Choisissez votre réseau"
+#~ msgstr "Choose your network"
+
+#~ msgid "T-Money (Togocom) ou Flooz (Moov Africa)."
+#~ msgstr "T-Money (Togocom) or Flooz (Moov Africa)."
+
+#~ msgid "Validez sur votre téléphone"
+#~ msgstr "Approve on your phone"
+
+#~ msgid "Une demande arrive sur votre téléphone : confirmez avec votre code secret."
+#~ msgstr "A request arrives on your phone: confirm it with your PIN."
+
+#~ msgid "C'est enregistré"
+#~ msgstr "It's recorded"
+
+#~ msgid "Votre cotisation apparaît confirmée dans votre historique, sans rien faire de plus."
+#~ msgstr "Your contribution shows as confirmed in your history, with nothing more to do."
+
+#~ msgid "Paiement sécurisé par PayGate Global. Kotiza ne voit jamais votre code secret."
+#~ msgstr "Payment secured by PayGate Global. Kotiza never sees your PIN."
+
+#~ msgid "Suivi du paiement"
+#~ msgstr "Payment tracking"
+
+#~ msgid "Paiement reçu, merci !"
+#~ msgstr "Payment received, thank you!"
+
+#~ msgid "Votre cotisation est confirmée et enregistrée dans votre historique."
+#~ msgstr "Your contribution is confirmed and recorded in your history."
+
+#~ msgid "Paiement non abouti"
+#~ msgstr "Payment not completed"
+
+#~ msgid "La demande a expiré ou a été annulée. Aucun montant n'a été débité. Vous pouvez réessayer."
+#~ msgstr "The request expired or was cancelled. Nothing was charged. You can try again."
+
+#~ msgid "Confirmez sur votre téléphone"
+#~ msgstr "Confirm on your phone"
+
+#, python-format
+#~ msgid "Une demande de paiement a été envoyée au %(phone)s. Validez-la avec votre code secret Mobile Money."
+#~ msgstr "A payment request was sent to %(phone)s. Approve it with your Mobile Money PIN."
+
+#~ msgid "Cette page se met à jour toute seule."
+#~ msgstr "This page updates by itself."
+
+#~ msgid "Référence"
+#~ msgstr "Reference"
+
+#~ msgid "J'ai confirmé, vérifier"
+#~ msgstr "I confirmed, check now"
+
+#~ msgid "Réessayer"
+#~ msgstr "Try again"
+
+#~ msgid "Paiements vérifiés"
+#~ msgstr "Verified payments"
+
+#~ msgid "Chaque paiement T-Money ou Flooz est revérifié auprès de l'opérateur, montant compris, avant d'être confirmé."
+#~ msgstr "Every T-Money or Flooz payment is re-checked with the operator, amount included, before it is confirmed."
+
+#~ msgid "Paiement Mobile Money (T-Money, Flooz)"
+#~ msgstr "Mobile Money payments (T-Money, Flooz)"
+
+#~ msgid "Le paiement n'a pas pu être lancé. Vérifiez le numéro et réessayez dans quelques instants."
+#~ msgstr "The payment could not be started. Check the number and try again in a moment."
+
+#~ msgid "Paiement toujours en attente. Confirmez-le sur votre téléphone avec votre code secret."
+#~ msgstr "Payment still pending. Confirm it on your phone with your PIN."
+
+#~ msgid "Connexion"
+#~ msgstr "Log in"
+
+#~ msgid "Identifiez-vous pour accéder à votre espace de gestion."
+#~ msgstr "Sign in to access your management space."
+
+#~ msgid "Connexion sécurisée avec chiffrement des données."
+#~ msgstr "Secure connection with encrypted data."
+
+#~ msgid "Accès aux dashboards Admin, Manager et Groupes."
+#~ msgstr "Access to Admin, Manager and Group dashboards."
+
+#~ msgid "Modules organisés"
+#~ msgstr "Organized modules"
+
+#~ msgid "Gestion des groupes, membres, rencontres et cotisations."
+#~ msgstr "Manage groups, members, meetings and contributions."
+
+#~ msgid "Modèle"
+#~ msgstr "Model"
+
+#~ msgid "Route"
+#~ msgstr "Route"
+
+#~ msgid "Merci ! Votre demande a bien été envoyée, nous vous répondrons rapidement."
+#~ msgstr "Thank you! Your request has been sent, we will get back to you soon."
+
+#~ msgid "Vos modules"
+#~ msgstr "Your modules"
+
+#~ msgid "Retrouvez aussi ces modules à tout moment via le bouton « Modules » en haut de page."
+#~ msgstr "You can also reach these modules anytime from the \"Modules\" button at the top of the page."
+
+#~ msgid "Modules par catégorie"
+#~ msgstr "Modules by category"
+
+#~ msgid "global"
+#~ msgstr "overall"

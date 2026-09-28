@@ -1,0 +1,139 @@
+{% extends 'core/base.html' %}
+{% load i18n l10n core_extras static %}
+
+{% block title %}{% translate "Tableau de bord - Kotiza" %}{% endblock %}
+
+{% block hero_class %} hero-dashboard{% endblock %}
+
+{% block hero %}
+<div class="dash-banner">
+  <div class="dash-banner-text">
+    <p class="dash-date">{% now "l j F Y" %}</p>
+    <h1>{% blocktranslate with name=user.get_username %}Bonjour, {{ name }}{% endblocktranslate %}</h1>
+    <p class="subtitle">{% translate "Voici l'essentiel de votre organisation aujourd'hui. Tous vos modules sont à portée de clic." %}</p>
+    <div class="hero-actions">
+      {% for action in quick_actions|slice:":1" %}
+      <a class="btn btn-light" href="{{ action.url }}">{% icon "plus" 18 %}{{ action.label }}</a>
+      {% endfor %}
+      <a class="btn btn-glass" href="/recherche/">{% icon "search" 18 %}{% translate "Recherche globale" %}</a>
+    </div>
+  </div>
+  <div class="dash-banner-badge" aria-hidden="true">
+    <span class="role-chip">{{ ui_role_label }}</span>
+    <img src="{% static 'core/img/logo.svg' %}" alt="" width="88" height="88" />
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+{% include "core/partials/modules_cta.html" %}
+
+{% if show_platform_stats %}
+<section class="dash-section">
+  <div class="dash-section-head">
+    <h2>{% translate "Indicateurs clés" %}</h2>
+    <p>{% translate "Chiffres consolidés de tous vos groupes." %}</p>
+  </div>
+  <div class="stats kpi-grid">
+    <div class="kpi-card tone-teal">
+      <span class="module-icon">{% icon "users" 20 %}</span>
+      <p class="kpi-label">{% translate "Groupes" %}</p>
+      <p class="stat-value" data-counter data-target="{{ group_count }}">0</p>
+      <p class="stat-label">{% translate "actifs" %}</p>
+    </div>
+    <div class="kpi-card tone-olive">
+      <span class="module-icon">{% icon "id-card" 20 %}</span>
+      <p class="kpi-label">{% translate "Membres" %}</p>
+      <p class="stat-value" data-counter data-target="{{ member_count }}">0</p>
+      <p class="stat-label">{% translate "enregistrés" %}</p>
+    </div>
+    <div class="kpi-card tone-gold">
+      <span class="module-icon">{% icon "wallet" 20 %}</span>
+      <p class="kpi-label">{% translate "Cotisations total" %}</p>
+      <p class="stat-value" data-counter data-target="{{ total_contributions|floatformat:'-2u' }}">0</p>
+      <p class="stat-label">{% currency %} · {% translate "cumulées" %}</p>
+    </div>
+    <div class="kpi-card tone-green">
+      <span class="module-icon">{% icon "trending" 20 %}</span>
+      <p class="kpi-label">{% translate "Cotisations du mois" %}</p>
+      <p class="stat-value" data-counter data-target="{{ current_month_contributions|floatformat:'-2u' }}">0</p>
+      <p class="stat-label">{% currency %} · {% translate "mois courant" %}</p>
+    </div>
+    <div class="kpi-card tone-amber">
+      <span class="module-icon">{% icon "calendar" 20 %}</span>
+      <p class="kpi-label">{% translate "Rencontres" %}</p>
+      <p class="stat-value" data-counter data-target="{{ meeting_count }}">0</p>
+      <p class="stat-label">{% translate "planifiées" %}</p>
+    </div>
+    <div class="kpi-card tone-orange">
+      <span class="module-icon">{% icon "flag" 20 %}</span>
+      <p class="kpi-label">{% translate "Événements" %}</p>
+      <p class="stat-value" data-counter data-target="{{ event_count }}">0</p>
+      <p class="stat-label">{% translate "à venir" %}</p>
+    </div>
+  </div>
+</section>
+
+<section class="dash-section">
+  <div class="dash-section-head">
+    <h2>{% translate "Semaine en cours" %}</h2>
+    <p>{% translate "Cotisations, rencontres et événements comptés du lundi au dimanche." %}</p>
+  </div>
+  {% include "core/partials/week_charts.html" %}
+</section>
+
+<section class="analytics-rings">
+  <article class="ring-card">
+    <h4>{% translate "Taux de présence" %}</h4>
+    <div class="progress-ring" style="--pct: {{ attendance_rate|floatformat:'1u' }};">
+      <div class="ring-inner">
+        <strong data-counter data-target="{{ attendance_rate|floatformat:'1u' }}" data-suffix="%">0%</strong>
+      </div>
+    </div>
+    <p class="ring-caption">{% translate "Présents, retards et permissions" %}</p>
+  </article>
+  <article class="ring-card">
+    <h4>{% translate "Cotisations du mois" %}</h4>
+    <div class="progress-ring alt" style="--pct: {{ contribution_month_share|floatformat:'1u' }};">
+      <div class="ring-inner">
+        <strong data-counter data-target="{{ contribution_month_share|floatformat:'1u' }}" data-suffix="%">0%</strong>
+      </div>
+    </div>
+    <p class="ring-caption">{% translate "Part du total encaissé ce mois-ci" %}</p>
+  </article>
+  <article class="ring-card">
+    <h4>{% translate "Activité événements" %}</h4>
+    <div class="progress-ring calm" style="--pct: {{ event_activity_rate|floatformat:'1u' }};">
+      <div class="ring-inner">
+        <strong data-counter data-target="{{ event_activity_rate|floatformat:'1u' }}" data-suffix="%">0%</strong>
+      </div>
+    </div>
+    <p class="ring-caption">{% translate "Événements par rencontre" %}</p>
+  </article>
+</section>
+{% endif %}
+
+{% if quick_actions %}
+<section class="dash-section">
+  <div class="dash-section-head">
+    <h2>{% translate "Actions rapides" %}</h2>
+    <p>{% translate "Les tâches les plus courantes, en un clic." %}</p>
+  </div>
+  <div class="quick-bar">
+    {% for action in quick_actions %}
+    <a class="quick-btn tone-{{ action.tone }}" href="{{ action.url }}">
+      <span class="module-icon">{% icon action.icon 18 %}</span>
+      <span>{{ action.label }}</span>
+      {% icon "plus" 16 %}
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{% static 'core/dashboard.js' %}"></script>
+{% endblock %}

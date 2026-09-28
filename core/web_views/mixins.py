@@ -96,12 +96,22 @@ class SearchableListView(LoginRequiredMixin, ModelPermissionMixin, CrudContextMi
         return queryset
 
 
-class BaseCreateView(LoginRequiredMixin, ModelPermissionMixin, CrudContextMixin, CreateView):
+class PolishedFormMixin:
+    """Applique les widgets conviviaux (calendrier, cases a cocher) au formulaire."""
+
+    def get_form(self, form_class=None):
+        """Retourne le formulaire avec ses widgets ameliores."""
+        from ..forms import polish_form
+
+        return polish_form(super().get_form(form_class))
+
+
+class BaseCreateView(LoginRequiredMixin, ModelPermissionMixin, CrudContextMixin, PolishedFormMixin, CreateView):
     """Vue de création de base avec permissions."""
     permission_action = "add"
 
 
-class BaseUpdateView(LoginRequiredMixin, ModelPermissionMixin, CrudContextMixin, UpdateView):
+class BaseUpdateView(LoginRequiredMixin, ModelPermissionMixin, CrudContextMixin, PolishedFormMixin, UpdateView):
     """Vue de modification de base avec permissions."""
     permission_action = "change"
 

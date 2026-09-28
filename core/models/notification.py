@@ -3,6 +3,7 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 
 class Notification(models.Model):
@@ -15,10 +16,10 @@ class Notification(models.Model):
     TYPE_ERROR = 'error'
 
     TYPE_CHOICES = [
-        (TYPE_INFO, 'Information'),
-        (TYPE_SUCCESS, 'Succès'),
-        (TYPE_WARNING, 'Avertissement'),
-        (TYPE_ERROR, 'Erreur'),
+        (TYPE_INFO, _("Information")),
+        (TYPE_SUCCESS, _("Succès")),
+        (TYPE_WARNING, _("Avertissement")),
+        (TYPE_ERROR, _("Erreur")),
     ]
 
     # Catégories de notifications
@@ -29,63 +30,63 @@ class Notification(models.Model):
     CATEGORY_SYSTEM = 'system'
 
     CATEGORY_CHOICES = [
-        (CATEGORY_GROUP, 'Groupe'),
-        (CATEGORY_MEMBER, 'Membre'),
-        (CATEGORY_MEETING, 'Rencontre'),
-        (CATEGORY_CONTRIBUTION, 'Cotisation'),
-        (CATEGORY_SYSTEM, 'Système'),
+        (CATEGORY_GROUP, _("Groupe")),
+        (CATEGORY_MEMBER, _("Membre")),
+        (CATEGORY_MEETING, _("Rencontre")),
+        (CATEGORY_CONTRIBUTION, _("Cotisation")),
+        (CATEGORY_SYSTEM, _("Système")),
     ]
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='notifications',
-        verbose_name='Utilisateur'
+        verbose_name=_("Utilisateur")
     )
 
     notification_type = models.CharField(
         max_length=20,
         choices=TYPE_CHOICES,
         default=TYPE_INFO,
-        verbose_name='Type'
+        verbose_name=_("Type")
     )
 
     category = models.CharField(
         max_length=20,
         choices=CATEGORY_CHOICES,
         default=CATEGORY_SYSTEM,
-        verbose_name='Catégorie'
+        verbose_name=_("Catégorie")
     )
 
     title = models.CharField(
         max_length=200,
-        verbose_name='Titre'
+        verbose_name=_("Titre")
     )
 
     message = models.TextField(
-        verbose_name='Message'
+        verbose_name=_("Message")
     )
 
     link = models.URLField(
         blank=True,
         null=True,
-        verbose_name='Lien'
+        verbose_name=_("Lien")
     )
 
     is_read = models.BooleanField(
         default=False,
-        verbose_name='Lu'
+        verbose_name=_("Lu")
     )
 
     created_at = models.DateTimeField(
         auto_now_add=True,
-        verbose_name='Créé le'
+        verbose_name=_("Créé le")
     )
 
     read_at = models.DateTimeField(
         blank=True,
         null=True,
-        verbose_name='Lu le'
+        verbose_name=_("Lu le")
     )
 
     # Métadonnées pour les notifications liées à des objets
@@ -93,18 +94,18 @@ class Notification(models.Model):
         max_length=50,
         blank=True,
         null=True,
-        verbose_name='Modèle lié'
+        verbose_name=_("Modèle lié")
     )
 
     related_object_id = models.PositiveIntegerField(
         blank=True,
         null=True,
-        verbose_name='ID de l\'objet lié'
+        verbose_name=_("ID de l'objet lié")
     )
 
     class Meta:
         verbose_name = 'Notification'
-        verbose_name_plural = 'Notifications'
+        verbose_name_plural = _("Notifications")
         ordering = ['-created_at']
         indexes = [
             models.Index(fields=['user', 'is_read']),
@@ -137,59 +138,59 @@ class NotificationPreference(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='notification_preferences',
-        verbose_name='Utilisateur'
+        verbose_name=_("Utilisateur")
     )
 
     # Préférences par canal
     email_enabled = models.BooleanField(
         default=True,
-        verbose_name='Notifications par email'
+        verbose_name=_("Notifications par email")
     )
 
     in_app_enabled = models.BooleanField(
         default=True,
-        verbose_name='Notifications in-app'
+        verbose_name=_("Notifications in-app")
     )
 
     # Préférences par catégorie
     notify_groups = models.BooleanField(
         default=True,
-        verbose_name='Notifications groupes'
+        verbose_name=_("Notifications groupes")
     )
 
     notify_members = models.BooleanField(
         default=True,
-        verbose_name='Notifications membres'
+        verbose_name=_("Notifications membres")
     )
 
     notify_meetings = models.BooleanField(
         default=True,
-        verbose_name='Notifications rencontres'
+        verbose_name=_("Notifications rencontres")
     )
 
     notify_contributions = models.BooleanField(
         default=True,
-        verbose_name='Notifications cotisations'
+        verbose_name=_("Notifications cotisations")
     )
 
     notify_system = models.BooleanField(
         default=True,
-        verbose_name='Notifications système'
+        verbose_name=_("Notifications système")
     )
 
     created_at = models.DateTimeField(
         auto_now_add=True,
-        verbose_name='Créé le'
+        verbose_name=_("Créé le")
     )
 
     updated_at = models.DateTimeField(
         auto_now=True,
-        verbose_name='Mis à jour le'
+        verbose_name=_("Mis à jour le")
     )
 
     class Meta:
-        verbose_name = 'Préférence de notification'
-        verbose_name_plural = 'Préférences de notification'
+        verbose_name = _("Préférence de notification")
+        verbose_name_plural = _("Préférences de notification")
 
     def __str__(self):
         return f"Préférences de {self.user.username}"

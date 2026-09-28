@@ -6,13 +6,32 @@
     return;
   }
 
+  var locale = document.documentElement.lang || undefined;
+
+  function decimalsOf(raw) {
+    var parts = String(raw).split(".");
+    return parts.length > 1 ? Math.min(parts[1].length, 2) : 0;
+  }
+
+  function render(node, value) {
+    var raw = node.getAttribute("data-target") || "0";
+    var decimals = decimalsOf(raw);
+    var suffix = node.getAttribute("data-suffix") || "";
+    node.textContent = value.toLocaleString(locale, {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals,
+    }) + suffix;
+  }
+
+  function target(node) {
+    var value = Number(node.getAttribute("data-target") || 0);
+    return isNaN(value) ? 0 : value;
+  }
+
   var reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reducedMotion) {
     counters.forEach(function (node) {
-      var target = Number(node.getAttribute("data-target") || 0);
-      var suffix = node.getAttribute("data-suffix") || "";
-      var decimals = String(node.getAttribute("data-target") || "").includes(".") ? 1 : 0;
-      node.textContent = target.toFixed(decimals) + suffix;
+      render(node, target(node));
     });
     return;
   }
@@ -29,12 +48,7 @@
     var eased = easeOutCubic(progress);
 
     counters.forEach(function (node) {
-      var rawTarget = node.getAttribute("data-target") || "0";
-      var target = Number(rawTarget);
-      var suffix = node.getAttribute("data-suffix") || "";
-      var decimals = rawTarget.includes(".") ? 1 : 0;
-      var current = target * eased;
-      node.textContent = current.toFixed(decimals) + suffix;
+      render(node, target(node) * eased);
     });
 
     if (progress < 1) {

@@ -7,8 +7,13 @@ __pycache__
 *.pyo
 *.pyd
 *.sqlite3
+*.sqlite3.*
 .env
 logs
 media
 staticfiles
 certbot
+# Donnees et secrets des clients (serveur multi-clients) et sauvegardes
+clients
+backups
+*.sql.gz

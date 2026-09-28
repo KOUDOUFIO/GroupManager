@@ -1,6 +1,7 @@
 
 import os
 import sys
+from datetime import date
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -109,17 +110,24 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'django_otp',
     'django_otp.plugins.otp_totp',
+    # Codes de secours (a usage unique) de la connexion a deux etapes.
+    'django_otp.plugins.otp_static',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'core.middleware.ApiToggleMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django_otp.middleware.OTPMiddleware',
+    # Apres OTPMiddleware : exige le code a deux etapes des comptes qui l'ont active.
+    'core.middleware.TwoFactorMiddleware',
     'core.middleware.AuditActorMiddleware',
+    'core.subscription.SubscriptionMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -134,9 +142,13 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
+                'django.template.context_processors.i18n',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'core.context_processors.ui_profile',
+                'core.context_processors.ui_modules',
+                'core.context_processors.ui_notifications',
+                'core.subscription.subscription_status',
             ],
         },
     },
@@ -165,11 +177,15 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 LANGUAGE_CODE = 'fr'
+
+# Langues proposees : le francais est la langue source des textes, l'anglais
+# est traduit dans locale/en/. La langue est choisie via le bouton FR | EN
+# (cookie), sinon d'apres le navigateur du visiteur.
 LANGUAGES = [
-    ('fr', 'Français'),
-    ('en', 'English'),
-    ('ar', 'العربية'),
+    ("fr", "Français"),
+    ("en", "English"),
 ]
+LOCALE_PATHS = [BASE_DIR / "locale"]
 
 TIME_ZONE = 'UTC'
 
@@ -180,6 +196,55 @@ USE_TZ = True
 LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/accounts/login/"
+
+
+def _parse_access_until(value: str):
+    """Parse la date de fin d'abonnement (format AAAA-MM-JJ), ou None si vide."""
+    if not value:
+        return None
+    try:
+        return date.fromisoformat(value)
+    except ValueError as exc:
+        raise ImproperlyConfigured(
+            f"KOTIZA_ACCESS_UNTIL doit etre au format AAAA-MM-JJ (recu : {value!r})."
+        ) from exc
+
+
+# Abonnement du client (une installation par client) : apres cette date,
+# seuls les administrateurs gardent l'acces au site. Vide = aucune limite.
+KOTIZA_ACCESS_UNTIL = _parse_access_until(os.environ.get("KOTIZA_ACCESS_UNTIL", "").strip())
+# API REST (/api/) et sa documentation : desactivees par defaut. L'interface
+# web n'en a pas besoin, et l'authentification Basic de l'API ne passe pas
+# par la double authentification (2FA). A activer client par client (=1).
+KOTIZA_API_ENABLED = os.environ.get("KOTIZA_API_ENABLED", "0") == "1"
+# Contact affiche sur la page "abonnement expire" (email, telephone Mobile Money...).
+KOTIZA_BILLING_CONTACT = os.environ.get("KOTIZA_BILLING_CONTACT", "")
+# Adresse qui recoit les demandes de devis de la page vitrine (votre email).
+KOTIZA_SALES_EMAIL = os.environ.get("KOTIZA_SALES_EMAIL", "")
+# Nom affiche dans l'application d'authentification (Google Authenticator...).
+OTP_TOTP_ISSUER = "Kotiza"
+# Devise affichee sur les montants (FCFA au Togo et en zone UEMOA).
+KOTIZA_CURRENCY = os.environ.get("KOTIZA_CURRENCY", "FCFA")
+# Tarifs mensuels affiches sur la page Devis (dans la devise ci-dessus) et
+# duree de l'essai gratuit (= duree par defaut d'un nouveau client).
+KOTIZA_PRICE_STARTER = int(os.environ.get("KOTIZA_PRICE_STARTER", "15000"))
+KOTIZA_PRICE_BUSINESS = int(os.environ.get("KOTIZA_PRICE_BUSINESS", "35000"))
+KOTIZA_TRIAL_DAYS = int(os.environ.get("KOTIZA_TRIAL_DAYS", "30"))
+# Indicatif ajoute aux numeros locaux sans indicatif (228 = Togo).
+KOTIZA_DEFAULT_COUNTRY_CODE = os.environ.get("KOTIZA_DEFAULT_COUNTRY_CODE", "228")
+
+
+
+# Rappels SMS / WhatsApp via Twilio : un canal est actif des que son numero
+# d'expedition est defini. Sans configuration, les messages sont seulement
+# journalises (aucun envoi, aucun cout).
+TWILIO_ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID", "")
+TWILIO_AUTH_TOKEN = os.environ.get("TWILIO_AUTH_TOKEN", "")
+TWILIO_SMS_FROM = os.environ.get("TWILIO_SMS_FROM", "")
+TWILIO_WHATSAPP_FROM = os.environ.get("TWILIO_WHATSAPP_FROM", "")
+# Modele WhatsApp valide par Meta (obligatoire hors fenetre de 24 h), variables :
+# {{1}} nom du membre, {{2}} groupe, {{3}} mois, {{4}} lien de paiement.
+TWILIO_WHATSAPP_TEMPLATE_SID = os.environ.get("TWILIO_WHATSAPP_TEMPLATE_SID", "")
 
 if not DEBUG:
     # nginx termine le HTTPS et transmet en HTTP simple a gunicorn (voir
@@ -216,6 +281,19 @@ else:
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "noreply@kotiza.local")
+
+# Sentry (suivi des erreurs en production) : desactive tant que SENTRY_DSN
+# n'est pas defini.
+SENTRY_DSN = os.environ.get("SENTRY_DSN", "")
+if SENTRY_DSN:
+    import sentry_sdk
+
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        environment=os.environ.get("SENTRY_ENVIRONMENT", "development" if DEBUG else "production"),
+        traces_sample_rate=float(os.environ.get("SENTRY_TRACES_SAMPLE_RATE", "0")),
+        send_default_pii=False,
+    )
 
 STORAGES = {
     "default": {

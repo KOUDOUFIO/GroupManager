@@ -1,29 +1,45 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 
 {% block title %}{{ title }} - Kotiza{% endblock %}
 
 {% block hero %}
 <div>
-  <p class="pill">Formulaire</p>
+  <p class="pill">{% translate "Formulaire" %}</p>
   <h1>{{ title }}</h1>
-  <p class="subtitle">Remplissez les informations et enregistrez.</p>
-</div>
-<div class="hero-actions">
-  {% if list_url %}
-  <a class="btn ghost" href="{{ list_url }}">Retour a la liste</a>
-  {% endif %}
+  <p class="subtitle">{% translate "Remplissez les informations et enregistrez." %}</p>
 </div>
 {% endblock %}
 
 {% block content %}
-<section class="form-card">
-  <form method="post" enctype="multipart/form-data">
+<section class="form-card crud-form-card">
+  <form method="post" enctype="multipart/form-data" class="crud-form" novalidate>
     {% csrf_token %}
-    {{ form.as_p }}
+    {% if form.errors %}
+    <p class="flash flash-error" role="alert">{% translate "Merci de corriger les champs indiqués en rouge." %}</p>
+    {% endif %}
+    {% for error in form.non_field_errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+    {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+
+    <div class="crud-grid">
+      {% for field in form.visible_fields %}
+      <div class="crud-field{% if field.errors %} has-error{% endif %}{% if field.widget_type == 'textarea' or field.widget_type == 'checkboxselectmultiple' %} crud-field-wide{% endif %}{% if field.widget_type == 'checkbox' %} crud-field-check{% endif %}">
+        {% if field.widget_type == 'checkbox' %}
+        <label for="{{ field.id_for_label }}">{{ field }} {{ field.label }}</label>
+        {% else %}
+        <label for="{{ field.id_for_label }}">{{ field.label }}{% if not field.field.required %} <small>{% translate "(facultatif)" %}</small>{% endif %}</label>
+        {{ field }}
+        {% endif %}
+        {% if field.help_text %}<small class="crud-help">{{ field.help_text }}</small>{% endif %}
+        {% for error in field.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+
     <div class="form-actions">
-      <button class="btn primary" type="submit">Enregistrer</button>
+      <button class="btn primary" type="submit">{% translate "Enregistrer" %}</button>
       {% if list_url %}
-      <a class="btn ghost" href="{{ list_url }}">Annuler</a>
+      <a class="btn ghost" href="{{ list_url }}">{% translate "Annuler" %}</a>
       {% endif %}
     </div>
   </form>

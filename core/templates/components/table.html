@@ -1,3 +1,4 @@
+{% load i18n %}
 {% comment %}
 Composant Table réutilisable
 Usage:
@@ -26,7 +27,7 @@ Usage:
       {% empty %}
       <tr>
         <td colspan="{{ headers|length }}" class="table-empty">
-          {% if empty_message %}{{ empty_message }}{% else %}Aucune donnée disponible{% endif %}
+          {% if empty_message %}{{ empty_message }}{% else %}{% translate "Aucune donnée disponible" %}{% endif %}
         </td>
       </tr>
       {% endfor %}

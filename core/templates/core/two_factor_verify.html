@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+{% load i18n static %}
+
+{% block title %}{% translate "Vérification - Kotiza" %}{% endblock %}
+
+{% block body_class %}page-auth{% endblock %}
+
+{% block hero %}{% endblock %}
+
+{% block content %}
+<section class="auth-wrap">
+  <div class="login-card auth-card">
+    <div class="login-header">
+      <img class="auth-logo" src="{% static 'core/img/logo.svg' %}" alt="" width="64" height="64" />
+      <h1>{% translate "Vérification" %}</h1>
+      <p>{% translate "Saisissez le code à 6 chiffres affiché dans votre application d'authentification." %}</p>
+    </div>
+    <form method="post" class="login-form" novalidate>
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next }}" />
+      {% if form.errors %}<p class="flash flash-error" role="alert">{% for e in form.code.errors %}{{ e }}{% endfor %}</p>{% endif %}
+      <div class="form-group">
+        <label for="{{ form.code.id_for_label }}">{{ form.code.label }}</label>
+        {{ form.code }}
+      </div>
+      <button class="btn primary btn-block" type="submit">{% translate "Valider" %}</button>
+      <p class="muted auth-hint">{% translate "Plus de téléphone ? Saisissez un de vos codes de secours à 8 chiffres." %}</p>
+    </form>
+    <div class="login-footer">
+      <form method="post" action="/accounts/logout/">{% csrf_token %}<button class="link link-button" type="submit">{% translate "Se déconnecter" %}</button></form>
+    </div>
+  </div>
+</section>
+{% endblock %}

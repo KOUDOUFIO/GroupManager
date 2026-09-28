@@ -1,11 +1,12 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 
-{% block title %}Acces refuse{% endblock %}
+{% block title %}{% translate "Accès refusé" %}{% endblock %}
 
 {% block content %}
 <section class="form-card">
-  <h2>403 - Acces refuse</h2>
-  <p>Vous n'avez pas la permission d'acceder a cette ressource.</p>
-  <a class="btn ghost" href="/">Retour a l'accueil</a>
+  <h2>{% translate "403 - Accès refusé" %}</h2>
+  <p>{% translate "Vous n'avez pas la permission d'accéder à cette ressource." %}</p>
+  <a class="btn ghost" href="/">{% translate "Retour à l'accueil" %}</a>
 </section>
 {% endblock %}

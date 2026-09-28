@@ -86,9 +86,9 @@ class EventAdmin(admin.ModelAdmin):
 @admin.register(models.ProposalRequest)
 class ProposalRequestAdmin(admin.ModelAdmin):
     """Interface d'administration pour les demandes de devis."""
-    list_display = ("name", "email", "company", "organization_type", "created_at")
-    search_fields = ("name", "email", "company", "message")
-    list_filter = ("organization_type", "created_at")
+    list_display = ("name", "email", "phone", "company", "organization_type", "plan", "created_at")
+    search_fields = ("name", "email", "phone", "company", "message")
+    list_filter = ("organization_type", "plan", "created_at")
     readonly_fields = ("created_at",)
 
 
@@ -111,3 +111,12 @@ class AuditLogAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         """Empêche la suppression de logs d'audit."""
         return False
+
+
+@admin.register(models.Testimonial)
+class TestimonialAdmin(admin.ModelAdmin):
+    """Témoignages clients : publiés seulement avec l'accord écrit du client."""
+    list_display = ("author_name", "organization", "consent_given", "is_published", "sort_order")
+    list_editable = ("is_published", "sort_order")
+    list_filter = ("is_published", "consent_given")
+    search_fields = ("author_name", "organization", "quote")

@@ -11,6 +11,7 @@ from reportlab.lib.pagesizes import landscape, letter
 from reportlab.pdfgen import canvas
 
 from .. import models
+from django.utils.translation import gettext
 
 
 def _pdf_response(filename):
@@ -87,7 +88,7 @@ def export_contributions_csv(request):
     response = HttpResponse(content_type="text/csv")
     response["Content-Disposition"] = "attachment; filename=cotisations.csv"
     writer = csv.writer(response)
-    writer.writerow(["Membre", "Groupe", "Type", "Methode", "Statut", "Montant", "Date"])
+    writer.writerow([gettext("Membre"), gettext("Groupe"), gettext("Type"), gettext("Méthode"), gettext("Statut"), gettext("Montant"), gettext("Date")])
     queryset = models.Contribution.objects.select_related("member", "group").order_by("-paid_at")
     group_id, start_date, end_date = _parse_filters(request)
     if group_id:
@@ -124,8 +125,8 @@ def export_contributions_xlsx(request):
     """
     workbook = Workbook()
     sheet = workbook.active
-    sheet.title = "Cotisations"
-    sheet.append(["Membre", "Groupe", "Type", "Methode", "Statut", "Montant", "Date"])
+    sheet.title = gettext("Cotisations")
+    sheet.append([gettext("Membre"), gettext("Groupe"), gettext("Type"), gettext("Méthode"), gettext("Statut"), gettext("Montant"), gettext("Date")])
     queryset = models.Contribution.objects.select_related("member", "group").order_by("-paid_at")
     group_id, start_date, end_date = _parse_filters(request)
     if group_id:
@@ -167,16 +168,16 @@ def export_contributions_pdf(request):
     response = _pdf_response("cotisations.pdf")
     pdf = canvas.Canvas(response, pagesize=landscape(letter))
     pdf.setFont("Helvetica-Bold", 14)
-    pdf.drawString(40, 570, "Rapport des cotisations")
+    pdf.drawString(40, 570, gettext("Rapport des cotisations"))
     pdf.setFont("Helvetica", 10)
     y = 540
-    pdf.drawString(40, y, "Membre")
-    pdf.drawString(220, y, "Groupe")
-    pdf.drawString(340, y, "Type")
-    pdf.drawString(430, y, "Methode")
-    pdf.drawString(540, y, "Statut")
-    pdf.drawString(650, y, "Montant")
-    pdf.drawString(720, y, "Date")
+    pdf.drawString(40, y, gettext("Membre"))
+    pdf.drawString(220, y, gettext("Groupe"))
+    pdf.drawString(340, y, gettext("Type"))
+    pdf.drawString(430, y, gettext("Méthode"))
+    pdf.drawString(540, y, gettext("Statut"))
+    pdf.drawString(650, y, gettext("Montant"))
+    pdf.drawString(720, y, gettext("Date"))
     y -= 20
     queryset = models.Contribution.objects.select_related("member", "group").order_by("-paid_at")
     group_id, start_date, end_date = _parse_filters(request)
@@ -218,7 +219,7 @@ def export_meeting_entries_csv(request):
     response = HttpResponse(content_type="text/csv")
     response["Content-Disposition"] = "attachment; filename=presences.csv"
     writer = csv.writer(response)
-    writer.writerow(["Rencontre", "Groupe", "Membre", "Statut", "Motif", "Date"])
+    writer.writerow([gettext("Rencontre"), gettext("Groupe"), gettext("Membre"), gettext("Statut"), gettext("Motif"), gettext("Date")])
     queryset = models.MeetingEntry.objects.select_related("meeting", "meeting__group", "member").order_by(
         "-recorded_at"
     )
@@ -232,7 +233,7 @@ def export_meeting_entries_csv(request):
     for item in queryset:
         writer.writerow(
             [
-                _safe_spreadsheet_cell(item.meeting.title or "Rencontre"),
+                _safe_spreadsheet_cell(item.meeting.title or gettext("Rencontre")),
                 _safe_spreadsheet_cell(item.meeting.group.name),
                 _safe_spreadsheet_cell(item.member.full_name),
                 _safe_spreadsheet_cell(item.get_status_display()),
@@ -256,8 +257,8 @@ def export_meeting_entries_xlsx(request):
     """
     workbook = Workbook()
     sheet = workbook.active
-    sheet.title = "Presences"
-    sheet.append(["Rencontre", "Groupe", "Membre", "Statut", "Motif", "Date"])
+    sheet.title = gettext("Présences")
+    sheet.append([gettext("Rencontre"), gettext("Groupe"), gettext("Membre"), gettext("Statut"), gettext("Motif"), gettext("Date")])
     queryset = models.MeetingEntry.objects.select_related("meeting", "meeting__group", "member").order_by(
         "-recorded_at"
     )
@@ -271,7 +272,7 @@ def export_meeting_entries_xlsx(request):
     for item in queryset:
         sheet.append(
             [
-                _safe_spreadsheet_cell(item.meeting.title or "Rencontre"),
+                _safe_spreadsheet_cell(item.meeting.title or gettext("Rencontre")),
                 _safe_spreadsheet_cell(item.meeting.group.name),
                 _safe_spreadsheet_cell(item.member.full_name),
                 _safe_spreadsheet_cell(item.get_status_display()),
@@ -300,14 +301,14 @@ def export_meeting_entries_pdf(request):
     response = _pdf_response("presences.pdf")
     pdf = canvas.Canvas(response)
     pdf.setFont("Helvetica-Bold", 14)
-    pdf.drawString(40, 800, "Rapport des presences")
+    pdf.drawString(40, 800, gettext("Rapport des présences"))
     pdf.setFont("Helvetica", 10)
     y = 770
-    pdf.drawString(40, y, "Rencontre")
-    pdf.drawString(170, y, "Groupe")
-    pdf.drawString(280, y, "Membre")
-    pdf.drawString(410, y, "Statut")
-    pdf.drawString(470, y, "Date")
+    pdf.drawString(40, y, gettext("Rencontre"))
+    pdf.drawString(170, y, gettext("Groupe"))
+    pdf.drawString(280, y, gettext("Membre"))
+    pdf.drawString(410, y, gettext("Statut"))
+    pdf.drawString(470, y, gettext("Date"))
     y -= 20
     queryset = models.MeetingEntry.objects.select_related("meeting", "meeting__group", "member").order_by(
         "-recorded_at"
@@ -324,7 +325,7 @@ def export_meeting_entries_pdf(request):
             pdf.showPage()
             pdf.setFont("Helvetica", 10)
             y = 800
-        pdf.drawString(40, y, item.meeting.title or "Rencontre")
+        pdf.drawString(40, y, item.meeting.title or gettext("Rencontre"))
         pdf.drawString(170, y, item.meeting.group.name)
         pdf.drawString(280, y, item.member.full_name)
         pdf.drawString(410, y, item.get_status_display())

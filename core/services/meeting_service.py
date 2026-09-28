@@ -8,6 +8,7 @@ from django.utils import timezone
 
 from ..models import Meeting, MeetingEntry, Member, Group
 from ..audit import log_action
+from django.utils.translation import gettext
 
 
 class MeetingService:
@@ -234,7 +235,7 @@ class MeetingService:
             from .member_service import MemberService
             meeting = Meeting.objects.get(pk=meeting_id)
             if not MemberService.validate_member_group_membership(member_id, meeting.group_id):
-                raise ValidationError("Le membre doit appartenir au groupe de la rencontre.")
+                raise ValidationError(gettext("Le membre doit appartenir au groupe de la rencontre."))
             
             entry = MeetingEntry.objects.create(
                 meeting_id=meeting_id,

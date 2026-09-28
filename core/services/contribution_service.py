@@ -12,6 +12,7 @@ from django.utils import timezone
 
 from ..models import Contribution, Member, Group
 from ..audit import log_action
+from django.utils.translation import gettext
 
 
 class ContributionService:
@@ -105,15 +106,15 @@ class ContributionService:
             # Validation: le membre doit appartenir au groupe
             from .member_service import MemberService
             if not MemberService.validate_member_group_membership(member_id, group_id):
-                raise ValidationError("Le membre doit appartenir au groupe de la cotisation.")
+                raise ValidationError(gettext("Le membre doit appartenir au groupe de la cotisation."))
             
             # Validation: le montant doit être positif
             try:
                 amount_float = float(amount)
                 if amount_float <= 0:
-                    raise ValidationError("Le montant doit être positif.")
+                    raise ValidationError(gettext("Le montant doit être positif."))
             except ValueError:
-                raise ValidationError("Le montant doit être un nombre valide.")
+                raise ValidationError(gettext("Le montant doit être un nombre valide."))
             
             contribution = Contribution.objects.create(
                 member_id=member_id,
@@ -170,9 +171,9 @@ class ContributionService:
                 try:
                     amount_float = float(amount)
                     if amount_float <= 0:
-                        raise ValidationError("Le montant doit être positif.")
+                        raise ValidationError(gettext("Le montant doit être positif."))
                 except ValueError:
-                    raise ValidationError("Le montant doit être un nombre valide.")
+                    raise ValidationError(gettext("Le montant doit être un nombre valide."))
                 
                 changes['amount'] = {'old': contribution.amount, 'new': amount}
                 contribution.amount = amount

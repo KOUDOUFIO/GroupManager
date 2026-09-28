@@ -1,5 +1,7 @@
 # Guide de déploiement (VPS + Docker)
 
+> Plusieurs organisations clientes sur le même serveur ? Voir `DEPLOYMENT-CLIENTS.md`.
+
 Ce guide suppose un déploiement sur un VPS (OVH, Hetzner, DigitalOcean...) avec Docker. Tout ce qui peut être automatisé l'est déjà dans ce dépôt (`docker-compose.yml`, nginx, certbot, sauvegardes). Les étapes marquées **[VOUS]** sont des actions que vous seul pouvez faire (paiement, compte externe, DNS).
 
 ## 1. Prérequis — actions de votre côté

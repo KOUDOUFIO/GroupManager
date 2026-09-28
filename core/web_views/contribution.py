@@ -7,24 +7,25 @@ from django.utils.dateparse import parse_date
 
 from .. import forms, models
 from .mixins import BaseCreateView, BaseDeleteView, BaseUpdateView, SearchableListView
+from django.utils.translation import gettext_lazy as _
 
 
 class ContributionListView(SearchableListView):
     """ListView pour les cotisations avec filtres avancés."""
     model = models.Contribution
     template_name = "core/crud_list.html"
-    title = "Cotisations"
+    title = _("Cotisations")
     create_url_name = "contribution_create"
     base_url_name = "contribution"
-    hero_image = "core/img/modules/cotisations.jpg"
+    hero_image = "core/img/modules/cotisations.svg"
     list_columns = [
-        {"label": "Membre", "accessor": "member.full_name"},
-        {"label": "Groupe", "accessor": "group.name"},
-        {"label": "Type", "accessor": "get_contribution_type_display"},
-        {"label": "Methode", "accessor": "get_payment_method_display"},
-        {"label": "Statut", "accessor": "get_payment_status_display"},
-        {"label": "Montant", "accessor": "amount"},
-        {"label": "Date", "accessor": "paid_at"},
+        {"label": _("Membre"), "accessor": "member.full_name"},
+        {"label": _("Groupe"), "accessor": "group.name"},
+        {"label": _("Type"), "accessor": "get_contribution_type_display"},
+        {"label": _("Méthode"), "accessor": "get_payment_method_display"},
+        {"label": _("Statut"), "accessor": "payment_status", "format": "status"},
+        {"label": _("Montant"), "accessor": "amount", "format": "money"},
+        {"label": _("Date"), "accessor": "paid_at"},
     ]
     search_fields = ["member__full_name", "group__name", "contribution_type", "payment_method", "payment_status"]
     select_related_fields = ("member", "group")
@@ -65,7 +66,7 @@ class ContributionCreateView(BaseCreateView):
     model = models.Contribution
     form_class = forms.ContributionForm
     template_name = "core/crud_form.html"
-    title = "Ajouter une cotisation"
+    title = _("Ajouter une cotisation")
     success_url = reverse_lazy("contribution_list")
     list_url_name = "contribution_list"
     base_url_name = "contribution"
@@ -76,7 +77,7 @@ class ContributionUpdateView(BaseUpdateView):
     model = models.Contribution
     form_class = forms.ContributionForm
     template_name = "core/crud_form.html"
-    title = "Modifier une cotisation"
+    title = _("Modifier une cotisation")
     success_url = reverse_lazy("contribution_list")
     list_url_name = "contribution_list"
     base_url_name = "contribution"
@@ -86,7 +87,7 @@ class ContributionDeleteView(BaseDeleteView):
     """Vue de suppression pour les cotisations."""
     model = models.Contribution
     template_name = "core/crud_confirm_delete.html"
-    title = "Supprimer une cotisation"
+    title = _("Supprimer une cotisation")
     success_url = reverse_lazy("contribution_list")
     list_url_name = "contribution_list"
     base_url_name = "contribution"
