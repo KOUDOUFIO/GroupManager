@@ -18,6 +18,8 @@ if [ -n "$REDIS_HOST" ]; then
 fi
 
 python manage.py migrate
+# Roles et permissions a jour a chaque demarrage (sans effet si deja corrects).
+python manage.py seed_roles
 python manage.py collectstatic --noinput
 
 exec gunicorn kotiza.wsgi:application \

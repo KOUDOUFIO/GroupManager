@@ -24,10 +24,14 @@ class MemberListView(SearchableListView):
     prefetch_related_fields = ("groups",)
 
 
+# Le compte de connexion se gere depuis la page "Acces" du membre, pas ici.
+MEMBER_FORM_FIELDS = ["full_name", "email", "phone", "address", "groups"]
+
+
 class MemberCreateView(BaseCreateView):
     """Vue de création pour les membres."""
     model = models.Member
-    fields = "__all__"
+    fields = MEMBER_FORM_FIELDS
     template_name = "core/crud_form.html"
     title = _("Ajouter un membre")
     success_url = reverse_lazy("member_list")
@@ -38,7 +42,7 @@ class MemberCreateView(BaseCreateView):
 class MemberUpdateView(BaseUpdateView):
     """Vue de modification pour les membres."""
     model = models.Member
-    fields = "__all__"
+    fields = MEMBER_FORM_FIELDS
     template_name = "core/crud_form.html"
     title = _("Modifier un membre")
     success_url = reverse_lazy("member_list")

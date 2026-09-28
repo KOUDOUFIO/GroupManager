@@ -1,6 +1,7 @@
 
 from django.contrib.auth.models import Group, Permission
 from django.core.management.base import BaseCommand
+from django.db.models import Q
 
 
 class Command(BaseCommand):
@@ -17,8 +18,9 @@ class Command(BaseCommand):
         """
         core_perms = Permission.objects.filter(content_type__app_label="core")
         view_perms = core_perms.filter(codename__startswith="view_")
+        # Le gestionnaire ajoute, modifie et consulte, mais ne supprime pas.
         manager_perms = core_perms.filter(
-            codename__startswith=("add_", "change_", "view_")
+            Q(codename__startswith="add_") | Q(codename__startswith="change_") | Q(codename__startswith="view_")
         )
 
         roles = [

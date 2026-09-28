@@ -68,9 +68,13 @@ class Command(BaseCommand):
         get_user_model().objects.filter(username__in=["demo-tresorier", "demo-membre"]).delete()
 
     def _create_organisation(self):
+        today = timezone.localdate()
+        first_month = (today.replace(day=1) - timedelta(days=5 * 28)).replace(day=1)
         group = Group.objects.create(
             name=f"Tontine Espoir de Lomé{DEMO_SUFFIX}",
             description="Tontine mensuelle de 12 membres : 5 000 FCFA par mois, réunion le samedi.",
+            monthly_due=MONTHLY_DUE,
+            dues_start=first_month,
         )
         members = []
         for name, phone in MEMBERS:

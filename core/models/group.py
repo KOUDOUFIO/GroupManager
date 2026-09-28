@@ -20,6 +20,15 @@ class Group(models.Model):
         null=True,
         blank=True,
         related_name="managed_groups", verbose_name=_("Responsable"))
+    # Suivi des retards : montant attendu chaque mois par membre, a partir d'une date.
+    monthly_due = models.DecimalField(
+        _("Cotisation mensuelle attendue"), max_digits=10, decimal_places=2, null=True, blank=True,
+        help_text=_("Montant que chaque membre doit verser par mois. Vide = pas de suivi des retards."),
+    )
+    dues_start = models.DateField(
+        _("Début des cotisations"), null=True, blank=True,
+        help_text=_("Premier mois dû. Vide = date de création du groupe."),
+    )
 
     class Meta:
         verbose_name = _("Groupe")

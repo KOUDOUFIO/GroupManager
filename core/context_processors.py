@@ -69,7 +69,8 @@ MODULE_SECTIONS = (
         ("attendance", gettext_lazy("Présences"), gettext_lazy("Présents, absents, retards et permissions"), "/presences/", "check", "emerald", "core.view_meetingentry"),
     )),
     (gettext_lazy("Finance"), (
-        ("contributions", gettext_lazy("Cotisations"), gettext_lazy("Paiements, reçus et exports"), "/cotisations/", "wallet", "gold", "core.view_contribution"),
+        ("contributions", gettext_lazy("Cotisations"), gettext_lazy("Paiements, reçus PDF et exports"), "/cotisations/", "wallet", "gold", "core.view_contribution"),
+        ("dues", gettext_lazy("Suivi des cotisations"), gettext_lazy("Qui est à jour, qui est en retard"), "/suivi-cotisations/", "trending", "orange", "core.view_contribution"),
     )),
     (gettext_lazy("Activités"), (
         ("events", gettext_lazy("Événements"), gettext_lazy("Agenda des événements à venir"), "/evenements/", "flag", "orange", "core.view_event"),
@@ -78,6 +79,8 @@ MODULE_SECTIONS = (
     )),
     (gettext_lazy("Outils"), (
         ("search", gettext_lazy("Recherche"), gettext_lazy("Retrouvez tout en un seul champ"), "/recherche/", "search", "teal", "all"),
+        ("notifications", gettext_lazy("Notifications"), gettext_lazy("Rappels et informations reçus"), "/notifications/", "bell", "sky", "all"),
+        ("security", gettext_lazy("Sécurité du compte"), gettext_lazy("Mot de passe et connexion à deux étapes"), "/securite/", "lock", "slate", "all"),
     )),
 )
 
@@ -125,3 +128,13 @@ def ui_modules(request):
         if items:
             sections.append({"label": section_label, "modules": items})
     return {"ui_module_sections": sections}
+
+
+def ui_notifications(request):
+    """Nombre de notifications non lues (cloche de l'en-tete)."""
+    user = getattr(request, "user", None)
+    if not user or not user.is_authenticated:
+        return {"ui_unread_notifications": 0}
+    from .models import Notification
+
+    return {"ui_unread_notifications": Notification.objects.filter(user=user, is_read=False).count()}

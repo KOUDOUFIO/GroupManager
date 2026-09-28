@@ -1,0 +1,52 @@
+{% extends 'core/base.html' %}
+{% load i18n core_extras %}
+
+{% block title %}{% translate "Notifications - Kotiza" %}{% endblock %}
+
+{% block hero %}
+<div>
+  <p class="pill">{% translate "Notifications" %}</p>
+  <h1>{% translate "Vos notifications" %}</h1>
+  <p class="subtitle">{% translate "Rappels de cotisation et informations de votre organisation." %}</p>
+</div>
+{% if ui_unread_notifications %}
+<form method="post" class="hero-actions">
+  {% csrf_token %}
+  <button class="btn ghost" type="submit">{% icon "check" 18 %}{% translate "Tout marquer comme lu" %}</button>
+</form>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% if notifications %}
+<section class="feed-card">
+  <ul class="feed">
+    {% for n in notifications %}
+    <li class="feed-row notif-row{% if not n.is_read %} is-unread{% endif %}">
+      <span class="module-icon tone-{% if n.notification_type == 'warning' %}amber{% elif n.notification_type == 'error' %}orange{% elif n.notification_type == 'success' %}green{% else %}sky{% endif %}">
+        {% if n.category == 'contribution' %}{% icon "wallet" 18 %}{% elif n.category == 'meeting' %}{% icon "calendar" 18 %}{% else %}{% icon "flag" 18 %}{% endif %}
+      </span>
+      <span class="feed-main">
+        <strong>{{ n.title }}</strong>
+        <small class="notif-message">{{ n.message|linebreaksbr }}</small>
+      </span>
+      <span class="feed-side"><small>{{ n.created_at|date:"d/m/Y H:i" }}</small>{% if not n.is_read %}<span class="status-badge status-info">{% translate "Nouveau" %}</span>{% endif %}</span>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% if is_paginated %}
+<div class="pagination">
+  {% if page_obj.has_previous %}<a class="link" href="?page={{ page_obj.previous_page_number }}">{% translate "Précédent" %}</a>{% endif %}
+  <span>{% blocktranslate with number=page_obj.number total=page_obj.paginator.num_pages %}Page {{ number }} / {{ total }}{% endblocktranslate %}</span>
+  {% if page_obj.has_next %}<a class="link" href="?page={{ page_obj.next_page_number }}">{% translate "Suivant" %}</a>{% endif %}
+</div>
+{% endif %}
+{% else %}
+<section class="empty-panel">
+  <span class="module-icon tone-sky">{% icon "bell" 22 %}</span>
+  <h3>{% translate "Aucune notification" %}</h3>
+  <p>{% translate "Vous serez prévenu ici des rappels de cotisation." %}</p>
+</section>
+{% endif %}
+{% endblock %}

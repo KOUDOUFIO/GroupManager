@@ -4775,3 +4775,272 @@ html.modules-open {
     height: 36px;
   }
 }
+
+/* ============================================
+   Cloche, compte, acces membre, suivi des dues, securite
+   ============================================ */
+.bell-btn {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--color-gray-200);
+  background: #fff;
+  color: var(--color-gray-700);
+  text-decoration: none;
+}
+
+.bell-btn:hover {
+  color: var(--color-primary-700);
+  background: var(--color-primary-50);
+}
+
+.bell-count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 19px;
+  height: 19px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #dc2626;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 19px;
+  text-align: center;
+  box-shadow: 0 0 0 2px #fff;
+}
+
+a.user-pill {
+  text-decoration: none;
+}
+
+a.user-pill:hover {
+  border-color: var(--color-primary-300);
+}
+
+.muted {
+  color: var(--color-gray-500);
+}
+
+.table-note {
+  margin: 14px 4px 0;
+  font-size: 0.85rem;
+  color: var(--color-gray-500);
+}
+
+.danger-btn {
+  color: #b91c1c;
+}
+
+.danger-btn:hover {
+  border-color: #fecaca;
+  background: var(--color-danger-light);
+}
+
+.link-button {
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.receipt-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.notif-row.is-unread {
+  background: var(--color-primary-50);
+  border-radius: 12px;
+}
+
+.notif-message {
+  white-space: normal !important;
+}
+
+.dues-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.dues-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid var(--color-gray-200);
+}
+
+.dues-item.is-late {
+  border-color: #fed7aa;
+  background: #fff7ed;
+}
+
+.dues-item .module-icon {
+  width: 38px;
+  height: 38px;
+}
+
+.access-card,
+.security-card {
+  max-width: 720px;
+  border: 1px solid var(--color-gray-200);
+}
+
+.access-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.access-status p {
+  margin: 0;
+}
+
+.access-done {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.access-done h2 {
+  margin: 0;
+}
+
+.access-done p {
+  margin: 0;
+  max-width: 520px;
+  color: var(--color-gray-600);
+}
+
+.access-summary {
+  display: grid;
+  gap: 10px;
+  min-width: 280px;
+  margin: 6px 0;
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--color-gray-50);
+  text-align: left;
+}
+
+.access-summary dt {
+  font-size: 0.8rem;
+  color: var(--color-gray-500);
+}
+
+.access-summary dd {
+  margin: 2px 0 0;
+  font-weight: 700;
+}
+
+.access-secret {
+  font-family: 'Fira Code', ui-monospace, monospace;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  color: var(--color-primary-800);
+}
+
+.security-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.security-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.security-head h2 {
+  margin: 0 0 4px;
+  font-size: 1.15rem;
+}
+
+.security-head p {
+  margin: 0;
+  color: var(--color-gray-500);
+}
+
+.security-head .status-badge {
+  margin-left: auto;
+}
+
+.setup-steps {
+  margin: 0 0 16px;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.qr-box {
+  width: 200px;
+  margin: 12px 0 4px;
+  padding: 8px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid var(--color-gray-200);
+}
+
+.qr-box svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.code-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.code-form input,
+.auth-card input[name="code"] {
+  width: 180px;
+  height: 48px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid var(--color-gray-300);
+  font: inherit;
+  font-size: 1.3rem;
+  letter-spacing: 0.3em;
+  text-align: center;
+}
+
+.auth-card input[name="code"] {
+  width: 100%;
+}
+
+@media (max-width: 720px) {
+  .bell-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .security-head {
+    flex-wrap: wrap;
+  }
+}
+
+.security-card form,
+.access-card form.form-actions {
+  align-items: flex-start;
+}

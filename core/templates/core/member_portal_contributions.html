@@ -7,19 +7,13 @@
 <div>
   <p class="pill">{% translate "Mon espace" %}</p>
   <h1>{% translate "Mes cotisations" %}</h1>
-  <p class="subtitle">{% translate "Historique complet de vos paiements enregistrés." %}</p>
-</div>
-<div class="hero-actions">
-  <a class="btn ghost" href="{% url 'member_portal' %}">{% translate "Retour au tableau de bord" %}</a>
+  <p class="subtitle">{% translate "Historique complet de vos paiements, avec un reçu PDF pour chaque cotisation confirmée." %}</p>
 </div>
 {% endblock %}
 
 {% block content %}
-{% if request.GET.paiement == "en_attente" %}
-<p class="pill">{% translate "Paiement initié, en attente de confirmation. Le statut sera mis à jour automatiquement." %}</p>
-{% endif %}
 <section class="table-card">
-  <table>
+  <table class="responsive-table">
     <thead>
       <tr>
         <th>{% translate "Date" %}</th>
@@ -28,24 +22,26 @@
         <th>{% translate "Méthode" %}</th>
         <th>{% translate "Statut" %}</th>
         <th>{% translate "Montant" %}</th>
-        <th>{% translate "Notes" %}</th>
+        <th>{% translate "Reçu" %}</th>
       </tr>
     </thead>
     <tbody>
       {% for c in object_list %}
       <tr>
-        <td>{{ c.paid_at }}</td>
-        <td>{{ c.group.name }}</td>
-        <td>{{ c.get_contribution_type_display }}</td>
-        <td>{{ c.get_payment_method_display }}</td>
-        <td>{{ c.get_payment_status_display }}</td>
-        <td>{{ c.amount|money }}</td>
-        <td>{{ c.notes }}</td>
+        <td class="cell-main">{{ c.paid_at|date:"j F Y" }}</td>
+        <td data-label="{% translate "Groupe" %}">{{ c.group.name }}</td>
+        <td data-label="{% translate "Type" %}">{{ c.get_contribution_type_display }}</td>
+        <td data-label="{% translate "Méthode" %}">{{ c.get_payment_method_display }}</td>
+        <td data-label="{% translate "Statut" %}">{{ c.payment_status|cell:"status" }}</td>
+        <td data-label="{% translate "Montant" %}"><b>{{ c.amount|money }}</b></td>
+        <td data-label="{% translate "Reçu" %}">
+          {% if c.payment_status == "confirmed" %}
+          <a class="link receipt-link" href="{% url 'contribution_receipt' c.pk %}">{% icon "receipt" 16 %}{% translate "Télécharger" %}</a>
+          {% else %}—{% endif %}
+        </td>
       </tr>
       {% empty %}
-      <tr>
-        <td colspan="7">{% translate "Aucune cotisation enregistrée." %}</td>
-      </tr>
+      <tr><td colspan="7" class="empty-state">{% translate "Aucune cotisation enregistrée." %}</td></tr>
       {% endfor %}
     </tbody>
   </table>

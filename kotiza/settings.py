@@ -122,6 +122,8 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django_otp.middleware.OTPMiddleware',
+    # Apres OTPMiddleware : exige le code a deux etapes des comptes qui l'ont active.
+    'core.middleware.TwoFactorMiddleware',
     'core.middleware.AuditActorMiddleware',
     'core.subscription.SubscriptionMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -143,6 +145,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'core.context_processors.ui_profile',
                 'core.context_processors.ui_modules',
+                'core.context_processors.ui_notifications',
                 'core.subscription.subscription_status',
             ],
         },
@@ -216,6 +219,8 @@ KOTIZA_API_ENABLED = os.environ.get("KOTIZA_API_ENABLED", "0") == "1"
 KOTIZA_BILLING_CONTACT = os.environ.get("KOTIZA_BILLING_CONTACT", "")
 # Adresse qui recoit les demandes de devis de la page vitrine (votre email).
 KOTIZA_SALES_EMAIL = os.environ.get("KOTIZA_SALES_EMAIL", "")
+# Nom affiche dans l'application d'authentification (Google Authenticator...).
+OTP_TOTP_ISSUER = "Kotiza"
 # Devise affichee sur les montants (FCFA au Togo et en zone UEMOA).
 KOTIZA_CURRENCY = os.environ.get("KOTIZA_CURRENCY", "FCFA")
 # Tarifs mensuels affiches sur la page Devis (dans la devise ci-dessus) et

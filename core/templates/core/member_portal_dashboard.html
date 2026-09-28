@@ -33,6 +33,24 @@
   </div>
 </section>
 
+{% if my_dues %}
+<section class="dues-strip">
+  {% for row in my_dues %}
+  <div class="dues-item{% if row.is_late %} is-late{% endif %}">
+    <span class="module-icon tone-{% if row.is_late %}orange{% else %}green{% endif %}">{% if row.is_late %}{% icon "trending" 18 %}{% else %}{% icon "check" 18 %}{% endif %}</span>
+    <span class="feed-main">
+      <strong>{{ row.group.name }}</strong>
+      {% if row.is_late %}
+      <small>{% blocktranslate with amount=row.remaining|money count months=row.months_late %}Reste à payer : {{ amount }} ({{ months }} mois){% plural %}Reste à payer : {{ amount }} ({{ months }} mois){% endblocktranslate %}</small>
+      {% else %}
+      <small>{% translate "Vous êtes à jour de vos cotisations." %}</small>
+      {% endif %}
+    </span>
+  </div>
+  {% endfor %}
+</section>
+{% endif %}
+
 <section class="feed-grid">
   <div class="feed-card">
     <div class="feed-head">

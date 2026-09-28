@@ -54,10 +54,14 @@
           <button type="submit" name="language" value="en" class="lang-btn{% if CURRENT_LANG == 'en' %} active{% endif %}" {% if CURRENT_LANG == 'en' %}aria-current="true"{% endif %}>EN</button>
         </form>
         {% if user.is_authenticated %}
-        <span class="user-pill">
+        <a class="bell-btn" href="/notifications/" aria-label="{% translate "Notifications" %}{% if ui_unread_notifications %} ({{ ui_unread_notifications }}){% endif %}" title="{% translate "Notifications" %}">
+          {% icon "bell" 19 %}
+          {% if ui_unread_notifications %}<span class="bell-count">{% if ui_unread_notifications > 9 %}9+{% else %}{{ ui_unread_notifications }}{% endif %}</span>{% endif %}
+        </a>
+        <a class="user-pill" href="/securite/" title="{% translate "Sécurité du compte" %}">
           <span class="user-avatar" aria-hidden="true">{{ user.get_username|first|upper }}</span>
           <span class="user-meta"><strong>{{ user.get_username }}</strong><small>{{ ui_role_label }}</small></span>
-        </span>
+        </a>
         <form method="post" action="/accounts/logout/" class="logout-form">
           {% csrf_token %}
           <button type="submit" class="btn ghost logout-btn" title="{% translate "Se déconnecter" %}">{% icon "logout" 16 %}<span>{% translate "Se déconnecter" %}</span></button>

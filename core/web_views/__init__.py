@@ -29,6 +29,11 @@ from .member_portal import (
     MemberContributionsListView,
     MemberPortalDashboardView,
 )
+from .access import MemberAccessView
+from .dues import DuesView
+from .notifications import NotificationListView
+from .receipts import contribution_receipt
+from .security import SecurityView, TwoFactorVerifyView
 from .group import GroupCreateView, GroupDeleteView, GroupListView, GroupUpdateView
 from .organ import OrganCreateView, OrganDeleteView, OrganListView, OrganUpdateView
 from .member import MemberCreateView, MemberDeleteView, MemberListView, MemberUpdateView

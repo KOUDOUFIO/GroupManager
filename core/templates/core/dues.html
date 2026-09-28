@@ -1,0 +1,98 @@
+{% extends 'core/base.html' %}
+{% load i18n core_extras %}
+
+{% block title %}{% translate "Suivi des cotisations - Kotiza" %}{% endblock %}
+
+{% block hero %}
+<div>
+  <p class="pill">{% translate "Finance" %}</p>
+  <h1>{% translate "Suivi des cotisations" %}</h1>
+  <p class="subtitle">{% translate "Qui est à jour, qui est en retard, et combien il reste à encaisser." %}</p>
+</div>
+{% endblock %}
+
+{% block content %}
+{% if not groups %}
+<section class="empty-panel">
+  <span class="module-icon tone-gold">{% icon "wallet" 22 %}</span>
+  <h3>{% translate "Aucun groupe suivi pour l'instant" %}</h3>
+  <p>{% translate "Indiquez la cotisation mensuelle attendue dans la fiche d'un groupe pour suivre les retards." %}</p>
+  <a class="btn primary" href="/groupes/">{% translate "Ouvrir les groupes" %}</a>
+</section>
+{% else %}
+<section class="stats kpi-grid">
+  <div class="kpi-card tone-slate">
+    <span class="module-icon">{% icon "wallet" 20 %}</span>
+    <p class="kpi-label">{% translate "Attendu" %}</p>
+    <p class="stat-value">{{ summary.expected|money }}</p>
+    <p class="stat-label">{% blocktranslate count total=summary.member_count %}{{ total }} membre suivi{% plural %}{{ total }} membres suivis{% endblocktranslate %}</p>
+  </div>
+  <div class="kpi-card tone-green">
+    <span class="module-icon">{% icon "check" 20 %}</span>
+    <p class="kpi-label">{% translate "Encaissé" %}</p>
+    <p class="stat-value">{{ summary.paid|money }}</p>
+    <p class="stat-label">{% translate "cotisations mensuelles confirmées" %}</p>
+  </div>
+  <div class="kpi-card tone-orange">
+    <span class="module-icon">{% icon "trending" 20 %}</span>
+    <p class="kpi-label">{% translate "Reste à encaisser" %}</p>
+    <p class="stat-value">{{ summary.remaining|money }}</p>
+    <p class="stat-label">{% blocktranslate count total=summary.late_count %}{{ total }} membre en retard{% plural %}{{ total }} membres en retard{% endblocktranslate %}</p>
+  </div>
+</section>
+
+<section class="table-card">
+  <div class="table-toolbar">
+    <form class="search-form" method="get">
+      <select name="group" aria-label="{% translate "Groupe" %}">
+        <option value="">{% translate "Tous les groupes" %}</option>
+        {% for grp in groups %}
+        <option value="{{ grp.pk }}"{% if selected_group == grp.pk|stringformat:'s' %} selected{% endif %}>{{ grp.name }} ({{ grp.monthly_due|money }} / {% translate "mois" %})</option>
+        {% endfor %}
+      </select>
+      <select name="statut" aria-label="{% translate "Statut" %}">
+        <option value="">{% translate "Tous les membres" %}</option>
+        <option value="retard"{% if only_late %} selected{% endif %}>{% translate "En retard seulement" %}</option>
+      </select>
+      <button class="btn ghost" type="submit">{% translate "Filtrer" %}</button>
+    </form>
+  </div>
+
+  <table class="responsive-table">
+    <thead>
+      <tr>
+        <th>{% translate "Membre" %}</th>
+        <th>{% translate "Groupe" %}</th>
+        <th>{% translate "Mois dus" %}</th>
+        <th>{% translate "Attendu" %}</th>
+        <th>{% translate "Versé" %}</th>
+        <th>{% translate "Reste à payer" %}</th>
+        <th>{% translate "Situation" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in rows %}
+      <tr>
+        <td class="cell-main">{{ row.member.full_name }}</td>
+        <td data-label="{% translate "Groupe" %}">{{ row.group.name }}</td>
+        <td data-label="{% translate "Mois dus" %}">{{ row.months_due }}</td>
+        <td data-label="{% translate "Attendu" %}">{{ row.expected|money }}</td>
+        <td data-label="{% translate "Versé" %}">{{ row.paid|money }}</td>
+        <td data-label="{% translate "Reste à payer" %}"><b>{{ row.remaining|money }}</b></td>
+        <td data-label="{% translate "Situation" %}">
+          {% if row.is_late %}
+          <span class="status-badge status-bad">{% blocktranslate count months=row.months_late %}{{ months }} mois de retard{% plural %}{{ months }} mois de retard{% endblocktranslate %}</span>
+          {% else %}
+          <span class="status-badge status-ok">{% translate "À jour" %}</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="7" class="empty-state">{% translate "Aucun membre en retard. Bravo !" %}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p class="table-note">{% translate "Calcul : cotisation mensuelle attendue × nombre de mois depuis le début des cotisations, comparée aux cotisations mensuelles confirmées." %}</p>
+</section>
+{% endif %}
+{% endblock %}

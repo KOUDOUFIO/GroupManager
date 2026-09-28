@@ -83,6 +83,12 @@
           {% if base_url_name == 'group' %}
           <a class="link" href="{% url 'group_dashboard' obj.pk %}">{% translate "Dashboard" %}</a>
           {% endif %}
+          {% if base_url_name == 'member' %}
+          <a class="link" href="{% url 'member_access' obj.pk %}">{% if obj.user_id %}{% translate "Accès actif" %}{% else %}{% translate "Donner l'accès" %}{% endif %}</a>
+          {% endif %}
+          {% if base_url_name == 'contribution' and obj.payment_status == 'confirmed' %}
+          <a class="link" href="{% url 'contribution_receipt' obj.pk %}">{% translate "Reçu" %}</a>
+          {% endif %}
           <a class="link" href="{% url base_url_name|add:'_update' obj.pk %}">{% translate "Modifier" %}</a>
           <a class="link danger" href="{% url base_url_name|add:'_delete' obj.pk %}">{% translate "Supprimer" %}</a>
         </td>

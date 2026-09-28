@@ -2,6 +2,7 @@
 
 from django.views.generic import ListView, TemplateView
 
+from ..services.dues_service import DuesService
 from ..services.member_service import MemberService
 from .mixins import MemberSelfRequiredMixin
 
@@ -21,6 +22,7 @@ class MemberPortalDashboardView(MemberSelfRequiredMixin, TemplateView):
                     "meeting", "meeting__group"
                 ).order_by("-meeting__scheduled_at")[:8],
                 "member_groups": self.member.groups.all(),
+                "my_dues": DuesService.for_member(self.member),
             }
         )
         return context

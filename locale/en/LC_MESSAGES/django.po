@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-28 12:08+0000\n"
+"POT-Creation-Date: 2026-09-28 13:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -105,8 +105,14 @@ msgstr "Finance"
 msgid "Cotisations"
 msgstr "Contributions"
 
-msgid "Paiements, reçus et exports"
-msgstr "Payments, receipts and exports"
+msgid "Paiements, reçus PDF et exports"
+msgstr "Payments, PDF receipts and exports"
+
+msgid "Suivi des cotisations"
+msgstr "Dues tracking"
+
+msgid "Qui est à jour, qui est en retard"
+msgstr "Who is up to date, who is behind"
 
 msgid "Activités"
 msgstr "Activities"
@@ -137,6 +143,18 @@ msgstr "Search"
 
 msgid "Retrouvez tout en un seul champ"
 msgstr "Find anything from one field"
+
+msgid "Notifications"
+msgstr "Notifications"
+
+msgid "Rappels et informations reçus"
+msgstr "Reminders and information received"
+
+msgid "Sécurité du compte"
+msgstr "Account security"
+
+msgid "Mot de passe et connexion à deux étapes"
+msgstr "Password and two-step sign-in"
 
 msgid "Choisissez..."
 msgstr "Choose..."
@@ -369,6 +387,18 @@ msgstr "Event"
 msgid "Responsable"
 msgstr "Leader"
 
+msgid "Cotisation mensuelle attendue"
+msgstr "Expected monthly contribution"
+
+msgid "Montant que chaque membre doit verser par mois. Vide = pas de suivi des retards."
+msgstr "Amount each member owes per month. Empty = no arrears tracking."
+
+msgid "Début des cotisations"
+msgstr "Dues start"
+
+msgid "Premier mois dû. Vide = date de création du groupe."
+msgstr "First month due. Empty = group creation date."
+
 msgid "Rencontre"
 msgstr "Meeting"
 
@@ -440,9 +470,6 @@ msgstr "Related model"
 
 msgid "ID de l'objet lié"
 msgstr "Related object ID"
-
-msgid "Notifications"
-msgstr "Notifications"
 
 msgid "Notifications par email"
 msgstr "Email notifications"
@@ -566,6 +593,22 @@ msgstr "2FA preference"
 
 msgid "Préférences 2FA"
 msgstr "2FA preferences"
+
+#, python-format
+msgid ""
+"Bonjour %(name)s,\n"
+"\n"
+"Votre espace Kotiza est prêt : vous pouvez y suivre vos cotisations et vos présences.\n"
+"\n"
+"Votre identifiant : %(username)s\n"
+"Choisissez votre mot de passe en ouvrant ce lien :\n"
+"%(link)s\n"
+"\n"
+"L'équipe Kotiza"
+msgstr ""
+
+msgid "Votre accès à Kotiza"
+msgstr "Your access to Kotiza"
 
 msgid "Le montant doit être positif."
 msgstr "The amount must be positive."
@@ -794,6 +837,15 @@ msgstr "Actions"
 msgid "Dashboard"
 msgstr "Dashboard"
 
+msgid "Accès actif"
+msgstr "Access active"
+
+msgid "Donner l'accès"
+msgstr "Give access"
+
+msgid "Reçu"
+msgstr "Receipt"
+
 msgid "Modifier"
 msgstr "Edit"
 
@@ -879,6 +931,81 @@ msgstr "Quick actions"
 
 msgid "Les tâches les plus courantes, en un clic."
 msgstr "Your most common tasks, one click away."
+
+msgid "Suivi des cotisations - Kotiza"
+msgstr "Dues tracking - Kotiza"
+
+msgid "Qui est à jour, qui est en retard, et combien il reste à encaisser."
+msgstr "Who is up to date, who is behind, and how much is left to collect."
+
+msgid "Aucun groupe suivi pour l'instant"
+msgstr "No tracked group yet"
+
+msgid "Indiquez la cotisation mensuelle attendue dans la fiche d'un groupe pour suivre les retards."
+msgstr "Set the expected monthly contribution on a group to track arrears."
+
+msgid "Ouvrir les groupes"
+msgstr "Open groups"
+
+msgid "Attendu"
+msgstr "Expected"
+
+#, fuzzy, python-format
+msgid "%(total)s membre suivi"
+msgid_plural "%(total)s membres suivis"
+msgstr[0] "%(total)s tracked member"
+msgstr[1] "%(total)s tracked members"
+
+msgid "Encaissé"
+msgstr "Collected"
+
+msgid "cotisations mensuelles confirmées"
+msgstr "confirmed monthly contributions"
+
+msgid "Reste à encaisser"
+msgstr "Left to collect"
+
+#, fuzzy, python-format
+msgid "%(total)s membre en retard"
+msgid_plural "%(total)s membres en retard"
+msgstr[0] "%(total)s member behind"
+msgstr[1] "%(total)s members behind"
+
+msgid "mois"
+msgstr "month"
+
+msgid "Tous les membres"
+msgstr "All members"
+
+msgid "En retard seulement"
+msgstr "Behind only"
+
+msgid "Mois dus"
+msgstr "Months due"
+
+msgid "Versé"
+msgstr "Paid"
+
+msgid "Reste à payer"
+msgstr "Left to pay"
+
+msgid "Situation"
+msgstr "Status"
+
+#, python-format
+msgid "%(months)s mois de retard"
+msgid_plural "%(months)s mois de retard"
+msgstr[0] "%(months)s month behind"
+msgstr[1] "%(months)s months behind"
+
+msgid "À jour"
+msgstr "Up to date"
+
+msgid "Aucun membre en retard. Bravo !"
+msgstr "No member behind. Well done!"
+
+msgid "Calcul : cotisation mensuelle attendue × nombre de mois depuis le début des cotisations, comparée aux cotisations mensuelles confirmées."
+msgstr "Calculation: expected monthly contribution × months since dues start, compared with confirmed monthly contributions."
 
 msgid "Entreprise - Kotiza"
 msgstr "Company - Kotiza"
@@ -1105,6 +1232,62 @@ msgstr "Create an event"
 msgid "Ajouter un événement"
 msgstr "Add an event"
 
+msgid "Accès à Mon espace - Kotiza"
+msgstr "Access to My space - Kotiza"
+
+msgid "Accès membre"
+msgstr "Member access"
+
+msgid "Le membre consulte ses cotisations, ses présences et ses reçus depuis son téléphone."
+msgstr "The member checks their contributions, attendance and receipts from their phone."
+
+msgid "Accès créé"
+msgstr "Access created"
+
+msgid "Identifiant"
+msgstr "Username"
+
+msgid "Mot de passe provisoire"
+msgstr "Temporary password"
+
+msgid "Transmettez ces informations au membre (en main propre, par SMS ou WhatsApp). Il pourra changer son mot de passe après sa première connexion. Ce mot de passe ne sera plus affiché."
+msgstr "Give these details to the member (in person, by SMS or WhatsApp). They can change their password after first signing in. This password will not be shown again."
+
+#, python-format
+msgid "Un email a été envoyé à %(email)s avec un lien pour choisir son mot de passe."
+msgstr "An email was sent to %(email)s with a link to choose a password."
+
+#, python-format
+msgid "L'email vers %(email)s n'a pas pu partir (envoi d'emails non configuré ?). Le membre peut utiliser « Mot de passe oublié » sur la page de connexion."
+msgstr "The email to %(email)s could not be sent (email not configured?). The member can use \"Forgot password\" on the sign-in page."
+
+msgid "Retour aux membres"
+msgstr "Back to members"
+
+#, python-format
+msgid "Identifiant de connexion : <strong>%(username)s</strong>"
+msgstr "Username: <strong>%(username)s</strong>"
+
+#, python-format
+msgid "Dernière connexion : %(date)s"
+msgstr "Last sign-in: %(date)s"
+
+msgid "Le membre ne s'est pas encore connecté."
+msgstr "The member has not signed in yet."
+
+msgid "Retirer l'accès"
+msgstr "Remove access"
+
+msgid "Pas encore d'accès"
+msgstr "No access yet"
+
+#, python-format
+msgid "Un email sera envoyé à <strong>%(email)s</strong> avec un lien pour choisir son mot de passe."
+msgstr "An email will be sent to <strong>%(email)s</strong> with a link to choose a password."
+
+msgid "Ce membre n'a pas d'email : un mot de passe provisoire vous sera affiché, à lui transmettre."
+msgstr "This member has no email: a temporary password will be shown for you to pass on."
+
 msgid "Mes présences - Kotiza"
 msgstr "My attendance - Kotiza"
 
@@ -1129,11 +1312,11 @@ msgstr "My contributions - Kotiza"
 msgid "Mes cotisations"
 msgstr "My contributions"
 
-msgid "Historique complet de vos paiements enregistrés."
-msgstr "Your full history of recorded payments."
+msgid "Historique complet de vos paiements, avec un reçu PDF pour chaque cotisation confirmée."
+msgstr "Full history of your payments, with a PDF receipt for each confirmed contribution."
 
-msgid "Paiement initié, en attente de confirmation. Le statut sera mis à jour automatiquement."
-msgstr "Payment started, awaiting confirmation. The status will update automatically."
+msgid "Télécharger"
+msgstr "Download"
 
 msgid "Aucune cotisation enregistrée."
 msgstr "No contributions recorded."
@@ -1162,6 +1345,15 @@ msgid_plural "%(total)s postes occupés"
 msgstr[0] "%(total)s position held"
 msgstr[1] "%(total)s positions held"
 
+#, python-format
+msgid "Reste à payer : %(amount)s (%(months)s mois)"
+msgid_plural "Reste à payer : %(amount)s (%(months)s mois)"
+msgstr[0] "Left to pay: %(amount)s (%(months)s month)"
+msgstr[1] "Left to pay: %(amount)s (%(months)s months)"
+
+msgid "Vous êtes à jour de vos cotisations."
+msgstr "You are up to date with your contributions."
+
 msgid "Présences récentes"
 msgstr "Recent attendance"
 
@@ -1170,6 +1362,27 @@ msgstr "My groups"
 
 msgid "Vous n'appartenez à aucun groupe."
 msgstr "You are not in any group."
+
+msgid "Notifications - Kotiza"
+msgstr "Notifications - Kotiza"
+
+msgid "Vos notifications"
+msgstr "Your notifications"
+
+msgid "Rappels de cotisation et informations de votre organisation."
+msgstr "Contribution reminders and news from your organization."
+
+msgid "Tout marquer comme lu"
+msgstr "Mark all as read"
+
+msgid "Nouveau"
+msgstr "New"
+
+msgid "Aucune notification"
+msgstr "No notifications"
+
+msgid "Vous serez prévenu ici des rappels de cotisation."
+msgstr "Contribution reminders will show up here."
 
 msgid "Tous vos modules au même endroit"
 msgstr "All your modules in one place"
@@ -1186,11 +1399,11 @@ msgstr "Security and trust"
 msgid "L'argent de vos membres mérite une application sérieuse."
 msgstr "Your members' money deserves a serious app."
 
-msgid "Connexion à deux étapes"
-msgstr "Two-step sign-in"
+msgid "Connexion protégée"
+msgstr "Protected sign-in"
 
-msgid "Un code sur le téléphone en plus du mot de passe : personne ne se connecte avec un mot de passe volé."
-msgstr "A code on the phone on top of the password: nobody signs in with a stolen password."
+msgid "Mots de passe chiffrés, connexion HTTPS, et connexion à deux étapes disponible : un code sur le téléphone en plus du mot de passe."
+msgstr "Hashed passwords, HTTPS, and optional two-step sign-in: a code on the phone on top of the password."
 
 msgid "Caisse transparente"
 msgstr "Transparent cash box"
@@ -1379,6 +1592,78 @@ msgstr "Do not fill in"
 msgid "Vos informations servent uniquement à vous répondre."
 msgstr "Your details are only used to reply to you."
 
+msgid "Sécurité du compte - Kotiza"
+msgstr "Account security - Kotiza"
+
+msgid "Sécurité"
+msgstr "Security"
+
+msgid "Protégez l'accès à la caisse de votre organisation."
+msgstr "Protect access to your organization's cash box."
+
+msgid "Connexion à deux étapes"
+msgstr "Two-step sign-in"
+
+msgid "En plus du mot de passe, un code à 6 chiffres affiché sur votre téléphone est demandé à chaque connexion."
+msgstr "On top of the password, a 6-digit code shown on your phone is required at each sign-in."
+
+msgid "Activée"
+msgstr "On"
+
+msgid "Désactivée"
+msgstr "Off"
+
+msgid "Installez une application d'authentification : Google Authenticator ou Microsoft Authenticator."
+msgstr "Install an authenticator app: Google Authenticator or Microsoft Authenticator."
+
+msgid "Dans l'application, scannez ce QR code :"
+msgstr "In the app, scan this QR code:"
+
+msgid "Ou saisissez cette clé :"
+msgstr "Or enter this key:"
+
+msgid "Saisissez le code à 6 chiffres affiché par l'application :"
+msgstr "Enter the 6-digit code shown by the app:"
+
+msgid "Activer"
+msgstr "Turn on"
+
+msgid "Pour désactiver la protection, saisissez le code affiché en ce moment dans votre application."
+msgstr "To turn protection off, enter the code currently shown in your app."
+
+msgid "Code à 6 chiffres"
+msgstr "6-digit code"
+
+msgid "Désactiver"
+msgstr "Turn off"
+
+msgid "Téléphone perdu ? Un administrateur peut supprimer votre appareil dans l'administration (OTP_TOTP > TOTP devices)."
+msgstr "Lost your phone? An administrator can delete your device in the admin (OTP_TOTP > TOTP devices)."
+
+msgid "Activer la connexion à deux étapes"
+msgstr "Turn on two-step sign-in"
+
+msgid "Mot de passe"
+msgstr "Password"
+
+msgid "Choisissez un mot de passe long, que vous n'utilisez nulle part ailleurs."
+msgstr "Choose a long password you don't use anywhere else."
+
+msgid "Changer mon mot de passe"
+msgstr "Change my password"
+
+msgid "Vérification - Kotiza"
+msgstr "Verification - Kotiza"
+
+msgid "Vérification"
+msgstr "Verification"
+
+msgid "Saisissez le code à 6 chiffres affiché dans votre application d'authentification."
+msgstr "Enter the 6-digit code shown in your authenticator app."
+
+msgid "Valider"
+msgstr "Confirm"
+
 msgid "Requête invalide"
 msgstr "Bad request"
 
@@ -1466,9 +1751,6 @@ msgstr "Username"
 msgid "Entrez votre nom d’utilisateur"
 msgstr "Enter your username"
 
-msgid "Mot de passe"
-msgstr "Password"
-
 msgid "Entrez votre mot de passe"
 msgstr "Enter your password"
 
@@ -1492,9 +1774,6 @@ msgstr "Your password has been updated."
 
 msgid "Changer le mot de passe - Kotiza"
 msgstr "Change password - Kotiza"
-
-msgid "Changer mon mot de passe"
-msgstr "Change my password"
 
 msgid "Renseignez votre mot de passe actuel puis le nouveau."
 msgstr "Enter your current password, then the new one."
@@ -1599,6 +1878,19 @@ msgstr "Send reset link"
 
 msgid "Kotiza - Réinitialisation de votre mot de passe"
 msgstr "Kotiza - Reset your password"
+
+msgid "Identifiant de connexion"
+msgstr "Username"
+
+msgid "Lettres, chiffres et . @ + - _ seulement, sans espace."
+msgstr "Letters, digits and . @ + - _ only, no spaces."
+
+msgid "Cet identifiant est déjà utilisé."
+msgstr "This username is already taken."
+
+#, python-format
+msgid "L'accès de %(name)s est retiré. Son historique est conservé."
+msgstr "%(name)s's access was removed. Their history is kept."
 
 msgid "Action"
 msgstr "Action"
@@ -2071,8 +2363,8 @@ msgstr "Attendance & treasury"
 msgid "Analysez les taux de présence, les paiements et la santé financière globale de votre organisation."
 msgstr "Analyze attendance, payments and your organization's overall financial health."
 
-msgid "2FA"
-msgstr "2FA"
+msgid "HTTPS"
+msgstr "HTTPS"
 
 msgid "Connexion sécurisée"
 msgstr "Secure login"
@@ -2128,6 +2420,53 @@ msgstr "Edit position"
 msgid "Supprimer un poste"
 msgstr "Delete position"
 
+msgid "Seule une cotisation confirmée donne droit à un reçu."
+msgstr "Only a confirmed contribution gets a receipt."
+
+msgid "Reçu établi avec Kotiza"
+msgstr "Receipt issued with Kotiza"
+
+msgid "Reçu de cotisation"
+msgstr "Contribution receipt"
+
+msgid "Montant reçu"
+msgstr "Amount received"
+
+#, python-format
+msgid "Document généré le %(date)s. Conservez-le comme preuve de paiement."
+msgstr "Generated on %(date)s. Keep it as proof of payment."
+
+#, python-format
+msgid "Vérifiable auprès du trésorier avec le numéro %(number)s."
+msgstr "Verifiable with the treasurer using number %(number)s."
+
+msgid "Le code contient 6 chiffres."
+msgstr "The code has 6 digits."
+
+msgid "Connexion à deux étapes activée. Le code vous sera demandé à chaque connexion."
+msgstr "Two-step sign-in is on. The code will be asked at each sign-in."
+
+msgid "Code incorrect. Vérifiez l'heure du téléphone et réessayez."
+msgstr "Wrong code. Check your phone's time and try again."
+
+msgid "Connexion à deux étapes désactivée."
+msgstr "Two-step sign-in is off."
+
+msgid "Code incorrect."
+msgstr "Wrong code."
+
+msgid "Code incorrect ou expiré. Utilisez le code affiché en ce moment."
+msgstr "Wrong or expired code. Use the code shown right now."
+
+#~ msgid "Paiement initié, en attente de confirmation. Le statut sera mis à jour automatiquement."
+#~ msgstr "Payment started, awaiting confirmation. The status will update automatically."
+
+#~ msgid "Un code sur le téléphone en plus du mot de passe : personne ne se connecte avec un mot de passe volé."
+#~ msgstr "A code on the phone on top of the password: nobody signs in with a stolen password."
+
+#~ msgid "2FA"
+#~ msgstr "2FA"
+
 #~ msgid "Montant (FCFA)"
 #~ msgstr "Amount (FCFA)"
 
@@ -2182,9 +2521,6 @@ msgstr "Delete position"
 #~ msgid "Paiement sécurisé par PayGate Global. Kotiza ne voit jamais votre code secret."
 #~ msgstr "Payment secured by PayGate Global. Kotiza never sees your PIN."
 
-#~ msgid "Suivi du paiement - Kotiza"
-#~ msgstr "Payment tracking - Kotiza"
-
 #~ msgid "Suivi du paiement"
 #~ msgstr "Payment tracking"
 
@@ -2234,17 +2570,11 @@ msgstr "Delete position"
 #~ msgid "Paiement toujours en attente. Confirmez-le sur votre téléphone avec votre code secret."
 #~ msgstr "Payment still pending. Confirm it on your phone with your PIN."
 
-#~ msgid "Accès sécurisé"
-#~ msgstr "Secure access"
-
 #~ msgid "Connexion"
 #~ msgstr "Log in"
 
 #~ msgid "Identifiez-vous pour accéder à votre espace de gestion."
 #~ msgstr "Sign in to access your management space."
-
-#~ msgid "Sécurité"
-#~ msgstr "Security"
 
 #~ msgid "Connexion sécurisée avec chiffrement des données."
 #~ msgstr "Secure connection with encrypted data."

@@ -498,7 +498,7 @@ def home(request):
     ]
 
     trust_metrics = [
-        {"value": _("2FA"), "label": _("Connexion sécurisée")},
+        {"value": _("HTTPS"), "label": _("Connexion sécurisée")},
         {"value": _("360°"), "label": _("Vue d'ensemble")},
         {"value": _("100%"), "label": _("Traçabilité")},
     ]
