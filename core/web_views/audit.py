@@ -16,9 +16,8 @@ class AuditLogListView(SearchableListView):
         {"label": _("Date"), "accessor": "created_at"},
         {"label": _("Utilisateur"), "accessor": "actor.get_username"},
         {"label": _("Action"), "accessor": "get_action_display"},
-        {"label": _("Modèle"), "accessor": "model_name"},
+        {"label": _("Élément"), "accessor": "model_name", "format": "model"},
         {"label": _("Objet"), "accessor": "object_repr"},
-        {"label": _("Route"), "accessor": "path"},
     ]
     search_fields = ["model_name", "object_pk", "object_repr", "actor__username", "path"]
     select_related_fields = ("actor",)

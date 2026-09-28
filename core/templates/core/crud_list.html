@@ -53,7 +53,7 @@
     {% endif %}
   </div>
 
-  <table>
+  <table class="responsive-table">
     <thead>
       <tr>
         {% if list_columns %}
@@ -73,13 +73,13 @@
       <tr>
         {% if list_columns %}
           {% for col in list_columns %}
-          <td>{{ obj|get_attr:col.accessor }}</td>
+          <td data-label="{{ col.label }}"{% if forloop.first %} class="cell-main"{% endif %}>{{ obj|get_attr:col.accessor|cell:col }}</td>
           {% endfor %}
         {% else %}
-          <td>{{ obj }}</td>
+          <td class="cell-main">{{ obj }}</td>
         {% endif %}
         {% if show_actions %}
-        <td class="actions">
+        <td class="actions" data-label="{% translate "Actions" %}">
           {% if base_url_name == 'group' %}
           <a class="link" href="{% url 'group_dashboard' obj.pk %}">{% translate "Dashboard" %}</a>
           {% endif %}

@@ -5,6 +5,7 @@ pour faciliter l'accès aux attributs d'objets dans les templates.
 """
 
 from django import template
+from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
 register = template.Library()
@@ -50,6 +51,52 @@ def money(value):
         return value
     decimals = 0 if amount == amount.to_integral_value() else 2
     return f"{number_format(amount, decimals, force_grouping=True)} {settings.KOTIZA_CURRENCY}"
+
+
+@register.filter
+def model_label(model_name):
+    """Nom lisible d'un modele d'audit : "meetingentry" -> "Présence"."""
+    from django.apps import apps
+
+    try:
+        return apps.get_model("core", model_name)._meta.verbose_name.capitalize()
+    except LookupError:
+        return model_name
+
+
+# Couleur des badges de statut, par code (cotisations et presences).
+STATUS_TONES = {
+    "confirmed": "ok", "present": "ok",
+    "pending": "wait", "late": "wait", "permission": "info",
+    "failed": "bad", "absent": "bad",
+}
+
+
+def _status_labels():
+    from ..models import Contribution, MeetingEntry
+
+    return {**dict(Contribution.STATUS_CHOICES), **dict(MeetingEntry.STATUS_CHOICES)}
+
+
+@register.filter
+def cell(value, fmt=None):
+    """Formate une cellule de liste selon la colonne : money, status ou model.
+
+    `fmt` est soit le nom du format, soit la definition de colonne (dict)
+    dont on lit la cle optionnelle "format".
+    """
+    if isinstance(fmt, dict):
+        fmt = fmt.get("format")
+    if value is None:
+        return ""
+    if fmt == "money":
+        return money(value)
+    if fmt == "model":
+        return model_label(value)
+    if fmt == "status":
+        label = _status_labels().get(value, value)
+        return format_html('<span class="status-badge status-{}">{}</span>', STATUS_TONES.get(value, "info"), label)
+    return value
 
 
 @register.simple_tag

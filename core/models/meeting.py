@@ -10,12 +10,14 @@ from django.utils.translation import gettext, gettext_lazy as _
 
 class Meeting(models.Model):
     """Représente une rencontre planifiée pour un groupe."""
-    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="meetings")
-    scheduled_at = models.DateTimeField()
-    title = models.CharField(max_length=200, blank=True)
-    description = models.TextField(blank=True)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="meetings", verbose_name=_("Groupe"))
+    scheduled_at = models.DateTimeField(verbose_name=_("Date et heure"))
+    title = models.CharField(max_length=200, blank=True, verbose_name=_("Titre"))
+    description = models.TextField(blank=True, verbose_name=_("Description"))
 
     class Meta:
+        verbose_name = _("Rencontre")
+        verbose_name_plural = _("Rencontres")
         indexes = [
             models.Index(fields=["scheduled_at"]),
             models.Index(fields=["title"]),
@@ -43,13 +45,15 @@ class MeetingEntry(models.Model):
         (STATUS_PERMISSION, _("Permission")),
     ]
 
-    meeting = models.ForeignKey(Meeting, on_delete=models.CASCADE, related_name="entries")
-    member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="meeting_entries")
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES)
-    reason = models.TextField(blank=True)
-    recorded_at = models.DateTimeField(auto_now_add=True)
+    meeting = models.ForeignKey(Meeting, on_delete=models.CASCADE, related_name="entries", verbose_name=_("Rencontre"))
+    member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="meeting_entries", verbose_name=_("Membre"))
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, verbose_name=_("Statut"))
+    reason = models.TextField(blank=True, verbose_name=_("Motif"))
+    recorded_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Enregistré le"))
 
     class Meta:
+        verbose_name = _("Présence")
+        verbose_name_plural = _("Présences")
         unique_together = ("meeting", "member")
         indexes = [
             models.Index(fields=["status"]),

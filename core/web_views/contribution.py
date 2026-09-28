@@ -23,8 +23,8 @@ class ContributionListView(SearchableListView):
         {"label": _("Groupe"), "accessor": "group.name"},
         {"label": _("Type"), "accessor": "get_contribution_type_display"},
         {"label": _("Méthode"), "accessor": "get_payment_method_display"},
-        {"label": _("Statut"), "accessor": "get_payment_status_display"},
-        {"label": _("Montant"), "accessor": "amount"},
+        {"label": _("Statut"), "accessor": "payment_status", "format": "status"},
+        {"label": _("Montant"), "accessor": "amount", "format": "money"},
         {"label": _("Date"), "accessor": "paid_at"},
     ]
     search_fields = ["member__full_name", "group__name", "contribution_type", "payment_method", "payment_status"]

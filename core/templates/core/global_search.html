@@ -12,59 +12,97 @@
 {% endblock %}
 
 {% block content %}
-<section class="form-card">
-  <form method="get" class="search-form">
-    <input type="text" name="q" value="{{ query }}" placeholder="{% translate 'Nom, email, groupe, événement...' %}" />
+<section class="search-panel">
+  <form method="get" class="big-search" role="search">
+    {% icon "search" 20 %}
+    <input type="search" name="q" value="{{ query }}" placeholder="{% translate 'Nom, email, groupe, événement...' %}" aria-label="{% translate "Recherche" %}" autofocus />
     <button class="btn primary" type="submit">{% translate "Rechercher" %}</button>
   </form>
+  {% if has_query %}
+  <p class="search-count">{% blocktranslate count total=result_count with q=query %}{{ total }} résultat pour « {{ q }} »{% plural %}{{ total }} résultats pour « {{ q }} »{% endblocktranslate %}</p>
+  {% endif %}
 </section>
 
 {% if has_query %}
-<section class="workspace-grid">
-  <article class="workspace-card">
-    <h4>{% translate "Groupes" %}</h4>
-    {% for item in groups %}
-    <p><a class="link" href="/groupes/{{ item.id }}/dashboard/">{{ item.name }}</a></p>
-    {% empty %}
-    <p>{% translate "Aucun résultat." %}</p>
-    {% endfor %}
-  </article>
+{% if result_count %}
+<section class="feed-grid">
+  {% if groups %}
+  <div class="feed-card">
+    <div class="feed-head"><h3>{% translate "Groupes" %}</h3></div>
+    <ul class="feed">
+      {% for item in groups %}
+      <li><a class="feed-row feed-link" href="/groupes/{{ item.id }}/dashboard/">
+        <span class="module-icon tone-teal">{% icon "users" 18 %}</span>
+        <span class="feed-main"><strong>{{ item.name }}</strong>{% if item.description %}<small>{{ item.description|truncatechars:60 }}</small>{% endif %}</span>
+      </a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
 
-  <article class="workspace-card">
-    <h4>{% translate "Membres" %}</h4>
-    {% for item in members %}
-    <p>{{ item.full_name }} - {{ item.email }}</p>
-    {% empty %}
-    <p>{% translate "Aucun résultat." %}</p>
-    {% endfor %}
-  </article>
+  {% if members %}
+  <div class="feed-card">
+    <div class="feed-head"><h3>{% translate "Membres" %}</h3></div>
+    <ul class="feed">
+      {% for item in members %}
+      <li><a class="feed-row feed-link" href="/membres/{{ item.id }}/modifier/">
+        <span class="user-avatar" aria-hidden="true">{{ item.full_name|first|upper }}</span>
+        <span class="feed-main"><strong>{{ item.full_name }}</strong>{% if item.phone or item.email %}<small>{{ item.phone|default:item.email }}</small>{% endif %}</span>
+      </a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
 
-  <article class="workspace-card">
-    <h4>{% translate "Rencontres" %}</h4>
-    {% for item in meetings %}
-    <p>{{ item.title|default:'Rencontre' }} - {{ item.group.name }}</p>
-    {% empty %}
-    <p>{% translate "Aucun résultat." %}</p>
-    {% endfor %}
-  </article>
+  {% if contributions %}
+  <div class="feed-card">
+    <div class="feed-head"><h3>{% translate "Cotisations" %}</h3></div>
+    <ul class="feed">
+      {% for item in contributions %}
+      <li><a class="feed-row feed-link" href="/cotisations/{{ item.id }}/modifier/">
+        <span class="feed-date"><strong>{{ item.paid_at|date:"d" }}</strong><small>{{ item.paid_at|date:"M" }}</small></span>
+        <span class="feed-main"><strong>{{ item.member.full_name }}</strong><small>{{ item.group.name }}</small></span>
+        <span class="feed-side"><b class="feed-amount">{{ item.amount|money }}</b></span>
+      </a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
 
-  <article class="workspace-card">
-    <h4>{% translate "Cotisations" %}</h4>
-    {% for item in contributions %}
-    <p>{{ item.member.full_name }} - {{ item.amount|money }} - {{ item.group.name }}</p>
-    {% empty %}
-    <p>{% translate "Aucun résultat." %}</p>
-    {% endfor %}
-  </article>
+  {% if meetings %}
+  <div class="feed-card">
+    <div class="feed-head"><h3>{% translate "Rencontres" %}</h3></div>
+    <ul class="feed">
+      {% for item in meetings %}
+      <li><a class="feed-row feed-link" href="/rencontres/{{ item.id }}/modifier/">
+        <span class="feed-date"><strong>{{ item.scheduled_at|date:"d" }}</strong><small>{{ item.scheduled_at|date:"M" }}</small></span>
+        <span class="feed-main"><strong>{{ item.title|default:_("Rencontre") }}</strong><small>{{ item.group.name }}</small></span>
+      </a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
 
-  <article class="workspace-card">
-    <h4>{% translate "Événements" %}</h4>
-    {% for item in events %}
-    <p>{{ item.title }} - {{ item.location }}</p>
-    {% empty %}
-    <p>{% translate "Aucun résultat." %}</p>
-    {% endfor %}
-  </article>
+  {% if events %}
+  <div class="feed-card">
+    <div class="feed-head"><h3>{% translate "Événements" %}</h3></div>
+    <ul class="feed">
+      {% for item in events %}
+      <li><a class="feed-row feed-link" href="/evenements/{{ item.id }}/modifier/">
+        <span class="feed-date"><strong>{{ item.starts_at|date:"d" }}</strong><small>{{ item.starts_at|date:"M" }}</small></span>
+        <span class="feed-main"><strong>{{ item.title }}</strong>{% if item.location %}<small>{{ item.location }}</small>{% endif %}</span>
+      </a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
 </section>
+{% else %}
+<section class="empty-panel">
+  <span class="module-icon tone-slate">{% icon "search" 22 %}</span>
+  <h3>{% translate "Aucun résultat" %}</h3>
+  <p>{% translate "Essayez un autre nom, un numéro de téléphone ou le nom d'un groupe." %}</p>
+</section>
+{% endif %}
 {% endif %}
 {% endblock %}

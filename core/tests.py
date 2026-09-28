@@ -298,9 +298,20 @@ class WebPermissionTests(TestCase):
 
         self.client.force_login(self.user)
         Group.objects.create(name="Chorale Recherche")
+        Member.objects.create(full_name="Membre Recherche", phone="90000000")
+
+        # Sans droit de consultation, la recherche ne revele rien.
         response = self.client.get(reverse("global_search"), {"q": "Recherche"})
         self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, "Chorale Recherche")
+        self.assertNotContains(response, "Membre Recherche")
+
+        # Avec le droit sur les groupes : les groupes seulement.
+        perm = Permission.objects.get(codename="view_group", content_type__app_label="core")
+        self.user.user_permissions.add(perm)
+        response = self.client.get(reverse("global_search"), {"q": "Recherche"})
         self.assertContains(response, "Chorale Recherche")
+        self.assertNotContains(response, "Membre Recherche")
 
     def test_base_nav_displays_role_label(self):
         manager_group, _ = AuthGroup.objects.get_or_create(name="Gestionnaire")

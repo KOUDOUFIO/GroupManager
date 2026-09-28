@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-28 07:09+0000\n"
+"POT-Creation-Date: 2026-09-28 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -138,6 +138,9 @@ msgstr "Search"
 msgid "Retrouvez tout en un seul champ"
 msgstr "Find anything from one field"
 
+msgid "Choisissez..."
+msgstr "Choose..."
+
 msgid "L'organe sélectionné doit appartenir au même groupe."
 msgstr "The selected body must belong to the same group."
 
@@ -179,9 +182,6 @@ msgstr "Preferred plan"
 
 msgid "Besoin principal"
 msgstr "Main need"
-
-msgid "Choisissez..."
-msgstr "Choose..."
 
 msgid "Je ne sais pas encore"
 msgstr "Not sure yet"
@@ -255,11 +255,35 @@ msgstr "Confirmed"
 msgid "Échouée"
 msgstr "Failed"
 
+msgid "Membre"
+msgstr "Member"
+
+msgid "Moyen de paiement"
+msgstr "Payment method"
+
+msgid "Statut"
+msgstr "Status"
+
+msgid "Montant"
+msgstr "Amount"
+
+msgid "Date de paiement"
+msgstr "Payment date"
+
+msgid "Notes"
+msgstr "Notes"
+
+msgid "Identifiant de transaction"
+msgstr "Transaction ID"
+
 msgid "Référence du paiement"
 msgstr "Payment reference"
 
 msgid "Numéro payeur"
 msgstr "Payer number"
+
+msgid "Cotisation"
+msgstr "Contribution"
 
 msgid "Statistiques Groupes"
 msgstr "Group statistics"
@@ -330,6 +354,39 @@ msgstr "Dashboard preference"
 msgid "Préférences de dashboard"
 msgstr "Dashboard preferences"
 
+msgid "Type de document"
+msgstr "Document type"
+
+msgid "Titre"
+msgstr "Title"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Fichier"
+msgstr "File"
+
+msgid "Ajouté le"
+msgstr "Added on"
+
+msgid "Document"
+msgstr "Document"
+
+msgid "Type d'événement"
+msgstr "Event type"
+
+msgid "Date et heure"
+msgstr "Date and time"
+
+msgid "Lieu"
+msgstr "Location"
+
+msgid "Événement"
+msgstr "Event"
+
+msgid "Responsable"
+msgstr "Leader"
+
 msgid "Rencontre"
 msgstr "Meeting"
 
@@ -345,6 +402,27 @@ msgstr "Late"
 msgid "Permission"
 msgstr "Excused"
 
+msgid "Motif"
+msgstr "Reason"
+
+msgid "Enregistré le"
+msgstr "Recorded on"
+
+msgid "Présence"
+msgstr "Attendance"
+
+msgid "Nom complet"
+msgstr "Full name"
+
+msgid "Téléphone"
+msgstr "Phone"
+
+msgid "Adresse"
+msgstr "Address"
+
+msgid "Compte utilisateur"
+msgstr "User account"
+
 msgid "Information"
 msgstr "Information"
 
@@ -357,20 +435,11 @@ msgstr "Warning"
 msgid "Erreur"
 msgstr "Error"
 
-msgid "Membre"
-msgstr "Member"
-
-msgid "Cotisation"
-msgstr "Contribution"
-
 msgid "Système"
 msgstr "System"
 
 msgid "Catégorie"
 msgstr "Category"
-
-msgid "Titre"
-msgstr "Title"
 
 msgid "Message"
 msgstr "Message"
@@ -419,6 +488,18 @@ msgstr "Notification preference"
 
 msgid "Préférences de notification"
 msgstr "Notification preferences"
+
+msgid "Organe"
+msgstr "Body"
+
+msgid "Intitulé"
+msgstr "Title"
+
+msgid "Titulaire"
+msgstr "Holder"
+
+msgid "Poste"
+msgstr "Position"
 
 msgid "Société"
 msgstr "Company"
@@ -591,6 +672,9 @@ msgstr "Recent activity"
 msgid "Derniers événements d'audit"
 msgstr "Latest audit events"
 
+msgid "Voir tout"
+msgstr "See all"
+
 msgid "Aucune activité récente."
 msgstr "No recent activity."
 
@@ -682,6 +766,12 @@ msgstr "Form"
 
 msgid "Remplissez les informations et enregistrez."
 msgstr "Fill in the details and save."
+
+msgid "Merci de corriger les champs indiqués en rouge."
+msgstr "Please correct the fields shown in red."
+
+msgid "(facultatif)"
+msgstr "(optional)"
 
 msgid "Enregistrer"
 msgstr "Save"
@@ -865,8 +955,17 @@ msgstr "Name, email, group, event..."
 msgid "Rechercher"
 msgstr "Search"
 
-msgid "Aucun résultat."
-msgstr "No results."
+#, python-format
+msgid "%(total)s résultat pour « %(q)s »"
+msgid_plural "%(total)s résultats pour « %(q)s »"
+msgstr[0] "%(total)s result for \"%(q)s\""
+msgstr[1] "%(total)s results for \"%(q)s\""
+
+msgid "Aucun résultat"
+msgstr "No results"
+
+msgid "Essayez un autre nom, un numéro de téléphone ou le nom d'un groupe."
+msgstr "Try another name, a phone number or a group name."
 
 msgid "Groupe 360"
 msgstr "Group 360"
@@ -877,8 +976,23 @@ msgstr "The full picture of the group: activities, members, finances and schedul
 msgid "Retour aux groupes"
 msgstr "Back to groups"
 
-msgid "Présence"
-msgstr "Attendance"
+msgid "confirmées"
+msgstr "confirmed"
+
+#, python-format
+msgid "%(total)s poste"
+msgid_plural "%(total)s postes"
+msgstr[0] "%(total)s position"
+msgstr[1] "%(total)s positions"
+
+#, fuzzy, python-format
+msgid "%(total)s rencontre"
+msgid_plural "%(total)s rencontres"
+msgstr[0] "%(total)s meeting"
+msgstr[1] "%(total)s meetings"
+
+msgid "au total"
+msgstr "in total"
 
 msgid "Cotisations récentes"
 msgstr "Recent contributions"
@@ -1021,9 +1135,6 @@ msgstr "Back to dashboard"
 msgid "Date"
 msgstr "Date"
 
-msgid "Statut"
-msgstr "Status"
-
 msgid "Aucune présence enregistrée."
 msgstr "No attendance recorded."
 
@@ -1039,12 +1150,6 @@ msgstr "Your full history of recorded payments."
 msgid "Paiement initié, en attente de confirmation. Le statut sera mis à jour automatiquement."
 msgstr "Payment started, awaiting confirmation. The status will update automatically."
 
-msgid "Montant"
-msgstr "Amount"
-
-msgid "Notes"
-msgstr "Notes"
-
 msgid "Aucune cotisation enregistrée."
 msgstr "No contributions recorded."
 
@@ -1057,8 +1162,23 @@ msgstr "Pay my contribution"
 msgid "Total cotisé"
 msgstr "Total contributed"
 
-msgid "Voir tout"
-msgstr "See all"
+#, fuzzy, python-format
+msgid "%(total)s cotisation"
+msgid_plural "%(total)s cotisations"
+msgstr[0] "%(total)s contribution"
+msgstr[1] "%(total)s contributions"
+
+#, python-format
+msgid "sur %(total)s rencontre"
+msgid_plural "sur %(total)s rencontres"
+msgstr[0] "over %(total)s meeting"
+msgstr[1] "over %(total)s meetings"
+
+#, python-format
+msgid "%(total)s poste occupé"
+msgid_plural "%(total)s postes occupés"
+msgstr[0] "%(total)s position held"
+msgstr[1] "%(total)s positions held"
 
 msgid "Présences récentes"
 msgstr "Recent attendance"
@@ -1147,9 +1267,6 @@ msgstr "Organization, people, contributions, activities, admin and manager areas
 
 msgid "Afficher tous les modules"
 msgstr "Show all modules"
-
-msgid "(facultatif)"
-msgstr "(optional)"
 
 msgid "Sécurité et confiance"
 msgstr "Security and trust"
@@ -1344,9 +1461,6 @@ msgstr "We will get back to you quickly, by email or on WhatsApp if you left you
 msgid "Revoir les tarifs"
 msgstr "See pricing again"
 
-msgid "Merci de corriger les champs indiqués en rouge."
-msgstr "Please correct the fields shown in red."
-
 msgid "Ne pas remplir"
 msgstr "Do not fill in"
 
@@ -1439,6 +1553,9 @@ msgstr "Welcome to Kotiza"
 
 msgid "Connectez-vous pour accéder à vos tableaux de bord et modules."
 msgstr "Log in to access your dashboards and modules."
+
+msgid "Nom d'utilisateur ou mot de passe incorrect. Vérifiez les majuscules et réessayez."
+msgstr "Incorrect username or password. Check capital letters and try again."
 
 msgid "Nom d'utilisateur"
 msgstr "Username"
@@ -1601,14 +1718,11 @@ msgstr "Kotiza - Reset your password"
 msgid "Action"
 msgstr "Action"
 
-msgid "Modèle"
-msgstr "Model"
+msgid "Élément"
+msgstr "Item"
 
 msgid "Objet"
 msgstr "Object"
-
-msgid "Route"
-msgstr "Route"
 
 msgid "Ajouter une cotisation"
 msgstr "Add a contribution"
@@ -1631,9 +1745,6 @@ msgstr "Edit document"
 msgid "Supprimer un document"
 msgstr "Delete document"
 
-msgid "Lieu"
-msgstr "Location"
-
 msgid "Modifier un événement"
 msgstr "Edit event"
 
@@ -1643,14 +1754,8 @@ msgstr "Delete event"
 msgid "Rapport des cotisations"
 msgstr "Contributions report"
 
-msgid "Motif"
-msgstr "Reason"
-
 msgid "Rapport des présences"
 msgstr "Attendance report"
-
-msgid "Responsable"
-msgstr "Leader"
 
 msgid "Ajouter un groupe"
 msgstr "Add a group"
@@ -2114,12 +2219,6 @@ msgstr "Edit attendance"
 msgid "Supprimer une présence"
 msgstr "Delete attendance"
 
-msgid "Nom complet"
-msgstr "Full name"
-
-msgid "Téléphone"
-msgstr "Phone"
-
 msgid "Modifier un membre"
 msgstr "Edit member"
 
@@ -2132,9 +2231,6 @@ msgstr "The payment could not be started. Check the number and try again in a mo
 msgid "Paiement toujours en attente. Confirmez-le sur votre téléphone avec votre code secret."
 msgstr "Payment still pending. Confirm it on your phone with your PIN."
 
-msgid "Description"
-msgstr "Description"
-
 msgid "Ajouter un organe"
 msgstr "Add a body"
 
@@ -2144,9 +2240,6 @@ msgstr "Edit body"
 msgid "Supprimer un organe"
 msgstr "Delete body"
 
-msgid "Organe"
-msgstr "Body"
-
 msgid "Ajouter un poste"
 msgstr "Add a position"
 
@@ -2155,6 +2248,12 @@ msgstr "Edit position"
 
 msgid "Supprimer un poste"
 msgstr "Delete position"
+
+#~ msgid "Modèle"
+#~ msgstr "Model"
+
+#~ msgid "Route"
+#~ msgstr "Route"
 
 #~ msgid "Merci ! Votre demande a bien été envoyée, nous vous répondrons rapidement."
 #~ msgstr "Thank you! Your request has been sent, we will get back to you soon."

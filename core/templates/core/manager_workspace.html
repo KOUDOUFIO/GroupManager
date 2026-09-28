@@ -47,35 +47,40 @@
   <div class="workspace-section">
     <h2>{% translate "Activité récente" %}</h2>
     <div class="recent-activity-grid">
-      <div class="activity-card">
-        <h3>{% translate "Rencontres récentes" %}</h3>
-        <div class="activity-list">
+      <div class="feed-card">
+        <div class="feed-head">
+          <h3>{% translate "Rencontres récentes" %}</h3>
+          <a class="link" href="/rencontres/">{% translate "Voir tout" %}</a>
+        </div>
+        <ul class="feed">
           {% for m in latest_meetings %}
-          <div class="activity-item">
-            <span class="activity-date">{{ m.scheduled_at|date:"d/m/Y" }}</span>
-            <span class="activity-title">{{ m.title|default:'Rencontre' }}</span>
-            <span class="activity-group">{{ m.group.name }}</span>
-          </div>
+          <li class="feed-row">
+            <span class="feed-date"><strong>{{ m.scheduled_at|date:"d" }}</strong><small>{{ m.scheduled_at|date:"M" }}</small></span>
+            <span class="feed-main"><strong>{{ m.title|default:_("Rencontre") }}</strong><small>{{ m.group.name }}</small></span>
+            <span class="feed-side"><small>{{ m.scheduled_at|date:"H:i" }}</small></span>
+          </li>
           {% empty %}
-          <p class="empty-state">{% translate "Aucune rencontre récente." %}</p>
+          <li class="empty-state">{% translate "Aucune rencontre récente." %}</li>
           {% endfor %}
-        </div>
+        </ul>
       </div>
-      
-      <div class="activity-card">
-        <h3>{% translate "Cotisations récentes" %}</h3>
-        <div class="activity-list">
-          {% for c in latest_contributions %}
-          <div class="activity-item">
-            <span class="activity-date">{{ c.paid_at|date:"d/m/Y" }}</span>
-            <span class="activity-title">{{ c.member.full_name }}</span>
-            <span class="activity-amount">{{ c.amount|money }}</span>
-            <span class="activity-group">{{ c.group.name }}</span>
-          </div>
-          {% empty %}
-          <p class="empty-state">{% translate "Aucune cotisation récente." %}</p>
-          {% endfor %}
+
+      <div class="feed-card">
+        <div class="feed-head">
+          <h3>{% translate "Cotisations récentes" %}</h3>
+          <a class="link" href="/cotisations/">{% translate "Voir tout" %}</a>
         </div>
+        <ul class="feed">
+          {% for c in latest_contributions %}
+          <li class="feed-row">
+            <span class="feed-date"><strong>{{ c.paid_at|date:"d" }}</strong><small>{{ c.paid_at|date:"M" }}</small></span>
+            <span class="feed-main"><strong>{{ c.member.full_name }}</strong><small>{{ c.group.name }}</small></span>
+            <span class="feed-side"><b class="feed-amount">{{ c.amount|money }}</b>{{ c.payment_status|cell:"status" }}</span>
+          </li>
+          {% empty %}
+          <li class="empty-state">{% translate "Aucune cotisation récente." %}</li>
+          {% endfor %}
+        </ul>
       </div>
     </div>
   </div>

@@ -82,20 +82,22 @@
 
   <div class="workspace-section">
     <h2>{% translate "Activité récente" %}</h2>
-    <div class="recent-activity">
-      <h3>{% translate "Derniers événements d'audit" %}</h3>
-      <div class="mini-list">
-        {% for log in recent_audits %}
-        <div class="mini-row">
-          <span class="action-badge">{{ log.get_action_display }}</span>
-          <span class="model-name">{{ log.model_name }}</span>
-          <span class="object-name">{{ log.object_repr }}</span>
-          <span class="timestamp">{{ log.created_at|date:"d/m/Y H:i" }}</span>
-        </div>
-        {% empty %}
-        <p class="empty-state">{% translate "Aucune activité récente." %}</p>
-        {% endfor %}
+    <div class="feed-card">
+      <div class="feed-head">
+        <h3>{% translate "Derniers événements d'audit" %}</h3>
+        <a class="link" href="/audit-logs/">{% translate "Voir tout" %}</a>
       </div>
+      <ul class="feed">
+        {% for log in recent_audits %}
+        <li class="feed-row">
+          <span class="action-badge action-{{ log.action }}">{{ log.get_action_display }}</span>
+          <span class="feed-main"><strong>{{ log.object_repr }}</strong><small>{{ log.model_name|model_label }}{% if log.actor %} · {{ log.actor.get_username }}{% endif %}</small></span>
+          <span class="feed-side"><small>{{ log.created_at|date:"d/m/Y H:i" }}</small></span>
+        </li>
+        {% empty %}
+        <li class="empty-state">{% translate "Aucune activité récente." %}</li>
+        {% endfor %}
+      </ul>
     </div>
   </div>
 </section>

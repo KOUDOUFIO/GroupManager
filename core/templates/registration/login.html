@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-{% load i18n %}
+{% load i18n core_extras %}
 
 {% block title %}{% translate "Connexion - Kotiza" %}{% endblock %}
 
@@ -18,60 +18,48 @@
       <h2>{% translate "Bienvenue sur Kotiza" %}</h2>
       <p>{% translate "Connectez-vous pour accéder à vos tableaux de bord et modules." %}</p>
     </div>
-    
+
     <form method="post" class="login-form">
       {% csrf_token %}
-      
+      {% if next %}<input type="hidden" name="next" value="{{ next }}" />{% endif %}
+
       {% if form.errors %}
-      <div class="error-messages">
-        {% for field, errors in form.errors.items %}
-        <div class="error-item">
-          <strong>{{ field|title }}:</strong>
-          {% for error in errors %}
-          <span>{{ error }}</span>
-          {% endfor %}
-        </div>
-        {% endfor %}
-      </div>
+      <p class="flash flash-error" role="alert">{% translate "Nom d'utilisateur ou mot de passe incorrect. Vérifiez les majuscules et réessayez." %}</p>
       {% endif %}
-      
+
       <div class="form-group">
         <label for="{{ form.username.id_for_label }}">{% translate "Nom d'utilisateur" %}</label>
-        <input type="text" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}" 
-               class="form-control" placeholder="{% translate 'Entrez votre nom d’utilisateur' %}" required autofocus>
+        <input type="text" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}" value="{{ form.username.value|default:'' }}"
+               class="form-control" placeholder="{% translate 'Entrez votre nom d’utilisateur' %}" autocomplete="username" required {% if not form.errors %}autofocus{% endif %}>
       </div>
-      
+
       <div class="form-group">
         <label for="{{ form.password.id_for_label }}">{% translate "Mot de passe" %}</label>
-        <input type="password" name="{{ form.password.name }}" id="{{ form.password.id_for_label }}" 
-               class="form-control" placeholder="{% translate 'Entrez votre mot de passe' %}" required>
+        <input type="password" name="{{ form.password.name }}" id="{{ form.password.id_for_label }}"
+               class="form-control" placeholder="{% translate 'Entrez votre mot de passe' %}" autocomplete="current-password" required {% if form.errors %}autofocus{% endif %}>
       </div>
-      
-      <div class="form-actions">
-        <button class="btn primary btn-block" type="submit">
-          <span>{% translate "Se connecter" %}</span>
-        </button>
-      </div>
+
+      <button class="btn primary btn-block" type="submit">{% translate "Se connecter" %}</button>
     </form>
 
     <div class="login-footer">
-      <p><a href="{% url 'password_reset' %}">{% translate "Mot de passe oublié ?" %}</a></p>
+      <a class="link" href="{% url 'password_reset' %}">{% translate "Mot de passe oublié ?" %}</a>
       <p>{% translate "Accès réservé aux membres autorisés." %}</p>
     </div>
   </div>
-  
+
   <div class="login-info">
-    <div class="info-card">
-      <h3>🔐 {% translate "Sécurité" %}</h3>
-      <p>{% translate "Connexion sécurisée avec chiffrement des données." %}</p>
+    <div class="login-point tone-green">
+      <span class="module-icon">{% icon "shield" 20 %}</span>
+      <div><h3>{% translate "Sécurité" %}</h3><p>{% translate "Connexion sécurisée avec chiffrement des données." %}</p></div>
     </div>
-    <div class="info-card">
-      <h3>📊 {% translate "Tableaux de bord" %}</h3>
-      <p>{% translate "Accès aux dashboards Admin, Manager et Groupes." %}</p>
+    <div class="login-point tone-sky">
+      <span class="module-icon">{% icon "chart" 20 %}</span>
+      <div><h3>{% translate "Tableaux de bord" %}</h3><p>{% translate "Accès aux dashboards Admin, Manager et Groupes." %}</p></div>
     </div>
-    <div class="info-card">
-      <h3>📁 {% translate "Modules organisés" %}</h3>
-      <p>{% translate "Gestion des groupes, membres, rencontres et cotisations." %}</p>
+    <div class="login-point tone-gold">
+      <span class="module-icon">{% icon "grid" 20 %}</span>
+      <div><h3>{% translate "Modules organisés" %}</h3><p>{% translate "Gestion des groupes, membres, rencontres et cotisations." %}</p></div>
     </div>
   </div>
 </section>

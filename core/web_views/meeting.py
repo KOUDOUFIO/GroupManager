@@ -71,8 +71,8 @@ class MeetingEntryListView(SearchableListView):
         {"label": _("Membre"), "accessor": "member.full_name"},
         {"label": _("Rencontre"), "accessor": "meeting.title"},
         {"label": _("Groupe"), "accessor": "meeting.group.name"},
-        {"label": _("Statut"), "accessor": "get_status_display"},
-        {"label": _("Date"), "accessor": "recorded_at"},
+        {"label": _("Statut"), "accessor": "status", "format": "status"},
+        {"label": _("Date"), "accessor": "meeting.scheduled_at"},
     ]
     search_fields = ["member__full_name", "meeting__title", "status", "reason", "meeting__group__name"]
     select_related_fields = ("meeting", "meeting__group", "member")

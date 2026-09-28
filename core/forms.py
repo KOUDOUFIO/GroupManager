@@ -10,6 +10,28 @@ from . import models
 from django.utils.translation import gettext, gettext_lazy as _
 
 
+def polish_form(form):
+    """Rend un formulaire de gestion agreable a utiliser.
+
+    Calendrier pour les dates, cases a cocher pour les choix multiples et
+    "Choisissez..." a la place de "---------" dans les listes.
+    """
+    for field in form.fields.values():
+        if isinstance(field, forms.ModelMultipleChoiceField):
+            field.widget = forms.CheckboxSelectMultiple(choices=field.widget.choices)
+        elif isinstance(field, forms.ModelChoiceField):
+            field.empty_label = _("Choisissez...")
+        elif isinstance(field, forms.DateTimeField):
+            field.widget = forms.DateTimeInput(attrs={"type": "datetime-local"}, format="%Y-%m-%dT%H:%M")
+            field.input_formats = ["%Y-%m-%dT%H:%M", *(field.input_formats or [])]
+        elif isinstance(field, forms.DateField):
+            field.widget = forms.DateInput(attrs={"type": "date"}, format="%Y-%m-%d")
+            field.input_formats = ["%Y-%m-%d", *(field.input_formats or [])]
+        if isinstance(field, forms.TypedChoiceField) and field.choices and field.choices[0][0] == "":
+            field.choices = [("", _("Choisissez..."))] + list(field.choices)[1:]
+    return form
+
+
 class PositionForm(forms.ModelForm):
     """Formulaire pour les postes avec validation de cohérence groupe/organe."""
 
@@ -49,7 +71,8 @@ class ContributionForm(forms.ModelForm):
 
     class Meta:
         model = models.Contribution
-        fields = "__all__"
+        # Les champs du paiement en ligne sont remplis par PayGate, jamais a la main.
+        exclude = ["gateway_transaction_id", "gateway_reference", "payer_phone"]
 
     def clean(self):
         """Valide que le membre appartient au groupe de la cotisation."""

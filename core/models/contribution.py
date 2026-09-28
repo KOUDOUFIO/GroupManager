@@ -54,20 +54,22 @@ class Contribution(models.Model):
         (STATUS_FAILED, _("Échouée")),
     ]
 
-    member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="contributions")
-    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="contributions")
-    contribution_type = models.CharField(max_length=20, choices=TYPE_CHOICES)
-    payment_method = models.CharField(max_length=20, choices=METHOD_CHOICES, default=METHOD_OTHER)
-    payment_status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=STATUS_CONFIRMED)
-    amount = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal("0.01"))])
-    paid_at = models.DateField()
-    notes = models.TextField(blank=True)
-    gateway_transaction_id = models.CharField(max_length=64, null=True, blank=True, unique=True)
+    member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="contributions", verbose_name=_("Membre"))
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="contributions", verbose_name=_("Groupe"))
+    contribution_type = models.CharField(max_length=20, choices=TYPE_CHOICES, verbose_name=_("Type"))
+    payment_method = models.CharField(max_length=20, choices=METHOD_CHOICES, default=METHOD_OTHER, verbose_name=_("Moyen de paiement"))
+    payment_status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=STATUS_CONFIRMED, verbose_name=_("Statut"))
+    amount = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal("0.01"))], verbose_name=_("Montant"))
+    paid_at = models.DateField(verbose_name=_("Date de paiement"))
+    notes = models.TextField(blank=True, verbose_name=_("Notes"))
+    gateway_transaction_id = models.CharField(max_length=64, null=True, blank=True, unique=True, verbose_name=_("Identifiant de transaction"))
     # Reference du paiement cote operateur (T-Money / Flooz), pour le rapprochement.
     gateway_reference = models.CharField(_("Référence du paiement"), max_length=64, blank=True, default="")
     payer_phone = models.CharField(_("Numéro payeur"), max_length=32, blank=True, default="")
 
     class Meta:
+        verbose_name = _("Cotisation")
+        verbose_name_plural = _("Cotisations")
         constraints = [
             models.CheckConstraint(
                 condition=models.Q(amount__gt=0),

@@ -2,6 +2,7 @@
 
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from .group import Group
 from .member import Member
@@ -14,13 +15,15 @@ class Position(models.Model):
 
     Un poste peut être rattaché à un organe spécifique ou directement au groupe.
     """
-    name = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
-    organ = models.ForeignKey(Organ, on_delete=models.SET_NULL, null=True, blank=True)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="positions")
-    member = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True, blank=True, related_name="positions")
+    name = models.CharField(max_length=200, verbose_name=_("Intitulé"))
+    description = models.TextField(blank=True, verbose_name=_("Description"))
+    organ = models.ForeignKey(Organ, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("Organe"))
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="positions", verbose_name=_("Groupe"))
+    member = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True, blank=True, related_name="positions", verbose_name=_("Titulaire"))
 
     class Meta:
+        verbose_name = _("Poste")
+        verbose_name_plural = _("Postes")
         indexes = [
             models.Index(fields=["name"]),
         ]
