@@ -1,21 +1,18 @@
 {% extends 'core/base.html' %}
-{% load i18n core_extras %}
+{% load i18n static %}
 
 {% block title %}{% translate "Connexion - Kotiza" %}{% endblock %}
 
-{% block hero %}
-<div>
-  <p class="pill">{% translate "Accès sécurisé" %}</p>
-  <h1>{% translate "Connexion" %}</h1>
-  <p class="subtitle">{% translate "Identifiez-vous pour accéder à votre espace de gestion." %}</p>
-</div>
-{% endblock %}
+{% block body_class %}page-auth{% endblock %}
+
+{% block hero %}{% endblock %}
 
 {% block content %}
-<section class="login-container">
-  <div class="login-card">
+<section class="auth-wrap">
+  <div class="login-card auth-card">
     <div class="login-header">
-      <h2>{% translate "Bienvenue sur Kotiza" %}</h2>
+      <img class="auth-logo" src="{% static 'core/img/logo.svg' %}" alt="" width="64" height="64" />
+      <h1>{% translate "Bienvenue sur Kotiza" %}</h1>
       <p>{% translate "Connectez-vous pour accéder à vos tableaux de bord et modules." %}</p>
     </div>
 
@@ -45,21 +42,6 @@
     <div class="login-footer">
       <a class="link" href="{% url 'password_reset' %}">{% translate "Mot de passe oublié ?" %}</a>
       <p>{% translate "Accès réservé aux membres autorisés." %}</p>
-    </div>
-  </div>
-
-  <div class="login-info">
-    <div class="login-point tone-green">
-      <span class="module-icon">{% icon "shield" 20 %}</span>
-      <div><h3>{% translate "Sécurité" %}</h3><p>{% translate "Connexion sécurisée avec chiffrement des données." %}</p></div>
-    </div>
-    <div class="login-point tone-sky">
-      <span class="module-icon">{% icon "chart" 20 %}</span>
-      <div><h3>{% translate "Tableaux de bord" %}</h3><p>{% translate "Accès aux dashboards Admin, Manager et Groupes." %}</p></div>
-    </div>
-    <div class="login-point tone-gold">
-      <span class="module-icon">{% icon "grid" 20 %}</span>
-      <div><h3>{% translate "Modules organisés" %}</h3><p>{% translate "Gestion des groupes, membres, rencontres et cotisations." %}</p></div>
     </div>
   </div>
 </section>

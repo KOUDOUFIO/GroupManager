@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-28 09:11+0000\n"
+"POT-Creation-Date: 2026-09-28 10:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1539,15 +1539,6 @@ msgstr "Back to login:"
 msgid "Connexion - Kotiza"
 msgstr "Log in - Kotiza"
 
-msgid "Accès sécurisé"
-msgstr "Secure access"
-
-msgid "Connexion"
-msgstr "Log in"
-
-msgid "Identifiez-vous pour accéder à votre espace de gestion."
-msgstr "Sign in to access your management space."
-
 msgid "Bienvenue sur Kotiza"
 msgstr "Welcome to Kotiza"
 
@@ -1574,24 +1565,6 @@ msgstr "Forgot your password?"
 
 msgid "Accès réservé aux membres autorisés."
 msgstr "Access restricted to authorized members."
-
-msgid "Sécurité"
-msgstr "Security"
-
-msgid "Connexion sécurisée avec chiffrement des données."
-msgstr "Secure connection with encrypted data."
-
-msgid "Tableaux de bord"
-msgstr "Dashboards"
-
-msgid "Accès aux dashboards Admin, Manager et Groupes."
-msgstr "Access to Admin, Manager and Group dashboards."
-
-msgid "Modules organisés"
-msgstr "Organized modules"
-
-msgid "Gestion des groupes, membres, rencontres et cotisations."
-msgstr "Manage groups, members, meetings and contributions."
 
 msgid "Mot de passe modifié - Kotiza"
 msgstr "Password changed - Kotiza"
@@ -1922,6 +1895,9 @@ msgstr "Client/prospect CRM"
 msgid "Devis / factures"
 msgstr "Quotes / invoices"
 
+msgid "Tableaux de bord"
+msgstr "Dashboards"
+
 msgid "Partiel"
 msgstr "Partial"
 
@@ -2248,6 +2224,30 @@ msgstr "Edit position"
 
 msgid "Supprimer un poste"
 msgstr "Delete position"
+
+#~ msgid "Accès sécurisé"
+#~ msgstr "Secure access"
+
+#~ msgid "Connexion"
+#~ msgstr "Log in"
+
+#~ msgid "Identifiez-vous pour accéder à votre espace de gestion."
+#~ msgstr "Sign in to access your management space."
+
+#~ msgid "Sécurité"
+#~ msgstr "Security"
+
+#~ msgid "Connexion sécurisée avec chiffrement des données."
+#~ msgstr "Secure connection with encrypted data."
+
+#~ msgid "Accès aux dashboards Admin, Manager et Groupes."
+#~ msgstr "Access to Admin, Manager and Group dashboards."
+
+#~ msgid "Modules organisés"
+#~ msgstr "Organized modules"
+
+#~ msgid "Gestion des groupes, membres, rencontres et cotisations."
+#~ msgstr "Manage groups, members, meetings and contributions."
 
 #~ msgid "Modèle"
 #~ msgstr "Model"

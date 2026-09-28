@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{% static 'core/styles.css' %}" />
     {% block extra_head %}{% endblock %}
   </head>
-  <body{% if ui_is_authenticated %} class="app"{% endif %}>
+  <body class="{% if ui_is_authenticated %}app {% endif %}{% block body_class %}{% endblock %}">
     <div class="background">
       <div class="glow"></div>
       <div class="grid"></div>
