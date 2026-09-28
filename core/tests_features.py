@@ -211,3 +211,71 @@ class TwoFactorTests(TestCase):
         self.client.login(username="secure", password="password123")
         response = self.client.post(reverse("two_factor_verify"), {"code": "000000", "next": "https://evil.example/"})
         self.assertEqual(response.context["next"], "/")
+
+
+class MemberImportTests(TestCase):
+    def setUp(self):
+        from django.contrib.auth.models import Permission
+
+        self.user = get_user_model().objects.create_user("importeur")
+        self.user.user_permissions.add(Permission.objects.get(codename="add_member", content_type__app_label="core"))
+        self.client.force_login(self.user)
+        self.group = Group.objects.create(name="Tontine Espoir")
+        Member.objects.create(full_name="Déjà Là", phone="+22890000001")
+
+    def _xlsx(self, rows):
+        from io import BytesIO
+
+        from django.core.files.uploadedfile import SimpleUploadedFile
+        from openpyxl import Workbook
+
+        workbook = Workbook()
+        for row in rows:
+            workbook.active.append(row)
+        output = BytesIO()
+        workbook.save(output)
+        return SimpleUploadedFile("membres.xlsx", output.getvalue())
+
+    def test_preview_then_confirm_creates_only_valid_rows(self):
+        upload = self._xlsx([
+            ["Nom complet", "Téléphone", "Email", "Adresse", "Groupe"],
+            ["Ama Mensah", 90123456, "ama@example.com", "Bè", ""],
+            ["Kofi Agbo", "91 11 22 33", "", "", "tontine espoir"],
+            ["Doublon", "90 00 00 01", "", "", ""],
+            ["", "", "", "", ""],
+            ["Mauvais Tel", "12", "", "", ""],
+            ["Groupe Faux", "", "", "", "Inconnu"],
+        ])
+        response = self.client.post(reverse("member_import"), {"file": upload, "group": self.group.pk})
+        self.assertEqual(response.context["counts"], {"new": 2, "duplicate": 1, "error": 2})
+        # Rien n'est cree avant la confirmation.
+        self.assertFalse(Member.objects.filter(full_name="Ama Mensah").exists())
+
+        response = self.client.post(reverse("member_import"), {"action": "confirm"})
+        self.assertRedirects(response, reverse("member_list"), fetch_redirect_response=False)
+        ama = Member.objects.get(full_name="Ama Mensah")
+        self.assertEqual(ama.phone, "+22890123456")
+        self.assertEqual(list(ama.groups.all()), [self.group])
+        self.assertEqual(Member.objects.get(full_name="Kofi Agbo").groups.get(), self.group)
+        self.assertEqual(Member.objects.count(), 3)
+
+    def test_csv_with_semicolons_and_repeated_import_has_no_duplicates(self):
+        from django.core.files.uploadedfile import SimpleUploadedFile
+
+        content = "Nom;Telephone\nAfi Dzifa;92 34 56 78\n".encode("utf-8")
+        for _ in range(2):
+            self.client.post(reverse("member_import"), {"file": SimpleUploadedFile("m.csv", content)})
+            self.client.post(reverse("member_import"), {"action": "confirm"})
+        self.assertEqual(Member.objects.filter(full_name="Afi Dzifa").count(), 1)
+
+    def test_file_without_name_column_is_refused(self):
+        response = self.client.post(reverse("member_import"), {"file": self._xlsx([["Prénom", "Ville"], ["A", "B"]])})
+        self.assertContains(response, "Nom complet")
+        self.assertNotIn("preview", response.context)
+
+    def test_template_download_and_permission(self):
+        response = self.client.get(reverse("member_import_template"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.content.startswith(b"PK"))
+        self.client.force_login(get_user_model().objects.create_user("sans-droit"))
+        self.assertEqual(self.client.get(reverse("member_import")).status_code, 403)

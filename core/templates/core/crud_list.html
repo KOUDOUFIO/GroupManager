@@ -17,6 +17,9 @@
   {% if create_url %}
   <a class="btn primary" href="{{ create_url }}">{% translate "Ajouter" %}</a>
   {% endif %}
+  {% if base_url_name == 'member' and perms.core.add_member %}
+  <a class="btn ghost" href="{% url 'member_import' %}">{% icon "file" 18 %}{% translate "Importer depuis Excel" %}</a>
+  {% endif %}
 </div>
 {% endblock %}
 

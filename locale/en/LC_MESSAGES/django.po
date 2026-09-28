@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-28 15:16+0000\n"
+"POT-Creation-Date: 2026-09-28 15:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -616,6 +616,44 @@ msgstr "The amount must be positive."
 msgid "Le montant doit être un nombre valide."
 msgstr "The amount must be a valid number."
 
+msgid "Fichier trop volumineux (2 Mo maximum)."
+msgstr "File too large (2 MB maximum)."
+
+msgid "Fichier Excel illisible."
+msgstr "Unreadable Excel file."
+
+msgid "Format non reconnu : envoyez un fichier .xlsx ou .csv."
+msgstr "Unknown format: send an .xlsx or .csv file."
+
+msgid "Colonne « Nom complet » introuvable. Utilisez le modèle proposé."
+msgstr "\"Full name\" column not found. Use the provided template."
+
+#, python-format
+msgid "Trop de lignes (%(max)s maximum par import)."
+msgstr "Too many rows (%(max)s maximum per import)."
+
+msgid "Nom manquant."
+msgstr "Missing name."
+
+msgid "Nom trop long."
+msgstr "Name too long."
+
+msgid "Téléphone invalide."
+msgstr "Invalid phone."
+
+msgid "Email invalide."
+msgstr "Invalid email."
+
+#, python-format
+msgid "Groupe « %(name)s » inconnu."
+msgstr "Unknown group \"%(name)s\"."
+
+msgid "Même téléphone ou email qu'un membre existant."
+msgstr "Same phone or email as an existing member."
+
+msgid "Même nom qu'un membre existant."
+msgstr "Same name as an existing member."
+
 msgid "Abonnement expiré."
 msgstr "Subscription expired."
 
@@ -812,6 +850,9 @@ msgstr "List and quick management of records."
 
 msgid "Ajouter"
 msgstr "Add"
+
+msgid "Importer depuis Excel"
+msgstr "Import from Excel"
 
 msgid "Rechercher..."
 msgstr "Search..."
@@ -1287,6 +1328,75 @@ msgstr "An email will be sent to <strong>%(email)s</strong> with a link to choos
 
 msgid "Ce membre n'a pas d'email : un mot de passe provisoire vous sera affiché, à lui transmettre."
 msgstr "This member has no email: a temporary password will be shown for you to pass on."
+
+msgid "Importer des membres - Kotiza"
+msgstr "Import members - Kotiza"
+
+msgid "Importer des membres"
+msgstr "Import members"
+
+msgid "Ajoutez tous vos membres d'un coup depuis un fichier Excel ou CSV."
+msgstr "Add all your members at once from an Excel or CSV file."
+
+msgid "À importer"
+msgstr "To import"
+
+msgid "nouveaux membres"
+msgstr "new members"
+
+msgid "Déjà présents"
+msgstr "Already there"
+
+msgid "ignorés"
+msgstr "skipped"
+
+msgid "Erreurs"
+msgstr "Errors"
+
+msgid "lignes à corriger"
+msgstr "rows to fix"
+
+msgid "Ligne"
+msgstr "Row"
+
+msgid "Résultat"
+msgstr "Result"
+
+msgid "Déjà présent"
+msgstr "Already there"
+
+#, fuzzy, python-format
+msgid "Importer %(total)s membre"
+msgid_plural "Importer %(total)s membres"
+msgstr[0] "Import %(total)s member"
+msgstr[1] "Import %(total)s members"
+
+msgid "Aucun nouveau membre à importer dans ce fichier."
+msgstr "No new member to import in this file."
+
+msgid "Envoyer un autre fichier"
+msgstr "Send another file"
+
+msgid "Voir l'aperçu"
+msgstr "See preview"
+
+msgid "Comment faire ?"
+msgstr "How to do it?"
+
+msgid "Téléchargez le modèle Excel et remplissez une ligne par membre."
+msgstr "Download the Excel template and fill one row per member."
+
+msgid "Seul le nom est obligatoire. Le téléphone, l'email, l'adresse et le groupe sont facultatifs."
+msgstr "Only the name is required. Phone, email, address and group are optional."
+
+msgid "Envoyez le fichier : un aperçu s'affiche avant toute création."
+msgstr "Send the file: a preview is shown before anything is created."
+
+msgid "Les membres déjà présents (même téléphone ou même email) sont ignorés : vous pouvez renvoyer le même fichier sans créer de doublons."
+msgstr "Members already there (same phone or email) are skipped: you can send the same file again without creating duplicates."
+
+msgid "Télécharger le modèle Excel"
+msgstr "Download the Excel template"
 
 msgid "Mes présences - Kotiza"
 msgstr "My attendance - Kotiza"
@@ -2396,6 +2506,22 @@ msgstr "Edit member"
 msgid "Supprimer un membre"
 msgstr "Delete member"
 
+msgid "Fichier Excel ou CSV"
+msgstr "Excel or CSV file"
+
+msgid "Ajouter les membres au groupe"
+msgstr "Add the members to the group"
+
+msgid "Aucun (ou colonne « Groupe » du fichier)"
+msgstr "None (or the file's \"Group\" column)"
+
+msgid "L'aperçu a expiré. Envoyez à nouveau le fichier."
+msgstr "The preview expired. Send the file again."
+
+#, python-format
+msgid "%(count)s membre(s) importé(s)."
+msgstr "%(count)s member(s) imported."
+
 msgid "Ajouter un organe"
 msgstr "Add a body"
 
@@ -2496,9 +2622,6 @@ msgstr "Wrong or expired code. Use the code shown right now."
 
 #~ msgid "Payer maintenant"
 #~ msgstr "Pay now"
-
-#~ msgid "Comment ça marche ?"
-#~ msgstr "How does it work?"
 
 #~ msgid "Choisissez votre réseau"
 #~ msgstr "Choose your network"

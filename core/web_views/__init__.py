@@ -30,6 +30,7 @@ from .member_portal import (
     MemberPortalDashboardView,
 )
 from .access import MemberAccessView
+from .member_import import MemberImportView, member_import_template
 from .dues import DuesView
 from .notifications import NotificationListView
 from .receipts import contribution_receipt

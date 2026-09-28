@@ -1,0 +1,110 @@
+{% extends 'core/base.html' %}
+{% load i18n core_extras %}
+
+{% block title %}{% translate "Importer des membres - Kotiza" %}{% endblock %}
+
+{% block hero %}
+<div>
+  <p class="pill">{% translate "Membres" %}</p>
+  <h1>{% translate "Importer des membres" %}</h1>
+  <p class="subtitle">{% translate "Ajoutez tous vos membres d'un coup depuis un fichier Excel ou CSV." %}</p>
+</div>
+{% endblock %}
+
+{% block content %}
+{% if preview %}
+<section class="stats kpi-grid">
+  <div class="kpi-card tone-green">
+    <span class="module-icon">{% icon "check" 20 %}</span>
+    <p class="kpi-label">{% translate "À importer" %}</p>
+    <p class="stat-value">{{ counts.new }}</p>
+    <p class="stat-label">{% translate "nouveaux membres" %}</p>
+  </div>
+  <div class="kpi-card tone-slate">
+    <span class="module-icon">{% icon "users" 20 %}</span>
+    <p class="kpi-label">{% translate "Déjà présents" %}</p>
+    <p class="stat-value">{{ counts.duplicate }}</p>
+    <p class="stat-label">{% translate "ignorés" %}</p>
+  </div>
+  <div class="kpi-card tone-orange">
+    <span class="module-icon">{% icon "close" 20 %}</span>
+    <p class="kpi-label">{% translate "Erreurs" %}</p>
+    <p class="stat-value">{{ counts.error }}</p>
+    <p class="stat-label">{% translate "lignes à corriger" %}</p>
+  </div>
+</section>
+
+<section class="table-card">
+  <table class="responsive-table">
+    <thead>
+      <tr>
+        <th>{% translate "Ligne" %}</th>
+        <th>{% translate "Nom complet" %}</th>
+        <th>{% translate "Téléphone" %}</th>
+        <th>{% translate "Email" %}</th>
+        <th>{% translate "Groupe" %}</th>
+        <th>{% translate "Résultat" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in preview %}
+      <tr>
+        <td data-label="{% translate "Ligne" %}">{{ row.line }}</td>
+        <td class="cell-main">{{ row.full_name|default:"—" }}</td>
+        <td data-label="{% translate "Téléphone" %}">{{ row.phone|default:"—" }}</td>
+        <td data-label="{% translate "Email" %}">{{ row.email|default:"—" }}</td>
+        <td data-label="{% translate "Groupe" %}">{{ row.group_name|default:"—" }}</td>
+        <td data-label="{% translate "Résultat" %}">
+          {% if row.status == "new" %}<span class="status-badge status-ok">{% translate "À importer" %}</span>
+          {% elif row.status == "duplicate" %}<span class="status-badge status-info" title="{{ row.reason }}">{% translate "Déjà présent" %}</span>
+          {% else %}<span class="status-badge status-bad">{{ row.reason }}</span>{% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<section class="import-actions">
+  {% if counts.new %}
+  <form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="confirm" />
+    <button class="btn primary" type="submit">{% icon "check" 18 %}{% blocktranslate count total=counts.new %}Importer {{ total }} membre{% plural %}Importer {{ total }} membres{% endblocktranslate %}</button>
+  </form>
+  {% else %}
+  <p class="muted">{% translate "Aucun nouveau membre à importer dans ce fichier." %}</p>
+  {% endif %}
+  <a class="btn ghost" href="{% url 'member_import' %}">{% translate "Envoyer un autre fichier" %}</a>
+</section>
+
+{% else %}
+<section class="import-layout">
+  <form method="post" enctype="multipart/form-data" class="form-card crud-form import-form" novalidate>
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="crud-field{% if field.errors %} has-error{% endif %}">
+      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+      {{ field }}
+      {% for error in field.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+    </div>
+    {% endfor %}
+    <div class="form-actions">
+      <button class="btn primary" type="submit">{% translate "Voir l'aperçu" %}</button>
+      <a class="btn ghost" href="{% url 'member_list' %}">{% translate "Annuler" %}</a>
+    </div>
+  </form>
+
+  <aside class="form-card import-help">
+    <h2>{% translate "Comment faire ?" %}</h2>
+    <ol>
+      <li>{% translate "Téléchargez le modèle Excel et remplissez une ligne par membre." %}</li>
+      <li>{% translate "Seul le nom est obligatoire. Le téléphone, l'email, l'adresse et le groupe sont facultatifs." %}</li>
+      <li>{% translate "Envoyez le fichier : un aperçu s'affiche avant toute création." %}</li>
+    </ol>
+    <p class="muted">{% translate "Les membres déjà présents (même téléphone ou même email) sont ignorés : vous pouvez renvoyer le même fichier sans créer de doublons." %}</p>
+    <a class="btn ghost" href="{% url 'member_import_template' %}">{% icon "file" 18 %}{% translate "Télécharger le modèle Excel" %}</a>
+  </aside>
+</section>
+{% endif %}
+{% endblock %}
