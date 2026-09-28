@@ -5,6 +5,7 @@ from django.db import models
 
 from .group import Group
 from .member import Member
+from django.utils.translation import gettext, gettext_lazy as _
 
 
 class Meeting(models.Model):
@@ -21,7 +22,7 @@ class Meeting(models.Model):
         ]
 
     def __str__(self) -> str:
-        label = self.title or "Rencontre"
+        label = self.title or gettext("Rencontre")
         return f"{label} - {self.group.name}"
 
 
@@ -36,10 +37,10 @@ class MeetingEntry(models.Model):
     STATUS_LATE = "late"
     STATUS_PERMISSION = "permission"
     STATUS_CHOICES = [
-        (STATUS_PRESENT, "Present"),
-        (STATUS_ABSENT, "Absent"),
-        (STATUS_LATE, "Late"),
-        (STATUS_PERMISSION, "Permission"),
+        (STATUS_PRESENT, _("Présent")),
+        (STATUS_ABSENT, _("Absent")),
+        (STATUS_LATE, _("En retard")),
+        (STATUS_PERMISSION, _("Permission")),
     ]
 
     meeting = models.ForeignKey(Meeting, on_delete=models.CASCADE, related_name="entries")
@@ -58,7 +59,7 @@ class MeetingEntry(models.Model):
     def clean(self):
         """Valide que le membre appartient au groupe de la rencontre."""
         if self.meeting_id and self.member_id and not self.member.groups.filter(pk=self.meeting.group_id).exists():
-            raise ValidationError({"member": "Le membre doit appartenir au groupe de la rencontre."})
+            raise ValidationError({"member": gettext("Le membre doit appartenir au groupe de la rencontre.")})
 
     def __str__(self) -> str:
         return f"{self.member.full_name} - {self.meeting}"

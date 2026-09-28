@@ -7,6 +7,7 @@ pour assurer la cohérence des données entre les modèles liés.
 from django import forms
 
 from . import models
+from django.utils.translation import gettext, gettext_lazy as _
 
 
 class PositionForm(forms.ModelForm):
@@ -22,7 +23,7 @@ class PositionForm(forms.ModelForm):
         group = cleaned_data.get("group")
         organ = cleaned_data.get("organ")
         if organ and group and organ.group_id != group.id:
-            self.add_error("organ", "L'organe selectionne doit appartenir au meme groupe.")
+            self.add_error("organ", gettext("L'organe sélectionné doit appartenir au même groupe."))
         return cleaned_data
 
 
@@ -39,7 +40,7 @@ class MeetingEntryForm(forms.ModelForm):
         meeting = cleaned_data.get("meeting")
         member = cleaned_data.get("member")
         if meeting and member and not member.groups.filter(pk=meeting.group_id).exists():
-            self.add_error("member", "Le membre doit appartenir au groupe de la rencontre.")
+            self.add_error("member", gettext("Le membre doit appartenir au groupe de la rencontre."))
         return cleaned_data
 
 
@@ -56,7 +57,7 @@ class ContributionForm(forms.ModelForm):
         group = cleaned_data.get("group")
         member = cleaned_data.get("member")
         if group and member and not member.groups.filter(pk=group.id).exists():
-            self.add_error("member", "Le membre doit appartenir au groupe de la cotisation.")
+            self.add_error("member", gettext("Le membre doit appartenir au groupe de la cotisation."))
         return cleaned_data
 
 
@@ -67,18 +68,18 @@ class ProposalRequestForm(forms.ModelForm):
         model = models.ProposalRequest
         fields = ["name", "email", "company", "organization_type", "message"]
         widgets = {
-            "name": forms.TextInput(attrs={"placeholder": "Votre nom"}),
-            "email": forms.EmailInput(attrs={"placeholder": "nom@entreprise.com"}),
-            "company": forms.TextInput(attrs={"placeholder": "Nom de l'organisation"}),
+            "name": forms.TextInput(attrs={"placeholder": _("Votre nom")}),
+            "email": forms.EmailInput(attrs={"placeholder": _("nom@entreprise.com")}),
+            "company": forms.TextInput(attrs={"placeholder": _("Nom de l'organisation")}),
             "message": forms.Textarea(attrs={
                 "rows": 5,
-                "placeholder": "Décrivez votre besoin, le nombre d'utilisateurs, les groupes et les priorités...",
+                "placeholder": _("Décrivez votre besoin, le nombre d'utilisateurs, les groupes et les priorités..."),
             }),
         }
         labels = {
-            "name": "Nom",
-            "email": "Email",
-            "company": "Entreprise",
-            "organization_type": "Type d'organisation",
-            "message": "Besoin principal",
+            "name": _("Nom"),
+            "email": _("Email"),
+            "company": _("Entreprise"),
+            "organization_type": _("Type d'organisation"),
+            "message": _("Besoin principal"),
         }

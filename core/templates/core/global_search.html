@@ -1,67 +1,68 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 
-{% block title %}Recherche Globale - Kotiza{% endblock %}
+{% block title %}{% translate "Recherche Globale - Kotiza" %}{% endblock %}
 
 {% block hero %}
 <div>
-  <p class="pill">Recherche transversale</p>
-  <h1>Recherche globale</h1>
-  <p class="subtitle">Interrogez toutes les entites depuis un seul point d'entree.</p>
+  <p class="pill">{% translate "Recherche transversale" %}</p>
+  <h1>{% translate "Recherche globale" %}</h1>
+  <p class="subtitle">{% translate "Interrogez toutes les entités depuis un seul point d'entrée." %}</p>
 </div>
 {% endblock %}
 
 {% block content %}
 <section class="form-card">
   <form method="get" class="search-form">
-    <input type="text" name="q" value="{{ query }}" placeholder="Nom, email, groupe, evenement..." />
-    <button class="btn primary" type="submit">Rechercher</button>
+    <input type="text" name="q" value="{{ query }}" placeholder="{% translate 'Nom, email, groupe, événement...' %}" />
+    <button class="btn primary" type="submit">{% translate "Rechercher" %}</button>
   </form>
 </section>
 
 {% if has_query %}
 <section class="workspace-grid">
   <article class="workspace-card">
-    <h4>Groupes</h4>
+    <h4>{% translate "Groupes" %}</h4>
     {% for item in groups %}
     <p><a class="link" href="/groupes/{{ item.id }}/dashboard/">{{ item.name }}</a></p>
     {% empty %}
-    <p>Aucun resultat.</p>
+    <p>{% translate "Aucun résultat." %}</p>
     {% endfor %}
   </article>
 
   <article class="workspace-card">
-    <h4>Membres</h4>
+    <h4>{% translate "Membres" %}</h4>
     {% for item in members %}
     <p>{{ item.full_name }} - {{ item.email }}</p>
     {% empty %}
-    <p>Aucun resultat.</p>
+    <p>{% translate "Aucun résultat." %}</p>
     {% endfor %}
   </article>
 
   <article class="workspace-card">
-    <h4>Rencontres</h4>
+    <h4>{% translate "Rencontres" %}</h4>
     {% for item in meetings %}
     <p>{{ item.title|default:'Rencontre' }} - {{ item.group.name }}</p>
     {% empty %}
-    <p>Aucun resultat.</p>
+    <p>{% translate "Aucun résultat." %}</p>
     {% endfor %}
   </article>
 
   <article class="workspace-card">
-    <h4>Cotisations</h4>
+    <h4>{% translate "Cotisations" %}</h4>
     {% for item in contributions %}
     <p>{{ item.member.full_name }} - {{ item.amount }} - {{ item.group.name }}</p>
     {% empty %}
-    <p>Aucun resultat.</p>
+    <p>{% translate "Aucun résultat." %}</p>
     {% endfor %}
   </article>
 
   <article class="workspace-card">
-    <h4>Evenements</h4>
+    <h4>{% translate "Événements" %}</h4>
     {% for item in events %}
     <p>{{ item.title }} - {{ item.location }}</p>
     {% empty %}
-    <p>Aucun resultat.</p>
+    <p>{% translate "Aucun résultat." %}</p>
     {% endfor %}
   </article>
 </section>

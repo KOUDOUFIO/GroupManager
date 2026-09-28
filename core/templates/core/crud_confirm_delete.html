@@ -1,16 +1,17 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 
 {% block title %}{{ title }} - Kotiza{% endblock %}
 
 {% block hero %}
 <div>
-  <p class="pill">Confirmation</p>
+  <p class="pill">{% translate "Confirmation" %}</p>
   <h1>{{ title }}</h1>
-  <p class="subtitle">Cette action est definitive.</p>
+  <p class="subtitle">{% translate "Cette action est définitive." %}</p>
 </div>
 <div class="hero-actions">
   {% if list_url %}
-  <a class="btn ghost" href="{{ list_url }}">Retour a la liste</a>
+  <a class="btn ghost" href="{{ list_url }}">{% translate "Retour à la liste" %}</a>
   {% endif %}
 </div>
 {% endblock %}
@@ -19,11 +20,11 @@
 <section class="form-card">
   <form method="post">
     {% csrf_token %}
-    <p>Voulez-vous vraiment supprimer : <strong>{{ object }}</strong> ?</p>
+    <p>{% translate "Voulez-vous vraiment supprimer :" %} <strong>{{ object }}</strong> ?</p>
     <div class="form-actions">
-      <button class="btn primary" type="submit">Supprimer</button>
+      <button class="btn primary" type="submit">{% translate "Supprimer" %}</button>
       {% if list_url %}
-      <a class="btn ghost" href="{{ list_url }}">Annuler</a>
+      <a class="btn ghost" href="{{ list_url }}">{% translate "Annuler" %}</a>
       {% endif %}
     </div>
   </form>

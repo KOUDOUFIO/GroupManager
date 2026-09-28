@@ -1,15 +1,16 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 
-{% block title %}Mes presences - Kotiza{% endblock %}
+{% block title %}{% translate "Mes présences - Kotiza" %}{% endblock %}
 
 {% block hero %}
 <div>
-  <p class="pill">Mon espace</p>
-  <h1>Mes presences</h1>
-  <p class="subtitle">Historique complet de vos presences aux rencontres.</p>
+  <p class="pill">{% translate "Mon espace" %}</p>
+  <h1>{% translate "Mes présences" %}</h1>
+  <p class="subtitle">{% translate "Historique complet de vos présences aux rencontres." %}</p>
 </div>
 <div class="hero-actions">
-  <a class="btn ghost" href="{% url 'member_portal' %}">Retour au tableau de bord</a>
+  <a class="btn ghost" href="{% url 'member_portal' %}">{% translate "Retour au tableau de bord" %}</a>
 </div>
 {% endblock %}
 
@@ -18,10 +19,10 @@
   <table>
     <thead>
       <tr>
-        <th>Date</th>
-        <th>Rencontre</th>
-        <th>Groupe</th>
-        <th>Statut</th>
+        <th>{% translate "Date" %}</th>
+        <th>{% translate "Rencontre" %}</th>
+        <th>{% translate "Groupe" %}</th>
+        <th>{% translate "Statut" %}</th>
       </tr>
     </thead>
     <tbody>
@@ -34,7 +35,7 @@
       </tr>
       {% empty %}
       <tr>
-        <td colspan="4">Aucune presence enregistree.</td>
+        <td colspan="4">{% translate "Aucune présence enregistrée." %}</td>
       </tr>
       {% endfor %}
     </tbody>
@@ -43,11 +44,11 @@
   {% if is_paginated %}
   <div class="pagination">
     {% if page_obj.has_previous %}
-      <a class="link" href="?page={{ page_obj.previous_page_number }}">Precedent</a>
+      <a class="link" href="?page={{ page_obj.previous_page_number }}">{% translate "Précédent" %}</a>
     {% endif %}
-    <span>Page {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+    <span>{% blocktranslate with number=page_obj.number total=page_obj.paginator.num_pages %}Page {{ number }} / {{ total }}{% endblocktranslate %}</span>
     {% if page_obj.has_next %}
-      <a class="link" href="?page={{ page_obj.next_page_number }}">Suivant</a>
+      <a class="link" href="?page={{ page_obj.next_page_number }}">{% translate "Suivant" %}</a>
     {% endif %}
   </div>
   {% endif %}

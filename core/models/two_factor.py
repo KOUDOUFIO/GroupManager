@@ -4,6 +4,7 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django_otp.plugins.otp_totp.models import TOTPDevice as BaseTOTPDevice
+from django.utils.translation import gettext_lazy as _
 
 
 class TOTPDevice(BaseTOTPDevice):
@@ -11,18 +12,18 @@ class TOTPDevice(BaseTOTPDevice):
 
     created_at = models.DateTimeField(
         auto_now_add=True,
-        verbose_name='Créé le'
+        verbose_name=_("Créé le")
     )
 
     last_used_at = models.DateTimeField(
         blank=True,
         null=True,
-        verbose_name='Dernière utilisation'
+        verbose_name=_("Dernière utilisation")
     )
 
     class Meta:
-        verbose_name = 'Appareil TOTP'
-        verbose_name_plural = 'Appareils TOTP'
+        verbose_name = _("Appareil TOTP")
+        verbose_name_plural = _("Appareils TOTP")
 
     def __str__(self):
         return f"TOTP Device - {self.user.username}"
@@ -43,39 +44,39 @@ class TwoFactorPreference(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='two_factor_preferences',
-        verbose_name='Utilisateur'
+        verbose_name=_("Utilisateur")
     )
 
     enabled = models.BooleanField(
         default=False,
-        verbose_name='2FA activé'
+        verbose_name=_("2FA activé")
     )
 
     backup_codes = models.JSONField(
         default=list,
         blank=True,
-        verbose_name='Codes de secours'
+        verbose_name=_("Codes de secours")
     )
 
     backup_codes_used = models.JSONField(
         default=list,
         blank=True,
-        verbose_name='Codes de secours utilisés'
+        verbose_name=_("Codes de secours utilisés")
     )
 
     created_at = models.DateTimeField(
         auto_now_add=True,
-        verbose_name='Créé le'
+        verbose_name=_("Créé le")
     )
 
     updated_at = models.DateTimeField(
         auto_now=True,
-        verbose_name='Mis à jour le'
+        verbose_name=_("Mis à jour le")
     )
 
     class Meta:
-        verbose_name = 'Préférence 2FA'
-        verbose_name_plural = 'Préférences 2FA'
+        verbose_name = _("Préférence 2FA")
+        verbose_name_plural = _("Préférences 2FA")
 
     def __str__(self):
         return f"2FA - {self.user.username}"

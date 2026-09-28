@@ -3,6 +3,7 @@
 from django.conf import settings
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class AuditLog(models.Model):
@@ -15,9 +16,9 @@ class AuditLog(models.Model):
     ACTION_UPDATE = "update"
     ACTION_DELETE = "delete"
     ACTION_CHOICES = [
-        (ACTION_CREATE, "Creation"),
-        (ACTION_UPDATE, "Modification"),
-        (ACTION_DELETE, "Suppression"),
+        (ACTION_CREATE, _("Création")),
+        (ACTION_UPDATE, _("Modification")),
+        (ACTION_DELETE, _("Suppression")),
     ]
 
     actor = models.ForeignKey(

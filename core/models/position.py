@@ -6,6 +6,7 @@ from django.db import models
 from .group import Group
 from .member import Member
 from .organ import Organ
+from django.utils.translation import gettext
 
 
 class Position(models.Model):
@@ -27,7 +28,7 @@ class Position(models.Model):
     def clean(self):
         """Valide que l'organe appartient au même groupe."""
         if self.organ_id and self.group_id and self.organ.group_id != self.group_id:
-            raise ValidationError({"organ": "L'organe selectionne doit appartenir au meme groupe."})
+            raise ValidationError({"organ": gettext("L'organe sélectionné doit appartenir au même groupe.")})
 
     def __str__(self) -> str:
         return f"{self.name} ({self.group.name})"

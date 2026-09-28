@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-28 00:15+0000\n"
+"POT-Creation-Date: 2026-09-28 00:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,11 +30,434 @@ msgstr "Manager"
 msgid "Utilisateur"
 msgstr "User"
 
-msgid "Abonnement expiré."
-msgstr "Subscription expired."
+msgid "L'organe sélectionné doit appartenir au même groupe."
+msgstr "The selected body must belong to the same group."
+
+msgid "Le membre doit appartenir au groupe de la rencontre."
+msgstr "The member must belong to the meeting's group."
+
+msgid "Le membre doit appartenir au groupe de la cotisation."
+msgstr "The member must belong to the contribution's group."
+
+msgid "Votre nom"
+msgstr "Your name"
+
+msgid "nom@entreprise.com"
+msgstr "name@company.com"
+
+msgid "Nom de l'organisation"
+msgstr "Organization name"
+
+msgid "Décrivez votre besoin, le nombre d'utilisateurs, les groupes et les priorités..."
+msgstr "Describe your needs, number of users, groups and priorities..."
+
+msgid "Nom"
+msgstr "Name"
+
+msgid "Email"
+msgstr "Email"
 
 msgid "Entreprise"
 msgstr "Company"
+
+msgid "Type d'organisation"
+msgstr "Organization type"
+
+msgid "Besoin principal"
+msgstr "Main need"
+
+msgid "Création"
+msgstr "Creation"
+
+msgid "Modification"
+msgstr "Update"
+
+msgid "Suppression"
+msgstr "Deletion"
+
+msgid "Mensuelle"
+msgstr "Monthly"
+
+msgid "Annuelle"
+msgstr "Annual"
+
+msgid "Spontanée"
+msgstr "One-off"
+
+msgid "Amende retard"
+msgstr "Late fine"
+
+msgid "Amende absence"
+msgstr "Absence fine"
+
+msgid "Autre"
+msgstr "Other"
+
+msgid "Espèces"
+msgstr "Cash"
+
+msgid "Virement bancaire"
+msgstr "Bank transfer"
+
+msgid "Mobile Money"
+msgstr "Mobile Money"
+
+msgid "Carte bancaire"
+msgstr "Card"
+
+msgid "En attente"
+msgstr "Pending"
+
+msgid "Confirmée"
+msgstr "Confirmed"
+
+msgid "Échouée"
+msgstr "Failed"
+
+msgid "Statistiques Groupes"
+msgstr "Group statistics"
+
+msgid "Statistiques Membres"
+msgstr "Member statistics"
+
+msgid "Statistiques Rencontres"
+msgstr "Meeting statistics"
+
+msgid "Statistiques Cotisations"
+msgstr "Contribution statistics"
+
+msgid "Activité Récente"
+msgstr "Recent activity"
+
+msgid "Événements à Venir"
+msgstr "Upcoming events"
+
+msgid "Actions Rapides"
+msgstr "Quick actions"
+
+msgid "Taux de Présence"
+msgstr "Attendance rate"
+
+msgid "Widgets activés"
+msgstr "Enabled widgets"
+
+msgid "Ordre des widgets"
+msgstr "Widget order"
+
+msgid "1 colonne"
+msgstr "1 column"
+
+msgid "2 colonnes"
+msgstr "2 columns"
+
+msgid "3 colonnes"
+msgstr "3 columns"
+
+msgid "4 colonnes"
+msgstr "4 columns"
+
+msgid "Nombre de colonnes"
+msgstr "Number of columns"
+
+msgid "Clair"
+msgstr "Light"
+
+msgid "Sombre"
+msgstr "Dark"
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "Thème"
+msgstr "Theme"
+
+msgid "Créé le"
+msgstr "Created on"
+
+msgid "Mis à jour le"
+msgstr "Updated on"
+
+msgid "Préférence de dashboard"
+msgstr "Dashboard preference"
+
+msgid "Préférences de dashboard"
+msgstr "Dashboard preferences"
+
+msgid "Rencontre"
+msgstr "Meeting"
+
+msgid "Présent"
+msgstr "Present"
+
+msgid "Absent"
+msgstr "Absent"
+
+msgid "En retard"
+msgstr "Late"
+
+msgid "Permission"
+msgstr "Excused"
+
+msgid "Information"
+msgstr "Information"
+
+msgid "Succès"
+msgstr "Success"
+
+msgid "Avertissement"
+msgstr "Warning"
+
+msgid "Erreur"
+msgstr "Error"
+
+msgid "Groupe"
+msgstr "Group"
+
+msgid "Membre"
+msgstr "Member"
+
+msgid "Cotisation"
+msgstr "Contribution"
+
+msgid "Système"
+msgstr "System"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Catégorie"
+msgstr "Category"
+
+msgid "Titre"
+msgstr "Title"
+
+msgid "Message"
+msgstr "Message"
+
+msgid "Lien"
+msgstr "Link"
+
+msgid "Lu"
+msgstr "Read"
+
+msgid "Lu le"
+msgstr "Read on"
+
+msgid "Modèle lié"
+msgstr "Related model"
+
+msgid "ID de l'objet lié"
+msgstr "Related object ID"
+
+msgid "Notifications"
+msgstr "Notifications"
+
+msgid "Notifications par email"
+msgstr "Email notifications"
+
+msgid "Notifications in-app"
+msgstr "In-app notifications"
+
+msgid "Notifications groupes"
+msgstr "Group notifications"
+
+msgid "Notifications membres"
+msgstr "Member notifications"
+
+msgid "Notifications rencontres"
+msgstr "Meeting notifications"
+
+msgid "Notifications cotisations"
+msgstr "Contribution notifications"
+
+msgid "Notifications système"
+msgstr "System notifications"
+
+msgid "Préférence de notification"
+msgstr "Notification preference"
+
+msgid "Préférences de notification"
+msgstr "Notification preferences"
+
+msgid "Société"
+msgstr "Company"
+
+msgid "Association"
+msgstr "Association"
+
+msgid "Collectivité"
+msgstr "Local authority"
+
+msgid "Club / groupe"
+msgstr "Club / group"
+
+msgid "Reçu le"
+msgstr "Received on"
+
+msgid "Demande de devis"
+msgstr "Quote request"
+
+msgid "Demandes de devis"
+msgstr "Quote requests"
+
+msgid "Dernière utilisation"
+msgstr "Last used"
+
+msgid "Appareil TOTP"
+msgstr "TOTP device"
+
+msgid "Appareils TOTP"
+msgstr "TOTP devices"
+
+msgid "2FA activé"
+msgstr "2FA enabled"
+
+msgid "Codes de secours"
+msgstr "Backup codes"
+
+msgid "Codes de secours utilisés"
+msgstr "Used backup codes"
+
+msgid "Préférence 2FA"
+msgstr "2FA preference"
+
+msgid "Préférences 2FA"
+msgstr "2FA preferences"
+
+msgid "Le montant doit être positif."
+msgstr "The amount must be positive."
+
+msgid "Le montant doit être un nombre valide."
+msgstr "The amount must be a valid number."
+
+msgid "Abonnement expiré."
+msgstr "Subscription expired."
+
+msgid "Fermer"
+msgstr "Close"
+
+msgid "Confirmer"
+msgstr "Confirm"
+
+msgid "Aucune donnée disponible"
+msgstr "No data available"
+
+msgid "Interface Administrateur - Kotiza"
+msgstr "Administrator area - Kotiza"
+
+msgid "Espace Administrateur"
+msgstr "Administrator area"
+
+msgid "Pilotage global"
+msgstr "Global oversight"
+
+msgid "Vue centralisée pour suivre la santé fonctionnelle, l'activité et la gouvernance."
+msgstr "A central view of operational health, activity and governance."
+
+msgid "Administration Django"
+msgstr "Django administration"
+
+msgid "Historique d'audit"
+msgstr "Audit history"
+
+msgid "Groupes"
+msgstr "Groups"
+
+msgid "structures actives"
+msgstr "active organizations"
+
+msgid "Membres"
+msgstr "Members"
+
+msgid "membres actifs"
+msgstr "active members"
+
+msgid "Rencontres"
+msgstr "Meetings"
+
+msgid "réunions planifiées"
+msgstr "scheduled meetings"
+
+msgid "Cotisations"
+msgstr "Contributions"
+
+msgid "paiements enregistrés"
+msgstr "recorded payments"
+
+msgid "Audits"
+msgstr "Audits"
+
+msgid "traces d'activité"
+msgstr "activity records"
+
+msgid "Vue d'ensemble"
+msgstr "Overview"
+
+msgid "Gérer les groupes"
+msgstr "Manage groups"
+
+msgid "Administrer les structures organisationnelles"
+msgstr "Manage organizational structures"
+
+msgid "Contrôler les membres"
+msgstr "Review members"
+
+msgid "Gérer les utilisateurs et leurs accès"
+msgstr "Manage users and their access"
+
+msgid "Vérifier les cotisations"
+msgstr "Check contributions"
+
+msgid "Suivre les paiements et finances"
+msgstr "Track payments and finances"
+
+msgid "Suivre les présences"
+msgstr "Track attendance"
+
+msgid "Contrôler les participations aux réunions"
+msgstr "Review meeting participation"
+
+msgid "Modules par catégorie"
+msgstr "Modules by category"
+
+msgid "Organisation"
+msgstr "Organization"
+
+msgid "Organes"
+msgstr "Bodies"
+
+msgid "Postes"
+msgstr "Positions"
+
+msgid "Personnes"
+msgstr "People"
+
+msgid "Présences"
+msgstr "Attendance"
+
+msgid "Finance"
+msgstr "Finance"
+
+msgid "Activités"
+msgstr "Activities"
+
+msgid "Événements"
+msgstr "Events"
+
+msgid "Documents"
+msgstr "Documents"
+
+msgid "Audit"
+msgstr "Audit"
+
+msgid "Activité récente"
+msgstr "Recent activity"
+
+msgid "Derniers événements d'audit"
+msgstr "Latest audit events"
+
+msgid "Aucune activité récente."
+msgstr "No recent activity."
 
 msgid "Plateforme"
 msgstr "Platform"
@@ -50,45 +473,6 @@ msgstr "Manager area"
 
 msgid "Mon espace"
 msgstr "My space"
-
-msgid "Organisation"
-msgstr "Organization"
-
-msgid "Groupes"
-msgstr "Groups"
-
-msgid "Organes"
-msgstr "Bodies"
-
-msgid "Postes"
-msgstr "Positions"
-
-msgid "Personnes"
-msgstr "People"
-
-msgid "Membres"
-msgstr "Members"
-
-msgid "Rencontres"
-msgstr "Meetings"
-
-msgid "Présences"
-msgstr "Attendance"
-
-msgid "Cotisations"
-msgstr "Contributions"
-
-msgid "Activités"
-msgstr "Activities"
-
-msgid "Événements"
-msgstr "Events"
-
-msgid "Documents"
-msgstr "Documents"
-
-msgid "Audit"
-msgstr "Audit"
 
 msgid "Recherche"
 msgstr "Search"
@@ -134,6 +518,82 @@ msgstr "Legal notice"
 msgid "Politique de confidentialité"
 msgstr "Privacy policy"
 
+msgid "Confirmation"
+msgstr "Confirmation"
+
+msgid "Cette action est définitive."
+msgstr "This action cannot be undone."
+
+msgid "Retour à la liste"
+msgstr "Back to list"
+
+msgid "Voulez-vous vraiment supprimer :"
+msgstr "Do you really want to delete:"
+
+msgid "Supprimer"
+msgstr "Delete"
+
+msgid "Annuler"
+msgstr "Cancel"
+
+msgid "Formulaire"
+msgstr "Form"
+
+msgid "Remplissez les informations et enregistrez."
+msgstr "Fill in the details and save."
+
+msgid "Enregistrer"
+msgstr "Save"
+
+msgid "Module"
+msgstr "Module"
+
+msgid "Liste et gestion rapide des enregistrements."
+msgstr "List and quick management of records."
+
+msgid "Ajouter"
+msgstr "Add"
+
+msgid "Rechercher..."
+msgstr "Search..."
+
+msgid "Tous les groupes"
+msgstr "All groups"
+
+msgid "Filtrer"
+msgstr "Filter"
+
+msgid "CSV"
+msgstr "CSV"
+
+msgid "Excel"
+msgstr "Excel"
+
+msgid "PDF"
+msgstr "PDF"
+
+msgid "Actions"
+msgstr "Actions"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Modifier"
+msgstr "Edit"
+
+msgid "Aucun élément pour le moment."
+msgstr "Nothing here yet."
+
+msgid "Précédent"
+msgstr "Previous"
+
+#, python-format
+msgid "Page %(number)s / %(total)s"
+msgstr "Page %(number)s / %(total)s"
+
+msgid "Suivant"
+msgstr "Next"
+
 msgid "Entreprise - Kotiza"
 msgstr "Company - Kotiza"
 
@@ -178,6 +638,57 @@ msgstr "We can offer a setup tailored to your structure, your management needs a
 
 msgid "Obtenir une proposition"
 msgstr "Get a proposal"
+
+msgid "Recherche Globale - Kotiza"
+msgstr "Global search - Kotiza"
+
+msgid "Recherche transversale"
+msgstr "Search everything"
+
+msgid "Recherche globale"
+msgstr "Global search"
+
+msgid "Interrogez toutes les entités depuis un seul point d'entrée."
+msgstr "Search every record from a single place."
+
+msgid "Nom, email, groupe, événement..."
+msgstr "Name, email, group, event..."
+
+msgid "Rechercher"
+msgstr "Search"
+
+msgid "Aucun résultat."
+msgstr "No results."
+
+msgid "Groupe 360"
+msgstr "Group 360"
+
+msgid "Vision complète du groupe : activités, membres, finances et agenda."
+msgstr "The full picture of the group: activities, members, finances and schedule."
+
+msgid "Retour aux groupes"
+msgstr "Back to groups"
+
+msgid "Présence"
+msgstr "Attendance"
+
+msgid "Cotisations récentes"
+msgstr "Recent contributions"
+
+msgid "Aucune cotisation récente."
+msgstr "No recent contributions."
+
+msgid "Événements à venir"
+msgstr "Upcoming events"
+
+msgid "Aucun événement à venir."
+msgstr "No upcoming events."
+
+msgid "Rencontres récentes"
+msgstr "Recent meetings"
+
+msgid "Aucune rencontre récente."
+msgstr "No recent meetings."
 
 msgid "Tableau de bord - Kotiza"
 msgstr "Dashboard - Kotiza"
@@ -278,6 +789,114 @@ msgstr "Give your organization a more robust system."
 msgid "Ajoutez vos premiers groupes, clarifiez vos rôles et pilotez votre activité en un seul espace professionnel."
 msgstr "Add your first groups, clarify roles and run your activity from one professional space."
 
+msgid "Interface Manager - Kotiza"
+msgstr "Manager area - Kotiza"
+
+msgid "Espace Gestionnaire"
+msgstr "Manager area"
+
+msgid "Pilotage opérationnel"
+msgstr "Day-to-day oversight"
+
+msgid "Suivi quotidien des groupes, activités, présences et cotisations."
+msgstr "Daily follow-up of groups, activities, attendance and contributions."
+
+msgid "groupes suivis"
+msgstr "groups tracked"
+
+msgid "réunions organisées"
+msgstr "meetings held"
+
+msgid "événements planifiés"
+msgstr "events scheduled"
+
+msgid "Actions rapides"
+msgstr "Quick actions"
+
+msgid "Ajouter un membre"
+msgstr "Add a member"
+
+msgid "Créer un nouveau membre"
+msgstr "Create a new member"
+
+msgid "Planifier une rencontre"
+msgstr "Schedule a meeting"
+
+msgid "Organiser une réunion"
+msgstr "Organize a meeting"
+
+msgid "Enregistrer une cotisation"
+msgstr "Record a contribution"
+
+msgid "Ajouter un paiement"
+msgstr "Add a payment"
+
+msgid "Créer un événement"
+msgstr "Create an event"
+
+msgid "Ajouter un événement"
+msgstr "Add an event"
+
+msgid "Mes présences - Kotiza"
+msgstr "My attendance - Kotiza"
+
+msgid "Mes présences"
+msgstr "My attendance"
+
+msgid "Historique complet de vos présences aux rencontres."
+msgstr "Your full meeting attendance history."
+
+msgid "Retour au tableau de bord"
+msgstr "Back to dashboard"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Statut"
+msgstr "Status"
+
+msgid "Aucune présence enregistrée."
+msgstr "No attendance recorded."
+
+msgid "Mes cotisations - Kotiza"
+msgstr "My contributions - Kotiza"
+
+msgid "Mes cotisations"
+msgstr "My contributions"
+
+msgid "Historique complet de vos paiements enregistrés."
+msgstr "Your full history of recorded payments."
+
+msgid "Paiement initié, en attente de confirmation. Le statut sera mis à jour automatiquement."
+msgstr "Payment started, awaiting confirmation. The status will update automatically."
+
+msgid "Montant"
+msgstr "Amount"
+
+msgid "Notes"
+msgstr "Notes"
+
+msgid "Aucune cotisation enregistrée."
+msgstr "No contributions recorded."
+
+msgid "Vos cotisations et votre présence, en un coup d'œil."
+msgstr "Your contributions and attendance at a glance."
+
+msgid "Total cotisé"
+msgstr "Total contributed"
+
+msgid "Voir tout"
+msgstr "See all"
+
+msgid "Présences récentes"
+msgstr "Recent attendance"
+
+msgid "Mes groupes"
+msgstr "My groups"
+
+msgid "Vous n'appartenez à aucun groupe."
+msgstr "You are not in any group."
+
 msgid "Plateforme - Kotiza"
 msgstr "Platform - Kotiza"
 
@@ -372,9 +991,6 @@ msgstr "Quick setup"
 msgid "Une mise en service simple, avec un accompagnement pensé pour les équipes de terrain."
 msgstr "Simple onboarding, with support designed for teams on the ground."
 
-msgid "Demande de devis"
-msgstr "Quote request"
-
 msgid "Parlons de votre organisation et de vos besoins."
 msgstr "Let's talk about your organization and your needs."
 
@@ -383,18 +999,6 @@ msgstr "Tell us what level of automation, security and support you need. We will
 
 msgid "Merci ! Votre demande a bien été envoyée, nous vous répondrons rapidement."
 msgstr "Thank you! Your request has been sent, we will get back to you soon."
-
-msgid "Nom"
-msgstr "Name"
-
-msgid "Email"
-msgstr "Email"
-
-msgid "Type d'organisation"
-msgstr "Organization type"
-
-msgid "Besoin principal"
-msgstr "Main need"
 
 msgid "Requête invalide"
 msgstr "Bad request"
@@ -549,9 +1153,6 @@ msgstr "New password"
 msgid "Confirmer le nouveau mot de passe"
 msgstr "Confirm new password"
 
-msgid "Enregistrer"
-msgstr "Save"
-
 msgid "Récupération de compte"
 msgstr "Account recovery"
 
@@ -643,6 +1244,69 @@ msgstr "Send reset link"
 
 msgid "Kotiza - Réinitialisation de votre mot de passe"
 msgstr "Kotiza - Reset your password"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Modèle"
+msgstr "Model"
+
+msgid "Objet"
+msgstr "Object"
+
+msgid "Route"
+msgstr "Route"
+
+msgid "Ajouter une cotisation"
+msgstr "Add a contribution"
+
+msgid "Modifier une cotisation"
+msgstr "Edit contribution"
+
+msgid "Supprimer une cotisation"
+msgstr "Delete contribution"
+
+msgid "Upload"
+msgstr "Uploaded"
+
+msgid "Ajouter un document"
+msgstr "Add a document"
+
+msgid "Modifier un document"
+msgstr "Edit document"
+
+msgid "Supprimer un document"
+msgstr "Delete document"
+
+msgid "Lieu"
+msgstr "Location"
+
+msgid "Modifier un événement"
+msgstr "Edit event"
+
+msgid "Supprimer un événement"
+msgstr "Delete event"
+
+msgid "Rapport des cotisations"
+msgstr "Contributions report"
+
+msgid "Motif"
+msgstr "Reason"
+
+msgid "Rapport des présences"
+msgstr "Attendance report"
+
+msgid "Responsable"
+msgstr "Leader"
+
+msgid "Ajouter un groupe"
+msgstr "Add a group"
+
+msgid "Modifier un groupe"
+msgstr "Edit group"
+
+msgid "Supprimer un groupe"
+msgstr "Delete group"
 
 msgid "Clarté opérationnelle"
 msgstr "Operational clarity"
@@ -739,9 +1403,6 @@ msgstr "Steer performance with dashboards, indicators, trends and comparisons."
 
 msgid "Analytics"
 msgstr "Analytics"
-
-msgid "Notifications"
-msgstr "Notifications"
 
 msgid "Rappelez les échéances, les réunions et les tâches grâce à des alertes utiles et personnalisables."
 msgstr "Remind people of deadlines, meetings and tasks with useful, customizable alerts."
@@ -1037,9 +1698,6 @@ msgstr "Analyze performance, attendance and management indicators to act precise
 msgid "Rôles et permissions"
 msgstr "Roles and permissions"
 
-msgid "Recherche globale"
-msgstr "Global search"
-
 msgid "Audit trail complet"
 msgstr "Full audit trail"
 
@@ -1079,11 +1737,62 @@ msgstr "Secure login"
 msgid "360°"
 msgstr "360°"
 
-msgid "Vue d'ensemble"
-msgstr "Overview"
-
 msgid "100%"
 msgstr "100%"
 
 msgid "Traçabilité"
 msgstr "Traceability"
+
+msgid "Ajouter une rencontre"
+msgstr "Add a meeting"
+
+msgid "Modifier une rencontre"
+msgstr "Edit meeting"
+
+msgid "Supprimer une rencontre"
+msgstr "Delete meeting"
+
+msgid "Ajouter une présence"
+msgstr "Add attendance"
+
+msgid "Modifier une présence"
+msgstr "Edit attendance"
+
+msgid "Supprimer une présence"
+msgstr "Delete attendance"
+
+msgid "Nom complet"
+msgstr "Full name"
+
+msgid "Téléphone"
+msgstr "Phone"
+
+msgid "Modifier un membre"
+msgstr "Edit member"
+
+msgid "Supprimer un membre"
+msgstr "Delete member"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Ajouter un organe"
+msgstr "Add a body"
+
+msgid "Modifier un organe"
+msgstr "Edit body"
+
+msgid "Supprimer un organe"
+msgstr "Delete body"
+
+msgid "Organe"
+msgstr "Body"
+
+msgid "Ajouter un poste"
+msgstr "Add a position"
+
+msgid "Modifier un poste"
+msgstr "Edit position"
+
+msgid "Supprimer un poste"
+msgstr "Delete position"

@@ -2336,3 +2336,10 @@ body {
   background: var(--accent-strong);
   color: #fff;
 }
+
+.topbar-actions .user-pill,
+.topbar-actions .logout-btn,
+.lang-switch {
+  white-space: nowrap;
+  flex-shrink: 0;
+}

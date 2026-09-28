@@ -477,7 +477,7 @@ class ExportSecurityTests(TestCase):
         response = self.client.get(reverse("contribution_export_csv"))
         self.assertEqual(response.status_code, 200)
         content = response.content.decode("utf-8")
-        self.assertIn("Methode", content)
+        self.assertIn("Méthode", content)
         self.assertIn("Statut", content)
 
     def test_contribution_csv_export_filters_by_group(self):
@@ -572,7 +572,7 @@ class WebFormValidationTests(TestCase):
             data={"name": "Secretaire", "description": "", "organ": organ.id, "group": g2.id, "member": ""},
         )
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "L&#x27;organe selectionne doit appartenir au meme groupe.")
+        self.assertContains(response, "L&#x27;organe sélectionné doit appartenir au même groupe.")
 
     def test_contribution_form_shows_error_for_member_outside_group(self):
         g1 = Group.objects.create(name="G1")
@@ -927,3 +927,39 @@ class LanguageTests(TestCase):
             page = self.client.get("/")
         self.assertContains(page, "Subscription expired", status_code=402)
         self.assertContains(page, "Mobile Money : 91 19 80 74", status_code=402)
+
+
+class AppLanguageTests(TestCase):
+    def setUp(self):
+        self.admin = get_user_model().objects.create_superuser(
+            username="lang_admin", password="password123", email="lang@example.com"
+        )
+        self.client.force_login(self.admin)
+        group = Group.objects.create(name="Groupe Langue")
+        member = Member.objects.create(full_name="Awa Langue")
+        member.groups.add(group)
+        Contribution.objects.create(
+            member=member,
+            group=group,
+            contribution_type=Contribution.TYPE_MONTHLY,
+            payment_method=Contribution.METHOD_CASH,
+            amount="1000.00",
+            paid_at=timezone.now().date(),
+            payment_status=Contribution.STATUS_CONFIRMED,
+        )
+
+    def test_contribution_list_in_english(self):
+        self.client.post("/i18n/setlang/", {"language": "en", "next": "/"})
+        response = self.client.get(reverse("contribution_list"))
+        for text in ["Contributions", "Member", "Method", "Cash", "Monthly", "Confirmed", "All groups"]:
+            self.assertContains(response, text)
+
+    def test_contribution_list_in_french(self):
+        response = self.client.get(reverse("contribution_list"))
+        for text in ["Cotisations", "Méthode", "Espèces", "Mensuelle", "Confirmée", "Tous les groupes"]:
+            self.assertContains(response, text)
+
+    def test_csv_export_headers_follow_language(self):
+        self.client.post("/i18n/setlang/", {"language": "en", "next": "/"})
+        content = self.client.get(reverse("contribution_export_csv")).content.decode("utf-8")
+        self.assertTrue(content.startswith("Member,Group,Type,Method,Status,Amount,Date"))

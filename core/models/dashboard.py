@@ -3,6 +3,7 @@
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class DashboardPreference(models.Model):
@@ -19,63 +20,63 @@ class DashboardPreference(models.Model):
     WIDGET_ATTENDANCE_RATE = 'attendance_rate'
 
     WIDGET_CHOICES = [
-        (WIDGET_GROUP_STATS, 'Statistiques Groupes'),
-        (WIDGET_MEMBER_STATS, 'Statistiques Membres'),
-        (WIDGET_MEETING_STATS, 'Statistiques Rencontres'),
-        (WIDGET_CONTRIBUTION_STATS, 'Statistiques Cotisations'),
-        (WIDGET_RECENT_ACTIVITY, 'Activité Récente'),
-        (WIDGET_UPCOMING_EVENTS, 'Événements à Venir'),
-        (WIDGET_QUICK_ACTIONS, 'Actions Rapides'),
-        (WIDGET_ATTENDANCE_RATE, 'Taux de Présence'),
+        (WIDGET_GROUP_STATS, _("Statistiques Groupes")),
+        (WIDGET_MEMBER_STATS, _("Statistiques Membres")),
+        (WIDGET_MEETING_STATS, _("Statistiques Rencontres")),
+        (WIDGET_CONTRIBUTION_STATS, _("Statistiques Cotisations")),
+        (WIDGET_RECENT_ACTIVITY, _("Activité Récente")),
+        (WIDGET_UPCOMING_EVENTS, _("Événements à Venir")),
+        (WIDGET_QUICK_ACTIONS, _("Actions Rapides")),
+        (WIDGET_ATTENDANCE_RATE, _("Taux de Présence")),
     ]
 
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='dashboard_preferences',
-        verbose_name='Utilisateur'
+        verbose_name=_("Utilisateur")
     )
 
     # Widgets activés (stockés comme JSON)
     enabled_widgets = models.JSONField(
         default=list,
-        verbose_name='Widgets activés'
+        verbose_name=_("Widgets activés")
     )
 
     # Ordre des widgets (liste des IDs dans l'ordre)
     widget_order = models.JSONField(
         default=list,
-        verbose_name='Ordre des widgets'
+        verbose_name=_("Ordre des widgets")
     )
 
     # Layout preference (grid columns)
     layout_columns = models.IntegerField(
         default=3,
-        choices=[(1, '1 colonne'), (2, '2 colonnes'), (3, '3 colonnes'), (4, '4 colonnes')],
-        verbose_name='Nombre de colonnes'
+        choices=[(1, _("1 colonne")), (2, _("2 colonnes")), (3, _("3 colonnes")), (4, _("4 colonnes"))],
+        verbose_name=_("Nombre de colonnes")
     )
 
     # Theme preference
     theme = models.CharField(
         max_length=20,
         default='light',
-        choices=[('light', 'Clair'), ('dark', 'Sombre'), ('auto', 'Auto')],
-        verbose_name='Thème'
+        choices=[('light', _("Clair")), ('dark', _("Sombre")), ('auto', _("Auto"))],
+        verbose_name=_("Thème")
     )
 
     created_at = models.DateTimeField(
         auto_now_add=True,
-        verbose_name='Créé le'
+        verbose_name=_("Créé le")
     )
 
     updated_at = models.DateTimeField(
         auto_now=True,
-        verbose_name='Mis à jour le'
+        verbose_name=_("Mis à jour le")
     )
 
     class Meta:
-        verbose_name = 'Préférence de dashboard'
-        verbose_name_plural = 'Préférences de dashboard'
+        verbose_name = _("Préférence de dashboard")
+        verbose_name_plural = _("Préférences de dashboard")
 
     def __str__(self):
         return f"Dashboard de {self.user.username}"

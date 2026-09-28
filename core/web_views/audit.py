@@ -2,22 +2,23 @@
 
 from .. import models
 from .mixins import SearchableListView
+from django.utils.translation import gettext_lazy as _
 
 
 class AuditLogListView(SearchableListView):
     """ListView pour les logs d'audit (lecture seule)."""
     model = models.AuditLog
     template_name = "core/crud_list.html"
-    title = "Historique d'audit"
+    title = _("Historique d'audit")
     base_url_name = "audit_log"
     hero_image = "core/img/modules/audit.jpg"
     list_columns = [
-        {"label": "Date", "accessor": "created_at"},
-        {"label": "Utilisateur", "accessor": "actor.get_username"},
-        {"label": "Action", "accessor": "get_action_display"},
-        {"label": "Modele", "accessor": "model_name"},
-        {"label": "Objet", "accessor": "object_repr"},
-        {"label": "Route", "accessor": "path"},
+        {"label": _("Date"), "accessor": "created_at"},
+        {"label": _("Utilisateur"), "accessor": "actor.get_username"},
+        {"label": _("Action"), "accessor": "get_action_display"},
+        {"label": _("Modèle"), "accessor": "model_name"},
+        {"label": _("Objet"), "accessor": "object_repr"},
+        {"label": _("Route"), "accessor": "path"},
     ]
     search_fields = ["model_name", "object_pk", "object_repr", "actor__username", "path"]
     select_related_fields = ("actor",)

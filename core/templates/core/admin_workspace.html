@@ -1,18 +1,19 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% load static %}
 
-{% block title %}Interface Administrateur - Kotiza{% endblock %}
+{% block title %}{% translate "Interface Administrateur - Kotiza" %}{% endblock %}
 
 {% block hero %}
 <img class="hero-banner" src="{% static 'core/img/modules/documents.jpg' %}" alt="" />
 <div>
-  <p class="pill">Espace Administrateur</p>
-  <h1>Pilotage global</h1>
-  <p class="subtitle">Vue centralisée pour suivre la santé fonctionnelle, l'activité et la gouvernance.</p>
+  <p class="pill">{% translate "Espace Administrateur" %}</p>
+  <h1>{% translate "Pilotage global" %}</h1>
+  <p class="subtitle">{% translate "Vue centralisée pour suivre la santé fonctionnelle, l'activité et la gouvernance." %}</p>
 </div>
 <div class="hero-actions">
-  <a class="btn primary" href="/admin/">Administration Django</a>
-  <a class="btn ghost" href="/audit-logs/">Historique d'audit</a>
+  <a class="btn primary" href="/admin/">{% translate "Administration Django" %}</a>
+  <a class="btn ghost" href="/audit-logs/">{% translate "Historique d'audit" %}</a>
 </div>
 {% endblock %}
 
@@ -20,103 +21,103 @@
 <section class="stats">
   <div class="stat-card">
     <div class="stat-icon">🏢</div>
-    <h3>Groupes</h3>
+    <h3>{% translate "Groupes" %}</h3>
     <p class="stat-value">{{ group_count }}</p>
-    <p class="stat-label">structures actives</p>
+    <p class="stat-label">{% translate "structures actives" %}</p>
   </div>
   <div class="stat-card">
     <div class="stat-icon">👥</div>
-    <h3>Membres</h3>
+    <h3>{% translate "Membres" %}</h3>
     <p class="stat-value">{{ member_count }}</p>
-    <p class="stat-label">membres actifs</p>
+    <p class="stat-label">{% translate "membres actifs" %}</p>
   </div>
   <div class="stat-card">
     <div class="stat-icon">📅</div>
-    <h3>Rencontres</h3>
+    <h3>{% translate "Rencontres" %}</h3>
     <p class="stat-value">{{ meeting_count }}</p>
-    <p class="stat-label">réunions planifiées</p>
+    <p class="stat-label">{% translate "réunions planifiées" %}</p>
   </div>
   <div class="stat-card">
     <div class="stat-icon">💰</div>
-    <h3>Cotisations</h3>
+    <h3>{% translate "Cotisations" %}</h3>
     <p class="stat-value">{{ contribution_count }}</p>
-    <p class="stat-label">paiements enregistrés</p>
+    <p class="stat-label">{% translate "paiements enregistrés" %}</p>
   </div>
   <div class="stat-card">
     <div class="stat-icon">📋</div>
-    <h3>Audits</h3>
+    <h3>{% translate "Audits" %}</h3>
     <p class="stat-value">{{ audit_count }}</p>
-    <p class="stat-label">traces d'activité</p>
+    <p class="stat-label">{% translate "traces d'activité" %}</p>
   </div>
 </section>
 
 <section class="workspace-sections">
   <div class="workspace-section">
-    <h2>📊 Vue d'ensemble</h2>
+    <h2>📊 {% translate "Vue d'ensemble" %}</h2>
     <div class="quick-actions">
       <a class="action-card" href="/groupes/">
         <span class="action-icon">🏢</span>
-        <h4>Gérer les groupes</h4>
-        <p>Administrer les structures organisationnelles</p>
+        <h4>{% translate "Gérer les groupes" %}</h4>
+        <p>{% translate "Administrer les structures organisationnelles" %}</p>
       </a>
       <a class="action-card" href="/membres/">
         <span class="action-icon">👥</span>
-        <h4>Contrôler les membres</h4>
-        <p>Gérer les utilisateurs et leurs accès</p>
+        <h4>{% translate "Contrôler les membres" %}</h4>
+        <p>{% translate "Gérer les utilisateurs et leurs accès" %}</p>
       </a>
       <a class="action-card" href="/cotisations/">
         <span class="action-icon">💰</span>
-        <h4>Vérifier les cotisations</h4>
-        <p>Suivre les paiements et finances</p>
+        <h4>{% translate "Vérifier les cotisations" %}</h4>
+        <p>{% translate "Suivre les paiements et finances" %}</p>
       </a>
       <a class="action-card" href="/presences/">
         <span class="action-icon">📅</span>
-        <h4>Suivre les présences</h4>
-        <p>Contrôler les participations aux réunions</p>
+        <h4>{% translate "Suivre les présences" %}</h4>
+        <p>{% translate "Contrôler les participations aux réunions" %}</p>
       </a>
     </div>
   </div>
 
   <div class="workspace-section">
-    <h2>📁 Modules par catégorie</h2>
+    <h2>📁 {% translate "Modules par catégorie" %}</h2>
     <div class="category-grid">
       <div class="category-card">
-        <h3>🏢 Organisation</h3>
+        <h3>🏢 {% translate "Organisation" %}</h3>
         <ul>
-          <li><a href="/groupes/">Groupes</a></li>
-          <li><a href="/organes/">Organes</a></li>
-          <li><a href="/postes/">Postes</a></li>
+          <li><a href="/groupes/">{% translate "Groupes" %}</a></li>
+          <li><a href="/organes/">{% translate "Organes" %}</a></li>
+          <li><a href="/postes/">{% translate "Postes" %}</a></li>
         </ul>
       </div>
       <div class="category-card">
-        <h3>👥 Personnes</h3>
+        <h3>👥 {% translate "Personnes" %}</h3>
         <ul>
-          <li><a href="/membres/">Membres</a></li>
-          <li><a href="/rencontres/">Rencontres</a></li>
-          <li><a href="/presences/">Présences</a></li>
+          <li><a href="/membres/">{% translate "Membres" %}</a></li>
+          <li><a href="/rencontres/">{% translate "Rencontres" %}</a></li>
+          <li><a href="/presences/">{% translate "Présences" %}</a></li>
         </ul>
       </div>
       <div class="category-card">
-        <h3>💰 Finance</h3>
+        <h3>💰 {% translate "Finance" %}</h3>
         <ul>
-          <li><a href="/cotisations/">Cotisations</a></li>
+          <li><a href="/cotisations/">{% translate "Cotisations" %}</a></li>
         </ul>
       </div>
       <div class="category-card">
-        <h3>📋 Activités</h3>
+        <h3>📋 {% translate "Activités" %}</h3>
         <ul>
-          <li><a href="/evenements/">Événements</a></li>
-          <li><a href="/documents/">Documents</a></li>
-          <li><a href="/audit-logs/">Audit</a></li>
+          <li><a href="/evenements/">{% translate "Événements" %}</a></li>
+          <li><a href="/documents/">{% translate "Documents" %}</a></li>
+          <li><a href="/audit-logs/">{% translate "Audit" %}</a></li>
         </ul>
       </div>
     </div>
   </div>
 
   <div class="workspace-section">
-    <h2>🔍 Activité récente</h2>
+    <h2>🔍 {% translate "Activité récente" %}</h2>
     <div class="recent-activity">
-      <h3>Derniers événements d'audit</h3>
+      <h3>{% translate "Derniers événements d'audit" %}</h3>
       <div class="mini-list">
         {% for log in recent_audits %}
         <div class="mini-row">
@@ -126,7 +127,7 @@
           <span class="timestamp">{{ log.created_at|date:"d/m/Y H:i" }}</span>
         </div>
         {% empty %}
-        <p class="empty-state">Aucune activité récente.</p>
+        <p class="empty-state">{% translate "Aucune activité récente." %}</p>
         {% endfor %}
       </div>
     </div>

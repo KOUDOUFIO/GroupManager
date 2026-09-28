@@ -8,6 +8,7 @@ from django.db import models
 
 from .group import Group
 from .member import Member
+from django.utils.translation import gettext, gettext_lazy as _
 
 
 class Contribution(models.Model):
@@ -23,12 +24,12 @@ class Contribution(models.Model):
     TYPE_ABSENCE_FINE = "absence_fine"
     TYPE_OTHER = "other"
     TYPE_CHOICES = [
-        (TYPE_MONTHLY, "Mensuelle"),
-        (TYPE_ANNUAL, "Annuelle"),
-        (TYPE_SPONTANEOUS, "Spontanee"),
-        (TYPE_LATE_FINE, "Amende retard"),
-        (TYPE_ABSENCE_FINE, "Amende absence"),
-        (TYPE_OTHER, "Autre"),
+        (TYPE_MONTHLY, _("Mensuelle")),
+        (TYPE_ANNUAL, _("Annuelle")),
+        (TYPE_SPONTANEOUS, _("Spontanée")),
+        (TYPE_LATE_FINE, _("Amende retard")),
+        (TYPE_ABSENCE_FINE, _("Amende absence")),
+        (TYPE_OTHER, _("Autre")),
     ]
 
     METHOD_CASH = "cash"
@@ -37,20 +38,20 @@ class Contribution(models.Model):
     METHOD_CARD = "card"
     METHOD_OTHER = "other"
     METHOD_CHOICES = [
-        (METHOD_CASH, "Especes"),
-        (METHOD_BANK_TRANSFER, "Virement bancaire"),
-        (METHOD_MOBILE_MONEY, "Mobile Money"),
-        (METHOD_CARD, "Carte bancaire"),
-        (METHOD_OTHER, "Autre"),
+        (METHOD_CASH, _("Espèces")),
+        (METHOD_BANK_TRANSFER, _("Virement bancaire")),
+        (METHOD_MOBILE_MONEY, _("Mobile Money")),
+        (METHOD_CARD, _("Carte bancaire")),
+        (METHOD_OTHER, _("Autre")),
     ]
 
     STATUS_PENDING = "pending"
     STATUS_CONFIRMED = "confirmed"
     STATUS_FAILED = "failed"
     STATUS_CHOICES = [
-        (STATUS_PENDING, "En attente"),
-        (STATUS_CONFIRMED, "Confirmee"),
-        (STATUS_FAILED, "Echouee"),
+        (STATUS_PENDING, _("En attente")),
+        (STATUS_CONFIRMED, _("Confirmée")),
+        (STATUS_FAILED, _("Échouée")),
     ]
 
     member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="contributions")
@@ -79,7 +80,7 @@ class Contribution(models.Model):
     def clean(self):
         """Valide que le membre appartient au groupe de la cotisation."""
         if self.group_id and self.member_id and not self.member.groups.filter(pk=self.group_id).exists():
-            raise ValidationError({"member": "Le membre doit appartenir au groupe de la cotisation."})
+            raise ValidationError({"member": gettext("Le membre doit appartenir au groupe de la cotisation.")})
 
     def __str__(self) -> str:
         return f"{self.member.full_name} - {self.amount}"
