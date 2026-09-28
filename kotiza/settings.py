@@ -115,6 +115,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'core.middleware.ApiToggleMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -200,6 +201,10 @@ def _parse_access_until(value: str):
 # Abonnement du client (une installation par client) : apres cette date,
 # seuls les administrateurs gardent l'acces au site. Vide = aucune limite.
 KOTIZA_ACCESS_UNTIL = _parse_access_until(os.environ.get("KOTIZA_ACCESS_UNTIL", "").strip())
+# API REST (/api/) et sa documentation : desactivees par defaut. L'interface
+# web n'en a pas besoin, et l'authentification Basic de l'API ne passe pas
+# par la double authentification (2FA). A activer client par client (=1).
+KOTIZA_API_ENABLED = os.environ.get("KOTIZA_API_ENABLED", "0") == "1"
 # Contact affiche sur la page "abonnement expire" (email, telephone Mobile Money...).
 KOTIZA_BILLING_CONTACT = os.environ.get("KOTIZA_BILLING_CONTACT", "")
 

@@ -101,7 +101,7 @@ def platform_page(request):
         ["CRM client/prospect", "À venir", "Oui", "Oui"],
         ["Devis / factures", "À venir", "Oui", "Oui"],
         ["Tableaux de bord", "Partiel", "Oui", "Oui"],
-        ["API / intégrations", "Restreint", "Oui", "Oui"],
+        ["API / intégrations", "Non", "Sur demande", "Oui"],
     ]
 
     context = {
@@ -323,7 +323,6 @@ def home(request):
         "Documents et événements",
         "Exports CSV / Excel / PDF",
         "Dashboard d'activité",
-        "API de données",
     ]
 
     solution_cards = [

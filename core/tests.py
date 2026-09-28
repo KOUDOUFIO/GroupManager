@@ -341,6 +341,7 @@ class MemberPortalTests(TestCase):
         self.assertEqual(object_list, [self.entry_a])
 
 
+@override_settings(KOTIZA_API_ENABLED=True)
 class ApiPermissionTests(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(
@@ -593,6 +594,7 @@ class WebFormValidationTests(TestCase):
         self.assertContains(response, "Le membre doit appartenir au groupe de la cotisation.")
 
 
+@override_settings(KOTIZA_API_ENABLED=True)
 class AuditLogTests(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(username="audituser", password="password123")
@@ -766,7 +768,11 @@ class ContributionReminderCommandTests(TestCase):
         self.assertTrue(Notification.objects.filter(user=self.user).exists())
 
 
-@override_settings(KOTIZA_ACCESS_UNTIL=date(2026, 1, 31), KOTIZA_BILLING_CONTACT="+228 90 00 00 00")
+@override_settings(
+    KOTIZA_ACCESS_UNTIL=date(2026, 1, 31),
+    KOTIZA_BILLING_CONTACT="+228 90 00 00 00",
+    KOTIZA_API_ENABLED=True,
+)
 class SubscriptionTests(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(username="sub_user", password="password123")
@@ -863,3 +869,28 @@ class CreateClientAdminCommandTests(TestCase):
         self.assertTrue(user.groups.filter(name="Administrateur").exists())
         self.assertTrue(user.has_perm("core.delete_contribution"))
         self.assertTrue(user.check_password("Pass1234!x"))
+
+
+class ApiToggleTests(TestCase):
+    def setUp(self):
+        self.staff = get_user_model().objects.create_superuser(
+            username="api_admin", password="password123", email="api@example.com"
+        )
+        self.client.force_login(self.staff)
+
+    @override_settings(KOTIZA_API_ENABLED=False)
+    def test_api_and_docs_return_404_when_disabled(self):
+        for path in ["/api/", "/api/contributions/", "/api/docs/", "/api/schema/"]:
+            self.assertEqual(self.client.get(path).status_code, 404, path)
+
+    @override_settings(KOTIZA_API_ENABLED=False)
+    def test_basic_auth_cannot_reach_api_when_disabled(self):
+        self.client.logout()
+        import base64
+        creds = base64.b64encode(b"api_admin:password123").decode()
+        response = self.client.get("/api/contributions/", HTTP_AUTHORIZATION=f"Basic {creds}")
+        self.assertEqual(response.status_code, 404)
+
+    @override_settings(KOTIZA_API_ENABLED=True)
+    def test_api_reachable_when_enabled(self):
+        self.assertEqual(self.client.get("/api/contributions/").status_code, 200)
