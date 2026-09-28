@@ -9,11 +9,6 @@
   <h1>{{ member.full_name }}</h1>
   <p class="subtitle">{% translate "Vos cotisations et votre présence, en un coup d'œil." %}</p>
 </div>
-{% if paygate_enabled %}
-<div class="hero-actions">
-  <a class="btn primary" href="{% url 'member_portal_pay' %}">{% icon "wallet" 18 %}{% translate "Payer ma cotisation" %}</a>
-</div>
-{% endif %}
 {% endblock %}
 
 {% block content %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-28 10:15+0000\n"
+"POT-Creation-Date: 2026-09-28 11:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -189,24 +189,6 @@ msgstr "Not sure yet"
 msgid "Numéro de téléphone invalide."
 msgstr "Invalid phone number."
 
-msgid "Groupe"
-msgstr "Group"
-
-msgid "Type"
-msgstr "Type"
-
-msgid "Montant (FCFA)"
-msgstr "Amount (FCFA)"
-
-msgid "Réseau"
-msgstr "Network"
-
-msgid "Numéro Mobile Money"
-msgstr "Mobile Money number"
-
-msgid "Exemple : 90 12 34 56. Vous confirmerez le paiement sur ce téléphone."
-msgstr "Example: 90 12 34 56. You will confirm the payment on this phone."
-
 msgid "Création"
 msgstr "Creation"
 
@@ -258,6 +240,12 @@ msgstr "Failed"
 msgid "Membre"
 msgstr "Member"
 
+msgid "Groupe"
+msgstr "Group"
+
+msgid "Type"
+msgstr "Type"
+
 msgid "Moyen de paiement"
 msgstr "Payment method"
 
@@ -275,12 +263,6 @@ msgstr "Notes"
 
 msgid "Identifiant de transaction"
 msgstr "Transaction ID"
-
-msgid "Référence du paiement"
-msgstr "Payment reference"
-
-msgid "Numéro payeur"
-msgstr "Payer number"
 
 msgid "Cotisation"
 msgstr "Contribution"
@@ -1156,9 +1138,6 @@ msgstr "No contributions recorded."
 msgid "Vos cotisations et votre présence, en un coup d'œil."
 msgstr "Your contributions and attendance at a glance."
 
-msgid "Payer ma cotisation"
-msgstr "Pay my contribution"
-
 msgid "Total cotisé"
 msgstr "Total contributed"
 
@@ -1189,76 +1168,6 @@ msgstr "My groups"
 msgid "Vous n'appartenez à aucun groupe."
 msgstr "You are not in any group."
 
-msgid "Payer ma cotisation - Kotiza"
-msgstr "Pay my contribution - Kotiza"
-
-msgid "Payez en quelques secondes avec T-Money ou Flooz. Votre cotisation est enregistrée automatiquement."
-msgstr "Pay in seconds with T-Money or Flooz. Your contribution is recorded automatically."
-
-msgid "Payer maintenant"
-msgstr "Pay now"
-
-msgid "Comment ça marche ?"
-msgstr "How does it work?"
-
-msgid "Choisissez votre réseau"
-msgstr "Choose your network"
-
-msgid "T-Money (Togocom) ou Flooz (Moov Africa)."
-msgstr "T-Money (Togocom) or Flooz (Moov Africa)."
-
-msgid "Validez sur votre téléphone"
-msgstr "Approve on your phone"
-
-msgid "Une demande arrive sur votre téléphone : confirmez avec votre code secret."
-msgstr "A request arrives on your phone: confirm it with your PIN."
-
-msgid "C'est enregistré"
-msgstr "It's recorded"
-
-msgid "Votre cotisation apparaît confirmée dans votre historique, sans rien faire de plus."
-msgstr "Your contribution shows as confirmed in your history, with nothing more to do."
-
-msgid "Paiement sécurisé par PayGate Global. Kotiza ne voit jamais votre code secret."
-msgstr "Payment secured by PayGate Global. Kotiza never sees your PIN."
-
-msgid "Suivi du paiement - Kotiza"
-msgstr "Payment tracking - Kotiza"
-
-msgid "Suivi du paiement"
-msgstr "Payment tracking"
-
-msgid "Paiement reçu, merci !"
-msgstr "Payment received, thank you!"
-
-msgid "Votre cotisation est confirmée et enregistrée dans votre historique."
-msgstr "Your contribution is confirmed and recorded in your history."
-
-msgid "Paiement non abouti"
-msgstr "Payment not completed"
-
-msgid "La demande a expiré ou a été annulée. Aucun montant n'a été débité. Vous pouvez réessayer."
-msgstr "The request expired or was cancelled. Nothing was charged. You can try again."
-
-msgid "Confirmez sur votre téléphone"
-msgstr "Confirm on your phone"
-
-#, python-format
-msgid "Une demande de paiement a été envoyée au %(phone)s. Validez-la avec votre code secret Mobile Money."
-msgstr "A payment request was sent to %(phone)s. Approve it with your Mobile Money PIN."
-
-msgid "Cette page se met à jour toute seule."
-msgstr "This page updates by itself."
-
-msgid "Référence"
-msgstr "Reference"
-
-msgid "J'ai confirmé, vérifier"
-msgstr "I confirmed, check now"
-
-msgid "Réessayer"
-msgstr "Try again"
-
 msgid "Tous vos modules au même endroit"
 msgstr "All your modules in one place"
 
@@ -1280,11 +1189,11 @@ msgstr "Two-step sign-in"
 msgid "Un code sur le téléphone en plus du mot de passe : personne ne se connecte avec un mot de passe volé."
 msgstr "A code on the phone on top of the password: nobody signs in with a stolen password."
 
-msgid "Paiements vérifiés"
-msgstr "Verified payments"
+msgid "Caisse transparente"
+msgstr "Transparent cash box"
 
-msgid "Chaque paiement T-Money ou Flooz est revérifié auprès de l'opérateur, montant compris, avant d'être confirmé."
-msgstr "Every T-Money or Flooz payment is re-checked with the operator, amount included, before it is confirmed."
+msgid "Chaque cotisation est enregistrée avec son statut, et la caisse s'exporte en Excel ou en PDF."
+msgstr "Every contribution is recorded with its status, and the cash box exports to Excel or PDF."
 
 msgid "Historique complet"
 msgstr "Full history"
@@ -1922,9 +1831,6 @@ msgstr "Up to 3 groups"
 msgid "Suivi des membres et réunions"
 msgstr "Member and meeting tracking"
 
-msgid "Paiement Mobile Money (T-Money, Flooz)"
-msgstr "Mobile Money payments (T-Money, Flooz)"
-
 msgid "Dashboard actif"
 msgstr "Live dashboard"
 
@@ -2201,12 +2107,6 @@ msgstr "Edit member"
 msgid "Supprimer un membre"
 msgstr "Delete member"
 
-msgid "Le paiement n'a pas pu être lancé. Vérifiez le numéro et réessayez dans quelques instants."
-msgstr "The payment could not be started. Check the number and try again in a moment."
-
-msgid "Paiement toujours en attente. Confirmez-le sur votre téléphone avec votre code secret."
-msgstr "Payment still pending. Confirm it on your phone with your PIN."
-
 msgid "Ajouter un organe"
 msgstr "Add a body"
 
@@ -2224,6 +2124,112 @@ msgstr "Edit position"
 
 msgid "Supprimer un poste"
 msgstr "Delete position"
+
+#~ msgid "Montant (FCFA)"
+#~ msgstr "Amount (FCFA)"
+
+#~ msgid "Réseau"
+#~ msgstr "Network"
+
+#~ msgid "Numéro Mobile Money"
+#~ msgstr "Mobile Money number"
+
+#~ msgid "Exemple : 90 12 34 56. Vous confirmerez le paiement sur ce téléphone."
+#~ msgstr "Example: 90 12 34 56. You will confirm the payment on this phone."
+
+#~ msgid "Référence du paiement"
+#~ msgstr "Payment reference"
+
+#~ msgid "Numéro payeur"
+#~ msgstr "Payer number"
+
+#~ msgid "Payer ma cotisation"
+#~ msgstr "Pay my contribution"
+
+#~ msgid "Payer ma cotisation - Kotiza"
+#~ msgstr "Pay my contribution - Kotiza"
+
+#~ msgid "Payez en quelques secondes avec T-Money ou Flooz. Votre cotisation est enregistrée automatiquement."
+#~ msgstr "Pay in seconds with T-Money or Flooz. Your contribution is recorded automatically."
+
+#~ msgid "Payer maintenant"
+#~ msgstr "Pay now"
+
+#~ msgid "Comment ça marche ?"
+#~ msgstr "How does it work?"
+
+#~ msgid "Choisissez votre réseau"
+#~ msgstr "Choose your network"
+
+#~ msgid "T-Money (Togocom) ou Flooz (Moov Africa)."
+#~ msgstr "T-Money (Togocom) or Flooz (Moov Africa)."
+
+#~ msgid "Validez sur votre téléphone"
+#~ msgstr "Approve on your phone"
+
+#~ msgid "Une demande arrive sur votre téléphone : confirmez avec votre code secret."
+#~ msgstr "A request arrives on your phone: confirm it with your PIN."
+
+#~ msgid "C'est enregistré"
+#~ msgstr "It's recorded"
+
+#~ msgid "Votre cotisation apparaît confirmée dans votre historique, sans rien faire de plus."
+#~ msgstr "Your contribution shows as confirmed in your history, with nothing more to do."
+
+#~ msgid "Paiement sécurisé par PayGate Global. Kotiza ne voit jamais votre code secret."
+#~ msgstr "Payment secured by PayGate Global. Kotiza never sees your PIN."
+
+#~ msgid "Suivi du paiement - Kotiza"
+#~ msgstr "Payment tracking - Kotiza"
+
+#~ msgid "Suivi du paiement"
+#~ msgstr "Payment tracking"
+
+#~ msgid "Paiement reçu, merci !"
+#~ msgstr "Payment received, thank you!"
+
+#~ msgid "Votre cotisation est confirmée et enregistrée dans votre historique."
+#~ msgstr "Your contribution is confirmed and recorded in your history."
+
+#~ msgid "Paiement non abouti"
+#~ msgstr "Payment not completed"
+
+#~ msgid "La demande a expiré ou a été annulée. Aucun montant n'a été débité. Vous pouvez réessayer."
+#~ msgstr "The request expired or was cancelled. Nothing was charged. You can try again."
+
+#~ msgid "Confirmez sur votre téléphone"
+#~ msgstr "Confirm on your phone"
+
+#, python-format
+#~ msgid "Une demande de paiement a été envoyée au %(phone)s. Validez-la avec votre code secret Mobile Money."
+#~ msgstr "A payment request was sent to %(phone)s. Approve it with your Mobile Money PIN."
+
+#~ msgid "Cette page se met à jour toute seule."
+#~ msgstr "This page updates by itself."
+
+#~ msgid "Référence"
+#~ msgstr "Reference"
+
+#~ msgid "J'ai confirmé, vérifier"
+#~ msgstr "I confirmed, check now"
+
+#~ msgid "Réessayer"
+#~ msgstr "Try again"
+
+#~ msgid "Paiements vérifiés"
+#~ msgstr "Verified payments"
+
+#~ msgid "Chaque paiement T-Money ou Flooz est revérifié auprès de l'opérateur, montant compris, avant d'être confirmé."
+#~ msgstr "Every T-Money or Flooz payment is re-checked with the operator, amount included, before it is confirmed."
+
+#~ msgid "Paiement Mobile Money (T-Money, Flooz)"
+#~ msgstr "Mobile Money payments (T-Money, Flooz)"
+
+#~ msgid "Le paiement n'a pas pu être lancé. Vérifiez le numéro et réessayez dans quelques instants."
+#~ msgstr "The payment could not be started. Check the number and try again in a moment."
+
+#~ msgid "Paiement toujours en attente. Confirmez-le sur votre téléphone avec votre code secret."
+#~ msgstr "Payment still pending. Confirm it on your phone with your PIN."
 
 #~ msgid "Accès sécurisé"
 #~ msgstr "Secure access"

@@ -87,14 +87,11 @@ python3 manage.py seed_demo --reset                          # tout supprimer
 
 Les données de démonstration sont marquées « (démo) » et n'affectent pas les autres données.
 
-## Paiement Mobile Money et rappels
+## Rappels de cotisation
 
-- `PAYGATE_AUTH_TOKEN` active le paiement T-Money / Flooz (PayGate Global) dans « Mon espace ».
-- `ESMS_API_KEY` (eSMS Africa) active les rappels par SMS, `TWILIO_*` les rappels WhatsApp (voir `.env.example`).
-- `python3 manage.py send_contribution_reminders` relance les membres en retard.
-- `python3 manage.py check_pending_payments` revérifie les paiements restés en attente.
+- `python3 manage.py send_contribution_reminders` relance les membres en retard (email et notification ; SMS / WhatsApp si `TWILIO_*` est configuré, voir `.env.example`).
 
-Mise en place détaillée et tâches automatiques : `DEPLOYMENT-CLIENTS.md`, section 5.
+Tâche automatique : `DEPLOYMENT-CLIENTS.md`, section 5.
 
 ## Commandes standard (Makefile)
 

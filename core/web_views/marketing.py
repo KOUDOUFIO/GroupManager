@@ -163,7 +163,6 @@ def proposal_page(request):
             "features": [
                 _("Jusqu’à 3 groupes"),
                 _("Suivi des membres et réunions"),
-                _("Paiement Mobile Money (T-Money, Flooz)"),
                 _("Dashboard actif"),
                 _("Exports de base"),
             ],

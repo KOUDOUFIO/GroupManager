@@ -20,8 +20,7 @@
 #   status                                 Lister les clients et leur abonnement
 #   backup <client|all>                    Sauvegarder la base (garde 14 jours)
 #   update                                 Reconstruire l'image et redemarrer tous les clients
-#   task <client|all> <tache>              Lancer une tache : reminders (rappels de
-#                                          cotisation) ou payments (paiements en attente)
+#   task <client|all> reminders            Envoyer les rappels de cotisation
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
@@ -313,12 +312,11 @@ task_one() {
 }
 
 cmd_task() {
-  [ $# -eq 2 ] || die "usage : task <client|all> <reminders|payments>"
+  [ $# -eq 2 ] || die "usage : task <client|all> reminders"
   local command slug
   case "$2" in
     reminders) command=send_contribution_reminders ;;
-    payments)  command=check_pending_payments ;;
-    *) die "tache inconnue : $2 (reminders ou payments)" ;;
+    *) die "tache inconnue : $2 (reminders)" ;;
   esac
   if [ "$1" = "all" ]; then
     for slug in $(list_clients); do task_one "$slug" "$command"; done
@@ -344,5 +342,5 @@ case "${1:-}" in
   backup) shift; cmd_backup "$@" ;;
   update) shift; cmd_update "$@" ;;
   task)   shift; cmd_task "$@" ;;
-  *) sed -n '2,24p' "$0" | sed 's/^# \{0,1\}//'; exit 1 ;;
+  *) sed -n '2,23p' "$0" | sed 's/^# \{0,1\}//'; exit 1 ;;
 esac

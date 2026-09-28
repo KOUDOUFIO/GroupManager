@@ -63,9 +63,6 @@ class Contribution(models.Model):
     paid_at = models.DateField(verbose_name=_("Date de paiement"))
     notes = models.TextField(blank=True, verbose_name=_("Notes"))
     gateway_transaction_id = models.CharField(max_length=64, null=True, blank=True, unique=True, verbose_name=_("Identifiant de transaction"))
-    # Reference du paiement cote operateur (T-Money / Flooz), pour le rapprochement.
-    gateway_reference = models.CharField(_("Référence du paiement"), max_length=64, blank=True, default="")
-    payer_phone = models.CharField(_("Numéro payeur"), max_length=32, blank=True, default="")
 
     class Meta:
         verbose_name = _("Cotisation")

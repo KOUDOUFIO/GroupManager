@@ -2504,7 +2504,6 @@ input:focus-visible {
   transform: translateX(-2px);
 }
 
-
 .launcher-btn {
   color: #fff;
   border: none;
@@ -2517,15 +2516,6 @@ input:focus-visible {
   box-shadow: 0 12px 24px -8px rgba(15, 90, 43, 0.9);
 }
 
-
-
-
-
-
-
-
-
-
 .module-section-label {
   margin: 12px 4px 8px;
   font-size: 0.75rem;
@@ -2534,12 +2524,6 @@ input:focus-visible {
   letter-spacing: 0.08em;
   color: var(--color-gray-500);
 }
-
-
-
-
-
-
 
 .topbar-search {
   position: relative;
@@ -3745,7 +3729,7 @@ html.modules-open {
 }
 
 /* ============================================
-   Messages, paiement Mobile Money, essai, confiance
+   Messages, essai, confiance
    ============================================ */
 .flash-list {
   display: flex;
@@ -3775,198 +3759,10 @@ html.modules-open {
   color: #78350f;
 }
 
-.pay-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-  gap: 24px;
-  align-items: start;
-}
-
-.pay-form {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  border: 1px solid var(--color-gray-200);
-}
-
-.network-choice {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin: 0;
-  padding: 0;
-  border: none;
-}
-
-.network-choice legend,
-.pay-field label {
-  margin-bottom: 8px;
-  font-weight: 600;
-}
-
-.network-option {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px;
-  border-radius: 16px;
-  border: 2px solid var(--color-gray-200);
-  background: #fff;
-  font-weight: 600;
-  cursor: pointer;
-  transition: border-color var(--transition-fast), background var(--transition-fast);
-}
-
-.network-option input {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.network-option:has(input:checked) {
-  border-color: var(--color-primary-600);
-  background: var(--color-primary-50);
-}
-
-.network-option:has(input:focus-visible) {
-  outline: 3px solid rgba(22, 163, 74, 0.45);
-  outline-offset: 2px;
-}
-
-.network-badge {
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  color: #fff;
-  font-weight: 800;
-}
-
-.network-tmoney .network-badge {
-  background: linear-gradient(135deg, #fbbf24, #d97706);
-  color: #3b2a06;
-}
-
-.network-flooz .network-badge {
-  background: linear-gradient(135deg, #38bdf8, #0369a1);
-}
-
-.pay-field {
-  display: flex;
-  flex-direction: column;
-}
-
-.pay-field input,
-.pay-field select {
-  height: 46px;
-  padding: 0 14px;
-  border-radius: 12px;
-  border: 1px solid var(--color-gray-300);
-  background: #fff;
-  font: inherit;
-}
-
-.pay-field small {
-  margin-top: 6px;
-  color: var(--color-gray-500);
-}
-
 .field-error {
   margin: 6px 0 0;
   color: #b91c1c;
   font-size: 0.9rem;
-}
-
-.pay-submit {
-  height: 52px;
-  font: inherit;
-  font-size: 1.05rem;
-  font-weight: 700;
-}
-
-.pay-steps {
-  padding: 24px;
-  border-radius: 20px;
-  background: linear-gradient(160deg, #0b3d1f, #14572c);
-  color: #fff;
-}
-
-.pay-steps h2 {
-  margin: 0 0 16px;
-  font-size: 1.2rem;
-}
-
-.pay-steps ol {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: step;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.pay-steps li {
-  counter-increment: step;
-  display: grid;
-  grid-template-columns: 34px 1fr;
-  column-gap: 12px;
-}
-
-.pay-steps li::before {
-  content: counter(step);
-  grid-row: span 2;
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: linear-gradient(180deg, #fde68a, #f5b82e);
-  color: #3b2a06;
-  font-weight: 800;
-}
-
-.pay-steps li span {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.92rem;
-}
-
-.pay-secure {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 20px 0 0;
-  padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-  font-size: 0.88rem;
-  color: #fde68a;
-}
-
-.pay-status {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  max-width: 560px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 36px 28px;
-  border-radius: 24px;
-  background: #fff;
-  border: 1px solid var(--color-gray-200);
-  box-shadow: var(--shadow);
-  text-align: center;
-}
-
-.pay-status h2 {
-  margin: 6px 0 0;
-}
-
-.pay-status p {
-  margin: 0;
-  color: var(--color-gray-600);
 }
 
 .pay-status-icon {
@@ -3977,55 +3773,6 @@ html.modules-open {
   border-radius: 50%;
   background: var(--color-warning-light);
   color: #b45309;
-}
-
-.pay-status-pending .pay-status-icon {
-  animation: pulseRing 1.6s ease-in-out infinite;
-}
-
-.pay-status-confirmed .pay-status-icon {
-  background: var(--color-primary-50);
-  color: var(--color-primary-700);
-}
-
-.pay-status-failed .pay-status-icon {
-  background: var(--color-danger-light);
-  color: #b91c1c;
-}
-
-.pay-hint {
-  font-size: 0.85rem;
-}
-
-.pay-summary {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  width: 100%;
-  margin: 12px 0;
-  padding: 16px;
-  border-radius: 16px;
-  background: var(--color-gray-50);
-  text-align: left;
-}
-
-.pay-summary dt {
-  font-size: 0.8rem;
-  color: var(--color-gray-500);
-}
-
-.pay-summary dd {
-  margin: 2px 0 0;
-  font-weight: 600;
-  overflow-wrap: break-word;
-}
-
-.pay-status .hero-actions {
-  justify-content: center;
-}
-
-.pay-status form {
-  margin: 0;
 }
 
 .plan-trial {
@@ -4090,19 +3837,6 @@ html.modules-open {
 .testimonial-card figcaption small {
   display: block;
   color: var(--color-gray-500);
-}
-
-@media (max-width: 900px) {
-  .pay-layout {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 480px) {
-  .network-choice,
-  .pay-summary {
-    grid-template-columns: 1fr;
-  }
 }
 
 .section-heading > .pill {

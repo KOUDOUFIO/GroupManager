@@ -110,15 +110,11 @@ class Command(BaseCommand):
         Returns:
             bool: True si un message a ete accepte par le fournisseur.
         """
-        pay_link = ""
-        if settings.PAYGATE_ENABLED and settings.KOTIZA_SITE_URL:
-            pay_link = f"{settings.KOTIZA_SITE_URL}/mon-espace/payer/"
         body = (
             f"Kotiza - Bonjour {member.full_name}, votre cotisation {group.name} de {month_label} "
-            f"n'est pas encore enregistree."
+            f"n'est pas encore enregistree. Merci de la regler rapidement."
         )
-        body += f" Payez par T-Money ou Flooz : {pay_link}" if pay_link else " Merci de la regler rapidement."
-        template_vars = {"1": member.full_name, "2": group.name, "3": month_label, "4": pay_link or "-"}
+        template_vars = {"1": member.full_name, "2": group.name, "3": month_label}
 
         for channel in MessagingService.enabled_channels():
             if MessagingService.send(channel, member.phone, body, template_vars=template_vars):

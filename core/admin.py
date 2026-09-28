@@ -63,7 +63,7 @@ class MeetingEntryAdmin(admin.ModelAdmin):
 class ContributionAdmin(admin.ModelAdmin):
     """Interface d'administration pour les cotisations."""
     list_display = ("member", "group", "contribution_type", "payment_method", "payment_status", "amount", "paid_at")
-    search_fields = ("member__full_name", "group__name", "gateway_transaction_id", "gateway_reference", "payer_phone")
+    search_fields = ("member__full_name", "group__name")
     list_filter = ("contribution_type", "payment_method", "payment_status", "group", "paid_at")
 
 

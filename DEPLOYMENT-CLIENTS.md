@@ -72,27 +72,17 @@ Sauvegarde automatique chaque nuit à 3h (`crontab -e`) :
 
 Les sauvegardes vont dans `clients/<client>/backups/` et sont conservées 14 jours. Copiez-les régulièrement hors du serveur.
 
-## 5. Paiement Mobile Money et rappels automatiques
+## 5. Rappels automatiques
 
-**Paiement T-Money / Flooz (PayGate Global).** Créez un compte marchand sur [paygateglobal.com](https://paygateglobal.com), puis :
+Les membres sans cotisation mensuelle reçoivent un rappel par email et dans l'application.
 
-1. Mettez la clé API dans `PAYGATE_AUTH_TOKEN` (dans `clients/shared.env` pour tous les clients, ou dans `clients/<client>/.env`).
-2. Dans l'espace marchand PayGate, déclarez l'URL de notification : `https://<domaine-du-client>/webhooks/paygate/`.
-3. Renseignez `KOTIZA_SITE_URL=https://<domaine-du-client>` : le lien de paiement est ajouté aux rappels.
+**SMS / WhatsApp (Twilio, facultatif).** Renseignez `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_SMS_FROM` et/ou `TWILIO_WHATSAPP_FROM`. WhatsApp exige un modèle de message validé par Meta (`TWILIO_WHATSAPP_TEMPLATE_SID`) ; sans modèle, le SMS prend le relais.
 
-Le membre voit alors un bouton « Payer ma cotisation » dans « Mon espace ». Il reçoit la demande sur son téléphone, la valide avec son code secret, et la cotisation passe en « Confirmée » toute seule. Kotiza ne fait jamais confiance au message reçu : il revérifie chaque paiement auprès de PayGate, y compris le montant.
-
-**SMS (eSMS Africa).** Renseignez `ESMS_API_KEY` (clé `esms_live_…`, menu Developers > API Keys sur esmsafrica.io) et rechargez le solde du compte (environ 30 FCFA par SMS vers le Togo). Faites approuver un nom d'expéditeur (ex. `KOTIZA`) et mettez-le dans `ESMS_SENDER_ID`, sinon les SMS partent au nom « eSMS ». eSMS Africa est prioritaire sur Twilio pour les SMS.
-
-**Rappels WhatsApp (et SMS de repli) via Twilio.** Renseignez `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_SMS_FROM` et/ou `TWILIO_WHATSAPP_FROM`. WhatsApp exige un modèle de message validé par Meta (`TWILIO_WHATSAPP_TEMPLATE_SID`). Sans modèle, WhatsApp refuse l'envoi et le SMS prend le relais. Sans aucune configuration, les rappels partent seulement par email et dans l'application.
-
-Tâches automatiques (`crontab -e`) :
+Tâche automatique (`crontab -e`) :
 
 ```
 # Rappels de cotisation le 5 et le 15 de chaque mois à 9h
 0 9 5,15 * * cd /chemin/vers/kotiza && ./docker/multi/kotiza-clients.sh task all reminders >> logs/tasks.log 2>&1
-# Vérification des paiements Mobile Money restés en attente, toutes les 15 minutes
-*/15 * * * * cd /chemin/vers/kotiza && ./docker/multi/kotiza-clients.sh task all payments >> logs/tasks.log 2>&1
 ```
 
 ## Tester sans vrai certificat

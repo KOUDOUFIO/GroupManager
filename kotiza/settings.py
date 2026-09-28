@@ -223,22 +223,10 @@ KOTIZA_CURRENCY = os.environ.get("KOTIZA_CURRENCY", "FCFA")
 KOTIZA_PRICE_STARTER = int(os.environ.get("KOTIZA_PRICE_STARTER", "15000"))
 KOTIZA_PRICE_BUSINESS = int(os.environ.get("KOTIZA_PRICE_BUSINESS", "35000"))
 KOTIZA_TRIAL_DAYS = int(os.environ.get("KOTIZA_TRIAL_DAYS", "30"))
-# Adresse publique du site (liens dans les SMS/WhatsApp), ex. https://kotiza.tg
-KOTIZA_SITE_URL = os.environ.get("KOTIZA_SITE_URL", "").rstrip("/")
 # Indicatif ajoute aux numeros locaux sans indicatif (228 = Togo).
 KOTIZA_DEFAULT_COUNTRY_CODE = os.environ.get("KOTIZA_DEFAULT_COUNTRY_CODE", "228")
 
-# PayGate Global (Mobile Money T-Money / Flooz) : desactive tant que la cle
-# n'est pas definie. Le portail membre masque alors le bouton de paiement.
-PAYGATE_AUTH_TOKEN = os.environ.get("PAYGATE_AUTH_TOKEN", "")
-PAYGATE_ENABLED = bool(PAYGATE_AUTH_TOKEN)
-PAYGATE_API_URL = os.environ.get("PAYGATE_API_URL", "https://paygateglobal.com/api")
 
-# SMS via eSMS Africa (prioritaire pour les SMS si la cle est definie).
-# ESMS_SENDER_ID : nom d'expediteur approuve par eSMS (ex. KOTIZA), vide = celui par defaut.
-ESMS_API_KEY = os.environ.get("ESMS_API_KEY", "")
-ESMS_SENDER_ID = os.environ.get("ESMS_SENDER_ID", "")
-ESMS_API_URL = os.environ.get("ESMS_API_URL", "https://sms.esmsafrica.io/api")
 
 # Rappels SMS / WhatsApp via Twilio : un canal est actif des que son numero
 # d'expedition est defini. Sans configuration, les messages sont seulement
