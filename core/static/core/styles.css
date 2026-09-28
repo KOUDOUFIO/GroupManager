@@ -2305,3 +2305,8 @@ body {
     padding: 32px 20px;
   }
 }
+
+.module-badge.soon {
+  background: var(--color-gray-100);
+  color: var(--color-gray-700);
+}

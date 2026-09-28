@@ -27,6 +27,7 @@
     {% for module in platform_modules %}
     <article class="module-card">
       <span class="module-badge">{{ module.badge }}</span>
+      {% if module.soon %}<span class="module-badge soon">Bientôt</span>{% endif %}
       <h4>{{ module.title }}</h4>
       <p>{{ module.description }}</p>
     </article>

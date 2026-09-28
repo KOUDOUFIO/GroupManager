@@ -61,16 +61,19 @@ def platform_page(request):
             "title": "CRM & relations",
             "description": "Centralisez les contacts, les prospects, les comptes et l’historique des échanges pour un meilleur suivi commercial.",
             "badge": "Sales",
+            "soon": True,
         },
         {
             "title": "Devis & factures",
             "description": "Créez, suivez et finalisez vos propositions commerciales avec une gestion plus claire de la facturation.",
             "badge": "Billing",
+            "soon": True,
         },
         {
             "title": "Tâches & workflow",
             "description": "Coordonnez les actions internes, les responsabilités et les priorités à travers des workflows simples et fiables.",
             "badge": "Ops",
+            "soon": True,
         },
         {
             "title": "Reporting & KPI",
@@ -98,8 +101,8 @@ def platform_page(request):
 
     comparison = [
         ["Gestion des groupes", "Oui", "Oui", "Oui"],
-        ["CRM client/prospect", "À venir", "Oui", "Oui"],
-        ["Devis / factures", "À venir", "Oui", "Oui"],
+        ["CRM client/prospect", "Bientôt", "Bientôt", "Bientôt"],
+        ["Devis / factures", "Bientôt", "Bientôt", "Bientôt"],
         ["Tableaux de bord", "Partiel", "Oui", "Oui"],
         ["API / intégrations", "Non", "Sur demande", "Oui"],
     ]
