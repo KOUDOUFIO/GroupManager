@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-28 01:13+0000\n"
+"POT-Creation-Date: 2026-09-28 06:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -174,6 +174,27 @@ msgstr "Organization type"
 msgid "Besoin principal"
 msgstr "Main need"
 
+msgid "Groupe"
+msgstr "Group"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Montant (FCFA)"
+msgstr "Amount (FCFA)"
+
+msgid "Réseau"
+msgstr "Network"
+
+msgid "Numéro Mobile Money"
+msgstr "Mobile Money number"
+
+msgid "Exemple : 90 12 34 56. Vous confirmerez le paiement sur ce téléphone."
+msgstr "Example: 90 12 34 56. You will confirm the payment on this phone."
+
+msgid "Numéro de téléphone invalide."
+msgstr "Invalid phone number."
+
 msgid "Création"
 msgstr "Creation"
 
@@ -221,6 +242,12 @@ msgstr "Confirmed"
 
 msgid "Échouée"
 msgstr "Failed"
+
+msgid "Référence du paiement"
+msgstr "Payment reference"
+
+msgid "Numéro payeur"
+msgstr "Payer number"
 
 msgid "Statistiques Groupes"
 msgstr "Group statistics"
@@ -318,9 +345,6 @@ msgstr "Warning"
 msgid "Erreur"
 msgstr "Error"
 
-msgid "Groupe"
-msgstr "Group"
-
 msgid "Membre"
 msgstr "Member"
 
@@ -329,9 +353,6 @@ msgstr "Contribution"
 
 msgid "Système"
 msgstr "System"
-
-msgid "Type"
-msgstr "Type"
 
 msgid "Catégorie"
 msgstr "Category"
@@ -407,6 +428,33 @@ msgstr "Quote request"
 
 msgid "Demandes de devis"
 msgstr "Quote requests"
+
+msgid "Fonction"
+msgstr "Feature"
+
+msgid "Ex. Trésorière"
+msgstr "E.g. Treasurer"
+
+msgid "Témoignage"
+msgstr "Testimonial"
+
+msgid "Accord écrit du client"
+msgstr "Customer's written consent"
+
+msgid "Obligatoire pour publier : le client a accepté que son avis et son nom soient affichés."
+msgstr "Required to publish: the customer agreed that their review and name may be shown."
+
+msgid "Publié"
+msgstr "Published"
+
+msgid "Ordre"
+msgstr "Order"
+
+msgid "Témoignages"
+msgstr "Testimonials"
+
+msgid "Impossible de publier sans l'accord écrit du client."
+msgstr "Cannot publish without the customer's written consent."
 
 msgid "Dernière utilisation"
 msgstr "Last used"
@@ -522,6 +570,9 @@ msgstr "Latest audit events"
 msgid "Aucune activité récente."
 msgstr "No recent activity."
 
+msgid "Retour"
+msgstr "Back"
+
 msgid "Plateforme"
 msgstr "Platform"
 
@@ -530,9 +581,6 @@ msgstr "Pricing"
 
 msgid "Navigation principale"
 msgstr "Main navigation"
-
-msgid "Retour"
-msgstr "Back"
 
 msgid "Modules"
 msgstr "Modules"
@@ -979,6 +1027,9 @@ msgstr "No contributions recorded."
 msgid "Vos cotisations et votre présence, en un coup d'œil."
 msgstr "Your contributions and attendance at a glance."
 
+msgid "Payer ma cotisation"
+msgstr "Pay my contribution"
+
 msgid "Total cotisé"
 msgstr "Total contributed"
 
@@ -994,6 +1045,76 @@ msgstr "My groups"
 msgid "Vous n'appartenez à aucun groupe."
 msgstr "You are not in any group."
 
+msgid "Payer ma cotisation - Kotiza"
+msgstr "Pay my contribution - Kotiza"
+
+msgid "Payez en quelques secondes avec T-Money ou Flooz. Votre cotisation est enregistrée automatiquement."
+msgstr "Pay in seconds with T-Money or Flooz. Your contribution is recorded automatically."
+
+msgid "Payer maintenant"
+msgstr "Pay now"
+
+msgid "Comment ça marche ?"
+msgstr "How does it work?"
+
+msgid "Choisissez votre réseau"
+msgstr "Choose your network"
+
+msgid "T-Money (Togocom) ou Flooz (Moov Africa)."
+msgstr "T-Money (Togocom) or Flooz (Moov Africa)."
+
+msgid "Validez sur votre téléphone"
+msgstr "Approve on your phone"
+
+msgid "Une demande arrive sur votre téléphone : confirmez avec votre code secret."
+msgstr "A request arrives on your phone: confirm it with your PIN."
+
+msgid "C'est enregistré"
+msgstr "It's recorded"
+
+msgid "Votre cotisation apparaît confirmée dans votre historique, sans rien faire de plus."
+msgstr "Your contribution shows as confirmed in your history, with nothing more to do."
+
+msgid "Paiement sécurisé par PayGate Global. Kotiza ne voit jamais votre code secret."
+msgstr "Payment secured by PayGate Global. Kotiza never sees your PIN."
+
+msgid "Suivi du paiement - Kotiza"
+msgstr "Payment tracking - Kotiza"
+
+msgid "Suivi du paiement"
+msgstr "Payment tracking"
+
+msgid "Paiement reçu, merci !"
+msgstr "Payment received, thank you!"
+
+msgid "Votre cotisation est confirmée et enregistrée dans votre historique."
+msgstr "Your contribution is confirmed and recorded in your history."
+
+msgid "Paiement non abouti"
+msgstr "Payment not completed"
+
+msgid "La demande a expiré ou a été annulée. Aucun montant n'a été débité. Vous pouvez réessayer."
+msgstr "The request expired or was cancelled. Nothing was charged. You can try again."
+
+msgid "Confirmez sur votre téléphone"
+msgstr "Confirm on your phone"
+
+#, python-format
+msgid "Une demande de paiement a été envoyée au %(phone)s. Validez-la avec votre code secret Mobile Money."
+msgstr "A payment request was sent to %(phone)s. Approve it with your Mobile Money PIN."
+
+msgid "Cette page se met à jour toute seule."
+msgstr "This page updates by itself."
+
+msgid "Référence"
+msgstr "Reference"
+
+msgid "J'ai confirmé, vérifier"
+msgstr "I confirmed, check now"
+
+msgid "Réessayer"
+msgstr "Try again"
+
 msgid "Tous vos modules au même endroit"
 msgstr "All your modules in one place"
 
@@ -1002,6 +1123,48 @@ msgstr "Organization, people, contributions, activities, admin and manager areas
 
 msgid "Afficher tous les modules"
 msgstr "Show all modules"
+
+msgid "Sécurité et confiance"
+msgstr "Security and trust"
+
+msgid "L'argent de vos membres mérite une application sérieuse."
+msgstr "Your members' money deserves a serious app."
+
+msgid "Connexion à deux étapes"
+msgstr "Two-step sign-in"
+
+msgid "Un code sur le téléphone en plus du mot de passe : personne ne se connecte avec un mot de passe volé."
+msgstr "A code on the phone on top of the password: nobody signs in with a stolen password."
+
+msgid "Paiements vérifiés"
+msgstr "Verified payments"
+
+msgid "Chaque paiement T-Money ou Flooz est revérifié auprès de l'opérateur, montant compris, avant d'être confirmé."
+msgstr "Every T-Money or Flooz payment is re-checked with the operator, amount included, before it is confirmed."
+
+msgid "Historique complet"
+msgstr "Full history"
+
+msgid "Qui a modifié quoi, et quand : chaque action est tracée. Fini les disputes sur la caisse."
+msgstr "Who changed what, and when: every action is logged. No more arguments about the cash box."
+
+msgid "Vos données séparées"
+msgstr "Your data kept separate"
+
+msgid "Chaque organisation a sa propre installation et sa propre base : aucune donnée partagée avec d'autres clients."
+msgstr "Each organization has its own installation and database: no data shared with other customers."
+
+msgid "Accès par rôle"
+msgstr "Role-based access"
+
+msgid "Administrateur, trésorier, membre : chacun ne voit que ce qui le concerne."
+msgstr "Administrator, treasurer, member: everyone only sees what concerns them."
+
+msgid "Sauvegardes et HTTPS"
+msgstr "Backups and HTTPS"
+
+msgid "Connexion chiffrée et sauvegardes automatiques de la base de données."
+msgstr "Encrypted connection and automatic database backups."
 
 msgid "Activité de la semaine"
 msgstr "Weekly activity"
@@ -1075,9 +1238,6 @@ msgstr "Comparison"
 msgid "Une base solide pour passer de l’organisation locale à la plateforme business complète."
 msgstr "A solid foundation to grow from a local organization to a full business platform."
 
-msgid "Fonction"
-msgstr "Feature"
-
 msgid "Base"
 msgstr "Base"
 
@@ -1108,6 +1268,12 @@ msgstr "Management solutions built for demanding organizations."
 msgid "Une plateforme robuste pour organiser vos groupes, vos équipes, vos événements et vos opérations, avec un pilotage clair et une expérience premium pour vos responsables."
 msgstr "A robust platform to organize your groups, teams, events and operations, with clear oversight and a premium experience for your leaders."
 
+#, python-format
+msgid "Essayer gratuitement %(days)s jour"
+msgid_plural "Essayer gratuitement %(days)s jours"
+msgstr[0] "Try free for %(days)s day"
+msgstr[1] "Try free for %(days)s days"
+
 msgid "Voir les tarifs"
 msgstr "See pricing"
 
@@ -1125,6 +1291,12 @@ msgstr "Flexible plans to start fast, grow calmly and evolve with your organizat
 
 msgid "Populaire"
 msgstr "Popular"
+
+#, python-format
+msgid "%(days)s jour d'essai gratuit, sans engagement"
+msgid_plural "%(days)s jours d'essai gratuit, sans engagement"
+msgstr[0] "%(days)s-day free trial, no commitment"
+msgstr[1] "%(days)s-day free trial, no commitment"
 
 #, python-format
 msgid "Choisir %(name)s"
@@ -1636,6 +1808,9 @@ msgstr "Up to 3 groups"
 msgid "Suivi des membres et réunions"
 msgstr "Member and meeting tracking"
 
+msgid "Paiement Mobile Money (T-Money, Flooz)"
+msgstr "Mobile Money payments (T-Money, Flooz)"
+
 msgid "Dashboard actif"
 msgstr "Live dashboard"
 
@@ -1647,6 +1822,9 @@ msgstr "For organizations that want deeper oversight."
 
 msgid "Gestion multi-groupes"
 msgstr "Multi-group management"
+
+msgid "Rappels automatiques SMS / WhatsApp"
+msgstr "Automatic SMS / WhatsApp reminders"
 
 msgid "Accès rôles et permissions"
 msgstr "Roles and permissions"
@@ -1810,9 +1988,6 @@ msgstr "Adapt the platform to a regulated environment with reliable management o
 msgid "Traçabilité des actions"
 msgstr "Action traceability"
 
-msgid "Accès par rôle"
-msgstr "Role-based access"
-
 msgid "Pilotage centralisé"
 msgstr "Centralized oversight"
 
@@ -1917,6 +2092,12 @@ msgstr "Edit member"
 
 msgid "Supprimer un membre"
 msgstr "Delete member"
+
+msgid "Le paiement n'a pas pu être lancé. Vérifiez le numéro et réessayez dans quelques instants."
+msgstr "The payment could not be started. Check the number and try again in a moment."
+
+msgid "Paiement toujours en attente. Confirmez-le sur votre téléphone avec votre code secret."
+msgstr "Payment still pending. Confirm it on your phone with your PIN."
 
 msgid "Description"
 msgstr "Description"

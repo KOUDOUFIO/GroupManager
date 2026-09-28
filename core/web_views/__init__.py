@@ -27,6 +27,8 @@ from .mixins import (
 from .member_portal import (
     MemberAttendanceListView,
     MemberContributionsListView,
+    MemberPaymentStatusView,
+    MemberPaymentView,
     MemberPortalDashboardView,
 )
 from .group import GroupCreateView, GroupDeleteView, GroupListView, GroupUpdateView

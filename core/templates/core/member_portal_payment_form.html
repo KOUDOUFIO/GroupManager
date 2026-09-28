@@ -1,0 +1,56 @@
+{% extends 'core/base.html' %}
+{% load i18n core_extras %}
+
+{% block title %}{% translate "Payer ma cotisation - Kotiza" %}{% endblock %}
+
+{% block hero %}
+<div>
+  <p class="pill">{% translate "Mon espace" %}</p>
+  <h1>{% translate "Payer ma cotisation" %}</h1>
+  <p class="subtitle">{% translate "Payez en quelques secondes avec T-Money ou Flooz. Votre cotisation est enregistrée automatiquement." %}</p>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="pay-layout">
+  <form method="post" class="form-card pay-form" novalidate>
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+    <div class="flash flash-error" role="alert">{% for e in form.non_field_errors %}{{ e }}{% endfor %}</div>
+    {% endif %}
+
+    <fieldset class="network-choice">
+      <legend>{{ form.network.label }}</legend>
+      {% for radio in form.network %}
+      <label class="network-option network-{{ radio.data.value|lower }}">
+        {{ radio.tag }}
+        <span class="network-badge" aria-hidden="true">{% if radio.data.value == "TMONEY" %}T{% else %}F{% endif %}</span>
+        <span>{{ radio.choice_label }}</span>
+      </label>
+      {% endfor %}
+      {% for e in form.network.errors %}<p class="field-error">{{ e }}</p>{% endfor %}
+    </fieldset>
+
+    {% for field in form %}{% if field.name != "network" %}
+    <div class="pay-field">
+      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+      {{ field }}
+      {% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}
+      {% for e in field.errors %}<p class="field-error">{{ e }}</p>{% endfor %}
+    </div>
+    {% endif %}{% endfor %}
+
+    <button class="btn primary pay-submit" type="submit">{% icon "wallet" 18 %}{% translate "Payer maintenant" %}</button>
+  </form>
+
+  <aside class="pay-steps">
+    <h2>{% translate "Comment ça marche ?" %}</h2>
+    <ol>
+      <li><strong>{% translate "Choisissez votre réseau" %}</strong><span>{% translate "T-Money (Togocom) ou Flooz (Moov Africa)." %}</span></li>
+      <li><strong>{% translate "Validez sur votre téléphone" %}</strong><span>{% translate "Une demande arrive sur votre téléphone : confirmez avec votre code secret." %}</span></li>
+      <li><strong>{% translate "C'est enregistré" %}</strong><span>{% translate "Votre cotisation apparaît confirmée dans votre historique, sans rien faire de plus." %}</span></li>
+    </ol>
+    <p class="pay-secure">{% icon "shield" 18 %}{% translate "Paiement sécurisé par PayGate Global. Kotiza ne voit jamais votre code secret." %}</p>
+  </aside>
+</section>
+{% endblock %}

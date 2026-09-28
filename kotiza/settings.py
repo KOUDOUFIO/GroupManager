@@ -214,6 +214,34 @@ KOTIZA_ACCESS_UNTIL = _parse_access_until(os.environ.get("KOTIZA_ACCESS_UNTIL", 
 KOTIZA_API_ENABLED = os.environ.get("KOTIZA_API_ENABLED", "0") == "1"
 # Contact affiche sur la page "abonnement expire" (email, telephone Mobile Money...).
 KOTIZA_BILLING_CONTACT = os.environ.get("KOTIZA_BILLING_CONTACT", "")
+# Devise affichee sur les montants (FCFA au Togo et en zone UEMOA).
+KOTIZA_CURRENCY = os.environ.get("KOTIZA_CURRENCY", "FCFA")
+# Tarifs mensuels affiches sur la page Devis (dans la devise ci-dessus) et
+# duree de l'essai gratuit (= duree par defaut d'un nouveau client).
+KOTIZA_PRICE_STARTER = int(os.environ.get("KOTIZA_PRICE_STARTER", "15000"))
+KOTIZA_PRICE_BUSINESS = int(os.environ.get("KOTIZA_PRICE_BUSINESS", "35000"))
+KOTIZA_TRIAL_DAYS = int(os.environ.get("KOTIZA_TRIAL_DAYS", "30"))
+# Adresse publique du site (liens dans les SMS/WhatsApp), ex. https://kotiza.tg
+KOTIZA_SITE_URL = os.environ.get("KOTIZA_SITE_URL", "").rstrip("/")
+# Indicatif ajoute aux numeros locaux sans indicatif (228 = Togo).
+KOTIZA_DEFAULT_COUNTRY_CODE = os.environ.get("KOTIZA_DEFAULT_COUNTRY_CODE", "228")
+
+# PayGate Global (Mobile Money T-Money / Flooz) : desactive tant que la cle
+# n'est pas definie. Le portail membre masque alors le bouton de paiement.
+PAYGATE_AUTH_TOKEN = os.environ.get("PAYGATE_AUTH_TOKEN", "")
+PAYGATE_ENABLED = bool(PAYGATE_AUTH_TOKEN)
+PAYGATE_API_URL = os.environ.get("PAYGATE_API_URL", "https://paygateglobal.com/api")
+
+# Rappels SMS / WhatsApp via Twilio : un canal est actif des que son numero
+# d'expedition est defini. Sans configuration, les messages sont seulement
+# journalises (aucun envoi, aucun cout).
+TWILIO_ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID", "")
+TWILIO_AUTH_TOKEN = os.environ.get("TWILIO_AUTH_TOKEN", "")
+TWILIO_SMS_FROM = os.environ.get("TWILIO_SMS_FROM", "")
+TWILIO_WHATSAPP_FROM = os.environ.get("TWILIO_WHATSAPP_FROM", "")
+# Modele WhatsApp valide par Meta (obligatoire hors fenetre de 24 h), variables :
+# {{1}} nom du membre, {{2}} groupe, {{3}} mois, {{4}} lien de paiement.
+TWILIO_WHATSAPP_TEMPLATE_SID = os.environ.get("TWILIO_WHATSAPP_TEMPLATE_SID", "")
 
 if not DEBUG:
     # nginx termine le HTTPS et transmet en HTTP simple a gunicorn (voir

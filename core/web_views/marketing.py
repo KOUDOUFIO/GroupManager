@@ -8,7 +8,7 @@ from django.db.models import Count, Sum
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils import timezone
-from django.utils.formats import date_format
+from django.utils.formats import date_format, number_format
 from django.utils.translation import gettext as _
 from django.utils.translation import gettext_lazy as _lazy
 
@@ -120,17 +120,28 @@ def platform_page(request):
     return render(request, "core/platform.html", context)
 
 
+def _published_testimonials():
+    """Temoignages publies (avec accord du client), les plus mis en avant d'abord."""
+    return list(models.Testimonial.objects.filter(is_published=True, consent_given=True)[:6])
+
+
+def _price(amount):
+    """Prix mensuel lisible : 15 000 FCFA."""
+    return f"{number_format(amount, 0, force_grouping=True)} {settings.KOTIZA_CURRENCY}"
+
+
 def proposal_page(request):
     """Page de proposition commerciale / devis premium."""
     pricing = [
         {
             "name": _("Starter"),
-            "price": "€49",
+            "price": _price(settings.KOTIZA_PRICE_STARTER),
             "subtitle": _("Par mois"),
             "description": _("Idéal pour petites structures et équipes de démarrage."),
             "features": [
                 _("Jusqu’à 3 groupes"),
                 _("Suivi des membres et réunions"),
+                _("Paiement Mobile Money (T-Money, Flooz)"),
                 _("Dashboard actif"),
                 _("Exports de base"),
             ],
@@ -138,11 +149,12 @@ def proposal_page(request):
         },
         {
             "name": _("Business"),
-            "price": "€99",
+            "price": _price(settings.KOTIZA_PRICE_BUSINESS),
             "subtitle": _("Par mois"),
             "description": _("Pour les organisations qui veulent un pilotage plus profond."),
             "features": [
                 _("Gestion multi-groupes"),
+                _("Rappels automatiques SMS / WhatsApp"),
                 _("Accès rôles et permissions"),
                 _("Audit complet"),
                 _("Support prioritaire"),
@@ -205,6 +217,8 @@ def proposal_page(request):
         "contact_points": contact_points,
         "form": form,
         "submitted": submitted,
+        "trial_days": settings.KOTIZA_TRIAL_DAYS,
+        "testimonials": _published_testimonials(),
     }
     return render(request, "core/proposal.html", context)
 
@@ -478,6 +492,7 @@ def home(request):
     # Page vitrine des visiteurs : jamais de chiffres de la plateforme.
     context = {
         "show_platform_stats": False,
+        "testimonials": _published_testimonials(),
         "industry_cards": industry_cards,
         "workflow_steps": workflow_steps,
         "feature_highlights": feature_highlights,

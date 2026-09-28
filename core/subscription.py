@@ -24,6 +24,8 @@ EXEMPT_PATH_PREFIXES = (
     "/accounts/",
     "/i18n/",
     "/health/",
+    # Notifications de paiement : un membre qui a deja paye doit etre enregistre.
+    "/webhooks/",
     "/robots.txt",
     "/static/",
     "/mentions-legales/",

@@ -7,11 +7,16 @@ from django.utils import dateformat, timezone
 
 from core.models import Notification, NotificationPreference
 from core.services.contribution_service import ContributionService
+from core.services.messaging_service import MessagingService
 from core.services.notification_service import NotificationService
 
 
 class Command(BaseCommand):
-    """Relance par email (et notification in-app) les membres sans cotisation mensuelle ce mois-ci."""
+    """Relance les membres sans cotisation mensuelle ce mois-ci.
+
+    Canaux : email, notification in-app, puis WhatsApp (repli SMS si
+    WhatsApp echoue) pour les membres ayant un numero de telephone.
+    """
 
     help = "Envoie un rappel aux membres n'ayant pas encore paye leur cotisation mensuelle du mois en cours."
 
@@ -39,20 +44,23 @@ class Command(BaseCommand):
         month_label = dateformat.format(today, "F Y")
 
         reminder_count = 0
+        self.phone_sent = 0
         for group in ContributionService.get_groups_with_monthly_dues():
             members = ContributionService.get_members_without_monthly_payment(group, today.year, today.month)
             for member in members:
+                reminder_count += 1
                 if dry_run:
                     self.stdout.write(f"[dry-run] {member.full_name} ({group.name})")
                     continue
 
                 self._send_reminder(member, group, month_label)
-                reminder_count += 1
 
         if dry_run:
             self.stdout.write(self.style.NOTICE(f"{reminder_count} rappels seraient envoyes (dry-run)."))
         else:
-            self.stdout.write(self.style.SUCCESS(f"{reminder_count} rappels envoyes."))
+            self.stdout.write(self.style.SUCCESS(
+                f"{reminder_count} rappels envoyes, dont {self.phone_sent} par WhatsApp/SMS."
+            ))
 
     def _send_reminder(self, member, group, month_label):
         """Envoie l'email et la notification in-app pour un membre en retard.
@@ -84,6 +92,9 @@ class Command(BaseCommand):
                     fail_silently=True,
                 )
 
+        if member.phone and self._send_to_phone(member, group, month_label):
+            self.phone_sent += 1
+
         if member.user_id:
             NotificationService.create_notification(
                 user_id=member.user_id,
@@ -92,3 +103,24 @@ class Command(BaseCommand):
                 title=title,
                 message=message,
             )
+
+    def _send_to_phone(self, member, group, month_label):
+        """Rappel court sur le telephone : WhatsApp d'abord, SMS en repli.
+
+        Returns:
+            bool: True si un message a ete accepte par le fournisseur.
+        """
+        pay_link = ""
+        if settings.PAYGATE_ENABLED and settings.KOTIZA_SITE_URL:
+            pay_link = f"{settings.KOTIZA_SITE_URL}/mon-espace/payer/"
+        body = (
+            f"Kotiza - Bonjour {member.full_name}, votre cotisation {group.name} de {month_label} "
+            f"n'est pas encore enregistree."
+        )
+        body += f" Payez par T-Money ou Flooz : {pay_link}" if pay_link else " Merci de la regler rapidement."
+        template_vars = {"1": member.full_name, "2": group.name, "3": month_label, "4": pay_link or "-"}
+
+        for channel in MessagingService.enabled_channels():
+            if MessagingService.send(channel, member.phone, body, template_vars=template_vars):
+                return True
+        return False

@@ -1,0 +1,53 @@
+{% load i18n core_extras %}
+<section class="section-block trust-section">
+  <div class="section-heading">
+    <p class="pill">{% translate "Sécurité et confiance" %}</p>
+    <h2>{% translate "L'argent de vos membres mérite une application sérieuse." %}</h2>
+  </div>
+  <div class="trust-features">
+    <article class="trust-feature tone-green">
+      <span class="module-icon">{% icon "shield" 20 %}</span>
+      <h4>{% translate "Connexion à deux étapes" %}</h4>
+      <p>{% translate "Un code sur le téléphone en plus du mot de passe : personne ne se connecte avec un mot de passe volé." %}</p>
+    </article>
+    <article class="trust-feature tone-gold">
+      <span class="module-icon">{% icon "wallet" 20 %}</span>
+      <h4>{% translate "Paiements vérifiés" %}</h4>
+      <p>{% translate "Chaque paiement T-Money ou Flooz est revérifié auprès de l'opérateur, montant compris, avant d'être confirmé." %}</p>
+    </article>
+    <article class="trust-feature tone-slate">
+      <span class="module-icon">{% icon "history" 20 %}</span>
+      <h4>{% translate "Historique complet" %}</h4>
+      <p>{% translate "Qui a modifié quoi, et quand : chaque action est tracée. Fini les disputes sur la caisse." %}</p>
+    </article>
+    <article class="trust-feature tone-petrol">
+      <span class="module-icon">{% icon "network" 20 %}</span>
+      <h4>{% translate "Vos données séparées" %}</h4>
+      <p>{% translate "Chaque organisation a sa propre installation et sa propre base : aucune donnée partagée avec d'autres clients." %}</p>
+    </article>
+    <article class="trust-feature tone-teal">
+      <span class="module-icon">{% icon "users" 20 %}</span>
+      <h4>{% translate "Accès par rôle" %}</h4>
+      <p>{% translate "Administrateur, trésorier, membre : chacun ne voit que ce qui le concerne." %}</p>
+    </article>
+    <article class="trust-feature tone-sky">
+      <span class="module-icon">{% icon "file" 20 %}</span>
+      <h4>{% translate "Sauvegardes et HTTPS" %}</h4>
+      <p>{% translate "Connexion chiffrée et sauvegardes automatiques de la base de données." %}</p>
+    </article>
+  </div>
+
+  {% if testimonials %}
+  <div class="testimonial-grid">
+    {% for t in testimonials %}
+    <figure class="testimonial-card">
+      <blockquote>« {{ t.quote }} »</blockquote>
+      <figcaption>
+        <span class="user-avatar" aria-hidden="true">{{ t.author_name|first|upper }}</span>
+        <span><strong>{{ t.author_name }}</strong>{% if t.author_role or t.organization %}<small>{{ t.author_role }}{% if t.author_role and t.organization %}, {% endif %}{{ t.organization }}</small>{% endif %}</span>
+      </figcaption>
+    </figure>
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>

@@ -69,7 +69,7 @@
           <div class="activity-item">
             <span class="activity-date">{{ c.paid_at|date:"d/m/Y" }}</span>
             <span class="activity-title">{{ c.member.full_name }}</span>
-            <span class="activity-amount">{{ c.amount }} €</span>
+            <span class="activity-amount">{{ c.amount|money }}</span>
             <span class="activity-group">{{ c.group.name }}</span>
           </div>
           {% empty %}

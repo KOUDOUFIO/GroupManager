@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-{% load i18n %}
+{% load i18n core_extras %}
 
 {% block title %}{% translate "Recherche Globale - Kotiza" %}{% endblock %}
 
@@ -51,7 +51,7 @@
   <article class="workspace-card">
     <h4>{% translate "Cotisations" %}</h4>
     {% for item in contributions %}
-    <p>{{ item.member.full_name }} - {{ item.amount }} - {{ item.group.name }}</p>
+    <p>{{ item.member.full_name }} - {{ item.amount|money }} - {{ item.group.name }}</p>
     {% empty %}
     <p>{% translate "Aucun résultat." %}</p>
     {% endfor %}

@@ -63,7 +63,7 @@ class MeetingEntryAdmin(admin.ModelAdmin):
 class ContributionAdmin(admin.ModelAdmin):
     """Interface d'administration pour les cotisations."""
     list_display = ("member", "group", "contribution_type", "payment_method", "payment_status", "amount", "paid_at")
-    search_fields = ("member__full_name", "group__name")
+    search_fields = ("member__full_name", "group__name", "gateway_transaction_id", "gateway_reference", "payer_phone")
     list_filter = ("contribution_type", "payment_method", "payment_status", "group", "paid_at")
 
 
@@ -111,3 +111,12 @@ class AuditLogAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         """Empêche la suppression de logs d'audit."""
         return False
+
+
+@admin.register(models.Testimonial)
+class TestimonialAdmin(admin.ModelAdmin):
+    """Témoignages clients : publiés seulement avec l'accord écrit du client."""
+    list_display = ("author_name", "organization", "consent_given", "is_published", "sort_order")
+    list_editable = ("is_published", "sort_order")
+    list_filter = ("is_published", "consent_given")
+    search_fields = ("author_name", "organization", "quote")

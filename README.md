@@ -78,6 +78,24 @@ python3 manage.py runserver
 python3 manage.py bootstrap_project --with-superuser --username admin --email admin@example.com --password Admin1234!
 ```
 
+## Démonstration commerciale
+
+```bash
+python3 manage.py seed_demo --password "UnMotDePasseDemo"   # tontine d'exemple + comptes demo-tresorier / demo-membre
+python3 manage.py seed_demo --reset                          # tout supprimer
+```
+
+Les données de démonstration sont marquées « (démo) » et n'affectent pas les autres données.
+
+## Paiement Mobile Money et rappels
+
+- `PAYGATE_AUTH_TOKEN` active le paiement T-Money / Flooz (PayGate Global) dans « Mon espace ».
+- `TWILIO_*` active les rappels par SMS et WhatsApp (voir `.env.example`).
+- `python3 manage.py send_contribution_reminders` relance les membres en retard.
+- `python3 manage.py check_pending_payments` revérifie les paiements restés en attente.
+
+Mise en place détaillée et tâches automatiques : `DEPLOYMENT-CLIENTS.md`, section 5.
+
 ## Commandes standard (Makefile)
 
 ```bash

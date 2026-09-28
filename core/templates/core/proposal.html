@@ -12,8 +12,8 @@
   </p>
 </div>
 <div class="hero-actions">
-  <a class="btn primary" href="#pricing">{% translate "Voir les tarifs" %}</a>
-  <a class="btn ghost" href="#contact">{% translate "Demander un devis" %}</a>
+  <a class="btn primary" href="#contact">{% blocktranslate count days=trial_days %}Essayer gratuitement {{ days }} jour{% plural %}Essayer gratuitement {{ days }} jours{% endblocktranslate %}</a>
+  <a class="btn ghost" href="#pricing">{% translate "Voir les tarifs" %}</a>
 </div>
 {% endblock %}
 
@@ -51,6 +51,9 @@
         <strong>{{ plan.price }}</strong>
         <span>{{ plan.subtitle }}</span>
       </div>
+      {% if not forloop.last %}
+      <p class="plan-trial">{% blocktranslate count days=trial_days %}{{ days }} jour d'essai gratuit, sans engagement{% plural %}{{ days }} jours d'essai gratuit, sans engagement{% endblocktranslate %}</p>
+      {% endif %}
       <p class="plan-description">{{ plan.description }}</p>
       <ul>
         {% for feature in plan.features %}
@@ -62,6 +65,8 @@
     {% endfor %}
   </div>
 </section>
+
+{% include "core/partials/trust_section.html" %}
 
 <section class="section-block highlight-panel">
   <div class="section-heading narrow">

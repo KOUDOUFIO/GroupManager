@@ -24,6 +24,7 @@ from .audit_log import AuditLog
 from .notification import Notification, NotificationPreference
 from .dashboard import DashboardPreference
 from .two_factor import TOTPDevice, TwoFactorPreference
+from .testimonial import Testimonial
 
 __all__ = [
     "Group",
@@ -42,4 +43,5 @@ __all__ = [
     "DashboardPreference",
     "TOTPDevice",
     "TwoFactorPreference",
+    "Testimonial",
 ]

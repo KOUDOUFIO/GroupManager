@@ -10,6 +10,7 @@
     <link rel="apple-touch-icon" href="{% static 'core/img/apple-touch-icon.png' %}" />
     <meta name="theme-color" content="#0b3d1f" />
     <link rel="stylesheet" href="{% static 'core/styles.css' %}" />
+    {% block extra_head %}{% endblock %}
   </head>
   <body{% if ui_is_authenticated %} class="app"{% endif %}>
     <div class="background">
@@ -100,6 +101,11 @@
         {% endif %}
         {% if contact %}{% blocktranslate %}Renouvellement : {{ contact }}{% endblocktranslate %}{% endif %}
         {% endwith %}
+      </div>
+      {% endif %}
+      {% if messages %}
+      <div class="flash-list" role="status">
+        {% for message in messages %}<p class="flash flash-{{ message.tags }}">{{ message }}</p>{% endfor %}
       </div>
       {% endif %}
       {% block content %}{% endblock %}

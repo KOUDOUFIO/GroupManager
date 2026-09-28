@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+{% load i18n core_extras %}
+
+{% block title %}{% translate "Suivi du paiement - Kotiza" %}{% endblock %}
+
+{% block hero %}
+<div>
+  <p class="pill">{% translate "Mon espace" %}</p>
+  <h1>{% translate "Suivi du paiement" %}</h1>
+</div>
+{% endblock %}
+
+{% block extra_head %}{% if contribution.payment_status == "pending" %}<meta http-equiv="refresh" content="15" />{% endif %}{% endblock %}
+
+{% block content %}
+<section class="pay-status pay-status-{{ contribution.payment_status }}">
+  <span class="pay-status-icon" aria-hidden="true">
+    {% if contribution.payment_status == "confirmed" %}{% icon "check" 34 %}{% elif contribution.payment_status == "failed" %}{% icon "close" 34 %}{% else %}{% icon "wallet" 34 %}{% endif %}
+  </span>
+  {% if contribution.payment_status == "confirmed" %}
+  <h2>{% translate "Paiement reçu, merci !" %}</h2>
+  <p>{% translate "Votre cotisation est confirmée et enregistrée dans votre historique." %}</p>
+  {% elif contribution.payment_status == "failed" %}
+  <h2>{% translate "Paiement non abouti" %}</h2>
+  <p>{% translate "La demande a expiré ou a été annulée. Aucun montant n'a été débité. Vous pouvez réessayer." %}</p>
+  {% else %}
+  <h2>{% translate "Confirmez sur votre téléphone" %}</h2>
+  <p>{% blocktranslate with phone=contribution.payer_phone %}Une demande de paiement a été envoyée au {{ phone }}. Validez-la avec votre code secret Mobile Money.{% endblocktranslate %}</p>
+  <p class="pay-hint">{% translate "Cette page se met à jour toute seule." %}</p>
+  {% endif %}
+
+  <dl class="pay-summary">
+    <div><dt>{% translate "Montant" %}</dt><dd>{{ contribution.amount|money }}</dd></div>
+    <div><dt>{% translate "Groupe" %}</dt><dd>{{ contribution.group.name }}</dd></div>
+    <div><dt>{% translate "Type" %}</dt><dd>{{ contribution.get_contribution_type_display }}</dd></div>
+    <div><dt>{% translate "Référence" %}</dt><dd>{{ contribution.gateway_reference|default:contribution.gateway_transaction_id }}</dd></div>
+  </dl>
+
+  <div class="hero-actions">
+    {% if contribution.payment_status == "pending" %}
+    <form method="post">{% csrf_token %}<button class="btn primary" type="submit">{% translate "J'ai confirmé, vérifier" %}</button></form>
+    {% elif contribution.payment_status == "failed" %}
+    <a class="btn primary" href="{% url 'member_portal_pay' %}">{% translate "Réessayer" %}</a>
+    {% endif %}
+    <a class="btn ghost" href="{% url 'member_portal_contributions' %}">{% translate "Mes cotisations" %}</a>
+  </div>
+</section>
+{% endblock %}

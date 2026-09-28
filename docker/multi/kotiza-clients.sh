@@ -20,6 +20,8 @@
 #   status                                 Lister les clients et leur abonnement
 #   backup <client|all>                    Sauvegarder la base (garde 14 jours)
 #   update                                 Reconstruire l'image et redemarrer tous les clients
+#   task <client|all> <tache>              Lancer une tache : reminders (rappels de
+#                                          cotisation) ou payments (paiements en attente)
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
@@ -304,6 +306,27 @@ cmd_backup() {
   fi
 }
 
+task_one() {
+  local slug="$1" command="$2"
+  echo "[$slug] $command"
+  client_compose "$slug" exec -T web python manage.py "$command" || echo "[$slug] echec de $command" >&2
+}
+
+cmd_task() {
+  [ $# -eq 2 ] || die "usage : task <client|all> <reminders|payments>"
+  local command slug
+  case "$2" in
+    reminders) command=send_contribution_reminders ;;
+    payments)  command=check_pending_payments ;;
+    *) die "tache inconnue : $2 (reminders ou payments)" ;;
+  esac
+  if [ "$1" = "all" ]; then
+    for slug in $(list_clients); do task_one "$slug" "$command"; done
+  else
+    task_one "$1" "$command"
+  fi
+}
+
 cmd_update() {
   docker build -t "$IMAGE" "$ROOT"
   local slug
@@ -320,5 +343,6 @@ case "${1:-}" in
   status) shift; cmd_status "$@" ;;
   backup) shift; cmd_backup "$@" ;;
   update) shift; cmd_update "$@" ;;
-  *) sed -n '2,22p' "$0" | sed 's/^# \{0,1\}//'; exit 1 ;;
+  task)   shift; cmd_task "$@" ;;
+  *) sed -n '2,24p' "$0" | sed 's/^# \{0,1\}//'; exit 1 ;;
 esac

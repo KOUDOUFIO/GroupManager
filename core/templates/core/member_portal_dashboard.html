@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-{% load i18n %}
+{% load i18n core_extras %}
 
 {% block title %}Mon espace - {{ member.full_name }}{% endblock %}
 
@@ -9,6 +9,11 @@
   <h1>{{ member.full_name }}</h1>
   <p class="subtitle">{% translate "Vos cotisations et votre présence, en un coup d'œil." %}</p>
 </div>
+{% if paygate_enabled %}
+<div class="hero-actions">
+  <a class="btn primary" href="{% url 'member_portal_pay' %}">{% icon "wallet" 18 %}{% translate "Payer ma cotisation" %}</a>
+</div>
+{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -16,7 +21,7 @@
   <div class="stat-card"><h3>{% translate "Groupes" %}</h3><p class="stat-value">{{ group_count }}</p></div>
   <div class="stat-card"><h3>{% translate "Postes" %}</h3><p class="stat-value">{{ position_count }}</p></div>
   <div class="stat-card"><h3>{% translate "Cotisations" %}</h3><p class="stat-value">{{ contribution_count }}</p></div>
-  <div class="stat-card"><h3>{% translate "Total cotisé" %}</h3><p class="stat-value">{{ contribution_total }}</p></div>
+  <div class="stat-card"><h3>{% translate "Total cotisé" %}</h3><p class="stat-value">{{ contribution_total|money }}</p></div>
   <div class="stat-card"><h3>{% translate "Rencontres" %}</h3><p class="stat-value">{{ meeting_count }}</p></div>
   <div class="stat-card"><h3>{% translate "Présence" %}</h3><p class="stat-value">{{ attendance_rate }}%</p></div>
 </section>
@@ -25,7 +30,7 @@
   <article class="workspace-card">
     <h4>{% translate "Cotisations récentes" %}</h4>
     {% for c in recent_contributions %}
-    <p>{{ c.paid_at }} - {{ c.group.name }} - {{ c.amount }}</p>
+    <p>{{ c.paid_at }} - {{ c.group.name }} - {{ c.amount|money }}</p>
     {% empty %}
     <p>{% translate "Aucune cotisation enregistrée." %}</p>
     {% endfor %}

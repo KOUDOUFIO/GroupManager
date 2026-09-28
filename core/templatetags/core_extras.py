@@ -36,6 +36,30 @@ def get_attr(obj, attr_path):
     return value
 
 
+@register.filter
+def money(value):
+    """Formate un montant avec separateur de milliers et la devise : 15 000 FCFA."""
+    from decimal import Decimal, InvalidOperation
+
+    from django.conf import settings
+    from django.utils.formats import number_format
+
+    try:
+        amount = Decimal(str(value))
+    except (InvalidOperation, TypeError, ValueError):
+        return value
+    decimals = 0 if amount == amount.to_integral_value() else 2
+    return f"{number_format(amount, decimals, force_grouping=True)} {settings.KOTIZA_CURRENCY}"
+
+
+@register.simple_tag
+def currency():
+    """Devise configuree (KOTIZA_CURRENCY)."""
+    from django.conf import settings
+
+    return settings.KOTIZA_CURRENCY
+
+
 # Icones au trait (24x24), dessinees avec la couleur du texte courant.
 ICONS = {
     "dashboard": '<rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/>',
