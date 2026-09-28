@@ -1,27 +1,27 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 
-{% block title %}Devis Kotiza{% endblock %}
+{% block title %}{% translate "Devis Kotiza" %}{% endblock %}
 
 {% block hero %}
 <div>
-  <p class="pill">Offre commerciale</p>
-  <h1>Des solutions de gestion conçues pour les entreprises exigeantes.</h1>
+  <p class="pill">{% translate "Offre commerciale" %}</p>
+  <h1>{% translate "Des solutions de gestion conçues pour les entreprises exigeantes." %}</h1>
   <p class="subtitle">
-    Une plateforme robuste pour organiser vos groupes, vos équipes, vos événements et vos opérations,
-    avec un pilotage clair et une expérience premium pour vos responsables.
+    {% translate "Une plateforme robuste pour organiser vos groupes, vos équipes, vos événements et vos opérations, avec un pilotage clair et une expérience premium pour vos responsables." %}
   </p>
 </div>
 <div class="hero-actions">
-  <a class="btn primary" href="#pricing">Voir les tarifs</a>
-  <a class="btn ghost" href="#contact">Demander un devis</a>
+  <a class="btn primary" href="#pricing">{% translate "Voir les tarifs" %}</a>
+  <a class="btn ghost" href="#contact">{% translate "Demander un devis" %}</a>
 </div>
 {% endblock %}
 
 {% block content %}
 <section class="section-block highlight-panel">
   <div class="section-heading narrow">
-    <p class="pill">Pourquoi choisir Kotiza</p>
-    <h2>Un système qui transforme l’organisation en avantage concurrentiel.</h2>
+    <p class="pill">{% translate "Pourquoi choisir Kotiza" %}</p>
+    <h2>{% translate "Un système qui transforme l’organisation en avantage concurrentiel." %}</h2>
   </div>
   <div class="benefit-grid">
     {% for benefit in benefits %}
@@ -35,8 +35,8 @@
 
 <section id="pricing" class="section-block pricing-block">
   <div class="section-heading">
-    <p class="pill">Tarification</p>
-    <h2>Des formules flexibles pour démarrer vite, grandir sereinement et évoluer avec votre organisation.</h2>
+    <p class="pill">{% translate "Tarification" %}</p>
+    <h2>{% translate "Des formules flexibles pour démarrer vite, grandir sereinement et évoluer avec votre organisation." %}</h2>
   </div>
   <div class="pricing-grid">
     {% for plan in pricing %}
@@ -44,7 +44,7 @@
       <div class="plan-head">
         <span class="plan-tag">{{ plan.name }}</span>
         {% if plan.highlighted %}
-        <span class="popular">Populaire</span>
+        <span class="popular">{% translate "Populaire" %}</span>
         {% endif %}
       </div>
       <div class="plan-price">
@@ -57,7 +57,7 @@
         <li>{{ feature }}</li>
         {% endfor %}
       </ul>
-      <a class="btn {% if plan.highlighted %}primary{% else %}ghost{% endif %}" href="#contact">Choisir {{ plan.name }}</a>
+      <a class="btn {% if plan.highlighted %}primary{% else %}ghost{% endif %}" href="#contact">{% blocktranslate with name=plan.name %}Choisir {{ name }}{% endblocktranslate %}</a>
     </article>
     {% endfor %}
   </div>
@@ -65,8 +65,8 @@
 
 <section class="section-block highlight-panel">
   <div class="section-heading narrow">
-    <p class="pill">Déploiement rapide</p>
-    <h2>Une mise en service simple, avec un accompagnement pensé pour les équipes de terrain.</h2>
+    <p class="pill">{% translate "Déploiement rapide" %}</p>
+    <h2>{% translate "Une mise en service simple, avec un accompagnement pensé pour les équipes de terrain." %}</h2>
   </div>
   <div class="trust-grid">
     {% for item in contact_points %}
@@ -80,15 +80,14 @@
 
 <section id="contact" class="section-block contact-panel">
   <div class="contact-copy">
-    <p class="pill">Demande de devis</p>
-    <h2>Parlons de votre organisation et de vos besoins.</h2>
+    <p class="pill">{% translate "Demande de devis" %}</p>
+    <h2>{% translate "Parlons de votre organisation et de vos besoins." %}</h2>
     <p>
-      Dites-nous quel niveau d’automatisation, de sécurité et d’accompagnement vous recherchez.
-      Nous vous répondrons avec une proposition claire, adaptée à votre volume et à votre contexte.
+      {% translate "Dites-nous quel niveau d’automatisation, de sécurité et d’accompagnement vous recherchez. Nous vous répondrons avec une proposition claire, adaptée à votre volume et à votre contexte." %}
     </p>
   </div>
   {% if submitted %}
-  <p class="form-success">Merci ! Votre demande a bien été envoyée, nous vous répondrons rapidement.</p>
+  <p class="form-success">{% translate "Merci ! Votre demande a bien été envoyée, nous vous répondrons rapidement." %}</p>
   {% else %}
   <form class="proposal-form" method="post">
     {% csrf_token %}
@@ -106,29 +105,29 @@
     {% endif %}
     <div class="field-row">
       <label>
-        <span>Nom</span>
+        <span>{% translate "Nom" %}</span>
         {{ form.name }}
       </label>
       <label>
-        <span>Email</span>
+        <span>{% translate "Email" %}</span>
         {{ form.email }}
       </label>
     </div>
     <div class="field-row">
       <label>
-        <span>Entreprise</span>
+        <span>{% translate "Entreprise" %}</span>
         {{ form.company }}
       </label>
       <label>
-        <span>Type d'organisation</span>
+        <span>{% translate "Type d'organisation" %}</span>
         {{ form.organization_type }}
       </label>
     </div>
     <label>
-      <span>Besoin principal</span>
+      <span>{% translate "Besoin principal" %}</span>
       {{ form.message }}
     </label>
-    <button class="btn primary" type="submit">Demander un devis</button>
+    <button class="btn primary" type="submit">{% translate "Demander un devis" %}</button>
   </form>
   {% endif %}
 </section>

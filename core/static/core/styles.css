@@ -2310,3 +2310,29 @@ body {
   background: var(--color-gray-100);
   color: var(--color-gray-700);
 }
+
+.lang-switch {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color-base, rgba(0, 0, 0, 0.12));
+  margin: 0;
+}
+
+.lang-btn {
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.lang-btn.active {
+  background: var(--accent-strong);
+  color: #fff;
+}

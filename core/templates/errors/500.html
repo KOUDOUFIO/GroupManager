@@ -1,11 +1,12 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 
-{% block title %}Erreur serveur{% endblock %}
+{% block title %}{% translate "Erreur serveur" %}{% endblock %}
 
 {% block content %}
 <section class="form-card">
-  <h2>500 - Erreur interne</h2>
-  <p>Une erreur interne est survenue. L'incident a ete journalise.</p>
-  <a class="btn ghost" href="/">Retour a l'accueil</a>
+  <h2>{% translate "500 - Erreur interne" %}</h2>
+  <p>{% translate "Une erreur interne est survenue. L'incident a été journalisé." %}</p>
+  <a class="btn ghost" href="/">{% translate "Retour à l'accueil" %}</a>
 </section>
 {% endblock %}

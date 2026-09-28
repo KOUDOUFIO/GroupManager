@@ -1,6 +1,7 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 
-{% block title %}Abonnement expiré{% endblock %}
+{% block title %}{% translate "Abonnement expiré" %}{% endblock %}
 
 {% block hero %}{% endblock %}
 
@@ -12,17 +13,17 @@
       <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
     </svg>
   </div>
-  <h2 id="expired-title">Abonnement expiré</h2>
-  <p>L'abonnement Kotiza de votre organisation est arrivé à son terme.</p>
-  <p>Vos données sont conservées et redeviennent accessibles dès le renouvellement.</p>
+  <h2 id="expired-title">{% translate "Abonnement expiré" %}</h2>
+  <p>{% translate "L'abonnement Kotiza de votre organisation est arrivé à son terme." %}</p>
+  <p>{% translate "Vos données sont conservées et redeviennent accessibles dès le renouvellement." %}</p>
 
   {% if billing_contact %}
   <div class="expired-contact">
-    <span>Pour renouveler, contactez-nous</span>
+    <span>{% translate "Pour renouveler, contactez-nous" %}</span>
     <strong>{{ billing_contact }}</strong>
   </div>
   {% endif %}
 
-  <a class="btn ghost" href="/accounts/login/">Connexion administrateur</a>
+  <a class="btn ghost" href="/accounts/login/">{% translate "Connexion administrateur" %}</a>
 </section>
 {% endblock %}

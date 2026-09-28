@@ -809,7 +809,7 @@ class SubscriptionTests(TestCase):
         with self._on(date(2026, 2, 1)):
             response = self.client.get("/api/")
         self.assertEqual(response.status_code, 402)
-        self.assertEqual(response.json()["detail"], "Abonnement expire.")
+        self.assertEqual(response.json()["detail"], "Abonnement expiré.")
 
     def test_expired_keeps_login_and_health_reachable(self):
         with self._on(date(2026, 2, 1)):
@@ -839,7 +839,7 @@ class SubscriptionTests(TestCase):
         with self._on(date(2026, 2, 1)):
             response = self.client.get(reverse("home"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Abonnement expire depuis le 31/01/2026")
+        self.assertContains(response, "Abonnement expiré depuis le 31/01/2026")
 
     def test_staff_sees_reminder_banner_before_expiry(self):
         self.client.force_login(self.staff)
@@ -894,3 +894,36 @@ class ApiToggleTests(TestCase):
     @override_settings(KOTIZA_API_ENABLED=True)
     def test_api_reachable_when_enabled(self):
         self.assertEqual(self.client.get("/api/contributions/").status_code, 200)
+
+
+class LanguageTests(TestCase):
+    def test_french_is_the_default(self):
+        response = self.client.get(reverse("login"))
+        self.assertContains(response, "Mot de passe oublié ?")
+        self.assertContains(response, '<html lang="fr">')
+
+    def test_english_from_browser_language(self):
+        response = self.client.get(reverse("login"), HTTP_ACCEPT_LANGUAGE="en-US,en;q=0.9")
+        self.assertContains(response, "Forgot your password?")
+        self.assertContains(response, '<html lang="en">')
+
+    def test_switcher_sets_language_and_redirects_back(self):
+        response = self.client.post("/i18n/setlang/", {"language": "en", "next": "/plateforme/"})
+        self.assertRedirects(response, "/plateforme/", fetch_redirect_response=False)
+        page = self.client.get("/plateforme/")
+        self.assertContains(page, "Coming soon")
+        self.assertContains(page, "Yes")
+
+    def test_switcher_back_to_french(self):
+        self.client.post("/i18n/setlang/", {"language": "en", "next": "/"})
+        self.client.post("/i18n/setlang/", {"language": "fr", "next": "/"})
+        self.assertContains(self.client.get("/plateforme/"), "Bientôt")
+
+    @override_settings(KOTIZA_ACCESS_UNTIL=date(2026, 1, 31), KOTIZA_BILLING_CONTACT="Mobile Money : 91 19 80 74")
+    def test_expired_page_in_english_and_switcher_still_works(self):
+        with patch("core.subscription.timezone.localdate", return_value=date(2026, 2, 1)):
+            response = self.client.post("/i18n/setlang/", {"language": "en", "next": "/"})
+            self.assertEqual(response.status_code, 302)
+            page = self.client.get("/")
+        self.assertContains(page, "Subscription expired", status_code=402)
+        self.assertContains(page, "Mobile Money : 91 19 80 74", status_code=402)

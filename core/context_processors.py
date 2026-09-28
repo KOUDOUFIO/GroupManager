@@ -4,6 +4,8 @@ Ce module fournit des variables de contexte globales pour les templates,
 notamment les informations de profil utilisateur pour l'adaptation de l'interface.
 """
 
+from django.utils.translation import gettext as _
+
 
 def ui_profile(request):
     """Fournit le profil UI de l'utilisateur connecté.
@@ -22,7 +24,7 @@ def ui_profile(request):
             "ui_is_admin": False,
             "ui_is_manager": False,
             "ui_is_member": False,
-            "ui_role_label": "Visiteur",
+            "ui_role_label": _("Visiteur"),
         }
 
     is_admin = user.is_staff
@@ -30,11 +32,11 @@ def ui_profile(request):
     is_member = hasattr(user, "member_profile")
 
     if is_admin:
-        role_label = "Administrateur"
+        role_label = _("Administrateur")
     elif is_manager:
-        role_label = "Gestionnaire"
+        role_label = _("Gestionnaire")
     else:
-        role_label = "Utilisateur"
+        role_label = _("Utilisateur")
 
     return {
         "ui_is_authenticated": True,

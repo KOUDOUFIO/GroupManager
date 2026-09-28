@@ -11,6 +11,7 @@ from django.conf import settings
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.utils import timezone
+from django.utils.translation import gettext as _
 
 # Nombre de jours avant l'expiration a partir duquel les administrateurs du
 # client voient un bandeau de rappel.
@@ -21,6 +22,7 @@ REMINDER_DAYS = 14
 # client (is_staff) pourrait sinon continuer a tout gerer via l'admin Django.
 EXEMPT_PATH_PREFIXES = (
     "/accounts/",
+    "/i18n/",
     "/health/",
     "/robots.txt",
     "/static/",
@@ -63,7 +65,7 @@ class SubscriptionMiddleware:
             return self.get_response(request)
 
         if request.path.startswith("/api/"):
-            return JsonResponse({"detail": "Abonnement expire."}, status=402)
+            return JsonResponse({"detail": _("Abonnement expiré.")}, status=402)
         return render(
             request,
             "errors/subscription_expired.html",

@@ -1,4 +1,4 @@
-.PHONY: help install bootstrap run check check-migrations test ci docker-build docker-run
+.PHONY: help install bootstrap run check check-migrations test ci docker-build docker-run messages
 
 PYTHON ?= ./.venv/bin/python
 PIP ?= ./.venv/bin/pip
@@ -14,6 +14,7 @@ help:
 	@echo "  make check-migrations   - Verifier migrations manquantes"
 	@echo "  make test               - Executer les tests"
 	@echo "  make ci                 - Pipeline locale (check + migrations + tests)"
+	@echo "  make messages           - Mettre a jour et compiler les traductions (FR -> EN)"
 	@echo "  make docker-build       - Construire l'image Docker locale"
 	@echo "  make docker-run         - Lancer le conteneur local sur :8000"
 
@@ -36,6 +37,13 @@ test:
 	$(RUN_SQLITE) $(PYTHON) manage.py test
 
 ci: check check-migrations test
+
+# Traductions : extrait les textes, recopie locale/translations_en.py dans le
+# catalogue anglais (echoue si un texte n'est pas traduit), puis compile.
+messages:
+	$(PYTHON) manage.py makemessages -l en --no-wrap --no-location -i ".venv/*" -i "clients/*" -i "docker/*"
+	$(PYTHON) locale/fill_po.py
+	$(PYTHON) manage.py compilemessages -l en -i .venv -i clients
 
 docker-build:
 	docker build -t $(IMAGE) .

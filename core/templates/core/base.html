@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+{% load i18n %}{% get_current_language as CURRENT_LANG %}<html lang="{{ CURRENT_LANG }}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -24,60 +24,66 @@
       </a>
       <nav class="nav">
         {% if not ui_is_authenticated %}
-        <a href="/entreprise/">Entreprise</a>
-        <a href="/plateforme/">Plateforme</a>
-        <a href="/devis/">Devis</a>
+        <a href="/entreprise/">{% translate "Entreprise" %}</a>
+        <a href="/plateforme/">{% translate "Plateforme" %}</a>
+        <a href="/devis/">{% translate "Devis" %}</a>
         {% else %}
         {% if ui_is_admin %}
-        <a href="/admin-workspace/">⚙️ Espace admin</a>
+        <a href="/admin-workspace/">⚙️ {% translate "Espace admin" %}</a>
         {% endif %}
         {% if ui_is_manager or ui_is_admin %}
-        <a href="/manager-workspace/">📊 Espace manager</a>
+        <a href="/manager-workspace/">📊 {% translate "Espace manager" %}</a>
         {% endif %}
         {% if ui_is_member %}
-        <a href="/mon-espace/">🙍 Mon espace</a>
+        <a href="/mon-espace/">🙍 {% translate "Mon espace" %}</a>
         {% endif %}
         <div class="nav-divider"></div>
         <div class="nav-dropdown">
-          <button class="nav-dropdown-btn">🏢 Organisation ▾</button>
+          <button class="nav-dropdown-btn">🏢 {% translate "Organisation" %} ▾</button>
           <div class="nav-dropdown-content">
-            <a href="/groupes/">Groupes</a>
-            <a href="/organes/">Organes</a>
-            <a href="/postes/">Postes</a>
+            <a href="/groupes/">{% translate "Groupes" %}</a>
+            <a href="/organes/">{% translate "Organes" %}</a>
+            <a href="/postes/">{% translate "Postes" %}</a>
           </div>
         </div>
         <div class="nav-dropdown">
-          <button class="nav-dropdown-btn">👥 Personnes ▾</button>
+          <button class="nav-dropdown-btn">👥 {% translate "Personnes" %} ▾</button>
           <div class="nav-dropdown-content">
-            <a href="/membres/">Membres</a>
-            <a href="/rencontres/">Rencontres</a>
-            <a href="/presences/">Présences</a>
+            <a href="/membres/">{% translate "Membres" %}</a>
+            <a href="/rencontres/">{% translate "Rencontres" %}</a>
+            <a href="/presences/">{% translate "Présences" %}</a>
           </div>
         </div>
-        <a href="/cotisations/">💰 Cotisations</a>
+        <a href="/cotisations/">💰 {% translate "Cotisations" %}</a>
         <div class="nav-dropdown">
-          <button class="nav-dropdown-btn">📋 Activités ▾</button>
+          <button class="nav-dropdown-btn">📋 {% translate "Activités" %} ▾</button>
           <div class="nav-dropdown-content">
-            <a href="/evenements/">Événements</a>
-            <a href="/documents/">Documents</a>
+            <a href="/evenements/">{% translate "Événements" %}</a>
+            <a href="/documents/">{% translate "Documents" %}</a>
             {% if ui_is_admin %}
-            <a href="/audit-logs/">Audit</a>
+            <a href="/audit-logs/">{% translate "Audit" %}</a>
             {% endif %}
           </div>
         </div>
         <div class="nav-divider"></div>
-        <a href="/recherche/">🔍 Recherche</a>
+        <a href="/recherche/">🔍 {% translate "Recherche" %}</a>
         {% endif %}
       </nav>
       <div class="topbar-actions">
+        <form method="post" action="{% url 'set_language' %}" class="lang-switch" aria-label="{% translate "Langue" %}">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.get_full_path }}" />
+          <button type="submit" name="language" value="fr" class="lang-btn{% if CURRENT_LANG == 'fr' %} active{% endif %}" {% if CURRENT_LANG == 'fr' %}aria-current="true"{% endif %}>FR</button>
+          <button type="submit" name="language" value="en" class="lang-btn{% if CURRENT_LANG == 'en' %} active{% endif %}" {% if CURRENT_LANG == 'en' %}aria-current="true"{% endif %}>EN</button>
+        </form>
         {% if user.is_authenticated %}
         <span class="user-pill">{{ user.get_username }} - {{ ui_role_label }}</span>
         <form method="post" action="/accounts/logout/" class="logout-form">
           {% csrf_token %}
-          <button type="submit" class="btn ghost logout-btn">Se déconnecter</button>
+          <button type="submit" class="btn ghost logout-btn">{% translate "Se déconnecter" %}</button>
         </form>
         {% else %}
-        <a class="btn ghost" href="/accounts/login/">Se connecter</a>
+        <a class="btn ghost" href="/accounts/login/">{% translate "Se connecter" %}</a>
         {% endif %}
       </div>
     </header>
@@ -85,15 +91,14 @@
     <section class="hero">
       {% block hero %}
       <div>
-        <p class="pill">Plateforme de gestion de groupes</p>
+        <p class="pill">{% translate "Plateforme de gestion de groupes" %}</p>
         <h1>Kotiza</h1>
         <p class="subtitle">
-          Centralisez vos groupes, vos membres et vos rencontres dans un espace clair,
-          rapide et professionnel.
+          {% translate "Centralisez vos groupes, vos membres et vos rencontres dans un espace clair, rapide et professionnel." %}
         </p>
       </div>
       <div class="hero-actions">
-        <a class="btn primary" href="/admin/">Acceder a l'administration</a>
+        <a class="btn primary" href="/admin/">{% translate "Accéder à l'administration" %}</a>
       </div>
       {% endblock %}
     </section>
@@ -101,22 +106,24 @@
     <main class="content">
       {% if subscription_days_left is not None %}
       <div class="subscription-banner{% if subscription_expired %} expired{% endif %}" role="status">
+        {% with end_date=subscription_access_until|date:"d/m/Y" days=subscription_days_left contact=subscription_billing_contact %}
         {% if subscription_expired %}
-        Abonnement expire depuis le {{ subscription_access_until|date:"d/m/Y" }} : le site est bloque pour votre organisation.
+        {% blocktranslate %}Abonnement expiré depuis le {{ end_date }} : le site est bloqué pour votre organisation.{% endblocktranslate %}
         {% else %}
-        Abonnement valable jusqu'au {{ subscription_access_until|date:"d/m/Y" }} ({{ subscription_days_left }} jour{{ subscription_days_left|pluralize }} restant{{ subscription_days_left|pluralize }}).
+        {% blocktranslate count days=days %}Abonnement valable jusqu'au {{ end_date }} ({{ days }} jour restant).{% plural %}Abonnement valable jusqu'au {{ end_date }} ({{ days }} jours restants).{% endblocktranslate %}
         {% endif %}
-        {% if subscription_billing_contact %}Renouvellement : {{ subscription_billing_contact }}{% endif %}
+        {% if contact %}{% blocktranslate %}Renouvellement : {{ contact }}{% endblocktranslate %}{% endif %}
+        {% endwith %}
       </div>
       {% endif %}
       {% block content %}{% endblock %}
     </main>
 
     <footer class="footer">
-      <p>Kotiza - edition professionnelle</p>
+      <p>{% translate "Kotiza - édition professionnelle" %}</p>
       <p class="footer-links">
-        <a href="/mentions-legales/">Mentions légales</a>
-        <a href="/confidentialite/">Politique de confidentialité</a>
+        <a href="/mentions-legales/">{% translate "Mentions légales" %}</a>
+        <a href="/confidentialite/">{% translate "Politique de confidentialité" %}</a>
       </p>
     </footer>
     {% block extra_scripts %}{% endblock %}

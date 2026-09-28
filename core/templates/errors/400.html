@@ -1,11 +1,12 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 
-{% block title %}Requete invalide{% endblock %}
+{% block title %}{% translate "Requête invalide" %}{% endblock %}
 
 {% block content %}
 <section class="form-card">
-  <h2>400 - Requete invalide</h2>
-  <p>La requete envoyee n'est pas valide. Verifiez les champs puis reessayez.</p>
-  <a class="btn ghost" href="/">Retour a l'accueil</a>
+  <h2>{% translate "400 - Requête invalide" %}</h2>
+  <p>{% translate "La requête envoyée n'est pas valide. Vérifiez les champs puis réessayez." %}</p>
+  <a class="btn ghost" href="/">{% translate "Retour à l'accueil" %}</a>
 </section>
 {% endblock %}

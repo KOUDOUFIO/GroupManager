@@ -1,0 +1,445 @@
+"""Traductions anglaises des textes de Kotiza (le francais est la langue source).
+
+Ce fichier est la reference : `python locale/fill_po.py` recopie ces
+traductions dans locale/en/LC_MESSAGES/django.po apres un `makemessages`.
+Pour un texte au pluriel, la valeur est un tuple (singulier, pluriel).
+"""
+
+EN = {
+    # Roles et navigation
+    "Visiteur": "Visitor",
+    "Administrateur": "Administrator",
+    "Gestionnaire": "Manager",
+    "Utilisateur": "User",
+    "Abonnement expiré.": "Subscription expired.",
+    "Entreprise": "Company",
+    "Plateforme": "Platform",
+    "Devis": "Pricing",
+    "Espace admin": "Admin area",
+    "Espace manager": "Manager area",
+    "Mon espace": "My space",
+    "Organisation": "Organization",
+    "Groupes": "Groups",
+    "Organes": "Bodies",
+    "Postes": "Positions",
+    "Personnes": "People",
+    "Membres": "Members",
+    "Rencontres": "Meetings",
+    "Présences": "Attendance",
+    "Cotisations": "Contributions",
+    "Activités": "Activities",
+    "Événements": "Events",
+    "Documents": "Documents",
+    "Audit": "Audit",
+    "Recherche": "Search",
+    "Langue": "Language",
+    "Se déconnecter": "Log out",
+    "Se connecter": "Log in",
+    "Plateforme de gestion de groupes": "Group management platform",
+    "Centralisez vos groupes, vos membres et vos rencontres dans un espace clair, rapide et professionnel.":
+        "Bring your groups, members and meetings together in one clear, fast and professional space.",
+    "Accéder à l'administration": "Go to administration",
+    "Abonnement expiré depuis le %(end_date)s : le site est bloqué pour votre organisation.":
+        "Subscription expired on %(end_date)s: the site is locked for your organization.",
+    "Abonnement valable jusqu'au %(end_date)s (%(days)s jour restant).": (
+        "Subscription valid until %(end_date)s (%(days)s day left).",
+        "Subscription valid until %(end_date)s (%(days)s days left).",
+    ),
+    "Renouvellement : %(contact)s": "Renewal: %(contact)s",
+    "Kotiza - édition professionnelle": "Kotiza - professional edition",
+    "Mentions légales": "Legal notice",
+    "Politique de confidentialité": "Privacy policy",
+
+    # Entreprise
+    "Entreprise - Kotiza": "Company - Kotiza",
+    "Notre entreprise": "Our company",
+    "Une vision claire pour des organisations plus solides.": "A clear vision for stronger organizations.",
+    "Kotiza aide les entreprises, institutions et structures associatives à mieux organiser leur activité, leur gouvernance et leur suivi grâce à un système simple, fiable et professionnel.":
+        "Kotiza helps companies, institutions and associations organize their activity, governance and follow-up with a simple, reliable and professional system.",
+    "Demander un devis": "Request a quote",
+    "Retour au site": "Back to site",
+    "Notre approche": "Our approach",
+    "Nous construisons des outils qui rendent la gestion plus lisible, plus rapide et plus sûre.":
+        "We build tools that make management clearer, faster and safer.",
+    "Méthode": "Method",
+    "Un parcours simple, pensé pour les équipes et pour la stabilité de l'organisation.":
+        "A simple path, designed for teams and for the stability of the organization.",
+    "FAQ": "FAQ",
+    "Les réponses aux questions fréquentes de nos clients et partenaires.":
+        "Answers to frequent questions from our clients and partners.",
+    "Prêt à moderniser votre organisation ?": "Ready to modernize your organization?",
+    "Nous pouvons vous proposer une mise en place adaptée à votre structure, vos besoins de gestion et votre niveau d’exigence.":
+        "We can offer a setup tailored to your structure, your management needs and your standards.",
+    "Obtenir une proposition": "Get a proposal",
+    "Clarté opérationnelle": "Operational clarity",
+    "Nous aidons les organisations à mieux voir les priorités, les responsabilités et les réalités du terrain.":
+        "We help organizations see priorities, responsibilities and realities on the ground more clearly.",
+    "Sérénité administrative": "Administrative peace of mind",
+    "Chaque action est suivie, chaque décision est traçable et chaque routine est sécurisée.":
+        "Every action is tracked, every decision is traceable and every routine is secured.",
+    "Croissance mesurée": "Measured growth",
+    "Le système s'adapte à votre volume sans complexifier les usages ni ralentir les équipes.":
+        "The system scales with your volume without complicating usage or slowing teams down.",
+    "Analyse": "Analysis",
+    "Nous identifions votre structure, vos groupes, vos rôles et vos points de friction.":
+        "We map your structure, groups, roles and pain points.",
+    "Configuration": "Configuration",
+    "Nous configurons les espaces, les permissions et les workflows adaptés à votre organisation.":
+        "We configure the spaces, permissions and workflows that fit your organization.",
+    "Adoption": "Adoption",
+    "Les équipes passent en production avec une logique de pilotage claire et un accompagnement précis.":
+        "Teams go live with clear oversight and close support.",
+    "Optimisation": "Optimization",
+    "Vous mesurez les performances, ajustez les routines et améliorez la gouvernance au fil du temps.":
+        "You measure performance, adjust routines and improve governance over time.",
+    "Le système convient-il à des structures diverses ?": "Does the system suit different kinds of organizations?",
+    "Oui. Kotiza est conçu pour s’adapter à des entreprises, associations, clubs, institutions ou organisations multisites.":
+        "Yes. Kotiza is designed to fit companies, associations, clubs, institutions and multi-site organizations.",
+    "Peut-on personnaliser le niveau d’accès ?": "Can access levels be customized?",
+    "Oui. Les rôles et permissions sont pensés pour distinguer administrateurs, gestionnaires, responsables et utilisateurs.":
+        "Yes. Roles and permissions distinguish administrators, managers, group leaders and users.",
+    "Le déploiement est-il rapide ?": "Is setup quick?",
+    "La mise en service est rapide et l’accompagnement permet de démarrer sans friction sur les routines existantes.":
+        "Setup is quick, and our support lets you start smoothly from your existing routines.",
+
+    # Accueil
+    "Tableau de bord - Kotiza": "Dashboard - Kotiza",
+    "Plateforme de gestion multisectorielle": "Management platform for every sector",
+    "Une solution plus profonde pour piloter vos organisations.": "A deeper way to run your organizations.",
+    "Kotiza centralise les groupes, les membres, les activités, les événements et la trésorerie pour offrir une expérience claire et évolutive dans tous les secteurs d'entreprise.":
+        "Kotiza brings groups, members, activities, events and treasury together for a clear, scalable experience in every sector.",
+    "Commencer": "Get started",
+    "actifs": "active",
+    "enregistrés": "registered",
+    "planifiées": "scheduled",
+    "à venir": "upcoming",
+    "Cotisations total": "Total contributions",
+    "cumulées": "to date",
+    "Cotisations du mois": "Contributions this month",
+    "mois courant": "current month",
+    "Taux de presence": "Attendance rate",
+    "Taux de présence": "Attendance rate",
+    "global": "overall",
+    "Activité événements": "Event activity",
+    "Domaines d'application": "Use cases",
+    "Un système conçu pour les entreprises, associations et organisations durables.":
+        "A system built for companies, associations and lasting organizations.",
+    "Méthode de travail": "How it works",
+    "Une plateforme de gestion simple à adopter et profonde à exploiter.":
+        "A management platform that is easy to adopt and deep to use.",
+    "Offre d'entreprise": "Business offer",
+    "Un outil de gestion pensé pour la performance et la croissance.":
+        "A management tool built for performance and growth.",
+    "Gestion des groupes": "Group management",
+    "Création, mise à jour, filtration par responsable, organes et postes inclus.":
+        "Create, update and filter by leader, with bodies and positions included.",
+    "Accéder": "Open",
+    "Membres & postes": "Members & positions",
+    "Association multi-groupes, postes isolés ou rattachés à un organe.":
+        "Members in several groups, positions standalone or attached to a body.",
+    "Rencontres & présences": "Meetings & attendance",
+    "Planification, présence/absence/retard/permission avec motifs.":
+        "Scheduling, present/absent/late/excused with reasons.",
+    "Cotisations & documents": "Contributions & documents",
+    "Suivi des paiements, stockage de documents importants.": "Payment tracking and storage of key documents.",
+    "Donnez à votre organisation un système plus robuste.": "Give your organization a more robust system.",
+    "Ajoutez vos premiers groupes, clarifiez vos rôles et pilotez votre activité en un seul espace professionnel.":
+        "Add your first groups, clarify roles and run your activity from one professional space.",
+    "Associations": "Associations",
+    "ONG, clubs et fondations": "NGOs, clubs and foundations",
+    "Organisez les adhésions, les rencontres, les cotisations et les décisions de manière transparente pour votre communauté.":
+        "Organize memberships, meetings, contributions and decisions transparently for your community.",
+    "Membres et responsables": "Members and leaders",
+    "Suivi des présences": "Attendance tracking",
+    "Gestion des documents": "Document management",
+    "Education": "Education",
+    "Écoles et centres de formation": "Schools and training centers",
+    "Pilotez la planification des cours, l'activité des groupes et le suivi des participants avec un tableau de bord clair.":
+        "Manage course planning, group activity and participant follow-up from a clear dashboard.",
+    "Planning des sessions": "Session planning",
+    "Évaluations et présence": "Assessments and attendance",
+    "Suivi des participants": "Participant follow-up",
+    "Services": "Services",
+    "PME, cabinets et services": "SMEs, firms and services",
+    "Un cadre de gestion opérationnelle pour coordonner les équipes, les projets et les engagements clients dans un seul espace.":
+        "An operational framework to coordinate teams, projects and client commitments in one place.",
+    "Equipes et rôles": "Teams and roles",
+    "Suivi des activités": "Activity tracking",
+    "Rapports dynamiques": "Dynamic reports",
+    "Sport": "Sport",
+    "Clubs sportifs et culturels": "Sports and cultural clubs",
+    "Gérez les effectifs, les événements, les paiements et les annonces avec une expérience pensée pour les bénévoles et les responsables.":
+        "Manage rosters, events, payments and announcements with an experience designed for volunteers and leaders.",
+    "Effectifs et postes": "Rosters and positions",
+    "Événements publics": "Public events",
+    "Cotisations et remboursements": "Contributions and refunds",
+    "Santé": "Health",
+    "Structures communautaires": "Community organizations",
+    "Trouvez un équilibre entre la coordination des membres, le suivi des activités et la communication interne dans un environnement structuré.":
+        "Balance member coordination, activity tracking and internal communication in a structured environment.",
+    "Suivi des missions": "Mission tracking",
+    "Communication interne": "Internal communication",
+    "Historique des actions": "Action history",
+    "Public": "Public sector",
+    "Institutions et collectivités": "Institutions and local authorities",
+    "Adaptez la plateforme à un environnement plus réglementé avec une gestion fiable des groupes, documents et opérations administratives.":
+        "Adapt the platform to a regulated environment with reliable management of groups, documents and administrative operations.",
+    "Traçabilité des actions": "Action traceability",
+    "Accès par rôle": "Role-based access",
+    "Pilotage centralisé": "Centralized oversight",
+    "Centraliser l'organisation": "Centralize the organization",
+    "Créez vos groupes, organes, membres et postes dans un espace unique, sans friction ni doublons.":
+        "Create your groups, bodies, members and positions in one space, without friction or duplicates.",
+    "Suivre l'activité": "Track activity",
+    "Visualisez les réunions, présences, événements et cotisations pour mesurer le rythme réel de l'organisation.":
+        "See meetings, attendance, events and contributions to measure the organization's real pace.",
+    "Automatiser les routines": "Automate routines",
+    "Utilisez des tableaux de bord et les flux de travail pour réduire les tâches manuelles et améliorer la fiabilité.":
+        "Use dashboards and workflows to cut manual work and improve reliability.",
+    "Piloter la décision": "Drive decisions",
+    "Analysez les performances, les taux de présence et les indicateurs de gestion pour agir avec précision.":
+        "Analyze performance, attendance and management indicators to act precisely.",
+    "Gestion multi-groupes": "Multi-group management",
+    "Rôles et permissions": "Roles and permissions",
+    "Recherche globale": "Global search",
+    "Audit trail complet": "Full audit trail",
+    "Documents et événements": "Documents and events",
+    "Exports CSV / Excel / PDF": "CSV / Excel / PDF exports",
+    "Dashboard d'activité": "Activity dashboard",
+    "Pilotage d'opérations": "Operations oversight",
+    "Suivez les réunions, les effectifs, les obligations et les engagements dans un tableau de bord centralisé.":
+        "Track meetings, headcount, obligations and commitments in a central dashboard.",
+    "Coordination multisite": "Multi-site coordination",
+    "Gérez plusieurs structures, équipes ou territoires sans perdre la trace des responsabilités et des livrables.":
+        "Manage several organizations, teams or areas without losing track of responsibilities and deliverables.",
+    "Présence & trésorerie": "Attendance & treasury",
+    "Analysez les taux de présence, les paiements et la santé financière globale de votre organisation.":
+        "Analyze attendance, payments and your organization's overall financial health.",
+    "2FA": "2FA",
+    "Connexion sécurisée": "Secure login",
+    "360°": "360°",
+    "Vue d'ensemble": "Overview",
+    "100%": "100%",
+    "Traçabilité": "Traceability",
+
+    # Plateforme
+    "Plateforme - Kotiza": "Platform - Kotiza",
+    "Suite d'entreprise": "Business suite",
+    "Une plateforme qui grandit avec votre organisation.": "A platform that grows with your organization.",
+    "Au-delà de la gestion interne, Kotiza devient un espace de pilotage, d’opportunités, de suivi commercial et d’automatisation pour les structures ambitieuses.":
+        "Beyond internal management, Kotiza becomes a space for oversight, opportunities, sales follow-up and automation for ambitious organizations.",
+    "Modules": "Modules",
+    "Un écosystème pensé pour centraliser les opérations, la vente et le reporting.":
+        "An ecosystem designed to centralize operations, sales and reporting.",
+    "Bientôt": "Coming soon",
+    "Roadmap": "Roadmap",
+    "Un développement progressif pour transformer la solution en plateforme d’entreprise.":
+        "Step-by-step development to turn the solution into a business platform.",
+    "Comparatif": "Comparison",
+    "Une base solide pour passer de l’organisation locale à la plateforme business complète.":
+        "A solid foundation to grow from a local organization to a full business platform.",
+    "Fonction": "Feature",
+    "Base": "Base",
+    "Business": "Business",
+    "Enterprise": "Enterprise",
+    "La plateforme évolue avec vos ambitions.": "The platform evolves with your ambitions.",
+    "Commencez avec une base solide et passez progressivement vers un système d’entreprise complet, pilotable et intégré.":
+        "Start from a solid base and move step by step to a complete, manageable and integrated business system.",
+    "Planifier une solution": "Plan a solution",
+    "CRM & relations": "CRM & relationships",
+    "Centralisez les contacts, les prospects, les comptes et l’historique des échanges pour un meilleur suivi commercial.":
+        "Centralize contacts, prospects, accounts and conversation history for better sales follow-up.",
+    "Sales": "Sales",
+    "Devis & factures": "Quotes & invoices",
+    "Créez, suivez et finalisez vos propositions commerciales avec une gestion plus claire de la facturation.":
+        "Create, track and close your proposals with clearer invoicing.",
+    "Billing": "Billing",
+    "Tâches & workflow": "Tasks & workflow",
+    "Coordonnez les actions internes, les responsabilités et les priorités à travers des workflows simples et fiables.":
+        "Coordinate internal actions, responsibilities and priorities through simple, reliable workflows.",
+    "Ops": "Ops",
+    "Reporting & KPI": "Reporting & KPIs",
+    "Pilotez vos performances grâce à des tableaux de bord, des indicateurs, des tendances et des comparatifs.":
+        "Steer performance with dashboards, indicators, trends and comparisons.",
+    "Analytics": "Analytics",
+    "Notifications": "Notifications",
+    "Rappelez les échéances, les réunions et les tâches grâce à des alertes utiles et personnalisables.":
+        "Remind people of deadlines, meetings and tasks with useful, customizable alerts.",
+    "Alerts": "Alerts",
+    "API & intégrations": "API & integrations",
+    "Connectez votre système à d’autres outils pour automatiser la gestion de vos données et de vos process.":
+        "Connect your system to other tools to automate your data and processes.",
+    "Integrations": "Integrations",
+    "Phase 1": "Phase 1",
+    "Organisation interne": "Internal organization",
+    "Groupes, membres, réunions, présences, cotisations et documents centralisés.":
+        "Groups, members, meetings, attendance, contributions and documents in one place.",
+    "Phase 2": "Phase 2",
+    "CRM & ventes": "CRM & sales",
+    "Contacts, prospection, pipeline, suivi des opportunités et gestion des comptes.":
+        "Contacts, prospecting, pipeline, opportunity tracking and account management.",
+    "Phase 3": "Phase 3",
+    "Finance & propositions": "Finance & proposals",
+    "Devis, factures, suivi des paiements et reporting commercial.": "Quotes, invoices, payment tracking and sales reporting.",
+    "Phase 4": "Phase 4",
+    "Automatisation": "Automation",
+    "Notifications, tâches, workflows, intégrations et analytics avancés.":
+        "Notifications, tasks, workflows, integrations and advanced analytics.",
+    "Oui": "Yes",
+    "Non": "No",
+    "Partiel": "Partial",
+    "Sur demande": "On request",
+    "CRM client/prospect": "Client/prospect CRM",
+    "Devis / factures": "Quotes / invoices",
+    "API / intégrations": "API / integrations",
+
+    # Devis / tarifs
+    "Devis Kotiza": "Kotiza pricing",
+    "Offre commerciale": "Our offer",
+    "Des solutions de gestion conçues pour les entreprises exigeantes.": "Management solutions built for demanding organizations.",
+    "Une plateforme robuste pour organiser vos groupes, vos équipes, vos événements et vos opérations, avec un pilotage clair et une expérience premium pour vos responsables.":
+        "A robust platform to organize your groups, teams, events and operations, with clear oversight and a premium experience for your leaders.",
+    "Voir les tarifs": "See pricing",
+    "Pourquoi choisir Kotiza": "Why choose Kotiza",
+    "Un système qui transforme l’organisation en avantage concurrentiel.": "A system that turns organization into a competitive edge.",
+    "Tarification": "Pricing",
+    "Des formules flexibles pour démarrer vite, grandir sereinement et évoluer avec votre organisation.":
+        "Flexible plans to start fast, grow calmly and evolve with your organization.",
+    "Populaire": "Popular",
+    "Choisir %(name)s": "Choose %(name)s",
+    "Déploiement rapide": "Quick setup",
+    "Une mise en service simple, avec un accompagnement pensé pour les équipes de terrain.":
+        "Simple onboarding, with support designed for teams on the ground.",
+    "Demande de devis": "Quote request",
+    "Parlons de votre organisation et de vos besoins.": "Let's talk about your organization and your needs.",
+    "Dites-nous quel niveau d’automatisation, de sécurité et d’accompagnement vous recherchez. Nous vous répondrons avec une proposition claire, adaptée à votre volume et à votre contexte.":
+        "Tell us what level of automation, security and support you need. We will reply with a clear proposal tailored to your size and context.",
+    "Merci ! Votre demande a bien été envoyée, nous vous répondrons rapidement.":
+        "Thank you! Your request has been sent, we will get back to you soon.",
+    "Nom": "Name",
+    "Email": "Email",
+    "Type d'organisation": "Organization type",
+    "Besoin principal": "Main need",
+    "Starter": "Starter",
+    "Par mois": "Per month",
+    "Idéal pour petites structures et équipes de démarrage.": "Ideal for small organizations and new teams.",
+    "Jusqu’à 3 groupes": "Up to 3 groups",
+    "Suivi des membres et réunions": "Member and meeting tracking",
+    "Dashboard actif": "Live dashboard",
+    "Exports de base": "Basic exports",
+    "Pour les organisations qui veulent un pilotage plus profond.": "For organizations that want deeper oversight.",
+    "Accès rôles et permissions": "Roles and permissions",
+    "Audit complet": "Full audit",
+    "Support prioritaire": "Priority support",
+    "Sur devis": "Custom quote",
+    "Personnalisé": "Tailored",
+    "Pour les structures multi-sites avec besoin de conformité et d’intégration.":
+        "For multi-site organizations with compliance and integration needs.",
+    "Configuration sur mesure": "Custom configuration",
+    "API et intégrations": "API and integrations",
+    "Support dédié": "Dedicated support",
+    "Sécurité avancée": "Advanced security",
+    "Pilotage centralisé en temps réel": "Real-time centralized oversight",
+    "Traçabilité des actions et décisions": "Traceable actions and decisions",
+    "Réduction du travail manuel et des doublons": "Less manual work and fewer duplicates",
+    "Expérience claire pour les responsables et les équipes": "A clear experience for leaders and teams",
+    "Démarrage": "Onboarding",
+    "Accompagné": "Guided",
+    "Mise en service": "Go-live",
+    "Sans migration lourde": "No heavy migration",
+    "Support": "Support",
+    "Par email": "By email",
+
+    # Erreurs et abonnement
+    "Requête invalide": "Bad request",
+    "400 - Requête invalide": "400 - Bad request",
+    "La requête envoyée n'est pas valide. Vérifiez les champs puis réessayez.":
+        "The request is not valid. Check the fields and try again.",
+    "Retour à l'accueil": "Back to home",
+    "Accès refusé": "Access denied",
+    "403 - Accès refusé": "403 - Access denied",
+    "Vous n'avez pas la permission d'accéder à cette ressource.": "You do not have permission to access this resource.",
+    "Page introuvable": "Page not found",
+    "404 - Page introuvable": "404 - Page not found",
+    "La page demandée n'existe pas ou a été déplacée.": "The page you requested does not exist or has moved.",
+    "Erreur serveur": "Server error",
+    "500 - Erreur interne": "500 - Internal error",
+    "Une erreur interne est survenue. L'incident a été journalisé.": "An internal error occurred. The incident has been logged.",
+    "Abonnement expiré": "Subscription expired",
+    "L'abonnement Kotiza de votre organisation est arrivé à son terme.": "Your organization's Kotiza subscription has ended.",
+    "Vos données sont conservées et redeviennent accessibles dès le renouvellement.":
+        "Your data is kept and becomes available again as soon as you renew.",
+    "Pour renouveler, contactez-nous": "To renew, contact us",
+    "Connexion administrateur": "Administrator login",
+
+    # Connexion et mot de passe
+    "Déconnexion - Kotiza": "Logged out - Kotiza",
+    "À bientôt": "See you soon",
+    "Vous êtes déconnecté": "You are logged out",
+    "Votre session est terminée.": "Your session has ended.",
+    "Revenir à la connexion :": "Back to login:",
+    "Connexion - Kotiza": "Log in - Kotiza",
+    "Accès sécurisé": "Secure access",
+    "Connexion": "Log in",
+    "Identifiez-vous pour accéder à votre espace de gestion.": "Sign in to access your management space.",
+    "Bienvenue sur Kotiza": "Welcome to Kotiza",
+    "Connectez-vous pour accéder à vos tableaux de bord et modules.": "Log in to access your dashboards and modules.",
+    "Nom d'utilisateur": "Username",
+    "Entrez votre nom d’utilisateur": "Enter your username",
+    "Mot de passe": "Password",
+    "Entrez votre mot de passe": "Enter your password",
+    "Mot de passe oublié ?": "Forgot your password?",
+    "Accès réservé aux membres autorisés.": "Access restricted to authorized members.",
+    "Sécurité": "Security",
+    "Connexion sécurisée avec chiffrement des données.": "Secure connection with encrypted data.",
+    "Tableaux de bord": "Dashboards",
+    "Accès aux dashboards Admin, Manager et Groupes.": "Access to Admin, Manager and Group dashboards.",
+    "Modules organisés": "Organized modules",
+    "Gestion des groupes, membres, rencontres et cotisations.": "Manage groups, members, meetings and contributions.",
+    "Mot de passe modifié - Kotiza": "Password changed - Kotiza",
+    "Mon compte": "My account",
+    "Mot de passe modifié": "Password changed",
+    "Votre mot de passe a été mis à jour avec succès.": "Your password has been updated.",
+    "Changer le mot de passe - Kotiza": "Change password - Kotiza",
+    "Changer mon mot de passe": "Change my password",
+    "Renseignez votre mot de passe actuel puis le nouveau.": "Enter your current password, then the new one.",
+    "Mot de passe actuel": "Current password",
+    "Nouveau mot de passe": "New password",
+    "Confirmer le nouveau mot de passe": "Confirm new password",
+    "Enregistrer": "Save",
+    "Récupération de compte": "Account recovery",
+    "Vous pouvez maintenant vous connecter avec votre nouveau mot de passe.": "You can now log in with your new password.",
+    "Nouveau mot de passe - Kotiza": "New password - Kotiza",
+    "Choisir un nouveau mot de passe": "Choose a new password",
+    "Dernière étape avant de retrouver votre accès.": "Last step to get your access back.",
+    "Choisissez un mot de passe robuste, différent des précédents.": "Choose a strong password, different from previous ones.",
+    "Confirmer le mot de passe": "Confirm password",
+    "Enregistrer le nouveau mot de passe": "Save new password",
+    "Lien invalide": "Invalid link",
+    "Ce lien de réinitialisation est invalide ou a déjà été utilisé.": "This reset link is invalid or has already been used.",
+    "Demander un nouveau lien": "Request a new link",
+    "Email envoyé - Kotiza": "Email sent - Kotiza",
+    "Vérifiez votre boîte mail": "Check your inbox",
+    "Si l'adresse existe dans nos systèmes, un email vient de vous être envoyé.":
+        "If the address exists in our system, an email has just been sent to you.",
+    "Suivez le lien reçu par email pour choisir un nouveau mot de passe. Pensez à vérifier vos courriers indésirables.":
+        "Follow the link in the email to choose a new password. Remember to check your spam folder.",
+    "Retour à la connexion": "Back to login",
+    "Bonjour %(username)s,": "Hello %(username)s,",
+    "Vous recevez cet email car une demande de réinitialisation de mot de passe a été faite pour votre compte Kotiza sur %(domain)s.":
+        "You are receiving this email because a password reset was requested for your Kotiza account on %(domain)s.",
+    "Pour choisir un nouveau mot de passe, ouvrez le lien suivant :": "To choose a new password, open this link:",
+    "Si vous n'êtes pas à l'origine de cette demande, ignorez simplement cet email : votre mot de passe restera inchangé.":
+        "If you did not make this request, just ignore this email: your password will stay the same.",
+    "L'équipe Kotiza": "The Kotiza team",
+    "Mot de passe oublié - Kotiza": "Forgot password - Kotiza",
+    "Mot de passe oublié": "Forgot password",
+    "Indiquez votre email pour recevoir un lien de réinitialisation.": "Enter your email to receive a reset link.",
+    "Réinitialiser votre mot de passe": "Reset your password",
+    "Un email contenant les instructions vous sera envoyé si l'adresse correspond à un compte existant.":
+        "An email with instructions will be sent if the address matches an existing account.",
+    "Adresse email": "Email address",
+    "vous@exemple.com": "you@example.com",
+    "Envoyer le lien de réinitialisation": "Send reset link",
+    "Kotiza - Réinitialisation de votre mot de passe": "Kotiza - Reset your password",
+}

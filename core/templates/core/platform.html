@@ -1,33 +1,33 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 
-{% block title %}Plateforme - Kotiza{% endblock %}
+{% block title %}{% translate "Plateforme - Kotiza" %}{% endblock %}
 
 {% block hero %}
 <div>
-  <p class="pill">Suite d'entreprise</p>
-  <h1>Une plateforme qui grandit avec votre organisation.</h1>
+  <p class="pill">{% translate "Suite d'entreprise" %}</p>
+  <h1>{% translate "Une plateforme qui grandit avec votre organisation." %}</h1>
   <p class="subtitle">
-    Au-delà de la gestion interne, Kotiza devient un espace de pilotage, d’opportunités,
-    de suivi commercial et d’automatisation pour les structures ambitieuses.
+    {% translate "Au-delà de la gestion interne, Kotiza devient un espace de pilotage, d’opportunités, de suivi commercial et d’automatisation pour les structures ambitieuses." %}
   </p>
 </div>
 <div class="hero-actions">
-  <a class="btn primary" href="/devis/">Demander un devis</a>
-  <a class="btn ghost" href="/entreprise/">Notre entreprise</a>
+  <a class="btn primary" href="/devis/">{% translate "Demander un devis" %}</a>
+  <a class="btn ghost" href="/entreprise/">{% translate "Notre entreprise" %}</a>
 </div>
 {% endblock %}
 
 {% block content %}
 <section class="section-block highlight-panel">
   <div class="section-heading narrow">
-    <p class="pill">Modules</p>
-    <h2>Un écosystème pensé pour centraliser les opérations, la vente et le reporting.</h2>
+    <p class="pill">{% translate "Modules" %}</p>
+    <h2>{% translate "Un écosystème pensé pour centraliser les opérations, la vente et le reporting." %}</h2>
   </div>
   <div class="module-grid">
     {% for module in platform_modules %}
     <article class="module-card">
       <span class="module-badge">{{ module.badge }}</span>
-      {% if module.soon %}<span class="module-badge soon">Bientôt</span>{% endif %}
+      {% if module.soon %}<span class="module-badge soon">{% translate "Bientôt" %}</span>{% endif %}
       <h4>{{ module.title }}</h4>
       <p>{{ module.description }}</p>
     </article>
@@ -37,8 +37,8 @@
 
 <section class="section-block">
   <div class="section-heading">
-    <p class="pill">Roadmap</p>
-    <h2>Un développement progressif pour transformer la solution en plateforme d’entreprise.</h2>
+    <p class="pill">{% translate "Roadmap" %}</p>
+    <h2>{% translate "Un développement progressif pour transformer la solution en plateforme d’entreprise." %}</h2>
   </div>
   <div class="roadmap-grid">
     {% for item in roadmap %}
@@ -53,17 +53,17 @@
 
 <section class="section-block pricing-block">
   <div class="section-heading">
-    <p class="pill">Comparatif</p>
-    <h2>Une base solide pour passer de l’organisation locale à la plateforme business complète.</h2>
+    <p class="pill">{% translate "Comparatif" %}</p>
+    <h2>{% translate "Une base solide pour passer de l’organisation locale à la plateforme business complète." %}</h2>
   </div>
   <div class="comparison-table-wrap">
     <table class="comparison-table">
       <thead>
         <tr>
-          <th>Fonction</th>
-          <th>Base</th>
-          <th>Business</th>
-          <th>Enterprise</th>
+          <th>{% translate "Fonction" %}</th>
+          <th>{% translate "Base" %}</th>
+          <th>{% translate "Business" %}</th>
+          <th>{% translate "Enterprise" %}</th>
         </tr>
       </thead>
       <tbody>
@@ -81,9 +81,9 @@
 
 <section class="cta">
   <div>
-    <h3>La plateforme évolue avec vos ambitions.</h3>
-    <p>Commencez avec une base solide et passez progressivement vers un système d’entreprise complet, pilotable et intégré.</p>
+    <h3>{% translate "La plateforme évolue avec vos ambitions." %}</h3>
+    <p>{% translate "Commencez avec une base solide et passez progressivement vers un système d’entreprise complet, pilotable et intégré." %}</p>
   </div>
-  <a class="btn primary" href="/devis/">Planifier une solution</a>
+  <a class="btn primary" href="/devis/">{% translate "Planifier une solution" %}</a>
 </section>
 {% endblock %}

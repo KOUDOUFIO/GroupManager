@@ -1,18 +1,18 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 
-{% block title %}Tableau de bord - Kotiza{% endblock %}
+{% block title %}{% translate "Tableau de bord - Kotiza" %}{% endblock %}
 
 {% block hero %}
 <div>
-  <p class="pill">Plateforme de gestion multisectorielle</p>
-  <h1>Une solution plus profonde pour piloter vos organisations.</h1>
+  <p class="pill">{% translate "Plateforme de gestion multisectorielle" %}</p>
+  <h1>{% translate "Une solution plus profonde pour piloter vos organisations." %}</h1>
   <p class="subtitle">
-    Kotiza centralise les groupes, les membres, les activités, les événements et la trésorerie
-    pour offrir une expérience claire et évolutive dans tous les secteurs d'entreprise.
+    {% translate "Kotiza centralise les groupes, les membres, les activités, les événements et la trésorerie pour offrir une expérience claire et évolutive dans tous les secteurs d'entreprise." %}
   </p>
 </div>
 <div class="hero-actions">
-  <a class="btn primary" href="/groupes/">Commencer</a>
+  <a class="btn primary" href="/groupes/">{% translate "Commencer" %}</a>
 </div>
 {% endblock %}
 
@@ -20,45 +20,45 @@
 {% if show_platform_stats %}
 <section class="stats">
   <div class="stat-card">
-    <h3>Groupes</h3>
+    <h3>{% translate "Groupes" %}</h3>
     <p class="stat-value" data-counter data-target="{{ group_count }}">0</p>
-    <p class="stat-label">actifs</p>
+    <p class="stat-label">{% translate "actifs" %}</p>
   </div>
   <div class="stat-card">
-    <h3>Membres</h3>
+    <h3>{% translate "Membres" %}</h3>
     <p class="stat-value" data-counter data-target="{{ member_count }}">0</p>
-    <p class="stat-label">enregistres</p>
+    <p class="stat-label">{% translate "enregistrés" %}</p>
   </div>
   <div class="stat-card">
-    <h3>Rencontres</h3>
+    <h3>{% translate "Rencontres" %}</h3>
     <p class="stat-value" data-counter data-target="{{ meeting_count }}">0</p>
-    <p class="stat-label">planifiees</p>
+    <p class="stat-label">{% translate "planifiées" %}</p>
   </div>
   <div class="stat-card">
-    <h3>Evenements</h3>
+    <h3>{% translate "Événements" %}</h3>
     <p class="stat-value" data-counter data-target="{{ event_count }}">0</p>
-    <p class="stat-label">a venir</p>
+    <p class="stat-label">{% translate "à venir" %}</p>
   </div>
   <div class="stat-card">
-    <h3>Cotisations total</h3>
+    <h3>{% translate "Cotisations total" %}</h3>
     <p class="stat-value" data-counter data-target="{{ total_contributions }}">0</p>
-    <p class="stat-label">cumulees</p>
+    <p class="stat-label">{% translate "cumulées" %}</p>
   </div>
   <div class="stat-card">
-    <h3>Cotisations du mois</h3>
+    <h3>{% translate "Cotisations du mois" %}</h3>
     <p class="stat-value" data-counter data-target="{{ current_month_contributions }}">0</p>
-    <p class="stat-label">mois courant</p>
+    <p class="stat-label">{% translate "mois courant" %}</p>
   </div>
   <div class="stat-card">
-    <h3>Taux de presence</h3>
+    <h3>{% translate "Taux de présence" %}</h3>
     <p class="stat-value" data-counter data-target="{{ attendance_rate }}" data-suffix="%">0%</p>
-    <p class="stat-label">global</p>
+    <p class="stat-label">{% translate "global" %}</p>
   </div>
 </section>
 
 <section class="analytics-rings">
   <article class="ring-card">
-    <h4>Taux de presence</h4>
+    <h4>{% translate "Taux de présence" %}</h4>
     <div class="progress-ring" style="--pct: {{ attendance_rate|floatformat:1 }};">
       <div class="ring-inner">
         <strong data-counter data-target="{{ attendance_rate|floatformat:1 }}" data-suffix="%">0%</strong>
@@ -66,7 +66,7 @@
     </div>
   </article>
   <article class="ring-card">
-    <h4>Cotisations du mois</h4>
+    <h4>{% translate "Cotisations du mois" %}</h4>
     <div class="progress-ring alt" style="--pct: {{ contribution_month_share|floatformat:1 }};">
       <div class="ring-inner">
         <strong data-counter data-target="{{ contribution_month_share|floatformat:1 }}" data-suffix="%">0%</strong>
@@ -74,7 +74,7 @@
     </div>
   </article>
   <article class="ring-card">
-    <h4>Activite evenements</h4>
+    <h4>{% translate "Activité événements" %}</h4>
     <div class="progress-ring calm" style="--pct: {{ event_activity_rate|floatformat:1 }};">
       <div class="ring-inner">
         <strong data-counter data-target="{{ event_activity_rate|floatformat:1 }}" data-suffix="%">0%</strong>
@@ -86,8 +86,8 @@
 
 <section class="section-block">
   <div class="section-heading">
-    <p class="pill">Domaines d'application</p>
-    <h2>Un système conçu pour les entreprises, associations et organisations durables.</h2>
+    <p class="pill">{% translate "Domaines d'application" %}</p>
+    <h2>{% translate "Un système conçu pour les entreprises, associations et organisations durables." %}</h2>
   </div>
   <div class="domain-grid">
     {% for item in industry_cards %}
@@ -107,8 +107,8 @@
 
 <section class="section-block">
   <div class="section-heading">
-    <p class="pill">Méthode de travail</p>
-    <h2>Une plateforme de gestion simple à adopter et profonde à exploiter.</h2>
+    <p class="pill">{% translate "Méthode de travail" %}</p>
+    <h2>{% translate "Une plateforme de gestion simple à adopter et profonde à exploiter." %}</h2>
   </div>
   <div class="flow-grid">
     {% for step in workflow_steps %}
@@ -128,8 +128,8 @@
 
 <section class="section-block highlight-panel">
   <div class="section-heading narrow">
-    <p class="pill">Offre d'entreprise</p>
-    <h2>Un outil de gestion pensé pour la performance et la croissance.</h2>
+    <p class="pill">{% translate "Offre d'entreprise" %}</p>
+    <h2>{% translate "Un outil de gestion pensé pour la performance et la croissance." %}</h2>
   </div>
   <div class="solution-grid">
     {% for card in solution_cards %}
@@ -152,33 +152,33 @@
 
 <section class="grid-cards">
   <article class="info-card">
-    <h4>Gestion des groupes</h4>
-    <p>Creation, mise a jour, filtration par responsable, organes et postes inclus.</p>
-    <a class="link" href="/groupes/">Acceder</a>
+    <h4>{% translate "Gestion des groupes" %}</h4>
+    <p>{% translate "Création, mise à jour, filtration par responsable, organes et postes inclus." %}</p>
+    <a class="link" href="/groupes/">{% translate "Accéder" %}</a>
   </article>
   <article class="info-card">
-    <h4>Membres & postes</h4>
-    <p>Association multi-groupes, postes isoles ou rattaches a un organe.</p>
-    <a class="link" href="/membres/">Acceder</a>
+    <h4>{% translate "Membres & postes" %}</h4>
+    <p>{% translate "Association multi-groupes, postes isolés ou rattachés à un organe." %}</p>
+    <a class="link" href="/membres/">{% translate "Accéder" %}</a>
   </article>
   <article class="info-card">
-    <h4>Rencontres & presences</h4>
-    <p>Planification, presence/absence/retard/permission avec motifs.</p>
-    <a class="link" href="/rencontres/">Acceder</a>
+    <h4>{% translate "Rencontres & présences" %}</h4>
+    <p>{% translate "Planification, présence/absence/retard/permission avec motifs." %}</p>
+    <a class="link" href="/rencontres/">{% translate "Accéder" %}</a>
   </article>
   <article class="info-card">
-    <h4>Cotisations & documents</h4>
-    <p>Suivi des paiements, stockage de documents importants.</p>
-    <a class="link" href="/cotisations/">Acceder</a>
+    <h4>{% translate "Cotisations & documents" %}</h4>
+    <p>{% translate "Suivi des paiements, stockage de documents importants." %}</p>
+    <a class="link" href="/cotisations/">{% translate "Accéder" %}</a>
   </article>
 </section>
 
 <section class="cta">
   <div>
-    <h3>Donnez à votre organisation un système plus robuste.</h3>
-    <p>Ajoutez vos premiers groupes, clarifiez vos rôles et pilotez votre activité en un seul espace professionnel.</p>
+    <h3>{% translate "Donnez à votre organisation un système plus robuste." %}</h3>
+    <p>{% translate "Ajoutez vos premiers groupes, clarifiez vos rôles et pilotez votre activité en un seul espace professionnel." %}</p>
   </div>
-  <a class="btn primary" href="/groupes/">Commencer</a>
+  <a class="btn primary" href="/groupes/">{% translate "Commencer" %}</a>
 </section>
 {% endblock %}
 
