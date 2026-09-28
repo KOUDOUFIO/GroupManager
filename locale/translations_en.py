@@ -967,4 +967,12 @@ EN = {
     "Aucun (ou colonne « Groupe » du fichier)": "None (or the file's \"Group\" column)",
     "L'aperçu a expiré. Envoyez à nouveau le fichier.": "The preview expired. Send the file again.",
     "%(count)s membre(s) importé(s).": "%(count)s member(s) imported.",
+    # Codes de secours
+    "Vos codes de secours": "Your backup codes",
+    "Notez-les ou imprimez-les maintenant et gardez-les en lieu sûr : ils ne seront plus affichés. Chaque code sert une seule fois, si vous n'avez plus votre téléphone.": "Write them down or print them now and keep them safe: they will not be shown again. Each code works once, if you no longer have your phone.",
+    "%(total)s code de secours disponible.": ("%(total)s backup code left.", "%(total)s backup codes left."),
+    "Générer de nouveaux codes de secours": "Generate new backup codes",
+    "Téléphone perdu et plus de code de secours ? Un administrateur peut supprimer votre appareil dans l'administration.": "Lost your phone and out of backup codes? An administrator can delete your device in the admin.",
+    "Plus de téléphone ? Saisissez un de vos codes de secours à 8 chiffres.": "No phone? Enter one of your 8-digit backup codes.",
+    "Le code contient 6 chiffres (ou 8 pour un code de secours).": "The code has 6 digits (or 8 for a backup code).",
 }

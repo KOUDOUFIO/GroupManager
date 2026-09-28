@@ -24,6 +24,7 @@
         {{ form.code }}
       </div>
       <button class="btn primary btn-block" type="submit">{% translate "Valider" %}</button>
+      <p class="muted auth-hint">{% translate "Plus de téléphone ? Saisissez un de vos codes de secours à 8 chiffres." %}</p>
     </form>
     <div class="login-footer">
       <form method="post" action="/accounts/logout/">{% csrf_token %}<button class="link link-button" type="submit">{% translate "Se déconnecter" %}</button></form>

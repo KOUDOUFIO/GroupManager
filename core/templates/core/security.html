@@ -41,6 +41,20 @@
     {% for error in form.code.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
 
     {% elif enabled %}
+    {% if backup_codes %}
+    <div class="backup-box" role="status">
+      <h3>{% translate "Vos codes de secours" %}</h3>
+      <p>{% translate "Notez-les ou imprimez-les maintenant et gardez-les en lieu sûr : ils ne seront plus affichés. Chaque code sert une seule fois, si vous n'avez plus votre téléphone." %}</p>
+      <ul class="backup-codes">{% for code in backup_codes %}<li>{{ code|slice:":4" }} {{ code|slice:"4:" }}</li>{% endfor %}</ul>
+    </div>
+    {% else %}
+    <p class="muted">{% blocktranslate count total=backup_remaining %}{{ total }} code de secours disponible.{% plural %}{{ total }} codes de secours disponibles.{% endblocktranslate %}</p>
+    {% endif %}
+    <form method="post" class="form-actions">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="backup" />
+      <button class="btn ghost" type="submit">{% translate "Générer de nouveaux codes de secours" %}</button>
+    </form>
     <p>{% translate "Pour désactiver la protection, saisissez le code affiché en ce moment dans votre application." %}</p>
     <form method="post" class="code-form" novalidate>
       {% csrf_token %}
@@ -49,7 +63,7 @@
       <button class="btn ghost danger-btn" type="submit">{% translate "Désactiver" %}</button>
     </form>
     {% for error in disable_form.code.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
-    <p class="muted">{% translate "Téléphone perdu ? Un administrateur peut supprimer votre appareil dans l'administration (OTP_TOTP > TOTP devices)." %}</p>
+    <p class="muted">{% translate "Téléphone perdu et plus de code de secours ? Un administrateur peut supprimer votre appareil dans l'administration." %}</p>
 
     {% else %}
     <form method="post">

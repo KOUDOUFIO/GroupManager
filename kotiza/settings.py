@@ -110,6 +110,8 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'django_otp',
     'django_otp.plugins.otp_totp',
+    # Codes de secours (a usage unique) de la connexion a deux etapes.
+    'django_otp.plugins.otp_static',
 ]
 
 MIDDLEWARE = [

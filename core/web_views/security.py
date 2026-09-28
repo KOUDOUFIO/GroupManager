@@ -1,5 +1,6 @@
 """Securite du compte : connexion a deux etapes (code a 6 chiffres, TOTP)."""
 
+import secrets
 from base64 import b32encode
 
 from django import forms
@@ -14,16 +15,36 @@ from django.views import View
 from django_otp import login as otp_login
 from django_otp import match_token
 from django_otp import user_has_device
+from django_otp.plugins.otp_static.models import StaticDevice, StaticToken
 from django_otp.plugins.otp_totp.models import TOTPDevice
 
 DEVICE_NAME = "Kotiza"
+BACKUP_NAME = "Codes de secours"
+BACKUP_COUNT = 8
+
+
+def _new_backup_codes(user) -> list:
+    """Remplace les codes de secours de l'utilisateur ; renvoie les nouveaux (affiches une seule fois)."""
+    StaticDevice.objects.filter(user=user).delete()
+    device = StaticDevice.objects.create(user=user, name=BACKUP_NAME, confirmed=True)
+    codes = []
+    while len(codes) < BACKUP_COUNT:
+        code = f"{secrets.randbelow(10**8):08d}"
+        if code not in codes:
+            codes.append(code)
+            StaticToken.objects.create(device=device, token=code)
+    return codes
+
+
+def _remaining_backup_codes(user) -> int:
+    return StaticToken.objects.filter(device__user=user).count()
 
 
 class CodeForm(forms.Form):
-    """Code a 6 chiffres affiche par l'application d'authentification."""
+    """Code a 6 chiffres de l'application, ou code de secours a 8 chiffres."""
     code = forms.RegexField(
-        label=gettext_lazy("Code à 6 chiffres"), regex=r"^\d{6}$", max_length=6,
-        error_messages={"invalid": gettext_lazy("Le code contient 6 chiffres.")},
+        label=gettext_lazy("Code à 6 chiffres"), regex=r"^(\d{6}|\d{8})$", max_length=8,
+        error_messages={"invalid": gettext_lazy("Le code contient 6 chiffres (ou 8 pour un code de secours).")},
         widget=forms.TextInput(attrs={"inputmode": "numeric", "autocomplete": "one-time-code", "autofocus": True}),
     )
 
@@ -47,7 +68,11 @@ class SecurityView(LoginRequiredMixin, View):
 
     def _render(self, request, **extra):
         device = _confirmed_device(request.user)
-        return render(request, self.template_name, {"enabled": device is not None, **extra})
+        return render(request, self.template_name, {
+            "enabled": device is not None,
+            "backup_remaining": _remaining_backup_codes(request.user) if device else 0,
+            **extra,
+        })
 
     def get(self, request):
         """Etat actuel."""
@@ -73,7 +98,7 @@ class SecurityView(LoginRequiredMixin, View):
                 device.save(update_fields=["confirmed"])
                 otp_login(request, device)
                 messages.success(request, _("Connexion à deux étapes activée. Le code vous sera demandé à chaque connexion."))
-                return redirect("security")
+                return self._render(request, backup_codes=_new_backup_codes(user))
             if form.is_valid():
                 form.add_error("code", _("Code incorrect. Vérifiez l'heure du téléphone et réessayez."))
             return self._setup(request, device, form)
@@ -83,11 +108,15 @@ class SecurityView(LoginRequiredMixin, View):
             device = _confirmed_device(user)
             if device and form.is_valid() and device.verify_token(form.cleaned_data["code"]):
                 TOTPDevice.objects.filter(user=user).delete()
+                StaticDevice.objects.filter(user=user).delete()
                 messages.success(request, _("Connexion à deux étapes désactivée."))
                 return redirect("security")
             if form.is_valid():
                 form.add_error("code", _("Code incorrect."))
             return self._render(request, disable_form=form)
+
+        if action == "backup" and _confirmed_device(user):
+            return self._render(request, backup_codes=_new_backup_codes(user))
 
         return redirect("security")
 

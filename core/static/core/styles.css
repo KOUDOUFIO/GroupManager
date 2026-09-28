@@ -5091,3 +5091,54 @@ a.user-pill:hover {
     grid-template-columns: 1fr;
   }
 }
+
+/* Codes de secours de la connexion a deux etapes */
+.backup-box {
+  margin-bottom: 16px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  border: 1px solid #fde68a;
+  background: #fffbeb;
+}
+
+.backup-box h3 {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+}
+
+.backup-box p {
+  margin: 0 0 12px;
+  color: #78350f;
+}
+
+.backup-codes {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.backup-codes li {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid #fde68a;
+  font-family: 'Fira Code', ui-monospace, monospace;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+.auth-hint {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .backup-codes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-28 15:26+0000\n"
+"POT-Creation-Date: 2026-09-28 15:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1738,6 +1738,21 @@ msgstr "Enter the 6-digit code shown by the app:"
 msgid "Activer"
 msgstr "Turn on"
 
+msgid "Vos codes de secours"
+msgstr "Your backup codes"
+
+msgid "Notez-les ou imprimez-les maintenant et gardez-les en lieu sûr : ils ne seront plus affichés. Chaque code sert une seule fois, si vous n'avez plus votre téléphone."
+msgstr "Write them down or print them now and keep them safe: they will not be shown again. Each code works once, if you no longer have your phone."
+
+#, python-format
+msgid "%(total)s code de secours disponible."
+msgid_plural "%(total)s codes de secours disponibles."
+msgstr[0] "%(total)s backup code left."
+msgstr[1] "%(total)s backup codes left."
+
+msgid "Générer de nouveaux codes de secours"
+msgstr "Generate new backup codes"
+
 msgid "Pour désactiver la protection, saisissez le code affiché en ce moment dans votre application."
 msgstr "To turn protection off, enter the code currently shown in your app."
 
@@ -1747,8 +1762,8 @@ msgstr "6-digit code"
 msgid "Désactiver"
 msgstr "Turn off"
 
-msgid "Téléphone perdu ? Un administrateur peut supprimer votre appareil dans l'administration (OTP_TOTP > TOTP devices)."
-msgstr "Lost your phone? An administrator can delete your device in the admin (OTP_TOTP > TOTP devices)."
+msgid "Téléphone perdu et plus de code de secours ? Un administrateur peut supprimer votre appareil dans l'administration."
+msgstr "Lost your phone and out of backup codes? An administrator can delete your device in the admin."
 
 msgid "Activer la connexion à deux étapes"
 msgstr "Turn on two-step sign-in"
@@ -1773,6 +1788,9 @@ msgstr "Enter the 6-digit code shown in your authenticator app."
 
 msgid "Valider"
 msgstr "Confirm"
+
+msgid "Plus de téléphone ? Saisissez un de vos codes de secours à 8 chiffres."
+msgstr "No phone? Enter one of your 8-digit backup codes."
 
 msgid "Requête invalide"
 msgstr "Bad request"
@@ -2560,8 +2578,8 @@ msgstr "Generated on %(date)s. Keep it as proof of payment."
 msgid "Vérifiable auprès du trésorier avec le numéro %(number)s."
 msgstr "Verifiable with the treasurer using number %(number)s."
 
-msgid "Le code contient 6 chiffres."
-msgstr "The code has 6 digits."
+msgid "Le code contient 6 chiffres (ou 8 pour un code de secours)."
+msgstr "The code has 6 digits (or 8 for a backup code)."
 
 msgid "Connexion à deux étapes activée. Le code vous sera demandé à chaque connexion."
 msgstr "Two-step sign-in is on. The code will be asked at each sign-in."

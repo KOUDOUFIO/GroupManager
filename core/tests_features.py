@@ -279,3 +279,57 @@ class MemberImportTests(TestCase):
         self.assertTrue(response.content.startswith(b"PK"))
         self.client.force_login(get_user_model().objects.create_user("sans-droit"))
         self.assertEqual(self.client.get(reverse("member_import")).status_code, 403)
+
+
+class DuesReminderTests(TestCase):
+    def test_reminder_states_amount_left_to_pay(self):
+        from io import StringIO
+
+        from django.core.management import call_command
+        from django.test import override_settings
+
+        group = Group.objects.create(name="Tontine", monthly_due=Decimal("5000"), dues_start=date(2026, 7, 1))
+        late = Member.objects.create(full_name="Retard", email="retard@example.com")
+        ok = Member.objects.create(full_name="Ok", email="ok@example.com")
+        for m in (late, ok):
+            m.groups.add(group)
+        for month in (7, 8, 9):
+            Contribution.objects.create(member=ok, group=group, contribution_type=Contribution.TYPE_MONTHLY,
+                                        amount=5000, paid_at=date(2026, month, 3))
+        Contribution.objects.create(member=late, group=group, contribution_type=Contribution.TYPE_MONTHLY,
+                                    amount=5000, paid_at=date(2026, 7, 3))
+        from unittest.mock import patch
+
+        with patch("core.management.commands.send_contribution_reminders.timezone.localdate", return_value=date(2026, 9, 20)), \
+                override_settings(TWILIO_ACCOUNT_SID="", TWILIO_AUTH_TOKEN=""):
+            call_command("send_contribution_reminders", stdout=StringIO())
+        self.assertEqual([m.to for m in mail.outbox], [["retard@example.com"]])
+        self.assertIn("10 000 FCFA", mail.outbox[0].body)
+        self.assertIn("2 mois", mail.outbox[0].body)
+
+
+class BackupCodeTests(TestCase):
+    def test_backup_code_signs_in_once(self):
+        from django_otp.plugins.otp_static.models import StaticToken
+
+        user = get_user_model().objects.create_user("secours", password="password123")
+        self.client.login(username="secours", password="password123")
+        self.client.post(reverse("security"), {"action": "start"})
+        device = TOTPDevice.objects.get(user=user)
+        code = f"{totp(device.bin_key, device.step, device.t0, device.digits, device.drift):06d}"
+        response = self.client.post(reverse("security"), {"action": "confirm", "code": code})
+        backup_codes = response.context["backup_codes"]
+        self.assertEqual(len(backup_codes), 8)
+        self.assertEqual(StaticToken.objects.filter(device__user=user).count(), 8)
+
+        self.client.logout()
+        self.client.login(username="secours", password="password123")
+        ok = self.client.post(reverse("two_factor_verify"), {"code": backup_codes[0], "next": "/"})
+        self.assertRedirects(ok, "/", fetch_redirect_response=False)
+        self.assertEqual(StaticToken.objects.filter(device__user=user).count(), 7)
+
+        # Le meme code ne sert qu'une fois.
+        self.client.logout()
+        self.client.login(username="secours", password="password123")
+        again = self.client.post(reverse("two_factor_verify"), {"code": backup_codes[0], "next": "/"})
+        self.assertEqual(again.status_code, 200)
