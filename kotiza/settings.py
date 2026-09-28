@@ -142,6 +142,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'core.context_processors.ui_profile',
+                'core.context_processors.ui_modules',
                 'core.subscription.subscription_status',
             ],
         },

@@ -1,0 +1,20 @@
+{% load i18n core_extras %}
+<div class="module-sections">
+  {% for section in ui_module_sections %}
+  <div class="module-section">
+    <p class="module-section-label">{{ section.label }}</p>
+    <div class="module-tiles">
+      {% for m in section.modules %}
+      <a class="module-tile tone-{{ m.tone }}{% if m.active %} is-active{% endif %}" href="{{ m.url }}"{% if m.active %} aria-current="page"{% endif %}>
+        <span class="module-icon">{% icon m.icon 22 %}</span>
+        <span class="module-tile-text">
+          <strong>{{ m.label }}</strong>
+          <small>{{ m.description }}</small>
+        </span>
+        <span class="module-tile-arrow">{% icon "arrow-right" 18 %}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</div>

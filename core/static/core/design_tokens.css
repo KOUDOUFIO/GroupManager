@@ -1,4 +1,4 @@
-/* Design System Tokens - GroupManager
+/* Design System Tokens - Kotiza
  * Ce fichier définit tous les tokens de design pour assurer la cohérence visuelle
  * et faciliter la maintenance de l'interface utilisateur.
  */
@@ -9,40 +9,40 @@
      ============================================ */
   
   /* Primary Colors */
-  --color-primary-50: #fff5f0;
-  --color-primary-100: #ffe4d6;
-  --color-primary-200: #ffc9b0;
-  --color-primary-300: #fea685;
-  --color-primary-400: #fc7e56;
-  --color-primary-500: #cc5a2a;  /* Main primary */
-  --color-primary-600: #a8461e;
-  --color-primary-700: #873816;
-  --color-primary-800: #6d2e12;
-  --color-primary-900: #5a2610;
+  --color-primary-50: #f0fdf4;
+  --color-primary-100: #dcfce7;
+  --color-primary-200: #bbf7d0;
+  --color-primary-300: #86efac;
+  --color-primary-400: #4ade80;
+  --color-primary-500: #16a34a;  /* Main primary */
+  --color-primary-600: #15803d;
+  --color-primary-700: #166534;
+  --color-primary-800: #14532d;
+  --color-primary-900: #052e16;
   
   /* Secondary Colors */
-  --color-secondary-50: #e8f5f0;
-  --color-secondary-100: #c5e6dc;
-  --color-secondary-200: #9dd4c4;
-  --color-secondary-300: #72c0ab;
-  --color-secondary-400: #4baa92;
-  --color-secondary-500: #0d7a6b;  /* Main secondary */
-  --color-secondary-600: #0a6358;
-  --color-secondary-700: #084d46;
-  --color-secondary-800: #063c37;
-  --color-secondary-900: #05312e;
+  --color-secondary-50: #f0fdfa;
+  --color-secondary-100: #ccfbf1;
+  --color-secondary-200: #99f6e4;
+  --color-secondary-300: #5eead4;
+  --color-secondary-400: #2dd4bf;
+  --color-secondary-500: #0f766e;  /* Main secondary */
+  --color-secondary-600: #115e59;
+  --color-secondary-700: #134e4a;
+  --color-secondary-800: #0f3d3a;
+  --color-secondary-900: #042f2e;
   
   /* Neutral Colors */
-  --color-gray-50: #f9f8f6;
-  --color-gray-100: #f0ebe4;
-  --color-gray-200: #e0d8cc;
-  --color-gray-300: #c9bba8;
-  --color-gray-400: #a89680;
-  --color-gray-500: #8a7a66;
-  --color-gray-600: #6d6050;
-  --color-gray-700: #524a3e;
-  --color-gray-800: #3e3830;
-  --color-gray-900: #201e1b;  /* Main text color */
+  --color-gray-50: #f8fafc;
+  --color-gray-100: #f1f5f9;
+  --color-gray-200: #e2e8f0;
+  --color-gray-300: #cbd5e1;
+  --color-gray-400: #94a3b8;
+  --color-gray-500: #64748b;
+  --color-gray-600: #475569;
+  --color-gray-700: #334155;
+  --color-gray-800: #1e293b;
+  --color-gray-900: #0f172a;  /* Main text color */
   
   /* Semantic Colors */
   --color-success: #2d8a4e;
@@ -55,14 +55,14 @@
   --color-info-light: #eff6ff;
   
   /* Background Colors */
-  --color-bg-primary: #f5f1ea;
+  --color-bg-primary: #f5f7f2;
   --color-bg-secondary: #ffffff;
   --color-bg-tertiary: rgba(255, 255, 255, 0.8);
   
   /* Text Colors */
-  --color-text-primary: #201e1b;
-  --color-text-secondary: rgba(32, 30, 27, 0.8);
-  --color-text-tertiary: rgba(32, 30, 27, 0.6);
+  --color-text-primary: #0f172a;
+  --color-text-secondary: rgba(15, 23, 42, 0.8);
+  --color-text-tertiary: rgba(15, 23, 42, 0.6);
   --color-text-inverse: #ffffff;
   
   /* ============================================
@@ -70,8 +70,8 @@
      ============================================ */
   
   /* Font Families */
-  --font-family-primary: 'Source Sans 3', sans-serif;
-  --font-family-display: 'Playfair Display', serif;
+  --font-family-primary: 'Inter', system-ui, sans-serif;
+  --font-family-display: 'Plus Jakarta Sans', 'Inter', sans-serif;
   --font-family-mono: 'Fira Code', monospace;
   
   /* Font Sizes */
@@ -142,9 +142,9 @@
   --border-radius-full: 9999px;
   
   /* Border Colors */
-  --border-color-light: rgba(32, 30, 27, 0.08);
-  --border-color-base: rgba(32, 30, 27, 0.15);
-  --border-color-dark: rgba(32, 30, 27, 0.25);
+  --border-color-light: rgba(15, 23, 42, 0.08);
+  --border-color-base: rgba(15, 23, 42, 0.15);
+  --border-color-dark: rgba(15, 23, 42, 0.25);
   
   /* ============================================
      SHADOWS - Système d'ombres
@@ -155,8 +155,8 @@
   --shadow-base: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
   --shadow-md: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
   --shadow-lg: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
-  --shadow-xl: 0 25px 50px rgba(19, 19, 19, 0.12);
-  --shadow-2xl: 0 35px 70px rgba(19, 19, 19, 0.15);
+  --shadow-xl: 0 1px 2px rgba(15, 23, 42, 0.04), 0 12px 32px rgba(15, 23, 42, 0.07);
+  --shadow-2xl: 0 24px 60px rgba(15, 23, 42, 0.14);
   --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.06);
   
   /* ============================================
@@ -211,7 +211,7 @@
   --input-padding-y: var(--spacing-2);
   --input-border-radius: var(--border-radius-md);
   --input-border-color: var(--border-color-base);
-  --input-focus-ring: 0 0 0 3px rgba(13, 122, 107, 0.1);
+  --input-focus-ring: 0 0 0 3px rgba(22, 163, 74, 0.2);
   
   /* Tables */
   --table-cell-padding: var(--spacing-3) var(--spacing-2);
@@ -235,14 +235,3 @@
   --animation-easing ease-in-out: ease-in-out;
 }
 
-/* Dark Mode Support (future implementation) */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg-primary: #1a1815;
-    --color-bg-secondary: #2a2825;
-    --color-text-primary: #f5f1ea;
-    --color-text-secondary: rgba(245, 241, 234, 0.8);
-    --border-color-light: rgba(255, 255, 255, 0.1);
-    --border-color-base: rgba(255, 255, 255, 0.15);
-  }
-}

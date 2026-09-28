@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-{% load i18n %}
+{% load i18n core_extras %}
 {% load static %}
 
 {% block title %}{% translate "Interface Administrateur - Kotiza" %}{% endblock %}
@@ -19,32 +19,32 @@
 
 {% block content %}
 <section class="stats">
-  <div class="stat-card">
-    <div class="stat-icon">🏢</div>
+  <div class="stat-card kpi-card tone-teal">
+    <span class="module-icon">{% icon "users" 20 %}</span>
     <h3>{% translate "Groupes" %}</h3>
     <p class="stat-value">{{ group_count }}</p>
     <p class="stat-label">{% translate "structures actives" %}</p>
   </div>
-  <div class="stat-card">
-    <div class="stat-icon">👥</div>
+  <div class="stat-card kpi-card tone-olive">
+    <span class="module-icon">{% icon "id-card" 20 %}</span>
     <h3>{% translate "Membres" %}</h3>
     <p class="stat-value">{{ member_count }}</p>
     <p class="stat-label">{% translate "membres actifs" %}</p>
   </div>
-  <div class="stat-card">
-    <div class="stat-icon">📅</div>
+  <div class="stat-card kpi-card tone-amber">
+    <span class="module-icon">{% icon "calendar" 20 %}</span>
     <h3>{% translate "Rencontres" %}</h3>
     <p class="stat-value">{{ meeting_count }}</p>
     <p class="stat-label">{% translate "réunions planifiées" %}</p>
   </div>
-  <div class="stat-card">
-    <div class="stat-icon">💰</div>
+  <div class="stat-card kpi-card tone-gold">
+    <span class="module-icon">{% icon "wallet" 20 %}</span>
     <h3>{% translate "Cotisations" %}</h3>
     <p class="stat-value">{{ contribution_count }}</p>
     <p class="stat-label">{% translate "paiements enregistrés" %}</p>
   </div>
-  <div class="stat-card">
-    <div class="stat-icon">📋</div>
+  <div class="stat-card kpi-card tone-slate">
+    <span class="module-icon">{% icon "history" 20 %}</span>
     <h3>{% translate "Audits" %}</h3>
     <p class="stat-value">{{ audit_count }}</p>
     <p class="stat-label">{% translate "traces d'activité" %}</p>
@@ -53,69 +53,35 @@
 
 <section class="workspace-sections">
   <div class="workspace-section">
-    <h2>📊 {% translate "Vue d'ensemble" %}</h2>
+    <h2>{% translate "Vue d'ensemble" %}</h2>
     <div class="quick-actions">
-      <a class="action-card" href="/groupes/">
-        <span class="action-icon">🏢</span>
+      <a class="action-card tone-teal" href="/groupes/">
+        <span class="module-icon">{% icon "users" 20 %}</span>
         <h4>{% translate "Gérer les groupes" %}</h4>
         <p>{% translate "Administrer les structures organisationnelles" %}</p>
       </a>
-      <a class="action-card" href="/membres/">
-        <span class="action-icon">👥</span>
+      <a class="action-card tone-olive" href="/membres/">
+        <span class="module-icon">{% icon "id-card" 20 %}</span>
         <h4>{% translate "Contrôler les membres" %}</h4>
         <p>{% translate "Gérer les utilisateurs et leurs accès" %}</p>
       </a>
-      <a class="action-card" href="/cotisations/">
-        <span class="action-icon">💰</span>
+      <a class="action-card tone-gold" href="/cotisations/">
+        <span class="module-icon">{% icon "wallet" 20 %}</span>
         <h4>{% translate "Vérifier les cotisations" %}</h4>
         <p>{% translate "Suivre les paiements et finances" %}</p>
       </a>
-      <a class="action-card" href="/presences/">
-        <span class="action-icon">📅</span>
+      <a class="action-card tone-emerald" href="/presences/">
+        <span class="module-icon">{% icon "check" 20 %}</span>
         <h4>{% translate "Suivre les présences" %}</h4>
         <p>{% translate "Contrôler les participations aux réunions" %}</p>
       </a>
     </div>
   </div>
 
-  <div class="workspace-section">
-    <h2>📁 {% translate "Modules par catégorie" %}</h2>
-    <div class="category-grid">
-      <div class="category-card">
-        <h3>🏢 {% translate "Organisation" %}</h3>
-        <ul>
-          <li><a href="/groupes/">{% translate "Groupes" %}</a></li>
-          <li><a href="/organes/">{% translate "Organes" %}</a></li>
-          <li><a href="/postes/">{% translate "Postes" %}</a></li>
-        </ul>
-      </div>
-      <div class="category-card">
-        <h3>👥 {% translate "Personnes" %}</h3>
-        <ul>
-          <li><a href="/membres/">{% translate "Membres" %}</a></li>
-          <li><a href="/rencontres/">{% translate "Rencontres" %}</a></li>
-          <li><a href="/presences/">{% translate "Présences" %}</a></li>
-        </ul>
-      </div>
-      <div class="category-card">
-        <h3>💰 {% translate "Finance" %}</h3>
-        <ul>
-          <li><a href="/cotisations/">{% translate "Cotisations" %}</a></li>
-        </ul>
-      </div>
-      <div class="category-card">
-        <h3>📋 {% translate "Activités" %}</h3>
-        <ul>
-          <li><a href="/evenements/">{% translate "Événements" %}</a></li>
-          <li><a href="/documents/">{% translate "Documents" %}</a></li>
-          <li><a href="/audit-logs/">{% translate "Audit" %}</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
+  {% include "core/partials/modules_cta.html" %}
 
   <div class="workspace-section">
-    <h2>🔍 {% translate "Activité récente" %}</h2>
+    <h2>{% translate "Activité récente" %}</h2>
     <div class="recent-activity">
       <h3>{% translate "Derniers événements d'audit" %}</h3>
       <div class="mini-list">

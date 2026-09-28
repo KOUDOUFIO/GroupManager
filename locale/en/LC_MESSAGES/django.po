@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-28 00:24+0000\n"
+"POT-Creation-Date: 2026-09-28 01:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,6 +29,114 @@ msgstr "Manager"
 
 msgid "Utilisateur"
 msgstr "User"
+
+msgid "Espaces"
+msgstr "Spaces"
+
+msgid "Tableau de bord"
+msgstr "Dashboard"
+
+msgid "Vue d'ensemble de votre activité"
+msgstr "Overview of your activity"
+
+msgid "Espace admin"
+msgstr "Admin area"
+
+msgid "Gouvernance, audit et contrôle global"
+msgstr "Governance, audit and global control"
+
+msgid "Espace manager"
+msgstr "Manager area"
+
+msgid "Pilotage opérationnel au quotidien"
+msgstr "Day-to-day operations"
+
+msgid "Mon espace"
+msgstr "My space"
+
+msgid "Vos cotisations et vos présences"
+msgstr "Your contributions and attendance"
+
+msgid "Organisation"
+msgstr "Organization"
+
+msgid "Groupes"
+msgstr "Groups"
+
+msgid "Structures, responsables et membres"
+msgstr "Structures, leaders and members"
+
+msgid "Organes"
+msgstr "Bodies"
+
+msgid "Bureaux, comités et commissions"
+msgstr "Boards, committees and commissions"
+
+msgid "Postes"
+msgstr "Positions"
+
+msgid "Rôles et responsabilités"
+msgstr "Roles and responsibilities"
+
+msgid "Personnes"
+msgstr "People"
+
+msgid "Membres"
+msgstr "Members"
+
+msgid "Fiches et coordonnées des membres"
+msgstr "Member records and contact details"
+
+msgid "Rencontres"
+msgstr "Meetings"
+
+msgid "Réunions planifiées et passées"
+msgstr "Planned and past meetings"
+
+msgid "Présences"
+msgstr "Attendance"
+
+msgid "Présents, absents, retards et permissions"
+msgstr "Present, absent, late and excused"
+
+msgid "Finance"
+msgstr "Finance"
+
+msgid "Cotisations"
+msgstr "Contributions"
+
+msgid "Paiements, reçus et exports"
+msgstr "Payments, receipts and exports"
+
+msgid "Activités"
+msgstr "Activities"
+
+msgid "Événements"
+msgstr "Events"
+
+msgid "Agenda des événements à venir"
+msgstr "Upcoming events calendar"
+
+msgid "Documents"
+msgstr "Documents"
+
+msgid "Statuts, comptes rendus et fichiers"
+msgstr "Bylaws, minutes and files"
+
+msgid "Audit"
+msgstr "Audit"
+
+msgid "Historique de toutes les actions"
+msgstr "History of every action"
+
+msgid "Outils"
+msgstr "Tools"
+
+msgid "Recherche"
+msgstr "Search"
+
+msgid "Retrouvez tout en un seul champ"
+msgstr "Find anything from one field"
 
 msgid "L'organe sélectionné doit appartenir au même groupe."
 msgstr "The selected body must belong to the same group."
@@ -360,26 +468,14 @@ msgstr "Django administration"
 msgid "Historique d'audit"
 msgstr "Audit history"
 
-msgid "Groupes"
-msgstr "Groups"
-
 msgid "structures actives"
 msgstr "active organizations"
-
-msgid "Membres"
-msgstr "Members"
 
 msgid "membres actifs"
 msgstr "active members"
 
-msgid "Rencontres"
-msgstr "Meetings"
-
 msgid "réunions planifiées"
 msgstr "scheduled meetings"
-
-msgid "Cotisations"
-msgstr "Contributions"
 
 msgid "paiements enregistrés"
 msgstr "recorded payments"
@@ -417,39 +513,6 @@ msgstr "Track attendance"
 msgid "Contrôler les participations aux réunions"
 msgstr "Review meeting participation"
 
-msgid "Modules par catégorie"
-msgstr "Modules by category"
-
-msgid "Organisation"
-msgstr "Organization"
-
-msgid "Organes"
-msgstr "Bodies"
-
-msgid "Postes"
-msgstr "Positions"
-
-msgid "Personnes"
-msgstr "People"
-
-msgid "Présences"
-msgstr "Attendance"
-
-msgid "Finance"
-msgstr "Finance"
-
-msgid "Activités"
-msgstr "Activities"
-
-msgid "Événements"
-msgstr "Events"
-
-msgid "Documents"
-msgstr "Documents"
-
-msgid "Audit"
-msgstr "Audit"
-
 msgid "Activité récente"
 msgstr "Recent activity"
 
@@ -465,17 +528,17 @@ msgstr "Platform"
 msgid "Devis"
 msgstr "Pricing"
 
-msgid "Espace admin"
-msgstr "Admin area"
+msgid "Navigation principale"
+msgstr "Main navigation"
 
-msgid "Espace manager"
-msgstr "Manager area"
+msgid "Retour"
+msgstr "Back"
 
-msgid "Mon espace"
-msgstr "My space"
+msgid "Modules"
+msgstr "Modules"
 
-msgid "Recherche"
-msgstr "Search"
+msgid "Rechercher un membre, un groupe..."
+msgstr "Search a member, a group..."
 
 msgid "Langue"
 msgstr "Language"
@@ -517,6 +580,12 @@ msgstr "Legal notice"
 
 msgid "Politique de confidentialité"
 msgstr "Privacy policy"
+
+msgid "Tous vos modules"
+msgstr "All your modules"
+
+msgid "Accédez en un clic à chaque espace de Kotiza."
+msgstr "Reach every area of Kotiza in one click."
 
 msgid "Confirmation"
 msgstr "Confirmation"
@@ -594,6 +663,76 @@ msgstr "Page %(number)s / %(total)s"
 msgid "Suivant"
 msgstr "Next"
 
+msgid "Tableau de bord - Kotiza"
+msgstr "Dashboard - Kotiza"
+
+#, fuzzy, python-format
+msgid "Bonjour, %(name)s"
+msgstr "Hello, %(name)s"
+
+msgid "Voici l'essentiel de votre organisation aujourd'hui. Tous vos modules sont à portée de clic."
+msgstr "Here is what matters in your organization today. All your modules are one click away."
+
+msgid "Recherche globale"
+msgstr "Global search"
+
+msgid "Indicateurs clés"
+msgstr "Key indicators"
+
+msgid "Chiffres consolidés de tous vos groupes."
+msgstr "Consolidated figures across all your groups."
+
+msgid "actifs"
+msgstr "active"
+
+msgid "enregistrés"
+msgstr "registered"
+
+msgid "Cotisations total"
+msgstr "Total contributions"
+
+msgid "cumulées"
+msgstr "to date"
+
+msgid "Cotisations du mois"
+msgstr "Contributions this month"
+
+msgid "mois courant"
+msgstr "current month"
+
+msgid "planifiées"
+msgstr "scheduled"
+
+msgid "à venir"
+msgstr "upcoming"
+
+msgid "Semaine en cours"
+msgstr "This week"
+
+msgid "Cotisations, rencontres et événements comptés du lundi au dimanche."
+msgstr "Contributions, meetings and events counted from Monday to Sunday."
+
+msgid "Taux de présence"
+msgstr "Attendance rate"
+
+msgid "Présents, retards et permissions"
+msgstr "Present, late and excused"
+
+msgid "Part du total encaissé ce mois-ci"
+msgstr "Share of the total collected this month"
+
+msgid "Activité événements"
+msgstr "Event activity"
+
+msgid "Événements par rencontre"
+msgstr "Events per meeting"
+
+msgid "Actions rapides"
+msgstr "Quick actions"
+
+msgid "Les tâches les plus courantes, en un clic."
+msgstr "Your most common tasks, one click away."
+
 msgid "Entreprise - Kotiza"
 msgstr "Company - Kotiza"
 
@@ -645,9 +784,6 @@ msgstr "Global search - Kotiza"
 msgid "Recherche transversale"
 msgstr "Search everything"
 
-msgid "Recherche globale"
-msgstr "Global search"
-
 msgid "Interrogez toutes les entités depuis un seul point d'entrée."
 msgstr "Search every record from a single place."
 
@@ -690,9 +826,6 @@ msgstr "Recent meetings"
 msgid "Aucune rencontre récente."
 msgstr "No recent meetings."
 
-msgid "Tableau de bord - Kotiza"
-msgstr "Dashboard - Kotiza"
-
 msgid "Plateforme de gestion multisectorielle"
 msgstr "Management platform for every sector"
 
@@ -704,39 +837,6 @@ msgstr "Kotiza brings groups, members, activities, events and treasury together 
 
 msgid "Commencer"
 msgstr "Get started"
-
-msgid "actifs"
-msgstr "active"
-
-msgid "enregistrés"
-msgstr "registered"
-
-msgid "planifiées"
-msgstr "scheduled"
-
-msgid "à venir"
-msgstr "upcoming"
-
-msgid "Cotisations total"
-msgstr "Total contributions"
-
-msgid "cumulées"
-msgstr "to date"
-
-msgid "Cotisations du mois"
-msgstr "Contributions this month"
-
-msgid "mois courant"
-msgstr "current month"
-
-msgid "Taux de présence"
-msgstr "Attendance rate"
-
-msgid "global"
-msgstr "overall"
-
-msgid "Activité événements"
-msgstr "Event activity"
 
 msgid "Domaines d'application"
 msgstr "Use cases"
@@ -809,9 +909,6 @@ msgstr "meetings held"
 
 msgid "événements planifiés"
 msgstr "events scheduled"
-
-msgid "Actions rapides"
-msgstr "Quick actions"
 
 msgid "Ajouter un membre"
 msgstr "Add a member"
@@ -897,6 +994,57 @@ msgstr "My groups"
 msgid "Vous n'appartenez à aucun groupe."
 msgstr "You are not in any group."
 
+msgid "Tous vos modules au même endroit"
+msgstr "All your modules in one place"
+
+msgid "Organisation, personnes, cotisations, activités, espaces admin et manager, recherche : un seul bouton suffit."
+msgstr "Organization, people, contributions, activities, admin and manager areas, search: one button is all it takes."
+
+msgid "Afficher tous les modules"
+msgstr "Show all modules"
+
+msgid "Activité de la semaine"
+msgstr "Weekly activity"
+
+#, python-format
+msgid "Du lundi %(start)s au dimanche %(end)s"
+msgstr "From Monday %(start)s to Sunday %(end)s"
+
+#, python-format
+msgid "%(total)s activité cette semaine, du lundi au dimanche"
+msgid_plural "%(total)s activités cette semaine, du lundi au dimanche"
+msgstr[0] "%(total)s activity this week, Monday to Sunday"
+msgstr[1] "%(total)s activities this week, Monday to Sunday"
+
+msgid "Aujourd'hui"
+msgstr "Today"
+
+msgid "Aucune activité enregistrée pour cette semaine."
+msgstr "No activity recorded this week."
+
+msgid "Répartition"
+msgstr "Breakdown"
+
+msgid "Part de chaque activité sur la semaine"
+msgstr "Share of each activity this week"
+
+msgid "Répartition de l'activité de la semaine"
+msgstr "Breakdown of this week's activity"
+
+msgid "activité"
+msgid_plural "activités"
+msgstr[0] "activity"
+msgstr[1] "activities"
+
+msgid "Voir les données du lundi au dimanche"
+msgstr "See the data from Monday to Sunday"
+
+msgid "Jour"
+msgstr "Day"
+
+msgid "Total"
+msgstr "Total"
+
 msgid "Plateforme - Kotiza"
 msgstr "Platform - Kotiza"
 
@@ -908,9 +1056,6 @@ msgstr "A platform that grows with your organization."
 
 msgid "Au-delà de la gestion interne, Kotiza devient un espace de pilotage, d’opportunités, de suivi commercial et d’automatisation pour les structures ambitieuses."
 msgstr "Beyond internal management, Kotiza becomes a space for oversight, opportunities, sales follow-up and automation for ambitious organizations."
-
-msgid "Modules"
-msgstr "Modules"
 
 msgid "Un écosystème pensé pour centraliser les opérations, la vente et le reporting."
 msgstr "An ecosystem designed to centralize operations, sales and reporting."
@@ -1796,3 +1941,15 @@ msgstr "Edit position"
 
 msgid "Supprimer un poste"
 msgstr "Delete position"
+
+#~ msgid "Vos modules"
+#~ msgstr "Your modules"
+
+#~ msgid "Retrouvez aussi ces modules à tout moment via le bouton « Modules » en haut de page."
+#~ msgstr "You can also reach these modules anytime from the \"Modules\" button at the top of the page."
+
+#~ msgid "Modules par catégorie"
+#~ msgstr "Modules by category"
+
+#~ msgid "global"
+#~ msgstr "overall"

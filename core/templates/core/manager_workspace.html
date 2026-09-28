@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-{% load i18n %}
+{% load i18n core_extras %}
 
 {% block title %}{% translate "Interface Manager - Kotiza" %}{% endblock %}
 
@@ -17,26 +17,26 @@
 
 {% block content %}
 <section class="stats">
-  <div class="stat-card">
-    <div class="stat-icon">🏢</div>
+  <div class="stat-card kpi-card tone-teal">
+    <span class="module-icon">{% icon "users" 20 %}</span>
     <h3>{% translate "Groupes" %}</h3>
     <p class="stat-value">{{ group_count }}</p>
     <p class="stat-label">{% translate "groupes suivis" %}</p>
   </div>
-  <div class="stat-card">
-    <div class="stat-icon">👥</div>
+  <div class="stat-card kpi-card tone-olive">
+    <span class="module-icon">{% icon "id-card" 20 %}</span>
     <h3>{% translate "Membres" %}</h3>
     <p class="stat-value">{{ member_count }}</p>
     <p class="stat-label">{% translate "membres actifs" %}</p>
   </div>
-  <div class="stat-card">
-    <div class="stat-icon">📅</div>
+  <div class="stat-card kpi-card tone-amber">
+    <span class="module-icon">{% icon "calendar" 20 %}</span>
     <h3>{% translate "Rencontres" %}</h3>
     <p class="stat-value">{{ meeting_count }}</p>
     <p class="stat-label">{% translate "réunions organisées" %}</p>
   </div>
-  <div class="stat-card">
-    <div class="stat-icon">📋</div>
+  <div class="stat-card kpi-card tone-orange">
+    <span class="module-icon">{% icon "flag" 20 %}</span>
     <h3>{% translate "Événements" %}</h3>
     <p class="stat-value">{{ event_count }}</p>
     <p class="stat-label">{% translate "événements planifiés" %}</p>
@@ -45,10 +45,10 @@
 
 <section class="workspace-sections">
   <div class="workspace-section">
-    <h2>📊 {% translate "Activité récente" %}</h2>
+    <h2>{% translate "Activité récente" %}</h2>
     <div class="recent-activity-grid">
       <div class="activity-card">
-        <h3>📅 {% translate "Rencontres récentes" %}</h3>
+        <h3>{% translate "Rencontres récentes" %}</h3>
         <div class="activity-list">
           {% for m in latest_meetings %}
           <div class="activity-item">
@@ -63,7 +63,7 @@
       </div>
       
       <div class="activity-card">
-        <h3>💰 {% translate "Cotisations récentes" %}</h3>
+        <h3>{% translate "Cotisations récentes" %}</h3>
         <div class="activity-list">
           {% for c in latest_contributions %}
           <div class="activity-item">
@@ -80,62 +80,28 @@
     </div>
   </div>
 
-  <div class="workspace-section">
-    <h2>📁 {% translate "Modules par catégorie" %}</h2>
-    <div class="category-grid">
-      <div class="category-card">
-        <h3>🏢 {% translate "Organisation" %}</h3>
-        <ul>
-          <li><a href="/groupes/">{% translate "Groupes" %}</a></li>
-          <li><a href="/organes/">{% translate "Organes" %}</a></li>
-          <li><a href="/postes/">{% translate "Postes" %}</a></li>
-        </ul>
-      </div>
-      <div class="category-card">
-        <h3>👥 {% translate "Personnes" %}</h3>
-        <ul>
-          <li><a href="/membres/">{% translate "Membres" %}</a></li>
-          <li><a href="/rencontres/">{% translate "Rencontres" %}</a></li>
-          <li><a href="/presences/">{% translate "Présences" %}</a></li>
-        </ul>
-      </div>
-      <div class="category-card">
-        <h3>💰 {% translate "Finance" %}</h3>
-        <ul>
-          <li><a href="/cotisations/">{% translate "Cotisations" %}</a></li>
-        </ul>
-      </div>
-      <div class="category-card">
-        <h3>📋 {% translate "Activités" %}</h3>
-        <ul>
-          <li><a href="/evenements/">{% translate "Événements" %}</a></li>
-          <li><a href="/documents/">{% translate "Documents" %}</a></li>
-          <li><a href="/recherche/">{% translate "Recherche globale" %}</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
+  {% include "core/partials/modules_cta.html" %}
 
   <div class="workspace-section">
-    <h2>⚡ {% translate "Actions rapides" %}</h2>
+    <h2>{% translate "Actions rapides" %}</h2>
     <div class="quick-actions">
-      <a class="action-card" href="/membres/nouveau/">
-        <span class="action-icon">➕</span>
+      <a class="action-card tone-olive" href="/membres/nouveau/">
+        <span class="module-icon">{% icon "id-card" 20 %}</span>
         <h4>{% translate "Ajouter un membre" %}</h4>
         <p>{% translate "Créer un nouveau membre" %}</p>
       </a>
-      <a class="action-card" href="/rencontres/nouveau/">
-        <span class="action-icon">➕</span>
+      <a class="action-card tone-amber" href="/rencontres/nouveau/">
+        <span class="module-icon">{% icon "calendar" 20 %}</span>
         <h4>{% translate "Planifier une rencontre" %}</h4>
         <p>{% translate "Organiser une réunion" %}</p>
       </a>
-      <a class="action-card" href="/cotisations/nouveau/">
-        <span class="action-icon">➕</span>
+      <a class="action-card tone-gold" href="/cotisations/nouveau/">
+        <span class="module-icon">{% icon "wallet" 20 %}</span>
         <h4>{% translate "Enregistrer une cotisation" %}</h4>
         <p>{% translate "Ajouter un paiement" %}</p>
       </a>
-      <a class="action-card" href="/evenements/nouveau/">
-        <span class="action-icon">➕</span>
+      <a class="action-card tone-orange" href="/evenements/nouveau/">
+        <span class="module-icon">{% icon "flag" 20 %}</span>
         <h4>{% translate "Créer un événement" %}</h4>
         <p>{% translate "Ajouter un événement" %}</p>
       </a>

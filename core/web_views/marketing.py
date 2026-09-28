@@ -1,12 +1,16 @@
 """Pages vitrine : accueil, entreprise, plateforme, devis."""
 
+from datetime import timedelta
+
 from django.conf import settings
 from django.core.mail import send_mail
-from django.db.models import Sum
+from django.db.models import Count, Sum
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.formats import date_format
 from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _lazy
 
 from .. import forms as core_forms
 from .. import models
@@ -252,6 +256,121 @@ def _platform_stats():
     }
 
 
+# Actions rapides du tableau de bord : (libelle, url, icone, couleur, permission).
+QUICK_ACTIONS = (
+    (_lazy("Ajouter un membre"), "/membres/nouveau/", "id-card", "olive", "core.add_member"),
+    (_lazy("Enregistrer une cotisation"), "/cotisations/nouveau/", "wallet", "gold", "core.add_contribution"),
+    (_lazy("Planifier une rencontre"), "/rencontres/nouveau/", "calendar", "amber", "core.add_meeting"),
+    (_lazy("Créer un événement"), "/evenements/nouveau/", "flag", "orange", "core.add_event"),
+    (_lazy("Créer un groupe"), "/groupes/nouveau/", "users", "teal", "core.add_group"),
+)
+
+
+# Series du graphique hebdomadaire : ordre fixe des couleurs (slots 1 a 3 valides).
+WEEK_SERIES = (
+    ("contributions", _lazy("Cotisations"), "#2a78d6"),
+    ("meetings", _lazy("Rencontres"), "#eb6834"),
+    ("events", _lazy("Événements"), "#1baf7a"),
+)
+
+
+def _week_activity():
+    """Compte l'activite de la semaine en cours, du lundi au dimanche.
+
+    Returns:
+        dict: days (7 jours avec segments empiles en % de la plus haute barre),
+              series (totaux par type, avec arcs du donut) et total.
+    """
+    today = timezone.localdate()
+    monday = today - timedelta(days=today.weekday())
+    sunday = monday + timedelta(days=6)
+
+    per_day = {
+        "contributions": dict(
+            models.Contribution.objects.filter(paid_at__range=(monday, sunday))
+            .values_list("paid_at")
+            .annotate(n=Count("id"))
+        ),
+        "meetings": dict(
+            models.Meeting.objects.filter(scheduled_at__date__range=(monday, sunday))
+            .values_list("scheduled_at__date")
+            .annotate(n=Count("id"))
+        ),
+        "events": dict(
+            models.Event.objects.filter(starts_at__date__range=(monday, sunday))
+            .values_list("starts_at__date")
+            .annotate(n=Count("id"))
+        ),
+    }
+
+    days = []
+    for offset in range(7):
+        day = monday + timedelta(days=offset)
+        counts = [(key, label, color, per_day[key].get(day, 0)) for key, label, color in WEEK_SERIES]
+        days.append({
+            "date": day,
+            "short": date_format(day, "D"),
+            "long": date_format(day, "l j F"),
+            "is_today": day == today,
+            "total": sum(c[3] for c in counts),
+            "rows": [{"label": lbl, "color": col, "count": n} for _k, lbl, col, n in counts],
+            "segments": [{"key": k, "label": lbl, "color": col, "count": n} for k, lbl, col, n in counts if n],
+        })
+
+    peak = max((d["total"] for d in days), default=0)
+    for d in days:
+        d["height"] = round(d["total"] / peak * 100, 1) if peak else 0
+        for seg in d["segments"]:
+            seg["share"] = round(seg["count"] / d["total"] * 100, 2)
+
+    total = sum(d["total"] for d in days)
+    series, start = [], 0.0
+    for key, label, color in WEEK_SERIES:
+        count = sum(per_day[key].get(monday + timedelta(days=i), 0) for i in range(7))
+        pct = count / total * 100 if total else 0
+        # pathLength=100 : un arc = son pourcentage, moins 1 point d'espace entre parts.
+        gap = 1 if pct and pct < 100 else 0
+        series.append({
+            "key": key,
+            "label": label,
+            "color": color,
+            "count": count,
+            "pct": round(pct),
+            "dash": round(max(pct - gap, 0), 2),
+            "offset": round(-start, 2),
+        })
+        start += pct
+
+    return {
+        "week_days": days,
+        "week_series": series,
+        "week_total": total,
+        "week_peak": peak,
+        "week_start": monday,
+        "week_end": sunday,
+    }
+
+
+def _dashboard(request):
+    """Tableau de bord des utilisateurs connectes (modules, actions, KPIs admin)."""
+    user = request.user
+    # Les totaux (dont la tresorerie) couvrent tous les groupes : on ne les
+    # montre qu'aux administrateurs.
+    show_platform_stats = user.is_staff
+    quick_actions = [
+        {"label": label, "url": url, "icon": icon, "tone": tone}
+        for label, url, icon, tone, perm in QUICK_ACTIONS
+        if user.has_perm(perm)
+    ]
+    context = {
+        "show_platform_stats": show_platform_stats,
+        **(_platform_stats() if show_platform_stats else {}),
+        **(_week_activity() if show_platform_stats else {}),
+        "quick_actions": quick_actions,
+    }
+    return render(request, "core/dashboard.html", context)
+
+
 def home(request):
     """Vue de la page d'accueil avec les KPIs principaux.
 
@@ -261,6 +380,9 @@ def home(request):
     Returns:
         HttpResponse: La page d'accueil avec les statistiques.
     """
+    if request.user.is_authenticated:
+        return _dashboard(request)
+
     industry_cards = [
         {
             "tag": _("Associations"),
@@ -353,12 +475,9 @@ def home(request):
         {"value": _("100%"), "label": _("Traçabilité")},
     ]
 
-    # Les totaux (dont la tresorerie) couvrent tous les groupes : on ne les
-    # montre qu'aux administrateurs, jamais aux visiteurs ni aux membres.
-    show_platform_stats = request.user.is_authenticated and request.user.is_staff
+    # Page vitrine des visiteurs : jamais de chiffres de la plateforme.
     context = {
-        "show_platform_stats": show_platform_stats,
-        **(_platform_stats() if show_platform_stats else {}),
+        "show_platform_stats": False,
         "industry_cards": industry_cards,
         "workflow_steps": workflow_steps,
         "feature_highlights": feature_highlights,

@@ -56,6 +56,54 @@ class HomeViewTests(TestCase):
         self.assertIn("current_month_contributions", response.context)
         self.assertIn("attendance_rate", response.context)
 
+    def test_home_shows_dashboard_to_signed_in_users(self):
+        user = get_user_model().objects.create_user(username="dash_user", password="password123")
+        self.client.force_login(user)
+        response = self.client.get(reverse("home"))
+        self.assertTemplateUsed(response, "core/dashboard.html")
+        self.assertContains(response, "data-modules-open")
+        self.assertNotContains(response, "bar-chart")
+        # Pas de bouton Retour sur le tableau de bord lui-meme.
+        self.assertNotContains(response, "data-back")
+
+    def test_modules_button_lists_only_allowed_modules(self):
+        user = get_user_model().objects.create_user(username="plain_user", password="password123")
+        self.client.force_login(user)
+        response = self.client.get(reverse("global_search"))
+        self.assertContains(response, "data-back")
+        self.assertContains(response, 'href="/recherche/"')
+        self.assertNotContains(response, 'href="/admin-workspace/"')
+        self.assertNotContains(response, 'href="/cotisations/"')
+
+    def test_modules_button_lists_admin_modules_for_superuser(self):
+        admin = get_user_model().objects.create_superuser(
+            username="root_user", password="password123", email="root@example.com"
+        )
+        self.client.force_login(admin)
+        response = self.client.get(reverse("home"))
+        for url in ("/admin-workspace/", "/manager-workspace/", "/groupes/", "/cotisations/", "/audit-logs/"):
+            self.assertContains(response, f'href="{url}"')
+
+    def test_dashboard_counts_week_activity_monday_to_sunday(self):
+        staff = get_user_model().objects.create_user(
+            username="week_staff", password="password123", is_staff=True
+        )
+        group = Group.objects.create(name="Semaine")
+        member = Member.objects.create(full_name="Jour Test")
+        today = timezone.localdate()
+        monday = today - timedelta(days=today.weekday())
+        Contribution.objects.create(member=member, group=group, amount=10, paid_at=monday)
+        Contribution.objects.create(member=member, group=group, amount=10, paid_at=monday + timedelta(days=6))
+        Contribution.objects.create(member=member, group=group, amount=10, paid_at=monday - timedelta(days=1))
+        self.client.force_login(staff)
+        response = self.client.get(reverse("home"))
+        days = response.context["week_days"]
+        self.assertEqual([d["date"].weekday() for d in days], list(range(7)))
+        self.assertEqual(days[0]["total"], 1)
+        self.assertEqual(days[6]["total"], 1)
+        self.assertEqual(response.context["week_total"], 2)
+        self.assertContains(response, "bar-chart")
+
     def test_proposal_page_status_ok(self):
         response = self.client.get(reverse("proposal_page"))
         self.assertEqual(response.status_code, 200)

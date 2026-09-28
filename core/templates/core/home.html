@@ -17,73 +17,6 @@
 {% endblock %}
 
 {% block content %}
-{% if show_platform_stats %}
-<section class="stats">
-  <div class="stat-card">
-    <h3>{% translate "Groupes" %}</h3>
-    <p class="stat-value" data-counter data-target="{{ group_count }}">0</p>
-    <p class="stat-label">{% translate "actifs" %}</p>
-  </div>
-  <div class="stat-card">
-    <h3>{% translate "Membres" %}</h3>
-    <p class="stat-value" data-counter data-target="{{ member_count }}">0</p>
-    <p class="stat-label">{% translate "enregistrés" %}</p>
-  </div>
-  <div class="stat-card">
-    <h3>{% translate "Rencontres" %}</h3>
-    <p class="stat-value" data-counter data-target="{{ meeting_count }}">0</p>
-    <p class="stat-label">{% translate "planifiées" %}</p>
-  </div>
-  <div class="stat-card">
-    <h3>{% translate "Événements" %}</h3>
-    <p class="stat-value" data-counter data-target="{{ event_count }}">0</p>
-    <p class="stat-label">{% translate "à venir" %}</p>
-  </div>
-  <div class="stat-card">
-    <h3>{% translate "Cotisations total" %}</h3>
-    <p class="stat-value" data-counter data-target="{{ total_contributions }}">0</p>
-    <p class="stat-label">{% translate "cumulées" %}</p>
-  </div>
-  <div class="stat-card">
-    <h3>{% translate "Cotisations du mois" %}</h3>
-    <p class="stat-value" data-counter data-target="{{ current_month_contributions }}">0</p>
-    <p class="stat-label">{% translate "mois courant" %}</p>
-  </div>
-  <div class="stat-card">
-    <h3>{% translate "Taux de présence" %}</h3>
-    <p class="stat-value" data-counter data-target="{{ attendance_rate }}" data-suffix="%">0%</p>
-    <p class="stat-label">{% translate "global" %}</p>
-  </div>
-</section>
-
-<section class="analytics-rings">
-  <article class="ring-card">
-    <h4>{% translate "Taux de présence" %}</h4>
-    <div class="progress-ring" style="--pct: {{ attendance_rate|floatformat:1 }};">
-      <div class="ring-inner">
-        <strong data-counter data-target="{{ attendance_rate|floatformat:1 }}" data-suffix="%">0%</strong>
-      </div>
-    </div>
-  </article>
-  <article class="ring-card">
-    <h4>{% translate "Cotisations du mois" %}</h4>
-    <div class="progress-ring alt" style="--pct: {{ contribution_month_share|floatformat:1 }};">
-      <div class="ring-inner">
-        <strong data-counter data-target="{{ contribution_month_share|floatformat:1 }}" data-suffix="%">0%</strong>
-      </div>
-    </div>
-  </article>
-  <article class="ring-card">
-    <h4>{% translate "Activité événements" %}</h4>
-    <div class="progress-ring calm" style="--pct: {{ event_activity_rate|floatformat:1 }};">
-      <div class="ring-inner">
-        <strong data-counter data-target="{{ event_activity_rate|floatformat:1 }}" data-suffix="%">0%</strong>
-      </div>
-    </div>
-  </article>
-</section>
-{% endif %}
-
 <section class="section-block">
   <div class="section-heading">
     <p class="pill">{% translate "Domaines d'application" %}</p>
@@ -182,7 +115,3 @@
 </section>
 {% endblock %}
 
-{% block extra_scripts %}
-{% load static %}
-<script src="{% static 'core/dashboard.js' %}"></script>
-{% endblock %}

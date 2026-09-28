@@ -1,0 +1,106 @@
+{% load i18n l10n %}
+<div class="chart-grid">
+  <article class="chart-card chart-card-wide">
+    <header class="chart-head">
+      <div>
+        <h3>{% translate "Activité de la semaine" %}</h3>
+        <p>{% blocktranslate with start=week_start|date:"j F" end=week_end|date:"j F Y" %}Du lundi {{ start }} au dimanche {{ end }}{% endblocktranslate %}</p>
+      </div>
+      <ul class="chart-legend">
+        {% for s in week_series %}
+        <li><span class="swatch" style="background: {{ s.color }}"></span>{{ s.label }}</li>
+        {% endfor %}
+      </ul>
+    </header>
+
+    <div class="bar-chart" role="img" aria-label="{% blocktranslate count total=week_total %}{{ total }} activité cette semaine, du lundi au dimanche{% plural %}{{ total }} activités cette semaine, du lundi au dimanche{% endblocktranslate %}">
+      <div class="bar-grid" aria-hidden="true">
+        <span data-value="{{ week_peak }}"></span>
+        <span data-value=""></span>
+        <span data-value="0"></span>
+      </div>
+      <div class="bar-cols">
+        {% for d in week_days %}
+        <div class="bar-col{% if d.is_today %} is-today{% endif %}" tabindex="0">
+          <div class="bar-track">
+            <span class="bar-total">{{ d.total }}</span>
+            <div class="bar" style="height: {{ d.height|unlocalize }}%">
+              {% for seg in d.segments %}
+              <span class="bar-seg" style="flex-grow: {{ seg.count }}; background: {{ seg.color }}"></span>
+              {% endfor %}
+            </div>
+          </div>
+          <span class="bar-label">{{ d.short }}{% if d.is_today %}<small>{% translate "Aujourd'hui" %}</small>{% endif %}</span>
+          <div class="chart-tip" role="tooltip">
+            <strong>{{ d.long }}</strong>
+            {% for row in d.rows %}
+            <span class="tip-row"><span class="swatch" style="background: {{ row.color }}"></span>{{ row.label }}<b>{{ row.count }}</b></span>
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% if not week_total %}
+    <p class="chart-empty">{% translate "Aucune activité enregistrée pour cette semaine." %}</p>
+    {% endif %}
+  </article>
+
+  <article class="chart-card">
+    <header class="chart-head">
+      <div>
+        <h3>{% translate "Répartition" %}</h3>
+        <p>{% translate "Part de chaque activité sur la semaine" %}</p>
+      </div>
+    </header>
+    <div class="donut-wrap">
+      <svg class="donut" viewBox="0 0 42 42" role="img" aria-label="{% translate "Répartition de l'activité de la semaine" %}">
+        <circle class="donut-track" cx="21" cy="21" r="15.915" />
+        {% for s in week_series %}{% if s.count %}
+        <circle class="donut-seg" cx="21" cy="21" r="15.915" pathLength="100" stroke="{{ s.color }}"
+                stroke-dasharray="{{ s.dash|unlocalize }} 100" stroke-dashoffset="{{ s.offset|unlocalize }}">
+          <title>{{ s.label }} : {{ s.count }} ({{ s.pct }} %)</title>
+        </circle>
+        {% endif %}{% endfor %}
+      </svg>
+      <div class="donut-center">
+        <strong>{{ week_total }}</strong>
+        <span>{% blocktranslate count total=week_total %}activité{% plural %}activités{% endblocktranslate %}</span>
+      </div>
+    </div>
+    <ul class="donut-legend">
+      {% for s in week_series %}
+      <li>
+        <span class="swatch" style="background: {{ s.color }}"></span>
+        <span class="donut-legend-label">{{ s.label }}</span>
+        <b>{{ s.count }}</b>
+        <span class="donut-legend-pct">{{ s.pct }} %</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </article>
+</div>
+
+<details class="chart-data">
+  <summary>{% translate "Voir les données du lundi au dimanche" %}</summary>
+  <div class="chart-data-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">{% translate "Jour" %}</th>
+          {% for s in week_series %}<th scope="col">{{ s.label }}</th>{% endfor %}
+          <th scope="col">{% translate "Total" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for d in week_days %}
+        <tr{% if d.is_today %} class="is-today"{% endif %}>
+          <th scope="row">{{ d.long }}</th>
+          {% for row in d.rows %}<td>{{ row.count }}</td>{% endfor %}
+          <td><b>{{ d.total }}</b></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</details>

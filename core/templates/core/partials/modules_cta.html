@@ -1,0 +1,15 @@
+{% load i18n core_extras %}
+<section class="modules-cta">
+  <div class="modules-cta-icons" aria-hidden="true">
+    {% for section in ui_module_sections %}{% for m in section.modules|slice:":2" %}
+    <span class="module-icon tone-{{ m.tone }}">{% icon m.icon 18 %}</span>
+    {% endfor %}{% endfor %}
+  </div>
+  <div class="modules-cta-text">
+    <h2>{% translate "Tous vos modules au même endroit" %}</h2>
+    <p>{% translate "Organisation, personnes, cotisations, activités, espaces admin et manager, recherche : un seul bouton suffit." %}</p>
+  </div>
+  <button type="button" class="btn primary modules-cta-btn" aria-haspopup="dialog" aria-controls="modules-dialog" data-modules-open>
+    {% icon "grid" 18 %}{% translate "Afficher tous les modules" %}
+  </button>
+</section>
