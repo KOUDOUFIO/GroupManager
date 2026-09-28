@@ -4742,3 +4742,36 @@ html.modules-open {
 .legal-todo .icon {
   margin-top: 2px;
 }
+
+/* Bouton Retour : une icone ronde (fleche), le libelle est lu par les lecteurs d'ecran. */
+.back-btn,
+.topbar:not(.topbar-app) > .back-btn {
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.back-btn:hover {
+  transform: translateX(-2px);
+  border-color: var(--color-primary-300);
+  color: var(--color-primary-700);
+  background: var(--color-primary-50);
+}
+
+.modules-close {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+@media (max-width: 720px) {
+  .topbar:not(.topbar-app) > .back-btn {
+    width: 36px;
+    height: 36px;
+  }
+}

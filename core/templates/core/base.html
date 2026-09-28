@@ -25,9 +25,7 @@
       </a>
       {% if not ui_is_authenticated %}
       {% if request.path != "/" %}
-      <a class="back-btn" href="/" data-back>
-        {% icon "arrow-left" 18 %}<span>{% translate "Retour" %}</span>
-      </a>
+      <a class="back-btn" href="/" data-back aria-label="{% translate "Retour" %}" title="{% translate "Retour" %}">{% icon "arrow-left" 20 %}</a>
       {% endif %}
       <nav class="nav">
         <a href="/entreprise/">{% translate "Entreprise" %}</a>
@@ -37,9 +35,7 @@
       {% else %}
       <nav class="app-nav" aria-label="{% translate "Navigation principale" %}">
         {% if request.path != "/" %}
-        <a class="back-btn" href="/" data-back>
-          {% icon "arrow-left" 18 %}<span>{% translate "Retour" %}</span>
-        </a>
+        <a class="back-btn" href="/" data-back aria-label="{% translate "Retour" %}" title="{% translate "Retour" %}">{% icon "arrow-left" 20 %}</a>
         {% endif %}
         <button type="button" class="launcher-btn" aria-haspopup="dialog" aria-controls="modules-dialog" aria-expanded="false" data-modules-open>
           {% icon "grid" 18 %}<span>{% translate "Modules" %}</span>
@@ -129,7 +125,7 @@
             <h2 id="modules-title">{% translate "Tous vos modules" %}</h2>
             <p>{% translate "Accédez en un clic à chaque espace de Kotiza." %}</p>
           </div>
-          <button type="button" class="modules-close" data-modules-close>{% icon "arrow-left" 18 %}<span>{% translate "Retour" %}</span></button>
+          <button type="button" class="modules-close" data-modules-close aria-label="{% translate "Retour" %}" title="{% translate "Retour" %}">{% icon "arrow-left" 20 %}</button>
         </header>
         <div class="modules-body">
           {% include "core/partials/module_grid.html" %}
