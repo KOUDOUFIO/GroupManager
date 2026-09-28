@@ -923,4 +923,7 @@ EN = {
     "Code incorrect.": "Wrong code.",
     "Code incorrect ou expiré. Utilisez le code affiché en ce moment.": "Wrong or expired code. Use the code shown right now.",
     "Bonjour %(name)s,\n\nVotre espace Kotiza est prêt : vous pouvez y suivre vos cotisations et vos présences.\n\nVotre identifiant : %(username)s\nChoisissez votre mot de passe en ouvrant ce lien :\n%(link)s\n\nL'équipe Kotiza": "Hello %(name)s,\n\nYour Kotiza space is ready: you can follow your contributions and attendance there.\n\nYour username: %(username)s\nChoose your password by opening this link:\n%(link)s\n\nThe Kotiza team",
+    "Mots de passe chiffrés et connexion à deux étapes disponible : un code sur le téléphone en plus du mot de passe.": "Hashed passwords and optional two-step sign-in: a code on the phone on top of the password.",
+    "Sauvegardes": "Backups",
+    "Sauvegardes automatiques de la base de données.": "Automatic database backups.",
 }

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-28 13:57+0000\n"
+"POT-Creation-Date: 2026-09-28 15:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1402,8 +1402,8 @@ msgstr "Your members' money deserves a serious app."
 msgid "Connexion protégée"
 msgstr "Protected sign-in"
 
-msgid "Mots de passe chiffrés, connexion HTTPS, et connexion à deux étapes disponible : un code sur le téléphone en plus du mot de passe."
-msgstr "Hashed passwords, HTTPS, and optional two-step sign-in: a code on the phone on top of the password."
+msgid "Mots de passe chiffrés et connexion à deux étapes disponible : un code sur le téléphone en plus du mot de passe."
+msgstr "Hashed passwords and optional two-step sign-in: a code on the phone on top of the password."
 
 msgid "Caisse transparente"
 msgstr "Transparent cash box"
@@ -1429,11 +1429,11 @@ msgstr "Role-based access"
 msgid "Administrateur, trésorier, membre : chacun ne voit que ce qui le concerne."
 msgstr "Administrator, treasurer, member: everyone only sees what concerns them."
 
-msgid "Sauvegardes et HTTPS"
-msgstr "Backups and HTTPS"
+msgid "Sauvegardes"
+msgstr "Backups"
 
-msgid "Connexion chiffrée et sauvegardes automatiques de la base de données."
-msgstr "Encrypted connection and automatic database backups."
+msgid "Sauvegardes automatiques de la base de données."
+msgstr "Automatic database backups."
 
 msgid "Activité de la semaine"
 msgstr "Weekly activity"
@@ -2363,12 +2363,6 @@ msgstr "Attendance & treasury"
 msgid "Analysez les taux de présence, les paiements et la santé financière globale de votre organisation."
 msgstr "Analyze attendance, payments and your organization's overall financial health."
 
-msgid "HTTPS"
-msgstr "HTTPS"
-
-msgid "Connexion sécurisée"
-msgstr "Secure login"
-
 msgid "360°"
 msgstr "360°"
 
@@ -2457,6 +2451,12 @@ msgstr "Wrong code."
 
 msgid "Code incorrect ou expiré. Utilisez le code affiché en ce moment."
 msgstr "Wrong or expired code. Use the code shown right now."
+
+#~ msgid "HTTPS"
+#~ msgstr "HTTPS"
+
+#~ msgid "Connexion sécurisée"
+#~ msgstr "Secure login"
 
 #~ msgid "Paiement initié, en attente de confirmation. Le statut sera mis à jour automatiquement."
 #~ msgstr "Payment started, awaiting confirmation. The status will update automatically."
